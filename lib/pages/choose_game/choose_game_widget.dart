@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/notifications/notifications_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:badges/badges.dart' as badges;
 import 'package:auto_size_text/auto_size_text.dart';
@@ -273,7 +274,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
             mainAxisSize: MainAxisSize.max,
             children: [
               Text(
-                'Hello ',
+                'Hello, ',
                 style: FlutterFlowTheme.of(context).titleLarge.override(
                       fontFamily: 'Outfit',
                       letterSpacing: 0.0,
@@ -311,7 +312,27 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 size: 24.0,
                               ),
                               onPressed: () async {
-                                context.pushNamed('errorPage');
+                                await showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  backgroundColor: Colors.transparent,
+                                  enableDrag: false,
+                                  useSafeArea: true,
+                                  context: context,
+                                  builder: (context) {
+                                    return GestureDetector(
+                                      onTap: () => _model
+                                              .unfocusNode.canRequestFocus
+                                          ? FocusScope.of(context)
+                                              .requestFocus(_model.unfocusNode)
+                                          : FocusScope.of(context).unfocus(),
+                                      child: Padding(
+                                        padding:
+                                            MediaQuery.viewInsetsOf(context),
+                                        child: const NotificationsWidget(),
+                                      ),
+                                    );
+                                  },
+                                ).then((value) => safeSetState(() {}));
                               },
                             ),
                           ),
