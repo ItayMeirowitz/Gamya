@@ -321,7 +321,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                             alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 6.0, 0.0, 0.0),
+                                  12.0, 6.0, 0.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
