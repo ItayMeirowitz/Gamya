@@ -48,10 +48,10 @@ dynamic fetchData(String apiUrl, String tokenType, String accessToken,
         http.Response response =
             await http.get(Uri.parse(urlWithParams), headers: headers);
 
-        return data;
+        return data['data'];
       }
     } else {
-      return "failed to load data: ${response.statusCode}";
+      return {"msg": "failed to load data: ${response.statusCode}"};
     }
   }
 }

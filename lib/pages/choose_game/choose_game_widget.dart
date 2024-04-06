@@ -41,9 +41,24 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
           FFAppState().accessToken,
           FFAppState().username,
         );
-        setState(() {
-          _model.notificationCount = _model.notificationCount + 1;
-        });
+        if (getJsonField(
+              _model.dataReceived,
+              r'''$.type''',
+            ) !=
+            null) {
+          setState(() {
+            _model.notificationCount = _model.notificationCount + 1;
+          });
+          setState(() {
+            _model.addToRequests(getJsonField(
+              _model.dataReceived,
+              r'''$.msg''',
+            ));
+          });
+          return;
+        } else {
+          return;
+        }
       }
     });
 
@@ -328,7 +343,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       child: Padding(
                                         padding:
                                             MediaQuery.viewInsetsOf(context),
-                                        child: const NotificationsWidget(),
+                                        child: NotificationsWidget(
+                                          requests: _model.requests,
+                                        ),
                                       ),
                                     );
                                   },
@@ -349,7 +366,30 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 hoverColor: Colors.transparent,
                                 highlightColor: Colors.transparent,
                                 onTap: () async {
-                                  context.pushNamed('errorPage');
+                                  await showModalBottomSheet(
+                                    isScrollControlled: true,
+                                    backgroundColor: Colors.transparent,
+                                    enableDrag: false,
+                                    useSafeArea: true,
+                                    context: context,
+                                    builder: (context) {
+                                      return GestureDetector(
+                                        onTap: () => _model
+                                                .unfocusNode.canRequestFocus
+                                            ? FocusScope.of(context)
+                                                .requestFocus(
+                                                    _model.unfocusNode)
+                                            : FocusScope.of(context).unfocus(),
+                                        child: Padding(
+                                          padding:
+                                              MediaQuery.viewInsetsOf(context),
+                                          child: NotificationsWidget(
+                                            requests: _model.requests,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ).then((value) => safeSetState(() {}));
                                 },
                                 child: badges.Badge(
                                   badgeContent: Text(

@@ -10,6 +10,15 @@ class ChooseGameModel extends FlutterFlowModel<ChooseGameWidget> {
 
   int notificationCount = 0;
 
+  List<dynamic> requests = [];
+  void addToRequests(dynamic item) => requests.add(item);
+  void removeFromRequests(dynamic item) => requests.remove(item);
+  void removeAtIndexFromRequests(int index) => requests.removeAt(index);
+  void insertAtIndexInRequests(int index, dynamic item) =>
+      requests.insert(index, item);
+  void updateRequestsAtIndex(int index, Function(dynamic) updateFn) =>
+      requests[index] = updateFn(requests[index]);
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

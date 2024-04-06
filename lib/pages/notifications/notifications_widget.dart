@@ -9,7 +9,12 @@ import 'notifications_model.dart';
 export 'notifications_model.dart';
 
 class NotificationsWidget extends StatefulWidget {
-  const NotificationsWidget({super.key});
+  const NotificationsWidget({
+    super.key,
+    this.requests,
+  });
+
+  final List<dynamic>? requests;
 
   @override
   State<NotificationsWidget> createState() => _NotificationsWidgetState();
@@ -258,7 +263,11 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            'Invite from: $invitesItem',
+                                                            'Invite from: ${getJsonField(
+                                                              widget.requests?[
+                                                                  invitesIndex],
+                                                              r'''$.username''',
+                                                            ).toString()}',
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyLarge
