@@ -8,7 +8,7 @@ class ChooseGameModel extends FlutterFlowModel<ChooseGameWidget> {
 
   String? errorDetail;
 
-  int notificationCount = 0;
+  int notificationCount = 3;
 
   ///  State fields for stateful widgets in this page.
 
