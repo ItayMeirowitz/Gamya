@@ -37,9 +37,6 @@ dynamic fetchData(String apiUrl, String tokenType, String accessToken,
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
 
-      print(data);
-      print(data['data']);
-
       if (data['isUpdate'] == 'true') {
         Map<String, dynamic> updateQueryParams = {
           'get': 'false',
