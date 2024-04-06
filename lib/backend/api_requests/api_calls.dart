@@ -20,7 +20,8 @@ class ConnectUserCall {
   "username": "$username",
   "email": "$email",
   "birthday": "$birthday",
-  "password": "$password"
+  "password": "$password",
+  "online": 1
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ConnectUser',
