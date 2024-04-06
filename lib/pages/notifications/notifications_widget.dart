@@ -262,7 +262,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                           Text(
                                                             getJsonField(
                                                               invitesItem,
-                                                              r'''$.msg''',
+                                                              r'''$.m''',
                                                             ).toString(),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
