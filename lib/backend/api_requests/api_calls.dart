@@ -67,8 +67,8 @@ class GetVocabCall {
         'Authorization': '$tokenType $accessToken',
       },
       params: {
-        'diff': diff,
         'username': username,
+        'diff': diff,
       },
       returnBody: true,
       encodeBodyUtf8: false,

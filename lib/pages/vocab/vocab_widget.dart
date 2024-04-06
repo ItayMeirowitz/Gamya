@@ -632,284 +632,292 @@ class _VocabWidgetState extends State<VocabWidget> {
                   ],
                 ),
               if (!_model.hasStarted!)
-                Column(
-                  mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(60.0, 50.0, 60.0, 0.0),
-                      child: FFButtonWidget(
-                        onPressed: () async {
-                          var shouldSetState = false;
-                          _model.vocabJSON = await GetVocabCall.call(
-                            accessToken: FFAppState().accessToken,
-                            tokenType: FFAppState().tokenType,
-                            serverIP: FFAppState().serverIP,
-                            diff: _model.diff,
-                          );
-                          shouldSetState = true;
-                          if ((_model.vocabJSON?.succeeded ?? true)) {
-                            setState(() {
-                              _model.vocabList = getJsonField(
-                                (_model.vocabJSON?.jsonBody ?? ''),
-                                r'''$.vocab''',
-                                true,
-                              )!
-                                  .toList()
-                                  .cast<dynamic>();
-                              _model.quizLength = getJsonField(
-                                (_model.vocabJSON?.jsonBody ?? ''),
-                                r'''$.length''',
-                              );
-                            });
-                          } else {
-                            if (shouldSetState) setState(() {});
-                            return;
-                          }
+                Align(
+                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
+                            60.0, 50.0, 60.0, 0.0),
+                        child: FFButtonWidget(
+                          onPressed: () async {
+                            var shouldSetState = false;
+                            _model.vocabJSON = await GetVocabCall.call(
+                              accessToken: FFAppState().accessToken,
+                              tokenType: FFAppState().tokenType,
+                              serverIP: FFAppState().serverIP,
+                              diff: _model.diff,
+                              username: FFAppState().username,
+                            );
+                            shouldSetState = true;
+                            if ((_model.vocabJSON?.succeeded ?? true)) {
+                              setState(() {
+                                _model.vocabList = getJsonField(
+                                  (_model.vocabJSON?.jsonBody ?? ''),
+                                  r'''$.vocab''',
+                                  true,
+                                )!
+                                    .toList()
+                                    .cast<dynamic>();
+                                _model.quizLength = getJsonField(
+                                  (_model.vocabJSON?.jsonBody ?? ''),
+                                  r'''$.length''',
+                                );
+                              });
+                            } else {
+                              if (shouldSetState) setState(() {});
+                              return;
+                            }
 
-                          setState(() {
-                            _model.wordToGuess = getJsonField(
-                              _model.vocabList[_model.currentIndex!],
-                              r'''$.word''',
-                            ).toString();
-                            _model.op1 = getJsonField(
-                              _model.vocabList[_model.currentIndex!],
-                              r'''$.op1''',
-                            ).toString();
-                            _model.op2 = getJsonField(
-                              _model.vocabList[_model.currentIndex!],
-                              r'''$.op2''',
-                            ).toString();
-                            _model.op3 = getJsonField(
-                              _model.vocabList[_model.currentIndex!],
-                              r'''$.op3''',
-                            ).toString();
-                            _model.op4 = getJsonField(
-                              _model.vocabList[_model.currentIndex!],
-                              r'''$.op4''',
-                            ).toString();
-                            _model.hasStarted = true;
-                            _model.correct = getJsonField(
-                              _model.vocabList[_model.currentIndex!],
-                              r'''$.correct''',
-                            ).toString();
-                          });
-                          if (shouldSetState) setState(() {});
-                        },
-                        text: 'Press to START!',
-                        options: FFButtonOptions(
-                          height: 40.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
-                              24.0, 0.0, 24.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 0.0, 0.0, 0.0),
-                          color: FlutterFlowTheme.of(context).primary,
-                          textStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Readex Pro',
-                                    color: Colors.white,
-                                    letterSpacing: 0.0,
-                                  ),
-                          elevation: 3.0,
-                          borderSide: const BorderSide(
-                            color: Colors.transparent,
-                            width: 1.0,
+                            setState(() {
+                              _model.wordToGuess = getJsonField(
+                                _model.vocabList[_model.currentIndex!],
+                                r'''$.word''',
+                              ).toString();
+                              _model.op1 = getJsonField(
+                                _model.vocabList[_model.currentIndex!],
+                                r'''$.op1''',
+                              ).toString();
+                              _model.op2 = getJsonField(
+                                _model.vocabList[_model.currentIndex!],
+                                r'''$.op2''',
+                              ).toString();
+                              _model.op3 = getJsonField(
+                                _model.vocabList[_model.currentIndex!],
+                                r'''$.op3''',
+                              ).toString();
+                              _model.op4 = getJsonField(
+                                _model.vocabList[_model.currentIndex!],
+                                r'''$.op4''',
+                              ).toString();
+                              _model.hasStarted = true;
+                              _model.correct = getJsonField(
+                                _model.vocabList[_model.currentIndex!],
+                                r'''$.correct''',
+                              ).toString();
+                            });
+                            if (shouldSetState) setState(() {});
+                          },
+                          text: 'Press to START!',
+                          options: FFButtonOptions(
+                            height: 40.0,
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                24.0, 0.0, 24.0, 0.0),
+                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 0.0),
+                            color: FlutterFlowTheme.of(context).primary,
+                            textStyle: FlutterFlowTheme.of(context)
+                                .titleSmall
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color: Colors.white,
+                                  letterSpacing: 0.0,
+                                ),
+                            elevation: 3.0,
+                            borderSide: const BorderSide(
+                              color: Colors.transparent,
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
                           ),
-                          borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Align(
-                            alignment: const AlignmentDirectional(0.0, -1.0),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 30.0, 0.0, 0.0),
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 50.0, 0.0, 0.0),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Align(
+                              alignment: const AlignmentDirectional(0.0, -1.0),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 30.0, 0.0, 0.0),
+                                child: Text(
+                                  'Choose Difficulty:',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 20.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 20.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Flexible(
+                                      child: Align(
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            setState(() {
+                                              _model.diff = 'easy';
+                                            });
+                                          },
+                                          text: 'Easy',
+                                          options: FFButtonOptions(
+                                            height: 40.0,
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    24.0, 0.0, 24.0, 0.0),
+                                            iconPadding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondary,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      color: Colors.white,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            elevation: 3.0,
+                                            borderSide: const BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: Align(
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            setState(() {
+                                              _model.diff = 'medium';
+                                            });
+                                          },
+                                          text: 'Medium',
+                                          options: FFButtonOptions(
+                                            height: 40.0,
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    24.0, 0.0, 24.0, 0.0),
+                                            iconPadding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .warning,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      color: Colors.white,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            elevation: 3.0,
+                                            borderSide: const BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: Align(
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: FFButtonWidget(
+                                          onPressed: () async {
+                                            setState(() {
+                                              _model.diff = 'hard';
+                                            });
+                                          },
+                                          text: 'Hard',
+                                          options: FFButtonOptions(
+                                            height: 40.0,
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    24.0, 0.0, 24.0, 0.0),
+                                            iconPadding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 0.0, 0.0, 0.0),
+                                            color: FlutterFlowTheme.of(context)
+                                                .error,
+                                            textStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .titleSmall
+                                                    .override(
+                                                      fontFamily: 'Readex Pro',
+                                                      color: Colors.white,
+                                                      letterSpacing: 0.0,
+                                                    ),
+                                            elevation: 3.0,
+                                            borderSide: const BorderSide(
+                                              color: Colors.transparent,
+                                              width: 1.0,
+                                            ),
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.max,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Align(
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Text(
-                                'Choose Difficulty:',
+                                'Difficulty selected: ',
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Readex Pro',
-                                      fontSize: 20.0,
                                       letterSpacing: 0.0,
                                     ),
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 20.0, 0.0, 0.0),
-                              child: Row(
-                                mainAxisSize: MainAxisSize.max,
-                                children: [
-                                  Flexible(
-                                    child: Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          setState(() {
-                                            _model.diff = 'easy';
-                                          });
-                                        },
-                                        text: 'Easy',
-                                        options: FFButtonOptions(
-                                          height: 40.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  24.0, 0.0, 24.0, 0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondary,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Colors.white,
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                          elevation: 3.0,
-                                          borderSide: const BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                      ),
+                            Align(
+                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              child: Text(
+                                _model.diff,
+                                style: FlutterFlowTheme.of(context)
+                                    .bodyMedium
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
                                     ),
-                                  ),
-                                  Flexible(
-                                    child: Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          setState(() {
-                                            _model.diff = 'medium';
-                                          });
-                                        },
-                                        text: 'Medium',
-                                        options: FFButtonOptions(
-                                          height: 40.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  24.0, 0.0, 24.0, 0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .warning,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Colors.white,
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                          elevation: 3.0,
-                                          borderSide: const BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Flexible(
-                                    child: Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                      child: FFButtonWidget(
-                                        onPressed: () async {
-                                          setState(() {
-                                            _model.diff = 'hard';
-                                          });
-                                        },
-                                        text: 'Hard',
-                                        options: FFButtonOptions(
-                                          height: 40.0,
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  24.0, 0.0, 24.0, 0.0),
-                                          iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 0.0, 0.0, 0.0),
-                                          color: FlutterFlowTheme.of(context)
-                                              .error,
-                                          textStyle:
-                                              FlutterFlowTheme.of(context)
-                                                  .titleSmall
-                                                  .override(
-                                                    fontFamily: 'Readex Pro',
-                                                    color: Colors.white,
-                                                    letterSpacing: 0.0,
-                                                  ),
-                                          elevation: 3.0,
-                                          borderSide: const BorderSide(
-                                            color: Colors.transparent,
-                                            width: 1.0,
-                                          ),
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.max,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
-                            child: Text(
-                              'Difficulty selected: ',
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                          ),
-                          Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
-                            child: Text(
-                              _model.diff,
-                              style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
-                                  .override(
-                                    fontFamily: 'Readex Pro',
-                                    letterSpacing: 0.0,
-                                  ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
             ],
           ),
