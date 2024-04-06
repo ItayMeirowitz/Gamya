@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
+import 'dart:io';
+
 import 'dart:async';
 
 import 'package:http/http.dart';
@@ -29,6 +31,8 @@ dynamic fetchData(String apiUrl, String tokenType, String accessToken,
 
     http.Response response =
         await http.get(Uri.parse(urlWithParams), headers: headers);
+
+    sleep(Duration(milliseconds: 500));
 
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);

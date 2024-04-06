@@ -8,6 +8,8 @@ class ChooseGameModel extends FlutterFlowModel<ChooseGameWidget> {
 
   String? errorDetail;
 
+  int notificationCount = 0;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

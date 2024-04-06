@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
+import 'package:badges/badges.dart' as badges;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -24,6 +25,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
   late ChooseGameModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -32,6 +34,8 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      currentUserLocationValue =
+          await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
       while (!FFAppState().hasStarted) {
         _model.dataReceived = await actions.fetchData(
           'http://${FFAppState().serverIP}:5000/user/${FFAppState().username}',
@@ -39,7 +43,10 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
           FFAppState().accessToken,
           FFAppState().username,
         );
-        ScaffoldMessenger.of(context).hideCurrentSnackBar();
+        await launchMap(
+          location: currentUserLocationValue,
+          title: 'Choose location!',
+        );
       }
     });
 
@@ -284,6 +291,67 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                       letterSpacing: 0.0,
                     ),
               ),
+              Flexible(
+                child: Align(
+                  alignment: const AlignmentDirectional(1.0, 0.0),
+                  child: Container(
+                    decoration: const BoxDecoration(),
+                    child: Stack(
+                      children: [
+                        Align(
+                          alignment: const AlignmentDirectional(1.0, 0.0),
+                          child: FlutterFlowIconButton(
+                            borderColor: FlutterFlowTheme.of(context).primary,
+                            borderRadius: 30.0,
+                            borderWidth: 1.0,
+                            buttonSize: 40.0,
+                            fillColor: FlutterFlowTheme.of(context).accent1,
+                            icon: Icon(
+                              Icons.notification_add,
+                              color: FlutterFlowTheme.of(context).primaryText,
+                              size: 24.0,
+                            ),
+                            onPressed: () async {
+                              context.pushNamed('errorPage');
+                            },
+                          ),
+                        ),
+                        if (_model.notificationCount > 0)
+                          Align(
+                            alignment: const AlignmentDirectional(1.0, -1.0),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  59.0, 5.0, 0.0, 0.0),
+                              child: badges.Badge(
+                                badgeContent: Text(
+                                  '1',
+                                  textAlign: TextAlign.start,
+                                  style: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: Colors.white,
+                                        fontSize: 12.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                                showBadge: true,
+                                shape: badges.BadgeShape.circle,
+                                badgeColor: const Color(0xFFFF0004),
+                                elevation: 4.0,
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    8.0, 8.0, 8.0, 8.0),
+                                position: badges.BadgePosition.topStart(),
+                                animationType: badges.BadgeAnimationType.scale,
+                                toAnimate: true,
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
           actions: [
@@ -293,9 +361,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                 child: FlutterFlowIconButton(
                   borderColor: FlutterFlowTheme.of(context).primary,
-                  borderRadius: 20.0,
+                  borderRadius: 25.0,
                   borderWidth: 1.0,
-                  buttonSize: 40.0,
+                  buttonSize: 50.0,
                   fillColor: FlutterFlowTheme.of(context).accent1,
                   icon: Icon(
                     Icons.connect_without_contact,
