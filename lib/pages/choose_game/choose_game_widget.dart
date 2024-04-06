@@ -52,7 +52,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
           setState(() {
             _model.addToRequests(getJsonField(
               _model.dataReceived,
-              r'''$.msg''',
+              r'''$.info''',
             ));
           });
         } else {
@@ -353,7 +353,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                             ),
                           ),
                         ),
-                        if (_model.notificationCount > 0)
+                        if (FFAppState().notificationCounter > 0)
                           Align(
                             alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Padding(
@@ -392,7 +392,8 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 },
                                 child: badges.Badge(
                                   badgeContent: Text(
-                                    _model.notificationCount
+                                    FFAppState()
+                                        .notificationCounter
                                         .toString()
                                         .maybeHandleOverflow(
                                           maxChars: 2,

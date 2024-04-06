@@ -14,6 +14,8 @@ import 'package:http/http.dart';
 
 import 'package:http/http.dart' as http;
 
+import 'package:gamya/custom_code/actions/post_to_userpage.dart';
+
 dynamic fetchData(String apiUrl, String tokenType, String accessToken,
     String username) async {
   while (true) {
@@ -32,7 +34,7 @@ dynamic fetchData(String apiUrl, String tokenType, String accessToken,
     http.Response response =
         await http.get(Uri.parse(urlWithParams), headers: headers);
 
-    sleep(Duration(milliseconds: 100));
+    sleep(Duration(milliseconds: 50));
 
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
@@ -42,11 +44,8 @@ dynamic fetchData(String apiUrl, String tokenType, String accessToken,
           'get': 'false',
           'change': jsonEncode({'isUpdate': 'false'})
         };
-        String urlWithParams =
-            apiUrl + '?' + Uri(queryParameters: updateQueryParams).query;
 
-        http.Response response =
-            await http.get(Uri.parse(urlWithParams), headers: headers);
+        postToUserpage(apiUrl, updateQueryParams, headers);
 
         return data['data'];
       }

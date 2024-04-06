@@ -99,6 +99,12 @@ class FFAppState extends ChangeNotifier {
   set hasStarted(bool value) {
     _hasStarted = value;
   }
+
+  int _notificationCounter = 0;
+  int get notificationCounter => _notificationCounter;
+  set notificationCounter(int value) {
+    _notificationCounter = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

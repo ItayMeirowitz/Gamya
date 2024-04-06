@@ -1,9 +1,12 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'notifications_model.dart';
 export 'notifications_model.dart';
 
@@ -34,6 +37,13 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
     super.initState();
     _model = createModel(context, () => NotificationsModel());
 
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        _model.requestList = widget.requests!.toList().cast<dynamic>();
+      });
+    });
+
     _model.tabBarController = TabController(
       vsync: this,
       length: 2,
@@ -50,6 +60,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
@@ -180,8 +192,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                 ),
                                 child: Builder(
                                   builder: (context) {
-                                    final invites =
-                                        widget.requests?.toList() ?? [];
+                                    final invites = _model.requestList.toList();
                                     return ListView.builder(
                                       padding: EdgeInsets.zero,
                                       scrollDirection: Axis.vertical,
@@ -260,8 +271,10 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            invitesItem
-                                                                .toString(),
+                                                            getJsonField(
+                                                              invitesItem,
+                                                              r'''$.msg''',
+                                                            ).toString(),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyLarge
@@ -318,9 +331,85 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                               .primaryText,
                                                       size: 24.0,
                                                     ),
-                                                    onPressed: () {
-                                                      print(
-                                                          'IconButton pressed ...');
+                                                    onPressed: () async {
+                                                      var shouldSetState =
+                                                          false;
+                                                      _model.declineInviteResp =
+                                                          await DeclineInviteCall
+                                                              .call(
+                                                        serverIP: FFAppState()
+                                                            .serverIP,
+                                                        tokenType: FFAppState()
+                                                            .tokenType,
+                                                        accessToken:
+                                                            FFAppState()
+                                                                .accessToken,
+                                                        senderUsername:
+                                                            FFAppState()
+                                                                .username,
+                                                        receiverUsername:
+                                                            getJsonField(
+                                                          invitesItem,
+                                                          r'''$.name''',
+                                                        ).toString(),
+                                                      );
+                                                      shouldSetState = true;
+                                                      if ((_model
+                                                              .declineInviteResp
+                                                              ?.succeeded ??
+                                                          true)) {
+                                                        await showDialog(
+                                                          context: context,
+                                                          builder:
+                                                              (alertDialogContext) {
+                                                            return AlertDialog(
+                                                              title: const Text(
+                                                                  'Invite Declined'),
+                                                              content: Text(
+                                                                  getJsonField(
+                                                                (_model.declineInviteResp
+                                                                        ?.jsonBody ??
+                                                                    ''),
+                                                                r'''$.msg''',
+                                                              ).toString()),
+                                                              actions: [
+                                                                TextButton(
+                                                                  onPressed: () =>
+                                                                      Navigator.pop(
+                                                                          alertDialogContext),
+                                                                  child: const Text(
+                                                                      'Ok'),
+                                                                ),
+                                                              ],
+                                                            );
+                                                          },
+                                                        );
+                                                        setState(() {
+                                                          _model
+                                                              .removeFromRequestList(
+                                                                  invitesItem);
+                                                        });
+                                                        setState(() {
+                                                          FFAppState()
+                                                                  .notificationCounter =
+                                                              FFAppState()
+                                                                      .notificationCounter +
+                                                                  -1;
+                                                        });
+                                                        if (shouldSetState) {
+                                                          setState(() {});
+                                                        }
+                                                        return;
+                                                      } else {
+                                                        if (shouldSetState) {
+                                                          setState(() {});
+                                                        }
+                                                        return;
+                                                      }
+
+                                                      if (shouldSetState) {
+                                                        setState(() {});
+                                                      }
                                                     },
                                                   ),
                                                   Padding(

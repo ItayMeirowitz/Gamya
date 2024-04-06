@@ -181,6 +181,39 @@ class InviteUserCall {
   }
 }
 
+class DeclineInviteCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    String? senderUsername = '',
+    String? receiverUsername = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "sender_username": "$senderUsername",
+  "receiver_username": "$receiverUsername"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'declineInvite',
+      apiUrl: 'http://$serverIP:5000/declineUser',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
