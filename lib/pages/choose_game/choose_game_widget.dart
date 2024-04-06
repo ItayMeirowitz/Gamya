@@ -295,7 +295,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                     child: Stack(
                       children: [
                         Align(
-                          alignment: const AlignmentDirectional(1.0, 0.0),
+                          alignment: const AlignmentDirectional(1.08, 0.0),
                           child: FlutterFlowIconButton(
                             borderColor: FlutterFlowTheme.of(context).primary,
                             borderRadius: 30.0,
@@ -314,32 +314,41 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                         ),
                         if (_model.notificationCount > 0)
                           Align(
-                            alignment: const AlignmentDirectional(1.0, -1.0),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  59.0, 5.0, 0.0, 0.0),
-                              child: badges.Badge(
-                                badgeContent: Text(
-                                  '1',
-                                  textAlign: TextAlign.start,
-                                  style: FlutterFlowTheme.of(context)
-                                      .titleSmall
-                                      .override(
-                                        fontFamily: 'Readex Pro',
-                                        color: Colors.white,
-                                        fontSize: 12.0,
-                                        letterSpacing: 0.0,
-                                      ),
+                                  59.0, 9.0, 0.0, 0.0),
+                              child: InkWell(
+                                splashColor: Colors.transparent,
+                                focusColor: Colors.transparent,
+                                hoverColor: Colors.transparent,
+                                highlightColor: Colors.transparent,
+                                onTap: () async {
+                                  context.pushNamed('errorPage');
+                                },
+                                child: badges.Badge(
+                                  badgeContent: Text(
+                                    '1',
+                                    textAlign: TextAlign.start,
+                                    style: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Readex Pro',
+                                          fontSize: 12.0,
+                                          letterSpacing: 0.0,
+                                        ),
+                                  ),
+                                  showBadge: true,
+                                  shape: badges.BadgeShape.circle,
+                                  badgeColor: const Color(0xFFFF0004),
+                                  elevation: 4.0,
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      4.0, 4.0, 4.0, 4.0),
+                                  position: badges.BadgePosition.topStart(),
+                                  animationType:
+                                      badges.BadgeAnimationType.scale,
+                                  toAnimate: true,
                                 ),
-                                showBadge: true,
-                                shape: badges.BadgeShape.circle,
-                                badgeColor: const Color(0xFFFF0004),
-                                elevation: 4.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    8.0, 8.0, 8.0, 8.0),
-                                position: badges.BadgePosition.topStart(),
-                                animationType: badges.BadgeAnimationType.scale,
-                                toAnimate: true,
                               ),
                             ),
                           ),
