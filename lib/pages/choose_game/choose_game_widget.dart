@@ -55,7 +55,6 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               r'''$.msg''',
             ));
           });
-          return;
         } else {
           return;
         }
