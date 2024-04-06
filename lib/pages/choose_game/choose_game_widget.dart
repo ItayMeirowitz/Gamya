@@ -50,7 +50,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
             _model.notificationCount = _model.notificationCount + 1;
           });
           setState(() {
-            _model.addToRequests(getJsonField(
+            FFAppState().addToRequests(getJsonField(
               _model.dataReceived,
               r'''$.info''',
             ));
@@ -343,7 +343,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         padding:
                                             MediaQuery.viewInsetsOf(context),
                                         child: NotificationsWidget(
-                                          requests: _model.requests,
+                                          requests: FFAppState().requests,
                                         ),
                                       ),
                                     );
@@ -383,7 +383,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                           padding:
                                               MediaQuery.viewInsetsOf(context),
                                           child: NotificationsWidget(
-                                            requests: _model.requests,
+                                            requests: FFAppState().requests,
                                           ),
                                         ),
                                       );

@@ -105,6 +105,35 @@ class FFAppState extends ChangeNotifier {
   set notificationCounter(int value) {
     _notificationCounter = value;
   }
+
+  List<dynamic> _requests = [];
+  List<dynamic> get requests => _requests;
+  set requests(List<dynamic> value) {
+    _requests = value;
+  }
+
+  void addToRequests(dynamic value) {
+    _requests.add(value);
+  }
+
+  void removeFromRequests(dynamic value) {
+    _requests.remove(value);
+  }
+
+  void removeAtIndexFromRequests(int index) {
+    _requests.removeAt(index);
+  }
+
+  void updateRequestsAtIndex(
+    int index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _requests[index] = updateFn(_requests[index]);
+  }
+
+  void insertAtIndexInRequests(int index, dynamic value) {
+    _requests.insert(index, value);
+  }
 }
 
 void _safeInit(Function() initializeField) {
