@@ -56,6 +56,7 @@ class GetVocabCall {
     String? tokenType = '',
     String? serverIP = '',
     String? diff = 'easy',
+    String? username = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getVocab',
@@ -67,6 +68,7 @@ class GetVocabCall {
       },
       params: {
         'diff': diff,
+        'username': username,
       },
       returnBody: true,
       encodeBodyUtf8: false,

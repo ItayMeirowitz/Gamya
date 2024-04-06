@@ -1,6 +1,6 @@
 # Gamya
 
-A Flutter project for playing games with others over LAN.
+A new Flutter project.
 
 ## Getting Started
 
