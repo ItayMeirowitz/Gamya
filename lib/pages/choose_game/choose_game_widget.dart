@@ -25,7 +25,6 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
   late ChooseGameModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  LatLng? currentUserLocationValue;
 
   @override
   void initState() {
@@ -34,8 +33,6 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      currentUserLocationValue =
-          await getCurrentUserLocation(defaultLocation: const LatLng(0.0, 0.0));
       while (!FFAppState().hasStarted) {
         _model.dataReceived = await actions.fetchData(
           'http://${FFAppState().serverIP}:5000/user/${FFAppState().username}',
@@ -43,10 +40,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
           FFAppState().accessToken,
           FFAppState().username,
         );
-        await launchMap(
-          location: currentUserLocationValue,
-          title: 'Choose location!',
-        );
+        setState(() {
+          _model.notificationCount = _model.notificationCount + 1;
+        });
       }
     });
 
