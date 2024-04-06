@@ -295,29 +295,33 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                     child: Stack(
                       children: [
                         Align(
-                          alignment: const AlignmentDirectional(1.08, 0.0),
-                          child: FlutterFlowIconButton(
-                            borderColor: FlutterFlowTheme.of(context).primary,
-                            borderRadius: 30.0,
-                            borderWidth: 1.0,
-                            buttonSize: 40.0,
-                            fillColor: FlutterFlowTheme.of(context).accent1,
-                            icon: Icon(
-                              Icons.notification_add,
-                              color: FlutterFlowTheme.of(context).primaryText,
-                              size: 24.0,
+                          alignment: const AlignmentDirectional(-1.0, 0.0),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                15.0, 0.0, 0.0, 0.0),
+                            child: FlutterFlowIconButton(
+                              borderColor: FlutterFlowTheme.of(context).primary,
+                              borderRadius: 30.0,
+                              borderWidth: 1.0,
+                              buttonSize: 40.0,
+                              fillColor: FlutterFlowTheme.of(context).accent1,
+                              icon: Icon(
+                                Icons.notification_add,
+                                color: FlutterFlowTheme.of(context).primaryText,
+                                size: 24.0,
+                              ),
+                              onPressed: () async {
+                                context.pushNamed('errorPage');
+                              },
                             ),
-                            onPressed: () async {
-                              context.pushNamed('errorPage');
-                            },
                           ),
                         ),
                         if (_model.notificationCount > 0)
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: const AlignmentDirectional(-1.0, 0.0),
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  0.0, 12.0, 12.0, 0.0),
+                                  0.0, 6.0, 0.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
@@ -328,8 +332,13 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 },
                                 child: badges.Badge(
                                   badgeContent: Text(
-                                    _model.notificationCount.toString(),
-                                    textAlign: TextAlign.start,
+                                    _model.notificationCount
+                                        .toString()
+                                        .maybeHandleOverflow(
+                                          maxChars: 2,
+                                          replacement: '…',
+                                        ),
+                                    textAlign: TextAlign.center,
                                     style: FlutterFlowTheme.of(context)
                                         .titleSmall
                                         .override(
@@ -344,7 +353,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                   elevation: 4.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       4.0, 4.0, 4.0, 4.0),
-                                  position: badges.BadgePosition.topEnd(),
+                                  position: badges.BadgePosition.topStart(),
                                   animationType:
                                       badges.BadgeAnimationType.scale,
                                   toAnimate: true,
