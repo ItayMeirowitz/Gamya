@@ -295,7 +295,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                     child: Stack(
                       children: [
                         Align(
-                          alignment: const AlignmentDirectional(-1.0, 0.0),
+                          alignment: const AlignmentDirectional(0.0, 0.0),
                           child: Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 15.0, 0.0, 0.0, 0.0),
