@@ -32,10 +32,13 @@ dynamic fetchData(String apiUrl, String tokenType, String accessToken,
     http.Response response =
         await http.get(Uri.parse(urlWithParams), headers: headers);
 
-    sleep(Duration(milliseconds: 500));
+    sleep(Duration(seconds: 1));
 
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
+
+      print(data);
+      print(data['data']);
 
       if (data['isUpdate'] == 'true') {
         Map<String, dynamic> updateQueryParams = {
