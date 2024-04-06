@@ -2,7 +2,6 @@ import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/flutter_flow/random_data_util.dart' as random_data;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'notifications_model.dart';
@@ -181,10 +180,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                 ),
                                 child: Builder(
                                   builder: (context) {
-                                    final invites = List.generate(
-                                        random_data.randomInteger(0, 0),
-                                        (index) => random_data.randomName(
-                                            true, false)).toList();
+                                    final invites =
+                                        widget.requests?.toList() ?? [];
                                     return ListView.builder(
                                       padding: EdgeInsets.zero,
                                       scrollDirection: Axis.vertical,
@@ -263,11 +260,10 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                 .start,
                                                         children: [
                                                           Text(
-                                                            'Invite from: ${getJsonField(
-                                                              widget.requests?[
-                                                                  invitesIndex],
-                                                              r'''$.username''',
-                                                            ).toString()}',
+                                                            getJsonField(
+                                                              invitesItem,
+                                                              r'''$.msg''',
+                                                            ).toString(),
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .bodyLarge
