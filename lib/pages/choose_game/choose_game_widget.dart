@@ -41,7 +41,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
           FFAppState().username,
         );
         setState(() {
-          _model.notificationCount = _model.notificationCount + 10;
+          _model.notificationCount = _model.notificationCount + 1;
         });
       }
     });
