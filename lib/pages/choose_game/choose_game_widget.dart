@@ -317,7 +317,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                             alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
-                                  59.0, 9.0, 0.0, 0.0),
+                                  0.0, 12.0, 12.0, 0.0),
                               child: InkWell(
                                 splashColor: Colors.transparent,
                                 focusColor: Colors.transparent,
@@ -344,7 +344,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                   elevation: 4.0,
                                   padding: const EdgeInsetsDirectional.fromSTEB(
                                       4.0, 4.0, 4.0, 4.0),
-                                  position: badges.BadgePosition.topStart(),
+                                  position: badges.BadgePosition.topEnd(),
                                   animationType:
                                       badges.BadgeAnimationType.scale,
                                   toAnimate: true,
