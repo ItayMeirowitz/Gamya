@@ -318,7 +318,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                         ),
                         if (_model.notificationCount > 0)
                           Align(
-                            alignment: const AlignmentDirectional(-1.0, 0.0),
+                            alignment: const AlignmentDirectional(0.0, 0.0),
                             child: Padding(
                               padding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 6.0, 0.0, 0.0),
