@@ -328,7 +328,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 },
                                 child: badges.Badge(
                                   badgeContent: Text(
-                                    '1',
+                                    _model.notificationCount.toString(),
                                     textAlign: TextAlign.start,
                                     style: FlutterFlowTheme.of(context)
                                         .titleSmall
