@@ -41,11 +41,11 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
           FFAppState().accessToken,
           FFAppState().username,
         );
-        if (getJsonField(
+        if ('msg' ==
+            getJsonField(
               _model.dataReceived,
               r'''$.type''',
-            ) !=
-            null) {
+            )) {
           setState(() {
             FFAppState().addToRequests(getJsonField(
               _model.dataReceived,
@@ -55,7 +55,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                 FFAppState().notificationCounter + 1;
           });
         } else {
-          return;
+          break;
         }
       }
     });
