@@ -54,6 +54,11 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
             FFAppState().notificationCounter =
                 FFAppState().notificationCounter + 1;
           });
+        } else if ('info' ==
+            getJsonField(
+              _model.dataReceived,
+              r'''$.type''',
+            )) {
         } else {
           break;
         }
