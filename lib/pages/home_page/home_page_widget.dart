@@ -47,11 +47,9 @@ class _HomePageWidgetState extends State<HomePageWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           title: Text(
-            'Success',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
+            'Good Game!',
+            style: FlutterFlowTheme.of(context).titleLarge.override(
                   fontFamily: 'Outfit',
-                  color: Colors.white,
-                  fontSize: 22.0,
                   letterSpacing: 0.0,
                 ),
           ),
