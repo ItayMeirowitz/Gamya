@@ -474,10 +474,10 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                 (alertDialogContext) {
                                                               return AlertDialog(
                                                                 title: const Text(
-                                                                    'Invite Accepted'),
+                                                                    'Invite Accepted!'),
                                                                 content: Text(
                                                                     getJsonField(
-                                                                  (_model.declineInviteResp
+                                                                  (_model.acceptInviteResp
                                                                           ?.jsonBody ??
                                                                       ''),
                                                                   r'''$.msg''',
