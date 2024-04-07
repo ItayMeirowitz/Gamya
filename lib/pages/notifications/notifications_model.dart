@@ -22,8 +22,10 @@ class NotificationsModel extends FlutterFlowModel<NotificationsWidget> {
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
-  // Stores action output result for [Backend Call - API (declineInvite)] action in IconButton widget.
+  // Stores action output result for [Backend Call - API (declineInvite)] action in DeclineInvite widget.
   ApiCallResponse? declineInviteResp;
+  // Stores action output result for [Backend Call - API (acceptInvite)] action in AcceptInvite widget.
+  ApiCallResponse? acceptInviteResp;
 
   @override
   void initState(BuildContext context) {}

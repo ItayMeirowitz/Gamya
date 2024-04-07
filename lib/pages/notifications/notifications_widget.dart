@@ -440,9 +440,89 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                 .primaryText,
                                                         size: 24.0,
                                                       ),
-                                                      onPressed: () {
-                                                        print(
-                                                            'IconButton pressed ...');
+                                                      onPressed: () async {
+                                                        var shouldSetState =
+                                                            false;
+                                                        _model.acceptInviteResp =
+                                                            await AcceptInviteCall
+                                                                .call(
+                                                          serverIP: FFAppState()
+                                                              .serverIP,
+                                                          tokenType:
+                                                              FFAppState()
+                                                                  .tokenType,
+                                                          accessToken:
+                                                              FFAppState()
+                                                                  .accessToken,
+                                                          sernderUsername:
+                                                              FFAppState()
+                                                                  .username,
+                                                          receiverUsername:
+                                                              getJsonField(
+                                                            invitesItem,
+                                                            r'''$.name''',
+                                                          ).toString(),
+                                                        );
+                                                        shouldSetState = true;
+                                                        if ((_model
+                                                                .acceptInviteResp
+                                                                ?.succeeded ??
+                                                            true)) {
+                                                          await showDialog(
+                                                            context: context,
+                                                            builder:
+                                                                (alertDialogContext) {
+                                                              return AlertDialog(
+                                                                title: const Text(
+                                                                    'Invite Accepted'),
+                                                                content: Text(
+                                                                    getJsonField(
+                                                                  (_model.declineInviteResp
+                                                                          ?.jsonBody ??
+                                                                      ''),
+                                                                  r'''$.msg''',
+                                                                ).toString()),
+                                                                actions: [
+                                                                  TextButton(
+                                                                    onPressed: () =>
+                                                                        Navigator.pop(
+                                                                            alertDialogContext),
+                                                                    child: const Text(
+                                                                        'Ok'),
+                                                                  ),
+                                                                ],
+                                                              );
+                                                            },
+                                                          );
+                                                          setState(() {
+                                                            FFAppState()
+                                                                .removeFromRequests(
+                                                                    invitesItem);
+                                                            FFAppState()
+                                                                    .notificationCounter =
+                                                                FFAppState()
+                                                                        .notificationCounter +
+                                                                    -1;
+                                                          });
+                                                          setState(() {
+                                                            _model
+                                                                .removeFromRequestList(
+                                                                    invitesItem);
+                                                          });
+                                                          if (shouldSetState) {
+                                                            setState(() {});
+                                                          }
+                                                          return;
+                                                        } else {
+                                                          if (shouldSetState) {
+                                                            setState(() {});
+                                                          }
+                                                          return;
+                                                        }
+
+                                                        if (shouldSetState) {
+                                                          setState(() {});
+                                                        }
                                                       },
                                                     ),
                                                   ),

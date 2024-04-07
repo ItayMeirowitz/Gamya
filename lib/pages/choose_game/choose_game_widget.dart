@@ -46,6 +46,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               _model.dataReceived,
               r'''$.type''',
             )) {
+          // New invite
           setState(() {
             FFAppState().addToRequests(getJsonField(
               _model.dataReceived,
@@ -54,11 +55,35 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
             FFAppState().notificationCounter =
                 FFAppState().notificationCounter + 1;
           });
-        } else if ('info' ==
+        } else if ('decline' ==
             getJsonField(
               _model.dataReceived,
               r'''$.type''',
             )) {
+        } else if ('accept' ==
+            getJsonField(
+              _model.dataReceived,
+              r'''$.type''',
+            )) {
+          // Invite Accepted
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                title: const Text('Invite Accepted!'),
+                content: Text(getJsonField(
+                  _model.dataReceived,
+                  r'''$.msg''',
+                ).toString().toString()),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: const Text('Party up!'),
+                  ),
+                ],
+              );
+            },
+          );
         } else {
           break;
         }

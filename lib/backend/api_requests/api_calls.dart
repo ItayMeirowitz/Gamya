@@ -197,7 +197,40 @@ class DeclineInviteCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'declineInvite',
-      apiUrl: 'http://$serverIP:5000/declineUser',
+      apiUrl: 'http://$serverIP:5000/declineInvite',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class AcceptInviteCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    String? sernderUsername = '',
+    String? receiverUsername = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "sender_username": "<sender_username>",
+  "receiver_username": "$receiverUsername"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'acceptInvite',
+      apiUrl: 'http://$serverIP:5000/acceptInvite',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
