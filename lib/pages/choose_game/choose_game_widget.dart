@@ -73,7 +73,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                 title: const Text('Invite Accepted!'),
                 content: Text(getJsonField(
                   _model.dataReceived,
-                  r'''$.info''',
+                  r'''$.msg''',
                 ).toString().toString()),
                 actions: [
                   TextButton(
