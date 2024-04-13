@@ -244,10 +244,6 @@ class _VocabWidgetState extends State<VocabWidget> {
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     if (_model.op2 == _model.correct) {
-                                      setState(() {
-                                        _model.clientScore =
-                                            _model.clientScore! + 20;
-                                      });
                                       _model.soundPlayer3 ??= AudioPlayer();
                                       if (_model.soundPlayer3!.playing) {
                                         await _model.soundPlayer3!.stop();
@@ -392,10 +388,6 @@ class _VocabWidgetState extends State<VocabWidget> {
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   if (_model.op3 == _model.correct) {
-                                    setState(() {
-                                      _model.clientScore =
-                                          _model.clientScore! + 20;
-                                    });
                                     _model.soundPlayer5 ??= AudioPlayer();
                                     if (_model.soundPlayer5!.playing) {
                                       await _model.soundPlayer5!.stop();
@@ -524,10 +516,6 @@ class _VocabWidgetState extends State<VocabWidget> {
                               child: FFButtonWidget(
                                 onPressed: () async {
                                   if (_model.op4 == _model.correct) {
-                                    setState(() {
-                                      _model.clientScore =
-                                          _model.clientScore! + 20;
-                                    });
                                     _model.soundPlayer7 ??= AudioPlayer();
                                     if (_model.soundPlayer7!.playing) {
                                       await _model.soundPlayer7!.stop();
