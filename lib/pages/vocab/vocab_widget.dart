@@ -110,6 +110,17 @@ class _VocabWidgetState extends State<VocabWidget> {
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     if (_model.op1 == _model.correct) {
+                                      _model.soundPlayer1 ??= AudioPlayer();
+                                      if (_model.soundPlayer1!.playing) {
+                                        await _model.soundPlayer1!.stop();
+                                      }
+                                      _model.soundPlayer1!.setVolume(1.0);
+                                      _model.soundPlayer1!
+                                          .setAsset(
+                                              'assets/audios/cute-level-up-3-189853.mp3')
+                                          .then((_) =>
+                                              _model.soundPlayer1!.play());
+
                                       if (_model.diff == 'easy') {
                                         setState(() {
                                           _model.clientScore =
@@ -126,17 +137,6 @@ class _VocabWidgetState extends State<VocabWidget> {
                                               _model.clientScore! + 100;
                                         });
                                       }
-
-                                      _model.soundPlayer1 ??= AudioPlayer();
-                                      if (_model.soundPlayer1!.playing) {
-                                        await _model.soundPlayer1!.stop();
-                                      }
-                                      _model.soundPlayer1!.setVolume(1.0);
-                                      _model.soundPlayer1!
-                                          .setAsset(
-                                              'assets/audios/cute-level-up-3-189853.mp3')
-                                          .then((_) =>
-                                              _model.soundPlayer1!.play());
                                     } else {
                                       _model.soundPlayer2 ??= AudioPlayer();
                                       if (_model.soundPlayer2!.playing) {
@@ -258,6 +258,23 @@ class _VocabWidgetState extends State<VocabWidget> {
                                               'assets/audios/cute-level-up-3-189853.mp3')
                                           .then((_) =>
                                               _model.soundPlayer3!.play());
+
+                                      if (_model.diff == 'easy') {
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 20;
+                                        });
+                                      } else if (_model.diff == 'medium') {
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 40;
+                                        });
+                                      } else if (_model.diff == 'hard') {
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 100;
+                                        });
+                                      }
                                     } else {
                                       _model.soundPlayer4 ??= AudioPlayer();
                                       if (_model.soundPlayer4!.playing) {
@@ -389,6 +406,23 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             'assets/audios/cute-level-up-3-189853.mp3')
                                         .then(
                                             (_) => _model.soundPlayer5!.play());
+
+                                    if (_model.diff == 'easy') {
+                                      setState(() {
+                                        _model.clientScore =
+                                            _model.clientScore! + 20;
+                                      });
+                                    } else if (_model.diff == 'medium') {
+                                      setState(() {
+                                        _model.clientScore =
+                                            _model.clientScore! + 40;
+                                      });
+                                    } else if (_model.diff == 'hard') {
+                                      setState(() {
+                                        _model.clientScore =
+                                            _model.clientScore! + 100;
+                                      });
+                                    }
                                   } else {
                                     _model.soundPlayer6 ??= AudioPlayer();
                                     if (_model.soundPlayer6!.playing) {
@@ -504,6 +538,23 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             'assets/audios/cute-level-up-3-189853.mp3')
                                         .then(
                                             (_) => _model.soundPlayer7!.play());
+
+                                    if (_model.diff == 'easy') {
+                                      setState(() {
+                                        _model.clientScore =
+                                            _model.clientScore! + 20;
+                                      });
+                                    } else if (_model.diff == 'medium') {
+                                      setState(() {
+                                        _model.clientScore =
+                                            _model.clientScore! + 40;
+                                      });
+                                    } else if (_model.diff == 'hard') {
+                                      setState(() {
+                                        _model.clientScore =
+                                            _model.clientScore! + 100;
+                                      });
+                                    }
                                   } else {
                                     _model.soundPlayer8 ??= AudioPlayer();
                                     if (_model.soundPlayer8!.playing) {
