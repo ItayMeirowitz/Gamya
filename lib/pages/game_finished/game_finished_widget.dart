@@ -42,15 +42,15 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
           lobbyId: FFAppState().lobbyId,
         );
         if ((_model.postScoreResp?.succeeded ?? true)) {
-          _model.getScoreResponse = await GetScoreCall.call(
+          _model.getScoreResp = await GetScoreCall.call(
             serverIP: FFAppState().serverIP,
             tokenType: FFAppState().tokenType,
             accessToken: FFAppState().accessToken,
             lobbyId: FFAppState().lobbyId,
           );
-          if ((_model.getScoreResponse?.succeeded ?? true)) {
+          if ((_model.getScoreResp?.succeeded ?? true)) {
             setState(() {
-              _model.scores = (_model.getScoreResponse?.jsonBody ?? '')
+              _model.scores = (_model.getScoreResp?.jsonBody ?? '')
                   .toList()
                   .cast<dynamic>();
             });
@@ -198,18 +198,19 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                   child: FFButtonWidget(
                     onPressed: () async {
                       var shouldSetState = false;
-                      _model.getScoreResp = await GetScoreCall.call(
+                      _model.getScoreResponse = await GetScoreCall.call(
                         serverIP: FFAppState().serverIP,
                         tokenType: FFAppState().tokenType,
                         accessToken: FFAppState().accessToken,
                         lobbyId: FFAppState().lobbyId,
                       );
                       shouldSetState = true;
-                      if ((_model.getScoreResp?.succeeded ?? true)) {
+                      if ((_model.getScoreResponse?.succeeded ?? true)) {
                         setState(() {
-                          _model.scores = (_model.getScoreResp?.jsonBody ?? '')
-                              .toList()
-                              .cast<dynamic>();
+                          _model.scores =
+                              (_model.getScoreResponse?.jsonBody ?? '')
+                                  .toList()
+                                  .cast<dynamic>();
                         });
                         if (shouldSetState) setState(() {});
                         return;
