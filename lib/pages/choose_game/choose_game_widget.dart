@@ -105,7 +105,10 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
-                    child: const Text('Join in!'),
+                    child: Text(getJsonField(
+                      _model.dataReceived,
+                      r'''$.lobby_id''',
+                    ).toString().toString()),
                   ),
                 ],
               );
