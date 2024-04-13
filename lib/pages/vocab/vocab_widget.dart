@@ -144,7 +144,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                     if (_model.currentIndex! >=
                                         _model.quizLength) {
                                       context.pushNamed(
-                                        'HomePage',
+                                        'GameFinished',
                                         queryParameters: {
                                           'vocabScore': serializeParam(
                                             _model.clientScore,
@@ -265,7 +265,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                     if (_model.currentIndex! >=
                                         _model.quizLength) {
                                       context.pushNamed(
-                                        'HomePage',
+                                        'GameFinished',
                                         queryParameters: {
                                           'vocabScore': serializeParam(
                                             _model.clientScore,
@@ -396,7 +396,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                   if (_model.currentIndex! >=
                                       _model.quizLength) {
                                     context.pushNamed(
-                                      'HomePage',
+                                      'GameFinished',
                                       queryParameters: {
                                         'vocabScore': serializeParam(
                                           _model.clientScore,
@@ -511,7 +511,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                   if (_model.currentIndex! >=
                                       _model.quizLength) {
                                     context.pushNamed(
-                                      'HomePage',
+                                      'GameFinished',
                                       queryParameters: {
                                         'vocabScore': serializeParam(
                                           _model.clientScore,

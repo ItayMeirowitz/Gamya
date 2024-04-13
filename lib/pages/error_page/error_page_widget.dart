@@ -89,7 +89,7 @@ class _ErrorPageWidgetState extends State<ErrorPageWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  context.pushNamed('HomePage');
+                  context.pushNamed('GameFinished');
                 },
                 text: 'Home Page',
                 options: FFButtonOptions(

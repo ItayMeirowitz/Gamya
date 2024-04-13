@@ -140,6 +140,12 @@ class FFAppState extends ChangeNotifier {
   set leader(String value) {
     _leader = value;
   }
+
+  int _lobbyId = 0;
+  int get lobbyId => _lobbyId;
+  set lobbyId(int value) {
+    _lobbyId = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

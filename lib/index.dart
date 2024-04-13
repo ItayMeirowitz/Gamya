@@ -1,5 +1,5 @@
 // Export pages
-export '/pages/home_page/home_page_widget.dart' show HomePageWidget;
+export '/pages/game_finished/game_finished_widget.dart' show GameFinishedWidget;
 export '/pages/authenticate/authenticate_widget.dart' show AuthenticateWidget;
 export '/pages/error_page/error_page_widget.dart' show ErrorPageWidget;
 export '/pages/vocab/vocab_widget.dart' show VocabWidget;

@@ -129,7 +129,7 @@ class GetScoreCall {
     String? serverIP = '',
     String? tokenType = '',
     String? accessToken = '',
-    String? gameType = '',
+    int? lobbyId,
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getScore',
@@ -140,7 +140,7 @@ class GetScoreCall {
         'Authorization': '$tokenType $accessToken',
       },
       params: {
-        'game': gameType,
+        'lobby_id': lobbyId,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -236,6 +236,41 @@ class AcceptInviteCall {
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class PostScoreCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    String? username = '',
+    double? score,
+    int? lobbyId,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "username": "$username",
+  "score": $score,
+  "lobby_id": $lobbyId
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'postScore',
+      apiUrl: 'http://$serverIP:5000/postScore',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-type': 'application/json',
         'Authorization': '$tokenType $accessToken',
       },
       params: {},

@@ -39,9 +39,9 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, _) => const IPregisterationWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => HomePageWidget(
+          name: 'GameFinished',
+          path: '/gameFinished',
+          builder: (context, params) => GameFinishedWidget(
             vocabScore: params.getParam(
               'vocabScore',
               ParamType.int,
