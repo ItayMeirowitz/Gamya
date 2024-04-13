@@ -146,7 +146,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       context.pushNamed(
                                         'GameFinished',
                                         queryParameters: {
-                                          'vocabScore': serializeParam(
+                                          'score': serializeParam(
                                             _model.clientScore,
                                             ParamType.int,
                                           ),
@@ -267,7 +267,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       context.pushNamed(
                                         'GameFinished',
                                         queryParameters: {
-                                          'vocabScore': serializeParam(
+                                          'score': serializeParam(
                                             _model.clientScore,
                                             ParamType.int,
                                           ),
@@ -398,7 +398,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                     context.pushNamed(
                                       'GameFinished',
                                       queryParameters: {
-                                        'vocabScore': serializeParam(
+                                        'score': serializeParam(
                                           _model.clientScore,
                                           ParamType.int,
                                         ),
@@ -513,7 +513,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                     context.pushNamed(
                                       'GameFinished',
                                       queryParameters: {
-                                        'vocabScore': serializeParam(
+                                        'score': serializeParam(
                                           _model.currentIndex,
                                           ParamType.int,
                                         ),
