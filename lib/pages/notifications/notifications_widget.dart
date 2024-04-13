@@ -454,7 +454,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                           accessToken:
                                                               FFAppState()
                                                                   .accessToken,
-                                                          sernderUsername:
+                                                          senderUsername:
                                                               FFAppState()
                                                                   .username,
                                                           receiverUsername:

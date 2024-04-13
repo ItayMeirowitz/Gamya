@@ -222,12 +222,12 @@ class AcceptInviteCall {
     String? serverIP = '',
     String? tokenType = '',
     String? accessToken = '',
-    String? sernderUsername = '',
+    String? senderUsername = '',
     String? receiverUsername = '',
   }) async {
     final ffApiRequestBody = '''
 {
-  "sender_username": "<sender_username>",
+  "sender_username": "$senderUsername",
   "receiver_username": "$receiverUsername"
 }''';
     return ApiManager.instance.makeApiCall(

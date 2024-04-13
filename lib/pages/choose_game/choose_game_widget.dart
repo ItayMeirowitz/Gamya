@@ -87,6 +87,36 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
           setState(() {
             FFAppState().leader = FFAppState().username;
           });
+        } else if ('enter_game' ==
+            getJsonField(
+              _model.dataReceived,
+              r'''$.type''',
+            )) {
+          // Entering game
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                title: const Text('Host started game'),
+                content: Text(getJsonField(
+                  _model.dataReceived,
+                  r'''$.msg''',
+                ).toString().toString()),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: const Text('Join in!'),
+                  ),
+                ],
+              );
+            },
+          );
+          setState(() {
+            FFAppState().lobbyId = getJsonField(
+              _model.dataReceived,
+              r'''$.lobby_id''',
+            );
+          });
         } else {
           break;
         }
