@@ -514,7 +514,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       'GameFinished',
                                       queryParameters: {
                                         'vocabScore': serializeParam(
-                                          _model.clientScore,
+                                          _model.currentIndex,
                                           ParamType.int,
                                         ),
                                       }.withoutNulls,

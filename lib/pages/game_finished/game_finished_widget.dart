@@ -11,10 +11,10 @@ export 'game_finished_model.dart';
 class GameFinishedWidget extends StatefulWidget {
   const GameFinishedWidget({
     super.key,
-    int? vocabScore,
-  }) : vocabScore = vocabScore ?? 0;
+    this.vocabScore,
+  });
 
-  final int vocabScore;
+  final int? vocabScore;
 
   @override
   State<GameFinishedWidget> createState() => _GameFinishedWidgetState();
@@ -38,7 +38,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
           tokenType: FFAppState().tokenType,
           accessToken: FFAppState().accessToken,
           username: FFAppState().username,
-          score: widget.vocabScore.toDouble(),
+          score: widget.vocabScore?.toDouble(),
           lobbyId: FFAppState().lobbyId,
         );
         if ((_model.postScoreResp?.succeeded ?? true)) {
@@ -58,6 +58,22 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
           } else {
             return;
           }
+        } else {
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                title: const Text('failed post'),
+                content: Text(widget.vocabScore!.toString()),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: const Text('Ok'),
+                  ),
+                ],
+              );
+            },
+          );
         }
       }
     });
