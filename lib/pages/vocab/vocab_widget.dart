@@ -110,10 +110,23 @@ class _VocabWidgetState extends State<VocabWidget> {
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     if (_model.op1 == _model.correct) {
-                                      setState(() {
-                                        _model.clientScore =
-                                            _model.clientScore! + 20;
-                                      });
+                                      if (_model.diff == 'easy') {
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 20;
+                                        });
+                                      } else if (_model.diff == 'medium') {
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 40;
+                                        });
+                                      } else if (_model.diff == 'hard') {
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 100;
+                                        });
+                                      }
+
                                       _model.soundPlayer1 ??= AudioPlayer();
                                       if (_model.soundPlayer1!.playing) {
                                         await _model.soundPlayer1!.stop();
@@ -669,6 +682,63 @@ class _VocabWidgetState extends State<VocabWidget> {
                               child: Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     0.0, 20.0, 0.0, 0.0),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: [
+                                    Flexible(
+                                      child: Align(
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: Text(
+                                          'x1 score',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: Align(
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: Text(
+                                          'x2 score',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                    Flexible(
+                                      child: Align(
+                                        alignment:
+                                            const AlignmentDirectional(0.0, 0.0),
+                                        child: Text(
+                                          'x5 score',
+                                          style: FlutterFlowTheme.of(context)
+                                              .bodyMedium
+                                              .override(
+                                                fontFamily: 'Readex Pro',
+                                                letterSpacing: 0.0,
+                                              ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Align(
+                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 5.0, 0.0, 0.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: [
