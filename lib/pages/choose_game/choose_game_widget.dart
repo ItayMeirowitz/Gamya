@@ -121,7 +121,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
             );
           });
 
-          context.pushNamed('ChooseGame');
+          context.pushNamed('Vocab');
         } else {
           break;
         }
