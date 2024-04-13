@@ -84,6 +84,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               );
             },
           );
+          setState(() {
+            FFAppState().leader = FFAppState().username;
+          });
         } else {
           break;
         }
@@ -313,149 +316,168 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               context.safePop();
             },
           ),
-          title: Row(
+          title: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Text(
-                'Hello, ',
-                style: FlutterFlowTheme.of(context).titleLarge.override(
-                      fontFamily: 'Outfit',
-                      letterSpacing: 0.0,
-                    ),
-              ),
-              Text(
-                FFAppState().username,
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Readex Pro',
-                      fontSize: 22.0,
-                      letterSpacing: 0.0,
-                    ),
-              ),
-              Flexible(
-                child: Align(
-                  alignment: const AlignmentDirectional(1.0, 0.0),
-                  child: Container(
-                    decoration: const BoxDecoration(),
-                    child: Stack(
-                      children: [
-                        Align(
-                          alignment: const AlignmentDirectional(0.0, 0.0),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                15.0, 0.0, 0.0, 0.0),
-                            child: FlutterFlowIconButton(
-                              borderColor: FlutterFlowTheme.of(context).primary,
-                              borderRadius: 30.0,
-                              borderWidth: 1.0,
-                              buttonSize: 40.0,
-                              fillColor: FlutterFlowTheme.of(context).accent1,
-                              icon: Icon(
-                                Icons.notification_add,
-                                color: FlutterFlowTheme.of(context).primaryText,
-                                size: 24.0,
-                              ),
-                              onPressed: () async {
-                                await showModalBottomSheet(
-                                  isScrollControlled: true,
-                                  backgroundColor: Colors.transparent,
-                                  enableDrag: false,
-                                  useSafeArea: true,
-                                  context: context,
-                                  builder: (context) {
-                                    return GestureDetector(
-                                      onTap: () => _model
-                                              .unfocusNode.canRequestFocus
-                                          ? FocusScope.of(context)
-                                              .requestFocus(_model.unfocusNode)
-                                          : FocusScope.of(context).unfocus(),
-                                      child: Padding(
-                                        padding:
-                                            MediaQuery.viewInsetsOf(context),
-                                        child: NotificationsWidget(
-                                          requests: FFAppState().requests,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                ).then((value) => safeSetState(() {}));
-                              },
-                            ),
-                          ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  Text(
+                    'Hello, ',
+                    style: FlutterFlowTheme.of(context).titleLarge.override(
+                          fontFamily: 'Outfit',
+                          letterSpacing: 0.0,
                         ),
-                        if (FFAppState().notificationCounter > 0)
-                          Align(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
-                            child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
-                                  36.0, 6.0, 0.0, 0.0),
-                              child: InkWell(
-                                splashColor: Colors.transparent,
-                                focusColor: Colors.transparent,
-                                hoverColor: Colors.transparent,
-                                highlightColor: Colors.transparent,
-                                onTap: () async {
-                                  await showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    backgroundColor: Colors.transparent,
-                                    enableDrag: false,
-                                    useSafeArea: true,
-                                    context: context,
-                                    builder: (context) {
-                                      return GestureDetector(
-                                        onTap: () => _model
-                                                .unfocusNode.canRequestFocus
-                                            ? FocusScope.of(context)
-                                                .requestFocus(
-                                                    _model.unfocusNode)
-                                            : FocusScope.of(context).unfocus(),
-                                        child: Padding(
-                                          padding:
-                                              MediaQuery.viewInsetsOf(context),
-                                          child: NotificationsWidget(
-                                            requests: FFAppState().requests,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                  ).then((value) => safeSetState(() {}));
-                                },
-                                child: badges.Badge(
-                                  badgeContent: Text(
-                                    FFAppState()
-                                        .notificationCounter
-                                        .toString()
-                                        .maybeHandleOverflow(
-                                          maxChars: 2,
-                                          replacement: '…',
-                                        ),
-                                    textAlign: TextAlign.center,
-                                    style: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .override(
-                                          fontFamily: 'Readex Pro',
-                                          fontSize: 12.0,
-                                          letterSpacing: 0.0,
-                                        ),
+                  ),
+                  Text(
+                    FFAppState().username,
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Readex Pro',
+                          fontSize: 22.0,
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                  Flexible(
+                    child: Align(
+                      alignment: const AlignmentDirectional(1.0, 0.0),
+                      child: Container(
+                        decoration: const BoxDecoration(),
+                        child: Stack(
+                          children: [
+                            Align(
+                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              child: Padding(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    15.0, 0.0, 0.0, 0.0),
+                                child: FlutterFlowIconButton(
+                                  borderColor:
+                                      FlutterFlowTheme.of(context).primary,
+                                  borderRadius: 30.0,
+                                  borderWidth: 1.0,
+                                  buttonSize: 40.0,
+                                  fillColor:
+                                      FlutterFlowTheme.of(context).accent1,
+                                  icon: Icon(
+                                    Icons.notification_add,
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    size: 24.0,
                                   ),
-                                  showBadge: true,
-                                  shape: badges.BadgeShape.circle,
-                                  badgeColor: const Color(0xFFFF0004),
-                                  elevation: 4.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
-                                      4.0, 4.0, 4.0, 4.0),
-                                  position: badges.BadgePosition.topStart(),
-                                  animationType:
-                                      badges.BadgeAnimationType.scale,
-                                  toAnimate: true,
+                                  onPressed: () async {
+                                    await showModalBottomSheet(
+                                      isScrollControlled: true,
+                                      backgroundColor: Colors.transparent,
+                                      enableDrag: false,
+                                      useSafeArea: true,
+                                      context: context,
+                                      builder: (context) {
+                                        return GestureDetector(
+                                          onTap: () => _model
+                                                  .unfocusNode.canRequestFocus
+                                              ? FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _model.unfocusNode)
+                                              : FocusScope.of(context)
+                                                  .unfocus(),
+                                          child: Padding(
+                                            padding: MediaQuery.viewInsetsOf(
+                                                context),
+                                            child: NotificationsWidget(
+                                              requests: FFAppState().requests,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ).then((value) => safeSetState(() {}));
+                                  },
                                 ),
                               ),
                             ),
-                          ),
-                      ],
+                            if (FFAppState().notificationCounter > 0)
+                              Align(
+                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      36.0, 6.0, 0.0, 0.0),
+                                  child: InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      await showModalBottomSheet(
+                                        isScrollControlled: true,
+                                        backgroundColor: Colors.transparent,
+                                        enableDrag: false,
+                                        useSafeArea: true,
+                                        context: context,
+                                        builder: (context) {
+                                          return GestureDetector(
+                                            onTap: () => _model
+                                                    .unfocusNode.canRequestFocus
+                                                ? FocusScope.of(context)
+                                                    .requestFocus(
+                                                        _model.unfocusNode)
+                                                : FocusScope.of(context)
+                                                    .unfocus(),
+                                            child: Padding(
+                                              padding: MediaQuery.viewInsetsOf(
+                                                  context),
+                                              child: NotificationsWidget(
+                                                requests: FFAppState().requests,
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ).then((value) => safeSetState(() {}));
+                                    },
+                                    child: badges.Badge(
+                                      badgeContent: Text(
+                                        FFAppState()
+                                            .notificationCounter
+                                            .toString()
+                                            .maybeHandleOverflow(
+                                              maxChars: 2,
+                                              replacement: '…',
+                                            ),
+                                        textAlign: TextAlign.center,
+                                        style: FlutterFlowTheme.of(context)
+                                            .titleSmall
+                                            .override(
+                                              fontFamily: 'Readex Pro',
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                      showBadge: true,
+                                      shape: badges.BadgeShape.circle,
+                                      badgeColor: const Color(0xFFFF0004),
+                                      elevation: 4.0,
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          4.0, 4.0, 4.0, 4.0),
+                                      position: badges.BadgePosition.topStart(),
+                                      animationType:
+                                          badges.BadgeAnimationType.scale,
+                                      toAnimate: true,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
-                ),
+                ],
               ),
+              if (FFAppState().leader != 'singlePlayer')
+                Text(
+                  'Party lead by ${FFAppState().leader}',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
+                ),
             ],
           ),
           actions: [

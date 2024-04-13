@@ -496,13 +496,19 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                           );
                                                           setState(() {
                                                             FFAppState()
-                                                                .removeFromRequests(
-                                                                    invitesItem);
-                                                            FFAppState()
                                                                     .notificationCounter =
                                                                 FFAppState()
                                                                         .notificationCounter +
                                                                     -1;
+                                                            FFAppState()
+                                                                    .leader =
+                                                                getJsonField(
+                                                              invitesItem,
+                                                              r'''$.name''',
+                                                            ).toString();
+                                                            FFAppState()
+                                                                .removeFromRequests(
+                                                                    invitesItem);
                                                           });
                                                           setState(() {
                                                             _model

@@ -371,7 +371,6 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    minLines: null,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -496,7 +495,6 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    minLines: null,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -986,7 +984,6 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    minLines: null,
                                                     keyboardType: TextInputType
                                                         .emailAddress,
                                                     cursorColor:
@@ -1090,7 +1087,6 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    minLines: null,
                                                     keyboardType: TextInputType
                                                         .emailAddress,
                                                     cursorColor:
@@ -1355,7 +1351,6 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    minLines: null,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
@@ -1481,6 +1476,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
+                                                    minLines: 1,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)

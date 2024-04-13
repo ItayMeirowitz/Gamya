@@ -134,6 +134,12 @@ class FFAppState extends ChangeNotifier {
   void insertAtIndexInRequests(int index, dynamic value) {
     _requests.insert(index, value);
   }
+
+  String _leader = 'singlePlayer';
+  String get leader => _leader;
+  set leader(String value) {
+    _leader = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {
