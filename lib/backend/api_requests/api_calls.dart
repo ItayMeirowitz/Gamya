@@ -100,6 +100,7 @@ class GetUsersCall {
     String? serverIP = '',
     String? tokenType = '',
     String? accessToken = '',
+    String? username = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getUsers',
@@ -109,7 +110,9 @@ class GetUsersCall {
         'Content-Type': 'application/json',
         'Authorization': '$tokenType $accessToken',
       },
-      params: {},
+      params: {
+        'username': username,
+      },
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,
