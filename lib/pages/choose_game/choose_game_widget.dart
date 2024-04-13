@@ -120,6 +120,8 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               r'''$.lobby_id''',
             );
           });
+
+          context.pushNamed('ChooseGame');
         } else {
           break;
         }
