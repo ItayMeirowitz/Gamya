@@ -2,7 +2,6 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -51,8 +50,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
           );
           if ((_model.getScoreResp?.succeeded ?? true)) {
             setState(() {
-              _model.scores = functions
-                  .sortScores((_model.getScoreResp?.jsonBody ?? ''))
+              _model.scores = (_model.getScoreResp?.jsonBody ?? '')
                   .toList()
                   .cast<dynamic>();
             });
@@ -209,11 +207,10 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                       shouldSetState = true;
                       if ((_model.getScoreResponse?.succeeded ?? true)) {
                         setState(() {
-                          _model.scores = functions
-                              .sortScores(
-                                  (_model.getScoreResponse?.jsonBody ?? ''))
-                              .toList()
-                              .cast<dynamic>();
+                          _model.scores =
+                              (_model.getScoreResponse?.jsonBody ?? '')
+                                  .toList()
+                                  .cast<dynamic>();
                         });
                         if (shouldSetState) setState(() {});
                         return;

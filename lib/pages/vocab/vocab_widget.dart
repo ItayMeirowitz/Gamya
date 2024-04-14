@@ -52,33 +52,30 @@ class _VocabWidgetState extends State<VocabWidget> {
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: PreferredSize(
-          preferredSize: const Size.fromHeight(20.0),
-          child: AppBar(
-            backgroundColor: FlutterFlowTheme.of(context).primary,
-            automaticallyImplyLeading: false,
-            actions: const [],
-            flexibleSpace: FlexibleSpaceBar(
-              title: Align(
-                alignment: const AlignmentDirectional(0.0, 1.0),
-                child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                  child: Text(
-                    'Vocabulary Contest!',
-                    style: FlutterFlowTheme.of(context).headlineMedium.override(
-                          fontFamily: 'Outfit',
-                          color: Colors.white,
-                          fontSize: 22.0,
-                          letterSpacing: 0.0,
-                        ),
-                  ),
+        appBar: AppBar(
+          backgroundColor: FlutterFlowTheme.of(context).primary,
+          automaticallyImplyLeading: false,
+          actions: const [],
+          flexibleSpace: FlexibleSpaceBar(
+            title: Align(
+              alignment: const AlignmentDirectional(0.0, 1.0),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                child: Text(
+                  'Vocabulary Contest!',
+                  style: FlutterFlowTheme.of(context).headlineMedium.override(
+                        fontFamily: 'Outfit',
+                        color: Colors.white,
+                        fontSize: 22.0,
+                        letterSpacing: 0.0,
+                      ),
                 ),
               ),
-              centerTitle: true,
-              expandedTitleScale: 1.0,
             ),
-            elevation: 1.0,
+            centerTitle: true,
+            expandedTitleScale: 1.0,
           ),
+          elevation: 1.0,
         ),
         body: SafeArea(
           top: true,
