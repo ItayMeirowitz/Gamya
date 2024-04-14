@@ -1,6 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
-import '../schema/structs/index.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
 import 'api_manager.dart';
@@ -19,15 +17,15 @@ class ConnectUserCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "username": "${username}",
-  "email": "${email}",
-  "birthday": "${birthday}",
-  "password": "${password}",
+  "username": "$username",
+  "email": "$email",
+  "birthday": "$birthday",
+  "password": "$password",
   "online": 1
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ConnectUser',
-      apiUrl: 'http://${serverIP}:5000/user',
+      apiUrl: 'http://$serverIP:5000/user',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -64,11 +62,11 @@ class GetVocabCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getVocab',
-      apiUrl: 'http://${serverIP}:5000/vocab',
+      apiUrl: 'http://$serverIP:5000/vocab',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '${tokenType} ${accessToken}',
+        'Authorization': '$tokenType $accessToken',
       },
       params: {
         'username': username,
@@ -106,11 +104,11 @@ class GetUsersCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getUsers',
-      apiUrl: 'http://${serverIP}:5000/users',
+      apiUrl: 'http://$serverIP:5000/users',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '${tokenType} ${accessToken}',
+        'Authorization': '$tokenType $accessToken',
       },
       params: {
         'username': username,
@@ -138,11 +136,11 @@ class GetScoreCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getScore',
-      apiUrl: 'http://${serverIP}:5000/getScore',
+      apiUrl: 'http://$serverIP:5000/getScore',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '${tokenType} ${accessToken}',
+        'Authorization': '$tokenType $accessToken',
       },
       params: {
         'lobby_id': lobbyId,
@@ -166,16 +164,16 @@ class InviteUserCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "sender_username": "${thisUser}",
-  "receiver_username": "${otherUser}"
+  "sender_username": "$thisUser",
+  "receiver_username": "$otherUser"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'InviteUser',
-      apiUrl: 'http://${serverIP}:5000/inviteUser',
+      apiUrl: 'http://$serverIP:5000/inviteUser',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '${tokenType} ${accessToken}',
+        'Authorization': '$tokenType $accessToken',
       },
       params: {},
       body: ffApiRequestBody,
@@ -199,16 +197,16 @@ class DeclineInviteCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "sender_username": "${senderUsername}",
-  "receiver_username": "${receiverUsername}"
+  "sender_username": "$senderUsername",
+  "receiver_username": "$receiverUsername"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'declineInvite',
-      apiUrl: 'http://${serverIP}:5000/declineInvite',
+      apiUrl: 'http://$serverIP:5000/declineInvite',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '${tokenType} ${accessToken}',
+        'Authorization': '$tokenType $accessToken',
       },
       params: {},
       body: ffApiRequestBody,
@@ -232,16 +230,16 @@ class AcceptInviteCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "sender_username": "${senderUsername}",
-  "receiver_username": "${receiverUsername}"
+  "sender_username": "$senderUsername",
+  "receiver_username": "$receiverUsername"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'acceptInvite',
-      apiUrl: 'http://${serverIP}:5000/acceptInvite',
+      apiUrl: 'http://$serverIP:5000/acceptInvite',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '${tokenType} ${accessToken}',
+        'Authorization': '$tokenType $accessToken',
       },
       params: {},
       body: ffApiRequestBody,
@@ -266,17 +264,17 @@ class PostScoreCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "username": "${username}",
-  "score": ${score},
-  "lobby_id": ${lobbyId}
+  "username": "$username",
+  "score": $score,
+  "lobby_id": $lobbyId
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postScore',
-      apiUrl: 'http://${serverIP}:5000/postScore',
+      apiUrl: 'http://$serverIP:5000/postScore',
       callType: ApiCallType.POST,
       headers: {
         'Content-type': 'application/json',
-        'Authorization': '${tokenType} ${accessToken}',
+        'Authorization': '$tokenType $accessToken',
       },
       params: {},
       body: ffApiRequestBody,

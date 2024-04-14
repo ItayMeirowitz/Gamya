@@ -10,7 +10,6 @@ import 'package:badges/badges.dart' as badges;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'choose_game_model.dart';
 export 'choose_game_model.dart';
@@ -71,7 +70,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
             context: context,
             builder: (alertDialogContext) {
               return AlertDialog(
-                title: Text('Invite Accepted!'),
+                title: const Text('Invite Accepted!'),
                 content: Text(getJsonField(
                   _model.dataReceived,
                   r'''$.msg''',
@@ -79,7 +78,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text('Party up!'),
+                    child: const Text('Party up!'),
                   ),
                 ],
               );
@@ -98,7 +97,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
             context: context,
             builder: (alertDialogContext) {
               return AlertDialog(
-                title: Text('Host started game'),
+                title: const Text('Host started game'),
                 content: Text(getJsonField(
                   _model.dataReceived,
                   r'''$.msg''',
@@ -164,10 +163,10 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                 children: [
                   Flexible(
                     child: Align(
-                      alignment: AlignmentDirectional(0.0, -1.0),
+                      alignment: const AlignmentDirectional(0.0, -1.0),
                       child: Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                         child: Text(
                           'Select someone to team up with!',
                           style: FlutterFlowTheme.of(context)
@@ -196,9 +195,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                       ),
                 ),
               Align(
-                alignment: AlignmentDirectional(-1.0, 0.0),
+                alignment: const AlignmentDirectional(-1.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 40.0, 0.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(5.0, 40.0, 0.0, 0.0),
                   child: Text(
                     'Active users:',
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -216,7 +215,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                     final onlineUsers = FFAppState().usersOnline.toList();
                     return GridView.builder(
                       padding: EdgeInsets.zero,
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 2.0,
                         mainAxisSpacing: 10.0,
@@ -265,10 +264,10 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       .secondaryBackground,
                                 ),
                                 child: Align(
-                                  alignment: AlignmentDirectional(0.0, -0.3),
+                                  alignment: const AlignmentDirectional(0.0, -0.3),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      var _shouldSetState = false;
+                                      var shouldSetState = false;
                                       _model.inviteUserResp =
                                           await InviteUserCall.call(
                                         serverIP: FFAppState().serverIP,
@@ -277,11 +276,11 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         otherUser: onlineUsersItem,
                                         thisUser: FFAppState().username,
                                       );
-                                      _shouldSetState = true;
+                                      shouldSetState = true;
                                       if ((_model.inviteUserResp?.succeeded ??
                                           true)) {
                                         Navigator.pop(context);
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       } else {
                                         setState(() {
@@ -291,19 +290,19 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                             r'''$.detail''',
                                           ).toString();
                                         });
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       }
 
-                                      if (_shouldSetState) setState(() {});
+                                      if (shouldSetState) setState(() {});
                                     },
                                     text: 'Invite!',
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
@@ -315,7 +314,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -375,15 +374,15 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                   ),
                   Flexible(
                     child: Align(
-                      alignment: AlignmentDirectional(1.0, 0.0),
+                      alignment: const AlignmentDirectional(1.0, 0.0),
                       child: Container(
-                        decoration: BoxDecoration(),
+                        decoration: const BoxDecoration(),
                         child: Stack(
                           children: [
                             Align(
-                              alignment: AlignmentDirectional(0.0, 0.0),
+                              alignment: const AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     15.0, 0.0, 0.0, 0.0),
                                 child: FlutterFlowIconButton(
                                   borderColor:
@@ -431,9 +430,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                             ),
                             if (FFAppState().notificationCounter > 0)
                               Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       36.0, 6.0, 0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -487,9 +486,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       ),
                                       showBadge: true,
                                       shape: badges.BadgeShape.circle,
-                                      badgeColor: Color(0xFFFF0004),
+                                      badgeColor: const Color(0xFFFF0004),
                                       elevation: 4.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           4.0, 4.0, 4.0, 4.0),
                                       position: badges.BadgePosition.topStart(),
                                       animationType:
@@ -518,9 +517,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
           ),
           actions: [
             Align(
-              alignment: AlignmentDirectional(0.0, 0.0),
+              alignment: const AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                 child: FlutterFlowIconButton(
                   borderColor: FlutterFlowTheme.of(context).primary,
                   borderRadius: 25.0,
@@ -533,7 +532,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                     size: 24.0,
                   ),
                   onPressed: () async {
-                    var _shouldSetState = false;
+                    var shouldSetState = false;
                     scaffoldKey.currentState!.openEndDrawer();
                     _model.getUsersResp = await GetUsersCall.call(
                       serverIP: FFAppState().serverIP,
@@ -541,7 +540,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                       accessToken: FFAppState().accessToken,
                       username: FFAppState().username,
                     );
-                    _shouldSetState = true;
+                    shouldSetState = true;
                     if ((_model.getUsersResp?.succeeded ?? true)) {
                       setState(() {
                         FFAppState().usersOnline = (getJsonField(
@@ -550,18 +549,18 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                           true,
                         ) as List)
                             .map<String>((s) => s.toString())
-                            .toList()!
+                            .toList()
                             .toList()
                             .cast<String>();
                       });
-                      if (_shouldSetState) setState(() {});
+                      if (shouldSetState) setState(() {});
                       return;
                     } else {
-                      if (_shouldSetState) setState(() {});
+                      if (shouldSetState) setState(() {});
                       return;
                     }
 
-                    if (_shouldSetState) setState(() {});
+                    if (shouldSetState) setState(() {});
                   },
                 ),
               ),
@@ -577,7 +576,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               child: Column(
                 children: [
                   Align(
-                    alignment: Alignment(-1.0, 0),
+                    alignment: const Alignment(-1.0, 0),
                     child: FlutterFlowButtonTabBar(
                       useToggleButtonStyle: false,
                       isScrollable: true,
@@ -586,7 +585,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 fontFamily: 'Readex Pro',
                                 letterSpacing: 0.0,
                               ),
-                      unselectedLabelStyle: TextStyle(),
+                      unselectedLabelStyle: const TextStyle(),
                       labelColor: FlutterFlowTheme.of(context).primary,
                       unselectedLabelColor:
                           FlutterFlowTheme.of(context).secondaryText,
@@ -596,12 +595,12 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                       borderRadius: 12.0,
                       elevation: 0.0,
                       labelPadding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                       buttonMargin:
-                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 16.0, 0.0),
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 16.0, 0.0),
                       padding:
-                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                      tabs: [
+                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      tabs: const [
                         Tab(
                           text: 'All',
                         ),
@@ -628,7 +627,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 16.0, 0.0, 0.0),
                                 child: Text(
                                   'Games',
@@ -641,7 +640,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -659,7 +658,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Padding(
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           8.0, 8.0, 12.0, 8.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -678,7 +677,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               'Vocabulary Test',
@@ -699,7 +698,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 12.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -709,7 +708,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -728,7 +727,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Outerwear',
@@ -746,7 +745,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -756,7 +755,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -775,7 +774,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Pants',
@@ -793,7 +792,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -803,7 +802,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -822,7 +821,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Shorts Sporty',
@@ -840,7 +839,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -850,7 +849,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -869,7 +868,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Shorts Casual',
@@ -887,7 +886,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -897,7 +896,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -916,7 +915,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Casual Tees',
@@ -934,7 +933,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 44.0),
                                 child: Container(
                                   width: double.infinity,
@@ -944,7 +943,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -963,7 +962,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Shoes',
@@ -989,7 +988,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 16.0, 0.0, 0.0),
                                 child: Text(
                                   'Categories',
@@ -1002,7 +1001,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1012,7 +1011,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1031,7 +1030,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Limited Edition',
@@ -1049,7 +1048,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 12.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1059,7 +1058,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1078,7 +1077,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Outerwear',
@@ -1096,7 +1095,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1106,7 +1105,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1125,7 +1124,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Pants',
@@ -1143,7 +1142,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1153,7 +1152,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1172,7 +1171,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Shorts Sporty',
@@ -1190,7 +1189,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1200,7 +1199,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1219,7 +1218,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Shorts Casual',
@@ -1237,7 +1236,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1247,7 +1246,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1266,7 +1265,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Casual Tees',
@@ -1284,7 +1283,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 44.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1294,7 +1293,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1313,7 +1312,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Shoes',
@@ -1339,7 +1338,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 16.0, 0.0, 0.0),
                                 child: Text(
                                   'Categories',
@@ -1352,7 +1351,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 12.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1362,7 +1361,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1381,7 +1380,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Outerwear',
@@ -1399,7 +1398,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1409,7 +1408,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1428,7 +1427,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Pants',
@@ -1446,7 +1445,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1456,7 +1455,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1475,7 +1474,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Shorts Sporty',
@@ -1493,7 +1492,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1503,7 +1502,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1522,7 +1521,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Shorts Casual',
@@ -1540,7 +1539,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1550,7 +1549,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1569,7 +1568,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Casual Tees',
@@ -1587,7 +1586,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1597,7 +1596,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1616,7 +1615,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Limited Edition',
@@ -1634,7 +1633,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: EdgeInsetsDirectional.fromSTEB(
+                                padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 44.0),
                                 child: Container(
                                   width: double.infinity,
@@ -1644,7 +1643,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     borderRadius: BorderRadius.circular(12.0),
                                   ),
                                   child: Padding(
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         8.0, 8.0, 12.0, 8.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
@@ -1663,7 +1662,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 0.0, 0.0, 0.0),
                                           child: Text(
                                             'Shoes',
