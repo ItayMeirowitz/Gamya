@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'notifications_model.dart';
 export 'notifications_model.dart';
@@ -63,13 +64,13 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
     context.watch<FFAppState>();
 
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: EdgeInsets.all(16.0),
       child: Container(
         width: 430.0,
         height: 400.0,
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
               blurRadius: 4.0,
               color: Color(0x33000000),
@@ -82,20 +83,20 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
           borderRadius: BorderRadius.circular(12.0),
         ),
         child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+          padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 0.0, 0.0),
                       child: Text(
                         'Notifications',
                         style: FlutterFlowTheme.of(context).titleLarge.override(
@@ -125,7 +126,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                 child: Column(
                   children: [
                     Align(
-                      alignment: const Alignment(-1.0, 0),
+                      alignment: Alignment(-1.0, 0),
                       child: FlutterFlowButtonTabBar(
                         useToggleButtonStyle: false,
                         isScrollable: true,
@@ -134,7 +135,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                   fontFamily: 'Readex Pro',
                                   letterSpacing: 0.0,
                                 ),
-                        unselectedLabelStyle: const TextStyle(),
+                        unselectedLabelStyle: TextStyle(),
                         labelColor: FlutterFlowTheme.of(context).primaryText,
                         unselectedLabelColor:
                             FlutterFlowTheme.of(context).secondaryText,
@@ -147,11 +148,11 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                         borderWidth: 2.0,
                         borderRadius: 12.0,
                         elevation: 0.0,
-                        labelPadding: const EdgeInsetsDirectional.fromSTEB(
+                        labelPadding: EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
                         buttonMargin:
-                            const EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
-                        tabs: const [
+                            EdgeInsetsDirectional.fromSTEB(16.0, 8.0, 0.0, 8.0),
+                        tabs: [
                           Tab(
                             text: 'New',
                           ),
@@ -171,7 +172,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                         children: [
                           KeepAliveWidgetWrapper(
                             builder: (context) => ClipRRect(
-                              borderRadius: const BorderRadius.only(
+                              borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(12.0),
                                 bottomRight: Radius.circular(12.0),
                                 topLeft: Radius.circular(0.0),
@@ -183,7 +184,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
-                                  borderRadius: const BorderRadius.only(
+                                  borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(12.0),
                                     bottomRight: Radius.circular(12.0),
                                     topLeft: Radius.circular(0.0),
@@ -202,7 +203,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                             invites[invitesIndex];
                                         return Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 1.0),
                                           child: Container(
                                             width: double.infinity,
@@ -217,7 +218,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .alternate,
-                                                  offset: const Offset(
+                                                  offset: Offset(
                                                     0.0,
                                                     1.0,
                                                   ),
@@ -225,7 +226,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                               ],
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 8.0, 16.0, 8.0),
                                               child: Row(
@@ -254,7 +255,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                   Expanded(
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   12.0,
                                                                   0.0,
@@ -288,7 +289,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                           Expanded(
                                                             child: Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           4.0,
@@ -321,7 +322,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                     borderWidth: 1.0,
                                                     buttonSize: 40.0,
                                                     fillColor:
-                                                        const Color(0x4CFF0004),
+                                                        Color(0x4CFF0004),
                                                     icon: Icon(
                                                       Icons
                                                           .disabled_by_default_sharp,
@@ -332,7 +333,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                       size: 24.0,
                                                     ),
                                                     onPressed: () async {
-                                                      var shouldSetState =
+                                                      var _shouldSetState =
                                                           false;
                                                       _model.declineInviteResp =
                                                           await DeclineInviteCall
@@ -353,7 +354,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                           r'''$.name''',
                                                         ).toString(),
                                                       );
-                                                      shouldSetState = true;
+                                                      _shouldSetState = true;
                                                       if ((_model
                                                               .declineInviteResp
                                                               ?.succeeded ??
@@ -363,7 +364,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                           builder:
                                                               (alertDialogContext) {
                                                             return AlertDialog(
-                                                              title: const Text(
+                                                              title: Text(
                                                                   'Invite Declined'),
                                                               content: Text(
                                                                   getJsonField(
@@ -377,7 +378,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                   onPressed: () =>
                                                                       Navigator.pop(
                                                                           alertDialogContext),
-                                                                  child: const Text(
+                                                                  child: Text(
                                                                       'Ok'),
                                                                 ),
                                                               ],
@@ -399,25 +400,22 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                               .removeFromRequestList(
                                                                   invitesItem);
                                                         });
-                                                        if (shouldSetState) {
+                                                        if (_shouldSetState)
                                                           setState(() {});
-                                                        }
                                                         return;
                                                       } else {
-                                                        if (shouldSetState) {
+                                                        if (_shouldSetState)
                                                           setState(() {});
-                                                        }
                                                         return;
                                                       }
 
-                                                      if (shouldSetState) {
+                                                      if (_shouldSetState)
                                                         setState(() {});
-                                                      }
                                                     },
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(10.0, 0.0,
                                                                 0.0, 0.0),
                                                     child:
@@ -430,7 +428,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                       borderWidth: 1.0,
                                                       buttonSize: 40.0,
                                                       fillColor:
-                                                          const Color(0xFF00FF72),
+                                                          Color(0xFF00FF72),
                                                       icon: FaIcon(
                                                         FontAwesomeIcons
                                                             .mailchimp,
@@ -441,7 +439,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                         size: 24.0,
                                                       ),
                                                       onPressed: () async {
-                                                        var shouldSetState =
+                                                        var _shouldSetState =
                                                             false;
                                                         _model.acceptInviteResp =
                                                             await AcceptInviteCall
@@ -463,7 +461,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                             r'''$.name''',
                                                           ).toString(),
                                                         );
-                                                        shouldSetState = true;
+                                                        _shouldSetState = true;
                                                         if ((_model
                                                                 .acceptInviteResp
                                                                 ?.succeeded ??
@@ -473,7 +471,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                             builder:
                                                                 (alertDialogContext) {
                                                               return AlertDialog(
-                                                                title: const Text(
+                                                                title: Text(
                                                                     'Invite Accepted!'),
                                                                 content: Text(
                                                                     getJsonField(
@@ -487,7 +485,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                     onPressed: () =>
                                                                         Navigator.pop(
                                                                             alertDialogContext),
-                                                                    child: const Text(
+                                                                    child: Text(
                                                                         'Ok'),
                                                                   ),
                                                                 ],
@@ -515,20 +513,17 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                                 .removeFromRequestList(
                                                                     invitesItem);
                                                           });
-                                                          if (shouldSetState) {
+                                                          if (_shouldSetState)
                                                             setState(() {});
-                                                          }
                                                           return;
                                                         } else {
-                                                          if (shouldSetState) {
+                                                          if (_shouldSetState)
                                                             setState(() {});
-                                                          }
                                                           return;
                                                         }
 
-                                                        if (shouldSetState) {
+                                                        if (_shouldSetState)
                                                           setState(() {});
-                                                        }
                                                       },
                                                     ),
                                                   ),
@@ -546,7 +541,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                           ),
                           KeepAliveWidgetWrapper(
                             builder: (context) => ClipRRect(
-                              borderRadius: const BorderRadius.only(
+                              borderRadius: BorderRadius.only(
                                 bottomLeft: Radius.circular(12.0),
                                 bottomRight: Radius.circular(12.0),
                                 topLeft: Radius.circular(0.0),
@@ -558,7 +553,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .primaryBackground,
-                                  borderRadius: const BorderRadius.only(
+                                  borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(12.0),
                                     bottomRight: Radius.circular(12.0),
                                     topLeft: Radius.circular(0.0),
@@ -570,7 +565,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                   scrollDirection: Axis.vertical,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 1.0),
                                       child: Container(
                                         width: double.infinity,
@@ -584,7 +579,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .alternate,
-                                              offset: const Offset(
+                                              offset: Offset(
                                                 0.0,
                                                 1.0,
                                               ),
@@ -593,7 +588,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                         ),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 8.0, 16.0, 8.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -618,7 +613,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           12.0, 0.0, 0.0, 0.0),
                                                   child: Column(
@@ -647,7 +642,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       4.0,
@@ -689,7 +684,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 1.0),
                                       child: Container(
                                         width: double.infinity,
@@ -703,7 +698,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .alternate,
-                                              offset: const Offset(
+                                              offset: Offset(
                                                 0.0,
                                                 1.0,
                                               ),
@@ -712,7 +707,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                         ),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 8.0, 16.0, 8.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -737,7 +732,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           12.0, 0.0, 0.0, 0.0),
                                                   child: Column(
@@ -766,7 +761,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       4.0,
@@ -808,7 +803,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 1.0),
                                       child: Container(
                                         width: double.infinity,
@@ -822,7 +817,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .alternate,
-                                              offset: const Offset(
+                                              offset: Offset(
                                                 0.0,
                                                 1.0,
                                               ),
@@ -831,7 +826,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                         ),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 8.0, 16.0, 8.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -856,7 +851,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           12.0, 0.0, 0.0, 0.0),
                                                   child: Column(
@@ -885,7 +880,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       4.0,
@@ -927,7 +922,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 1.0),
                                       child: Container(
                                         width: double.infinity,
@@ -941,7 +936,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .alternate,
-                                              offset: const Offset(
+                                              offset: Offset(
                                                 0.0,
                                                 1.0,
                                               ),
@@ -950,7 +945,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                         ),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 8.0, 16.0, 8.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -975,7 +970,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           12.0, 0.0, 0.0, 0.0),
                                                   child: Column(
@@ -1004,7 +999,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       4.0,
@@ -1046,7 +1041,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 0.0, 0.0, 1.0),
                                       child: Container(
                                         width: double.infinity,
@@ -1060,7 +1055,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .alternate,
-                                              offset: const Offset(
+                                              offset: Offset(
                                                 0.0,
                                                 1.0,
                                               ),
@@ -1069,7 +1064,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                         ),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   16.0, 8.0, 16.0, 8.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
@@ -1088,7 +1083,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                               ),
                                               Expanded(
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           12.0, 0.0, 0.0, 0.0),
                                                   child: Column(
@@ -1117,7 +1112,7 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       4.0,
