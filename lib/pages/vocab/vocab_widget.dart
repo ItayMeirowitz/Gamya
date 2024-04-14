@@ -981,6 +981,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                 (_model.vocabJSON?.jsonBody ?? ''),
                                 r'''$.lobby_id''',
                               );
+                              FFAppState().hasStarted = true;
                             });
                             setState(() {
                               _model.wordToGuess = getJsonField(
@@ -1003,7 +1004,6 @@ class _VocabWidgetState extends State<VocabWidget> {
                                 _model.vocabList[_model.currentIndex!],
                                 r'''$.op4''',
                               ).toString();
-                              _model.hasStarted = true;
                               _model.correct = getJsonField(
                                 _model.vocabList[_model.currentIndex!],
                                 r'''$.correct''',
