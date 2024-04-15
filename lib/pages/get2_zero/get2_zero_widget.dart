@@ -575,10 +575,12 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                               _model.percentage = _model.sliderValue!;
                               _model.initialNumber =
                                   functions.getRandomNumber();
-                              _model.currentNumber = _model.currentNumber;
                               _model.currentDecrementer =
                                   _model.countControllerValue!;
                               _model.started = true;
+                            });
+                            setState(() {
+                              _model.currentNumber = _model.initialNumber;
                             });
                           },
                           text: 'Start!',
