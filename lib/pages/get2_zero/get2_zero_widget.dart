@@ -64,12 +64,15 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
             ),
           ),
           actions: [
-            Text(
-              FFAppState().lobbyId.toString(),
-              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                    fontFamily: 'Readex Pro',
-                    letterSpacing: 0.0,
-                  ),
+            Padding(
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
+              child: Text(
+                FFAppState().lobbyId.toString(),
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Readex Pro',
+                      letterSpacing: 0.0,
+                    ),
+              ),
             ),
           ],
           centerTitle: false,
