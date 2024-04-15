@@ -97,7 +97,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                         child: Text(
-                          'Current optimal clicks: ${_model.initialOptimal}',
+                          'Current optimal clicks: ${_model.currentOptimal}',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
                                     fontFamily: 'Readex Pro',
@@ -123,7 +123,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                       padding:
                           const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                       child: Text(
-                        'Current dec: ${_model.initialDecrementer.toString()}',
+                        'Current dec: ${_model.currentDecrementer.toString()}',
                         style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Readex Pro',
                               fontSize: 20.0,
