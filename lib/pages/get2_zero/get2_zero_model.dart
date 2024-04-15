@@ -22,7 +22,7 @@ class Get2ZeroModel extends FlutterFlowModel<Get2ZeroWidget> {
 
   int currentDecrementer = 1;
 
-  double percentage = 10.0;
+  double percentage = 5.0;
 
   bool started = false;
 

@@ -671,12 +671,20 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     shouldSetState = true;
                                     if ((_model.postVocabResp?.succeeded ??
                                         true)) {
+                                      setState(() {
+                                        FFAppState().lobbyId = getJsonField(
+                                          (_model.postVocabResp?.jsonBody ??
+                                              ''),
+                                          r'''$.lobby_id''',
+                                        );
+                                      });
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    } else {
                                       if (shouldSetState) setState(() {});
                                       return;
                                     }
 
-                                    if (shouldSetState) setState(() {});
-                                    return;
                                     if (shouldSetState) setState(() {});
                                   },
                                   child: Container(
@@ -749,12 +757,20 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     shouldSetState = true;
                                     if ((_model.postZeroResp?.succeeded ??
                                         true)) {
+                                      setState(() {
+                                        FFAppState().lobbyId = getJsonField(
+                                          (_model.postVocabResp?.jsonBody ??
+                                              ''),
+                                          r'''$.lobby_id''',
+                                        );
+                                      });
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    } else {
                                       if (shouldSetState) setState(() {});
                                       return;
                                     }
 
-                                    if (shouldSetState) setState(() {});
-                                    return;
                                     if (shouldSetState) setState(() {});
                                   },
                                   child: Container(
