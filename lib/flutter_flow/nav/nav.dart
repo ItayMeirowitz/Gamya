@@ -44,7 +44,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           builder: (context, params) => GameFinishedWidget(
             score: params.getParam(
               'score',
-              ParamType.int,
+              ParamType.double,
             ),
           ),
         ),

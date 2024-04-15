@@ -11,10 +11,10 @@ export 'game_finished_model.dart';
 class GameFinishedWidget extends StatefulWidget {
   const GameFinishedWidget({
     super.key,
-    this.score,
+    required this.score,
   });
 
-  final int? score;
+  final double? score;
 
   @override
   State<GameFinishedWidget> createState() => _GameFinishedWidgetState();
@@ -38,7 +38,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
           tokenType: FFAppState().tokenType,
           accessToken: FFAppState().accessToken,
           username: FFAppState().username,
-          score: widget.score?.toDouble(),
+          score: widget.score,
           lobbyId: FFAppState().lobbyId,
         );
         if ((_model.postScoreResp?.succeeded ?? true)) {

@@ -165,8 +165,8 @@ class _VocabWidgetState extends State<VocabWidget> {
                                         'GameFinished',
                                         queryParameters: {
                                           'score': serializeParam(
-                                            _model.clientScore,
-                                            ParamType.int,
+                                            _model.clientScore?.toDouble(),
+                                            ParamType.double,
                                           ),
                                         }.withoutNulls,
                                         extra: <String, dynamic>{
@@ -299,8 +299,8 @@ class _VocabWidgetState extends State<VocabWidget> {
                                         'GameFinished',
                                         queryParameters: {
                                           'score': serializeParam(
-                                            _model.clientScore,
-                                            ParamType.int,
+                                            _model.clientScore?.toDouble(),
+                                            ParamType.double,
                                           ),
                                         }.withoutNulls,
                                         extra: <String, dynamic>{
@@ -443,8 +443,8 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       'GameFinished',
                                       queryParameters: {
                                         'score': serializeParam(
-                                          _model.clientScore,
-                                          ParamType.int,
+                                          _model.clientScore?.toDouble(),
+                                          ParamType.double,
                                         ),
                                       }.withoutNulls,
                                       extra: <String, dynamic>{
@@ -571,8 +571,8 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       'GameFinished',
                                       queryParameters: {
                                         'score': serializeParam(
-                                          _model.clientScore,
-                                          ParamType.int,
+                                          _model.clientScore?.toDouble(),
+                                          ParamType.double,
                                         ),
                                       }.withoutNulls,
                                       extra: <String, dynamic>{

@@ -325,8 +325,8 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                         'GameFinished',
                                         queryParameters: {
                                           'score': serializeParam(
-                                            _model.clicks,
-                                            ParamType.int,
+                                            _model.clicks.toDouble(),
+                                            ParamType.double,
                                           ),
                                         }.withoutNulls,
                                       );
