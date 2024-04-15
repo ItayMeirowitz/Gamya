@@ -144,7 +144,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                       ),
                     ),
                     Text(
-                      'Number: ${_model.initialNumber?.toString()}',
+                      'Number: ${_model.currentNumber?.toString()}',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(
                             fontFamily: 'Readex Pro',
                             fontSize: 32.0,
