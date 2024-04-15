@@ -15,3 +15,17 @@ List<dynamic> sortScores(List<dynamic> scores) {
   scores.sort((a, b) => b['score'].compareTo(a['score']));
   return scores;
 }
+
+double minusPrecent(
+  double number,
+  double precentage,
+) {
+  return (1 - precentage / 100) * number;
+}
+
+double decrementNumber(
+  double number,
+  int dec,
+) {
+  return number - dec;
+}

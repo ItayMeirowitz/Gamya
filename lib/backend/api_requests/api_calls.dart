@@ -288,6 +288,37 @@ class PostScoreCall {
   }
 }
 
+class GetOptimalCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    double? number,
+    double? percent,
+    int? dec,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getOptimal',
+      apiUrl: 'http://$serverIP:5000/zero/optimal',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {
+        'number': number,
+        'percent': percent,
+        'dec': dec,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

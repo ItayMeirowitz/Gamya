@@ -72,6 +72,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ChooseGame',
           path: '/chooseGame',
           builder: (context, params) => const ChooseGameWidget(),
+        ),
+        FFRoute(
+          name: 'test',
+          path: '/test',
+          builder: (context, params) => const TestWidget(),
+        ),
+        FFRoute(
+          name: 'Get2Zero',
+          path: '/get2Zero',
+          builder: (context, params) => const Get2ZeroWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
