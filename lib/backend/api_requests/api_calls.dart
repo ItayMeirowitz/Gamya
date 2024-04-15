@@ -57,21 +57,17 @@ class GetVocabCall {
     String? tokenType = '',
     String? serverIP = '',
     String? diff = 'easy',
-    String? username = '',
-    String? leader = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getVocab',
-      apiUrl: 'http://$serverIP:5000/vocab',
+      apiUrl: 'http://$serverIP:5000/getVocab',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
         'Authorization': '$tokenType $accessToken',
       },
       params: {
-        'username': username,
         'diff': diff,
-        'leader': leader,
       },
       returnBody: true,
       encodeBodyUtf8: false,
@@ -310,6 +306,70 @@ class GetOptimalCall {
         'percent': percent,
         'dec': dec,
       },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class PostGetTZeroCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    String? username = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "username": "$username"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'postGetTZero',
+      apiUrl: 'http://$serverIP:5000/zero',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class PostVocabCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    String? leader = '',
+    String? username = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "leader": "$leader",
+  "username": "$username"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'postVocab',
+      apiUrl: 'http://$serverIP:5000/vocab',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
       decodeUtf8: false,

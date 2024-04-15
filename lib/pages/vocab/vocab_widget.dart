@@ -958,8 +958,6 @@ class _VocabWidgetState extends State<VocabWidget> {
                               tokenType: FFAppState().tokenType,
                               serverIP: FFAppState().serverIP,
                               diff: _model.diff,
-                              username: FFAppState().username,
-                              leader: FFAppState().leader,
                             );
                             shouldSetState = true;
                             if ((_model.vocabJSON?.succeeded ?? true)) {

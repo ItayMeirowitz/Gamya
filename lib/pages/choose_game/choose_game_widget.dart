@@ -122,6 +122,14 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
           });
 
           context.pushNamed('Vocab');
+
+          _model.dontUse = await PostVocabCall.call(
+            serverIP: FFAppState().serverIP,
+            tokenType: FFAppState().tokenType,
+            accessToken: FFAppState().accessToken,
+            leader: FFAppState().leader,
+            username: FFAppState().username,
+          );
         } else {
           break;
         }
@@ -648,7 +656,28 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    var shouldSetState = false;
+
                                     context.pushNamed('Vocab');
+
+                                    _model.postVocabResp =
+                                        await PostVocabCall.call(
+                                      serverIP: FFAppState().serverIP,
+                                      tokenType: FFAppState().tokenType,
+                                      accessToken: FFAppState().accessToken,
+                                      leader: FFAppState().leader,
+                                      username: FFAppState().username,
+                                    );
+                                    shouldSetState = true;
+                                    if ((_model.postVocabResp?.succeeded ??
+                                        true)) {
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    }
+
+                                    if (shouldSetState) setState(() {});
+                                    return;
+                                    if (shouldSetState) setState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -728,7 +757,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                                 BorderRadius.circular(8.0),
                                             child: Image.asset(
                                               'assets/images/Get2ZeroIcon.png',
-                                              width: 114.0,
+                                              width: 70.0,
                                               height: 70.0,
                                               fit: BoxFit.cover,
                                             ),

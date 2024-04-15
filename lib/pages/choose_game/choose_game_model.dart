@@ -15,11 +15,15 @@ class ChooseGameModel extends FlutterFlowModel<ChooseGameWidget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Custom Action - fetchData] action in ChooseGame widget.
   dynamic dataReceived;
+  // Stores action output result for [Backend Call - API (postVocab)] action in ChooseGame widget.
+  ApiCallResponse? dontUse;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>
       tabBarController != null ? tabBarController!.index : 0;
 
+  // Stores action output result for [Backend Call - API (postVocab)] action in Container widget.
+  ApiCallResponse? postVocabResp;
   // Stores action output result for [Backend Call - API (getUsers)] action in IconButton widget.
   ApiCallResponse? getUsersResp;
   // Stores action output result for [Backend Call - API (InviteUser)] action in Button widget.
