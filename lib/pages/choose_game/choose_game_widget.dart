@@ -735,7 +735,27 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
+                                    var shouldSetState = false;
+
                                     context.pushNamed('Get2Zero');
+
+                                    _model.postZeroResp =
+                                        await PostGetTZeroCall.call(
+                                      serverIP: FFAppState().serverIP,
+                                      tokenType: FFAppState().tokenType,
+                                      accessToken: FFAppState().accessToken,
+                                      username: FFAppState().username,
+                                    );
+                                    shouldSetState = true;
+                                    if ((_model.postZeroResp?.succeeded ??
+                                        true)) {
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    }
+
+                                    if (shouldSetState) setState(() {});
+                                    return;
+                                    if (shouldSetState) setState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,
