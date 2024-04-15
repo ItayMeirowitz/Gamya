@@ -240,7 +240,10 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                     var shouldSetState = false;
                                     setState(() {
                                       _model.clicks = _model.clicks + 1;
-                                      _model.currentNumber = _model.percentage;
+                                      _model.currentNumber =
+                                          functions.minusPrecent(
+                                              _model.currentNumber!,
+                                              _model.percentage);
                                     });
                                     if (_model.reveal) {
                                       _model.getOptimalPerResp =
@@ -277,7 +280,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
 
                                     if (shouldSetState) setState(() {});
                                   },
-                                  text: '-10%',
+                                  text: '-${_model.percentage.toString()}%',
                                   options: FFButtonOptions(
                                     height: 40.0,
                                     padding: const EdgeInsetsDirectional.fromSTEB(
