@@ -63,7 +63,15 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                   ),
             ),
           ),
-          actions: const [],
+          actions: [
+            Text(
+              FFAppState().lobbyId.toString(),
+              style: FlutterFlowTheme.of(context).bodyMedium.override(
+                    fontFamily: 'Readex Pro',
+                    letterSpacing: 0.0,
+                  ),
+            ),
+          ],
           centerTitle: false,
           elevation: 2.0,
         ),
@@ -313,6 +321,13 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     var shouldSetState = false;
+                                    setState(() {
+                                      _model.clicks = _model.clicks + 1;
+                                      _model.currentNumber =
+                                          functions.decrementNumber(
+                                              _model.currentNumber!,
+                                              _model.currentDecrementer);
+                                    });
                                     if (_model.currentNumber! <= 0.0) {
                                       context.pushNamed(
                                         'GameFinished',
@@ -322,18 +337,20 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                             ParamType.double,
                                           ),
                                         }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: const TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.fade,
+                                            duration:
+                                                Duration(milliseconds: 1000),
+                                          ),
+                                        },
                                       );
 
                                       if (shouldSetState) setState(() {});
                                       return;
                                     }
-                                    setState(() {
-                                      _model.clicks = _model.clicks + 1;
-                                      _model.currentNumber =
-                                          functions.decrementNumber(
-                                              _model.currentNumber!,
-                                              _model.currentDecrementer);
-                                    });
                                     if (_model.reveal) {
                                       _model.getOptimalDecResp =
                                           await GetOptimalCall.call(
