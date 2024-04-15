@@ -759,8 +759,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         true)) {
                                       setState(() {
                                         FFAppState().lobbyId = getJsonField(
-                                          (_model.postVocabResp?.jsonBody ??
-                                              ''),
+                                          (_model.postZeroResp?.jsonBody ?? ''),
                                           r'''$.lobby_id''',
                                         );
                                       });
