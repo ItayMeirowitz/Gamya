@@ -980,12 +980,6 @@ class _VocabWidgetState extends State<VocabWidget> {
                             }
 
                             setState(() {
-                              FFAppState().lobbyId = getJsonField(
-                                (_model.vocabJSON?.jsonBody ?? ''),
-                                r'''$.lobby_id''',
-                              );
-                            });
-                            setState(() {
                               _model.wordToGuess = getJsonField(
                                 _model.vocabList[_model.currentIndex!],
                                 r'''$.word''',
