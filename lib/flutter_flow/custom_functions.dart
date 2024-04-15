@@ -30,7 +30,12 @@ double decrementNumber(
   double number,
   int dec,
 ) {
-  return number - dec;
+  double num = number - dec;
+
+  double roundedNumber =
+      (num * 100).round() / 100; // Rounds to 2 decimal places
+
+  return roundedNumber;
 }
 
 double getRandomNumber() {
