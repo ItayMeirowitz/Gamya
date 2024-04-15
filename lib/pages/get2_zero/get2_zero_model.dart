@@ -30,9 +30,17 @@ class Get2ZeroModel extends FlutterFlowModel<Get2ZeroWidget> {
 
   final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (getOptimal)] action in Button widget.
+  ApiCallResponse? getOptimalIncResp;
+  // Stores action output result for [Backend Call - API (getOptimal)] action in Button widget.
+  ApiCallResponse? getOptimalPerResp;
+  // Stores action output result for [Backend Call - API (getOptimal)] action in Button widget.
+  ApiCallResponse? getOptimalDecResp;
+  // Stores action output result for [Backend Call - API (getOptimal)] action in Button widget.
   ApiCallResponse? getOptimalResp;
   // State field(s) for Slider widget.
   double? sliderValue;
+  // State field(s) for CountController widget.
+  int? countControllerValue;
 
   @override
   void initState(BuildContext context) {}

@@ -29,3 +29,10 @@ double decrementNumber(
 ) {
   return number - dec;
 }
+
+double getRandomNumber() {
+  // Generate a random number between 100 and 1000
+  math.Random random = math.Random();
+  return random.nextInt(901) +
+      100; // Generates a random number between 0 and 900, then adds 100
+}
