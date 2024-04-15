@@ -320,6 +320,20 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                               _model.currentNumber!,
                                               _model.currentDecrementer);
                                     });
+                                    if (_model.currentNumber! <= 0.0) {
+                                      context.pushNamed(
+                                        'GameFinished',
+                                        queryParameters: {
+                                          'score': serializeParam(
+                                            _model.clicks,
+                                            ParamType.int,
+                                          ),
+                                        }.withoutNulls,
+                                      );
+
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    }
                                     if (_model.reveal) {
                                       _model.getOptimalDecResp =
                                           await GetOptimalCall.call(

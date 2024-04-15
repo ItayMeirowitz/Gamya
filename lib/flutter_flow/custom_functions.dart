@@ -20,7 +20,10 @@ double minusPrecent(
   double number,
   double precentage,
 ) {
-  return (1 - precentage / 100) * number;
+  double num = (1 - precentage / 100) * number;
+  double roundedNumber =
+      (num * 100).round() / 100; // Rounds to 2 decimal places
+  return roundedNumber;
 }
 
 double decrementNumber(
