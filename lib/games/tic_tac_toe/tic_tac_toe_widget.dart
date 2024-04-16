@@ -47,6 +47,9 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
               .toList()
               .cast<String>();
         });
+        setState(() {
+          _model.started = true;
+        });
         return;
       } else {
         return;
