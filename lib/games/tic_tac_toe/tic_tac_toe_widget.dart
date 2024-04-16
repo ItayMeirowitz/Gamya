@@ -30,32 +30,50 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
       setState(() {
         FFAppState().hasStarted = true;
       });
-      _model.getInitialTicTacToeResp = await GetTicTacToeBoardCall.call(
-        serverIP: FFAppState().serverIP,
-        tokenType: FFAppState().tokenType,
-        accessToken: FFAppState().accessToken,
-        lobbyId: FFAppState().lobbyId,
-      );
-      if ((_model.getInitialTicTacToeResp?.succeeded ?? true)) {
-        setState(() {
-          _model.currentGrid = (getJsonField(
-            (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
-            r'''$.board''',
-            true,
-          ) as List)
-              .map<String>((s) => s.toString())
-              .toList()
-              .toList()
-              .cast<String>();
-        });
-        setState(() {
-          _model.started = true;
-          _model.isTurn = functions.isTurn(
-              FFAppState().userType, _model.currentGrid.toList());
-        });
-        return;
-      } else {
-        return;
+      setState(() {
+        _model.started = true;
+      });
+      while (_model.started) {
+        _model.getInitialTicTacToeResp = await GetTicTacToeBoardCall.call(
+          serverIP: FFAppState().serverIP,
+          tokenType: FFAppState().tokenType,
+          accessToken: FFAppState().accessToken,
+          lobbyId: FFAppState().lobbyId,
+        );
+        if ((_model.getInitialTicTacToeResp?.succeeded ?? true)) {
+          setState(() {
+            _model.currentGrid = (getJsonField(
+              (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
+              r'''$.board''',
+              true,
+            ) as List)
+                .map<String>((s) => s.toString())
+                .toList()
+                .toList()
+                .cast<String>();
+          });
+          setState(() {
+            _model.isTurn = functions.isTurn(
+                FFAppState().userType, _model.currentGrid.toList());
+          });
+        } else {
+          await showDialog(
+            context: context,
+            builder: (alertDialogContext) {
+              return AlertDialog(
+                title: const Text('aaaaaaaaaaaaaaaaaaaaaaaaa'),
+                content: const Text('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),
+                actions: [
+                  TextButton(
+                    onPressed: () => Navigator.pop(alertDialogContext),
+                    child: const Text('Oaaaaaak'),
+                  ),
+                ],
+              );
+            },
+          );
+          return;
+        }
       }
     });
   }
