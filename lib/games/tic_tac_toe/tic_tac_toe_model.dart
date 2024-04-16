@@ -6,13 +6,13 @@ import 'package:flutter/material.dart';
 class TicTacToeModel extends FlutterFlowModel<TicTacToeWidget> {
   ///  Local state fields for this page.
 
-  List<dynamic> currentGrid = [];
-  void addToCurrentGrid(dynamic item) => currentGrid.add(item);
-  void removeFromCurrentGrid(dynamic item) => currentGrid.remove(item);
+  List<String> currentGrid = [];
+  void addToCurrentGrid(String item) => currentGrid.add(item);
+  void removeFromCurrentGrid(String item) => currentGrid.remove(item);
   void removeAtIndexFromCurrentGrid(int index) => currentGrid.removeAt(index);
-  void insertAtIndexInCurrentGrid(int index, dynamic item) =>
+  void insertAtIndexInCurrentGrid(int index, String item) =>
       currentGrid.insert(index, item);
-  void updateCurrentGridAtIndex(int index, Function(dynamic) updateFn) =>
+  void updateCurrentGridAtIndex(int index, Function(String) updateFn) =>
       currentGrid[index] = updateFn(currentGrid[index]);
 
   bool started = false;
@@ -22,6 +22,8 @@ class TicTacToeModel extends FlutterFlowModel<TicTacToeWidget> {
   final unfocusNode = FocusNode();
   // Stores action output result for [Backend Call - API (postTicTacToe)] action in TicTacToe widget.
   ApiCallResponse? postTicTacToeResp;
+  // Stores action output result for [Backend Call - API (getTicTacToeBoard)] action in TicTacToe widget.
+  ApiCallResponse? getInitialTicTacToeResp;
 
   @override
   void initState(BuildContext context) {}

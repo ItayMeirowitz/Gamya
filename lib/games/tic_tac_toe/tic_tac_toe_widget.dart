@@ -43,6 +43,27 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
             r'''$.lobby_id''',
           );
         });
+        _model.getInitialTicTacToeResp = await GetTicTacToeBoardCall.call(
+          serverIP: FFAppState().serverIP,
+          tokenType: FFAppState().tokenType,
+          accessToken: FFAppState().accessToken,
+          lobbyId: FFAppState().lobbyId,
+        );
+        if ((_model.getInitialTicTacToeResp?.succeeded ?? true)) {
+          setState(() {
+            _model.currentGrid = (getJsonField(
+              (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
+              r'''$.board''',
+              true,
+            ) as List)
+                .map<String>((s) => s.toString())
+                .toList()
+                .toList()
+                .cast<String>();
+          });
+        } else {
+          return;
+        }
       } else {
         return;
       }
@@ -119,11 +140,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                                 ),
                                 child: Stack(
                                   children: [
-                                    if ('X' ==
-                                        getJsonField(
-                                          gridItem,
-                                          r'''$.type''',
-                                        ))
+                                    if ('X' == gridItem)
                                       Align(
                                         alignment:
                                             const AlignmentDirectional(0.0, 0.0),
@@ -138,11 +155,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                                           ),
                                         ),
                                       ),
-                                    if ('O' ==
-                                        getJsonField(
-                                          gridItem,
-                                          r'''$.type''',
-                                        ))
+                                    if ('O' == gridItem)
                                       ClipRRect(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
