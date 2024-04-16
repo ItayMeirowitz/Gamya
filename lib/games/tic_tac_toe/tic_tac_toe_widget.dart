@@ -166,6 +166,17 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                                           fit: BoxFit.cover,
                                         ),
                                       ),
+                                    if (' ' == gridItem)
+                                      ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                        child: Image.asset(
+                                          'assets/images/Empty.png',
+                                          width: 300.0,
+                                          height: 200.0,
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
                                   ],
                                 ),
                               );
