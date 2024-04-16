@@ -120,6 +120,26 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                           ),
                           child: Stack(
                             children: [
+                              if (' ' == gridItem)
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/Empty.png',
+                                    width: 300.0,
+                                    height: 200.0,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              if ('O' == gridItem)
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(8.0),
+                                  child: Image.asset(
+                                    'assets/images/O_pic.png',
+                                    width: 300.0,
+                                    height: 200.0,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               if ('X' == gridItem)
                                 Align(
                                   alignment: const AlignmentDirectional(0.0, 0.0),
@@ -133,26 +153,18 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                                     ),
                                   ),
                                 ),
-                              if ('O' == gridItem)
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/O_pic.png',
-                                    width: 300.0,
-                                    height: 200.0,
-                                    fit: BoxFit.cover,
-                                  ),
+                              Align(
+                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                child: Text(
+                                  'Hello World',
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        letterSpacing: 0.0,
+                                      ),
                                 ),
-                              if (' ' == gridItem)
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/Empty.png',
-                                    width: 300.0,
-                                    height: 200.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
+                              ),
                             ],
                           ),
                         );
