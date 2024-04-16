@@ -26,79 +26,30 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if (FFAppState().username != FFAppState().leader) {
+      setState(() {
+        FFAppState().hasStarted = true;
+      });
+      _model.getInitialTicTacToeResp = await GetTicTacToeBoardCall.call(
+        serverIP: FFAppState().serverIP,
+        tokenType: FFAppState().tokenType,
+        accessToken: FFAppState().accessToken,
+        lobbyId: FFAppState().lobbyId,
+      );
+      if ((_model.getInitialTicTacToeResp?.succeeded ?? true)) {
         setState(() {
-          FFAppState().hasStarted = true;
+          _model.currentGrid = (getJsonField(
+            (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
+            r'''$.board''',
+            true,
+          ) as List)
+              .map<String>((s) => s.toString())
+              .toList()
+              .toList()
+              .cast<String>();
         });
-        _model.postTicTacToeResp = await PostTicTacToeCall.call(
-          serverIP: FFAppState().serverIP,
-          tokenType: FFAppState().tokenType,
-          accessToken: FFAppState().accessToken,
-          username: FFAppState().username,
-          leader: FFAppState().leader,
-        );
-        if ((_model.postTicTacToeResp?.succeeded ?? true)) {
-          setState(() {
-            FFAppState().lobbyId = getJsonField(
-              (_model.postTicTacToeResp?.jsonBody ?? ''),
-              r'''$.lobby_id''',
-            );
-            FFAppState().userType = getJsonField(
-              (_model.postTicTacToeResp?.jsonBody ?? ''),
-              r'''$.user_type''',
-            ).toString().toString();
-          });
-          _model.getInitialTicTacToeResp = await GetTicTacToeBoardCall.call(
-            serverIP: FFAppState().serverIP,
-            tokenType: FFAppState().tokenType,
-            accessToken: FFAppState().accessToken,
-            lobbyId: FFAppState().lobbyId,
-          );
-          if ((_model.getInitialTicTacToeResp?.succeeded ?? true)) {
-            setState(() {
-              _model.currentGrid = (getJsonField(
-                (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
-                r'''$.board''',
-                true,
-              ) as List)
-                  .map<String>((s) => s.toString())
-                  .toList()
-                  .toList()
-                  .cast<String>();
-            });
-            return;
-          } else {
-            return;
-          }
-        } else {
-          return;
-        }
+        return;
       } else {
-        setState(() {
-          FFAppState().hasStarted = true;
-        });
-        _model.getInitialTicTacToeRespCopy = await GetTicTacToeBoardCall.call(
-          serverIP: FFAppState().serverIP,
-          tokenType: FFAppState().tokenType,
-          accessToken: FFAppState().accessToken,
-          lobbyId: FFAppState().lobbyId,
-        );
-        if ((_model.getInitialTicTacToeRespCopy?.succeeded ?? true)) {
-          setState(() {
-            _model.currentGrid = (getJsonField(
-              (_model.getInitialTicTacToeRespCopy?.jsonBody ?? ''),
-              r'''$.board''',
-              true,
-            ) as List)
-                .map<String>((s) => s.toString())
-                .toList()
-                .toList()
-                .cast<String>();
-          });
-          return;
-        } else {
-          return;
-        }
+        return;
       }
     });
   }
@@ -217,6 +168,17 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                           );
                         },
                       ),
+                    Align(
+                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      child: Text(
+                        (_model.getInitialTicTacToeResp?.jsonBody ?? '')
+                            .toString(),
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              letterSpacing: 0.0,
+                            ),
+                      ),
+                    ),
                   ],
                 ),
               ),

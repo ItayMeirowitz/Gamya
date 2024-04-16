@@ -20,12 +20,8 @@ class TicTacToeModel extends FlutterFlowModel<TicTacToeWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (postTicTacToe)] action in TicTacToe widget.
-  ApiCallResponse? postTicTacToeResp;
   // Stores action output result for [Backend Call - API (getTicTacToeBoard)] action in TicTacToe widget.
   ApiCallResponse? getInitialTicTacToeResp;
-  // Stores action output result for [Backend Call - API (getTicTacToeBoard)] action in TicTacToe widget.
-  ApiCallResponse? getInitialTicTacToeRespCopy;
 
   @override
   void initState(BuildContext context) {}
