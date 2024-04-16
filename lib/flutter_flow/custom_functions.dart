@@ -64,10 +64,10 @@ bool isTurn(
   // Determine whose turn it is based on the count of X and O
   if (userType == 'X') {
     // If userType is X, then it's O's turn if O has fewer occurrences
-    return oCount < xCount;
+    return oCount >= xCount;
   } else if (userType == 'O') {
     // If userType is O, then it's X's turn if X has fewer occurrences
-    return xCount <= oCount;
+    return xCount > oCount;
   } else {
     // Invalid userType
     return false;
