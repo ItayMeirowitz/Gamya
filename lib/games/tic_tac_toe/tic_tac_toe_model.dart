@@ -24,6 +24,8 @@ class TicTacToeModel extends FlutterFlowModel<TicTacToeWidget> {
   ApiCallResponse? postTicTacToeResp;
   // Stores action output result for [Backend Call - API (getTicTacToeBoard)] action in TicTacToe widget.
   ApiCallResponse? getInitialTicTacToeResp;
+  // Stores action output result for [Backend Call - API (getTicTacToeBoard)] action in TicTacToe widget.
+  ApiCallResponse? getInitialTicTacToeRespCopy;
 
   @override
   void initState(BuildContext context) {}

@@ -26,33 +26,67 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        FFAppState().hasStarted = true;
-      });
-      _model.postTicTacToeResp = await PostTicTacToeCall.call(
-        serverIP: FFAppState().serverIP,
-        tokenType: FFAppState().tokenType,
-        accessToken: FFAppState().accessToken,
-        username: FFAppState().username,
-        leader: FFAppState().leader,
-      );
-      if ((_model.postTicTacToeResp?.succeeded ?? true)) {
+      if (FFAppState().username != FFAppState().leader) {
         setState(() {
-          FFAppState().lobbyId = getJsonField(
-            (_model.postTicTacToeResp?.jsonBody ?? ''),
-            r'''$.lobby_id''',
-          );
+          FFAppState().hasStarted = true;
         });
-        _model.getInitialTicTacToeResp = await GetTicTacToeBoardCall.call(
+        _model.postTicTacToeResp = await PostTicTacToeCall.call(
+          serverIP: FFAppState().serverIP,
+          tokenType: FFAppState().tokenType,
+          accessToken: FFAppState().accessToken,
+          username: FFAppState().username,
+          leader: FFAppState().leader,
+        );
+        if ((_model.postTicTacToeResp?.succeeded ?? true)) {
+          setState(() {
+            FFAppState().lobbyId = getJsonField(
+              (_model.postTicTacToeResp?.jsonBody ?? ''),
+              r'''$.lobby_id''',
+            );
+            FFAppState().userType = getJsonField(
+              (_model.postTicTacToeResp?.jsonBody ?? ''),
+              r'''$.user_type''',
+            ).toString().toString();
+          });
+          _model.getInitialTicTacToeResp = await GetTicTacToeBoardCall.call(
+            serverIP: FFAppState().serverIP,
+            tokenType: FFAppState().tokenType,
+            accessToken: FFAppState().accessToken,
+            lobbyId: FFAppState().lobbyId,
+          );
+          if ((_model.getInitialTicTacToeResp?.succeeded ?? true)) {
+            setState(() {
+              _model.currentGrid = (getJsonField(
+                (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
+                r'''$.board''',
+                true,
+              ) as List)
+                  .map<String>((s) => s.toString())
+                  .toList()
+                  .toList()
+                  .cast<String>();
+            });
+            return;
+          } else {
+            return;
+          }
+        } else {
+          return;
+        }
+      } else {
+        setState(() {
+          FFAppState().hasStarted = true;
+        });
+        _model.getInitialTicTacToeRespCopy = await GetTicTacToeBoardCall.call(
           serverIP: FFAppState().serverIP,
           tokenType: FFAppState().tokenType,
           accessToken: FFAppState().accessToken,
           lobbyId: FFAppState().lobbyId,
         );
-        if ((_model.getInitialTicTacToeResp?.succeeded ?? true)) {
+        if ((_model.getInitialTicTacToeRespCopy?.succeeded ?? true)) {
           setState(() {
             _model.currentGrid = (getJsonField(
-              (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
+              (_model.getInitialTicTacToeRespCopy?.jsonBody ?? ''),
               r'''$.board''',
               true,
             ) as List)
@@ -61,11 +95,10 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                 .toList()
                 .cast<String>();
           });
+          return;
         } else {
           return;
         }
-      } else {
-        return;
       }
     });
   }

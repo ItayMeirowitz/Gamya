@@ -872,6 +872,12 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                               ''),
                                           r'''$.user_type''',
                                         ).toString();
+                                        FFAppState().lobbyId = getJsonField(
+                                          (_model.postTicTacToeRespLeader
+                                                  ?.jsonBody ??
+                                              ''),
+                                          r'''$.lobby_id''',
+                                        );
                                       });
                                     } else {
                                       await showDialog(
