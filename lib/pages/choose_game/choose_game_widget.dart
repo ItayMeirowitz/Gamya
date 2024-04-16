@@ -729,8 +729,8 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                           ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
-                                            child: Image.network(
-                                              'https://i.ytimg.com/vi/bFDXFErn9qc/maxresdefault.jpg',
+                                            child: Image.asset(
+                                              'assets/images/vocabT.png',
                                               width: 114.0,
                                               height: 70.0,
                                               fit: BoxFit.cover,
@@ -816,7 +816,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                                 BorderRadius.circular(8.0),
                                             child: Image.asset(
                                               'assets/images/Get2ZeroIcon.png',
-                                              width: 70.0,
+                                              width: 90.0,
                                               height: 70.0,
                                               fit: BoxFit.cover,
                                             ),
@@ -921,9 +921,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                           ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(8.0),
-                                            child: Image.network(
-                                              'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/cd1fc4e4-5d02-4f18-afd7-a1ea42ff1f73/sportswear-club-fleece-pullover-hoodie-Gw4Nwq.png',
-                                              width: 70.0,
+                                            child: Image.asset(
+                                              'assets/images/TicTacToe.png',
+                                              width: 90.0,
                                               height: 70.0,
                                               fit: BoxFit.cover,
                                             ),
