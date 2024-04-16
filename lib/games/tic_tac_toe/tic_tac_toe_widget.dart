@@ -274,7 +274,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
               Align(
                 alignment: const AlignmentDirectional(-1.0, 1.0),
                 child: Text(
-                  'You are: ${FFAppState().userType}',
+                  'You are:${FFAppState().userType}',
                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                         fontFamily: 'Readex Pro',
                         fontSize: 30.0,

@@ -515,7 +515,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                           min: 0.0,
                           max: 50.0,
                           value: _model.sliderValue ??= _model.percentage,
-                          label: _model.sliderValue.toString(),
+                          label: _model.sliderValue?.toStringAsFixed(2),
                           onChanged: (newValue) async {
                             newValue =
                                 double.parse(newValue.toStringAsFixed(2));

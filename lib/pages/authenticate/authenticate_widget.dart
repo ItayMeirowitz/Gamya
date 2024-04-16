@@ -23,60 +23,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'columnOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(0.0, 60.0),
-          end: const Offset(0.0, 0.0),
-        ),
-        TiltEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(-0.349, 0),
-          end: const Offset(0, 0),
-        ),
-      ],
-    ),
-    'columnOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(0.0, 60.0),
-          end: const Offset(0.0, 0.0),
-        ),
-        TiltEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(-0.349, 0),
-          end: const Offset(0, 0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -88,23 +35,78 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
       length: 2,
       initialIndex: 0,
     )..addListener(() => setState(() {}));
-    _model.usernameController ??= TextEditingController();
+    _model.usernameTextController ??= TextEditingController();
     _model.usernameFocusNode ??= FocusNode();
 
-    _model.passwordController ??= TextEditingController();
+    _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
 
-    _model.usernameCreateController ??= TextEditingController();
+    _model.usernameCreateTextController ??= TextEditingController();
     _model.usernameCreateFocusNode ??= FocusNode();
 
-    _model.emailAddressCreateController ??= TextEditingController();
+    _model.emailAddressCreateTextController ??= TextEditingController();
     _model.emailAddressCreateFocusNode ??= FocusNode();
 
-    _model.passwordCreateController ??= TextEditingController();
+    _model.passwordCreateTextController ??= TextEditingController();
     _model.passwordCreateFocusNode ??= FocusNode();
 
-    _model.passwordConfirmController ??= TextEditingController();
+    _model.passwordConfirmTextController ??= TextEditingController();
     _model.passwordConfirmFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'columnOnPageLoadAnimation1': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          TiltEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(-0.349, 0),
+            end: const Offset(0, 0),
+          ),
+        ],
+      ),
+      'columnOnPageLoadAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          TiltEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(-0.349, 0),
+            end: const Offset(0, 0),
+          ),
+        ],
+      ),
+    });
   }
 
   @override
@@ -288,7 +290,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .usernameController,
+                                                        .usernameTextController,
                                                     focusNode: _model
                                                         .usernameFocusNode,
                                                     autofocus: true,
@@ -376,7 +378,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .usernameControllerValidator
+                                                        .usernameTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -389,7 +391,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .passwordController,
+                                                        .passwordTextController,
                                                     focusNode: _model
                                                         .passwordFocusNode,
                                                     autofocus: false,
@@ -500,7 +502,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .passwordControllerValidator
+                                                        .passwordTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -518,10 +520,10 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                           false;
                                                       setState(() {
                                                         _model.username = _model
-                                                            .usernameController
+                                                            .usernameTextController
                                                             .text;
                                                         _model.password = _model
-                                                            .passwordController
+                                                            .passwordTextController
                                                             .text;
                                                       });
                                                       if (!((_model.username !=
@@ -901,7 +903,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .usernameCreateController,
+                                                        .usernameCreateTextController,
                                                     focusNode: _model
                                                         .usernameCreateFocusNode,
                                                     autofocus: true,
@@ -991,7 +993,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .usernameCreateControllerValidator
+                                                        .usernameCreateTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -1004,7 +1006,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .emailAddressCreateController,
+                                                        .emailAddressCreateTextController,
                                                     focusNode: _model
                                                         .emailAddressCreateFocusNode,
                                                     autofocus: true,
@@ -1094,7 +1096,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .emailAddressCreateControllerValidator
+                                                        .emailAddressCreateTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -1245,7 +1247,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .passwordCreateController,
+                                                        .passwordCreateTextController,
                                                     focusNode: _model
                                                         .passwordCreateFocusNode,
                                                     autofocus: false,
@@ -1356,7 +1358,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .passwordCreateControllerValidator
+                                                        .passwordCreateTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -1369,7 +1371,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .passwordConfirmController,
+                                                        .passwordConfirmTextController,
                                                     focusNode: _model
                                                         .passwordConfirmFocusNode,
                                                     autofocus: false,
@@ -1482,7 +1484,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .passwordConfirmControllerValidator
+                                                        .passwordConfirmTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -1501,19 +1503,19 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                       setState(() {
                                                         _model.usernameCreate =
                                                             _model
-                                                                .usernameCreateController
+                                                                .usernameCreateTextController
                                                                 .text;
                                                         _model.emailAdressCreate =
                                                             _model
-                                                                .emailAddressCreateController
+                                                                .emailAddressCreateTextController
                                                                 .text;
                                                         _model.passwordCreate =
                                                             _model
-                                                                .passwordCreateController
+                                                                .passwordCreateTextController
                                                                 .text;
                                                         _model.passwordConfirm =
                                                             _model
-                                                                .passwordConfirmController
+                                                                .passwordConfirmTextController
                                                                 .text;
                                                         _model.birthday =
                                                             dateTimeFormat(
