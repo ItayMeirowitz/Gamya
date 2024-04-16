@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'get2_zero_model.dart';
@@ -26,6 +27,13 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => Get2ZeroModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setState(() {
+        FFAppState().hasStarted = true;
+      });
+    });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -63,18 +71,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                   ),
             ),
           ),
-          actions: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 30.0, 0.0, 0.0),
-              child: Text(
-                FFAppState().lobbyId.toString(),
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Readex Pro',
-                      letterSpacing: 0.0,
-                    ),
-              ),
-            ),
-          ],
+          actions: const [],
           centerTitle: false,
           elevation: 2.0,
         ),

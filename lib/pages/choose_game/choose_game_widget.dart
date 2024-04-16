@@ -105,10 +105,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
-                    child: Text(getJsonField(
-                      _model.dataReceived,
-                      r'''$.lobby_id''',
-                    ).toString().toString()),
+                    child: const Text('Join In!'),
                   ),
                 ],
               );
@@ -120,18 +117,45 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               r'''$.lobby_id''',
             );
           });
+          if ('Vocab' ==
+              getJsonField(
+                _model.dataReceived,
+                r'''$.game''',
+              )) {
+            _model.dontUse = await PostVocabCall.call(
+              serverIP: FFAppState().serverIP,
+              tokenType: FFAppState().tokenType,
+              accessToken: FFAppState().accessToken,
+              leader: FFAppState().leader,
+              username: FFAppState().username,
+            );
 
-          context.pushNamed('Vocab');
+            context.pushNamed('Vocab');
+          } else if ('TicTacToe' ==
+              getJsonField(
+                _model.dataReceived,
+                r'''$.game''',
+              )) {
+            _model.postTicTacToeResp = await PostTicTacToeCall.call(
+              serverIP: FFAppState().serverIP,
+              tokenType: FFAppState().tokenType,
+              accessToken: FFAppState().accessToken,
+              username: FFAppState().username,
+              leader: FFAppState().leader,
+            );
+            if ((_model.postTicTacToeResp?.succeeded ?? true)) {
+              setState(() {
+                FFAppState().userType = getJsonField(
+                  (_model.postTicTacToeResp?.jsonBody ?? ''),
+                  r'''$.user_type''',
+                ).toString().toString();
+              });
+            } else {
+              return;
+            }
 
-          _model.dontUse = await PostVocabCall.call(
-            serverIP: FFAppState().serverIP,
-            tokenType: FFAppState().tokenType,
-            accessToken: FFAppState().accessToken,
-            leader: FFAppState().leader,
-            username: FFAppState().username,
-          );
-        } else {
-          break;
+            context.pushNamed('TicTacToe');
+          }
         }
       }
     });

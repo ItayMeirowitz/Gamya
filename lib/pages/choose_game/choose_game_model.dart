@@ -17,6 +17,8 @@ class ChooseGameModel extends FlutterFlowModel<ChooseGameWidget> {
   dynamic dataReceived;
   // Stores action output result for [Backend Call - API (postVocab)] action in ChooseGame widget.
   ApiCallResponse? dontUse;
+  // Stores action output result for [Backend Call - API (postTicTacToe)] action in ChooseGame widget.
+  ApiCallResponse? postTicTacToeResp;
   // State field(s) for TabBar widget.
   TabController? tabBarController;
   int get tabBarCurrentIndex =>

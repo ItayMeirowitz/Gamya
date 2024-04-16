@@ -82,6 +82,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'Get2Zero',
           path: '/get2Zero',
           builder: (context, params) => const Get2ZeroWidget(),
+        ),
+        FFRoute(
+          name: 'TicTacToe',
+          path: '/ticTacToe',
+          builder: (context, params) => const TicTacToeWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

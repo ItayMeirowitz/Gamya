@@ -379,6 +379,101 @@ class PostVocabCall {
   }
 }
 
+class PostTicTacToeCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    String? username = '',
+    String? leader = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "username": "$username",
+  "leader": "$leader"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'postTicTacToe',
+      apiUrl: 'http://$serverIP:5000/tictactoe',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class PlaceTicTacToeCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    int? lobbyId,
+    int? index,
+    bool? userType,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "lobby_id": $lobbyId,
+  "index": $index,
+  "user_type": $userType
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'placeTicTacToe',
+      apiUrl: 'http://$serverIP:5000/tictactoe/place',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetTicTacToeBoardCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    int? lobbyId,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getTicTacToeBoard',
+      apiUrl: 'http://$serverIP:5000/tictactoe/board',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {
+        'lobby_id': lobbyId,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

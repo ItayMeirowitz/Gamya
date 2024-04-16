@@ -146,6 +146,12 @@ class FFAppState extends ChangeNotifier {
   set lobbyId(int value) {
     _lobbyId = value;
   }
+
+  String _userType = '';
+  String get userType => _userType;
+  set userType(String value) {
+    _userType = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {
