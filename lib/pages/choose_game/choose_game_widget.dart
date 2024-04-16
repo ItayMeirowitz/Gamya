@@ -878,6 +878,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                               ''),
                                           r'''$.user_type''',
                                         ).toString();
+                                        FFAppState().hasStarted = true;
                                       });
                                     } else {
                                       await showDialog(

@@ -81,14 +81,19 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
-          title: Text(
-            'Tic Tac Toe',
-            style: FlutterFlowTheme.of(context).headlineMedium.override(
-                  fontFamily: 'Outfit',
-                  color: Colors.white,
-                  fontSize: 22.0,
-                  letterSpacing: 0.0,
-                ),
+          title: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Text(
+                'Tic Tac Toe',
+                style: FlutterFlowTheme.of(context).headlineMedium.override(
+                      fontFamily: 'Outfit',
+                      color: Colors.white,
+                      fontSize: 22.0,
+                      letterSpacing: 0.0,
+                    ),
+              ),
+            ],
           ),
           actions: const [],
           centerTitle: false,
@@ -248,6 +253,17 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                     );
                   },
                 ),
+              Align(
+                alignment: const AlignmentDirectional(-1.0, 1.0),
+                child: Text(
+                  'You are: ${FFAppState().userType}',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Readex Pro',
+                        fontSize: 30.0,
+                        letterSpacing: 0.0,
+                      ),
+                ),
+              ),
             ],
           ),
         ),
