@@ -44,3 +44,32 @@ double getRandomNumber() {
   return random.nextInt(901) +
       100; // Generates a random number between 0 and 900, then adds 100
 }
+
+bool isTurn(
+  String userType,
+  List<String> currentBoard,
+) {
+  int xCount = 0;
+  int oCount = 0;
+
+  // Count the occurrences of X and O in the board
+  for (String cell in currentBoard) {
+    if (cell == 'X') {
+      xCount++;
+    } else if (cell == 'O') {
+      oCount++;
+    }
+  }
+
+  // Determine whose turn it is based on the count of X and O
+  if (userType == 'X') {
+    // If userType is X, then it's O's turn if O has fewer occurrences
+    return oCount < xCount;
+  } else if (userType == 'O') {
+    // If userType is O, then it's X's turn if X has fewer occurrences
+    return xCount <= oCount;
+  } else {
+    // Invalid userType
+    return false;
+  }
+}

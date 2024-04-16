@@ -419,13 +419,13 @@ class PlaceTicTacToeCall {
     String? accessToken = '',
     int? lobbyId,
     int? index,
-    bool? userType,
+    String? userType = '',
   }) async {
     final ffApiRequestBody = '''
 {
   "lobby_id": $lobbyId,
   "index": $index,
-  "user_type": $userType
+  "user_type": "$userType"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'placeTicTacToe',

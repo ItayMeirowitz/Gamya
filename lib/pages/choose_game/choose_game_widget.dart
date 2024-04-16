@@ -866,18 +866,18 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                             ?.succeeded ??
                                         true)) {
                                       setState(() {
-                                        FFAppState().userType = getJsonField(
-                                          (_model.postTicTacToeRespLeader
-                                                  ?.jsonBody ??
-                                              ''),
-                                          r'''$.user_type''',
-                                        ).toString();
                                         FFAppState().lobbyId = getJsonField(
                                           (_model.postTicTacToeRespLeader
                                                   ?.jsonBody ??
                                               ''),
                                           r'''$.lobby_id''',
                                         );
+                                        FFAppState().userType = getJsonField(
+                                          (_model.postTicTacToeRespLeader
+                                                  ?.jsonBody ??
+                                              ''),
+                                          r'''$.user_type''',
+                                        ).toString();
                                       });
                                     } else {
                                       await showDialog(
