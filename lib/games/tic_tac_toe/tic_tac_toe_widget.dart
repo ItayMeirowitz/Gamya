@@ -177,6 +177,14 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                       letterSpacing: 0.0,
                     ),
               ),
+              Card(
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                color: FlutterFlowTheme.of(context).secondaryBackground,
+                elevation: 4.0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8.0),
+                ),
+              ),
             ],
           ),
         ),
