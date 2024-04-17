@@ -56,6 +56,39 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
             _model.isTurn = functions.isTurn(
                 FFAppState().userType, _model.currentGrid.toList());
           });
+          if (getJsonField(
+                (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
+                r'''$.won''',
+              ) !=
+              null) {
+            setState(() {
+              _model.won = getJsonField(
+                (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
+                r'''$.won''',
+              ).toString().toString();
+            });
+            if (_model.won == FFAppState().userType) {
+              setState(() {
+                _model.score = 100;
+              });
+            } else {
+              setState(() {
+                _model.score = 0;
+              });
+            }
+
+            context.pushNamed(
+              'GameFinished',
+              queryParameters: {
+                'score': serializeParam(
+                  _model.score?.toDouble(),
+                  ParamType.double,
+                ),
+              }.withoutNulls,
+            );
+
+            return;
+          }
         } else {
           await showDialog(
             context: context,
@@ -234,7 +267,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: Image.asset(
-                                      'assets/images/TicTacToe.png',
+                                      'assets/images/Empty.png',
                                       width: 300.0,
                                       height: 200.0,
                                       fit: BoxFit.cover,
@@ -271,15 +304,21 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                     );
                   },
                 ),
-              Align(
-                alignment: const AlignmentDirectional(-1.0, 1.0),
-                child: Text(
-                  'You are:${FFAppState().userType}',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Readex Pro',
-                        fontSize: 30.0,
-                        letterSpacing: 0.0,
-                      ),
+              Flexible(
+                child: Align(
+                  alignment: const AlignmentDirectional(-1.0, 1.0),
+                  child: Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 100.0),
+                    child: Text(
+                      'You are: ${FFAppState().userType}',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Readex Pro',
+                            fontSize: 30.0,
+                            letterSpacing: 0.0,
+                          ),
+                    ),
+                  ),
                 ),
               ),
             ],

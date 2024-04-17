@@ -19,6 +19,10 @@ class TicTacToeModel extends FlutterFlowModel<TicTacToeWidget> {
 
   bool isTurn = false;
 
+  String? won;
+
+  int? score;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
