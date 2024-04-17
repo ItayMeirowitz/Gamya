@@ -149,7 +149,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                           ),
                           child: Stack(
                             children: [
-                              if ('' == gridItem)
+                              if (gridItem == '')
                                 InkWell(
                                   splashColor: Colors.transparent,
                                   focusColor: Colors.transparent,
