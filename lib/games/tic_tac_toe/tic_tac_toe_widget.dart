@@ -149,7 +149,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                           ),
                           child: Stack(
                             children: [
-                              if (' ' == gridItem)
+                              if ('' == gridItem)
                                 InkWell(
                                   splashColor: Colors.transparent,
                                   focusColor: Colors.transparent,
@@ -234,7 +234,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: Image.asset(
-                                      'assets/images/Empty.png',
+                                      'assets/images/vocabT.png',
                                       width: 300.0,
                                       height: 200.0,
                                       fit: BoxFit.cover,
