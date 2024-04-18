@@ -155,6 +155,26 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
             }
 
             context.pushNamed('TicTacToe');
+          } else {
+            _model.postConnectFResp = await PostConnectFCall.call(
+              serverIP: FFAppState().serverIP,
+              tokenType: FFAppState().tokenType,
+              accessToken: FFAppState().accessToken,
+              username: FFAppState().username,
+              leader: FFAppState().leader,
+            );
+            if ((_model.postConnectFResp?.succeeded ?? true)) {
+              setState(() {
+                FFAppState().userType = getJsonField(
+                  (_model.postConnectFResp?.jsonBody ?? ''),
+                  r'''$.user_type''',
+                ).toString().toString();
+              });
+            } else {
+              return;
+            }
+
+            context.pushNamed('Connect4');
           }
         }
       }
