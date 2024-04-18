@@ -263,23 +263,23 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                                     ),
                                   ),
                                 ),
-                              if ('O' == gridItem)
+                              if ('R' == gridItem)
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(8.0),
                                   child: Image.asset(
-                                    'assets/images/O_pic.png',
+                                    'assets/images/RedConnect.png',
                                     width: 300.0,
                                     height: 200.0,
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                              if ('X' == gridItem)
+                              if ('B' == gridItem)
                                 Align(
                                   alignment: const AlignmentDirectional(0.0, 0.0),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: Image.asset(
-                                      'assets/images/X_pic.png',
+                                      'assets/images/BlueConnect.png',
                                       width: 300.0,
                                       height: 200.0,
                                       fit: BoxFit.cover,
@@ -297,18 +297,25 @@ class _Connect4WidgetState extends State<Connect4Widget> {
               Flexible(
                 child: Align(
                   alignment: const AlignmentDirectional(-1.0, 1.0),
-                  child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 100.0),
-                    child: Text(
-                      'You are: ${FFAppState().userType}',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            fontSize: 30.0,
-                            letterSpacing: 0.0,
-                          ),
-                    ),
+                  child: Text(
+                    'You are: ${FFAppState().userType}',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Readex Pro',
+                          fontSize: 30.0,
+                          letterSpacing: 0.0,
+                        ),
                   ),
+                ),
+              ),
+              Align(
+                alignment: const AlignmentDirectional(-1.0, -1.0),
+                child: Text(
+                  'isTurn: ${_model.isTurn.toString()}',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Readex Pro',
+                        fontSize: 20.0,
+                        letterSpacing: 0.0,
+                      ),
                 ),
               ),
             ],
