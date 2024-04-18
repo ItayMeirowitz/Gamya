@@ -569,6 +569,33 @@ class GetConnectFBoardCall {
   }
 }
 
+class GetMathTestCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    int? lobbyId,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getMathTest',
+      apiUrl: 'http://$serverIP:5000/getMath',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {
+        'lobby_id': lobbyId,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

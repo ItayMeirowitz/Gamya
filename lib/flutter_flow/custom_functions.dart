@@ -102,3 +102,12 @@ bool isTurnConnect4(
     return false;
   }
 }
+
+String getName(String userType) {
+  if (userType == 'R') {
+    return "Red";
+  } else if (userType == 'B') {
+    return "Blue";
+  }
+  return "SUS";
+}

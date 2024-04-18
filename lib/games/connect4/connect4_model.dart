@@ -23,6 +23,8 @@ class Connect4Model extends FlutterFlowModel<Connect4Widget> {
 
   int? score;
 
+  String? type;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

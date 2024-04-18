@@ -1,0 +1,62 @@
+import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_util.dart';
+import 'math_contest_widget.dart' show MathContestWidget;
+import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
+
+class MathContestModel extends FlutterFlowModel<MathContestWidget> {
+  ///  Local state fields for this page.
+
+  List<dynamic> mathList = [];
+  void addToMathList(dynamic item) => mathList.add(item);
+  void removeFromMathList(dynamic item) => mathList.remove(item);
+  void removeAtIndexFromMathList(int index) => mathList.removeAt(index);
+  void insertAtIndexInMathList(int index, dynamic item) =>
+      mathList.insert(index, item);
+  void updateMathListAtIndex(int index, Function(dynamic) updateFn) =>
+      mathList[index] = updateFn(mathList[index]);
+
+  String? eqToSolve = 'SUS';
+
+  String? op1;
+
+  String? op2;
+
+  String? op3;
+
+  String? op4;
+
+  int? clientScore = 0;
+
+  bool? hasStarted = false;
+
+  int? currentIndex = 0;
+
+  String? correct;
+
+  int quizLength = 0;
+
+  String diff = 'easy';
+
+  ///  State fields for stateful widgets in this page.
+
+  final unfocusNode = FocusNode();
+  AudioPlayer? soundPlayer1;
+  AudioPlayer? soundPlayer2;
+  AudioPlayer? soundPlayer3;
+  AudioPlayer? soundPlayer4;
+  AudioPlayer? soundPlayer5;
+  AudioPlayer? soundPlayer6;
+  AudioPlayer? soundPlayer7;
+  AudioPlayer? soundPlayer8;
+  // Stores action output result for [Backend Call - API (getMathTest)] action in Button widget.
+  ApiCallResponse? mathJSON;
+
+  @override
+  void initState(BuildContext context) {}
+
+  @override
+  void dispose() {
+    unfocusNode.dispose();
+  }
+}

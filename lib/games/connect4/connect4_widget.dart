@@ -32,6 +32,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
       });
       setState(() {
         _model.started = true;
+        _model.type = functions.getName(FFAppState().userType);
       });
       while (_model.started) {
         _model.getInitialConnectResp = await GetConnectFBoardCall.call(
@@ -133,7 +134,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           title: Text(
-            'Page Title',
+            'Connect 4!',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
                   fontFamily: 'Outfit',
                   color: Colors.white,
@@ -150,9 +151,21 @@ class _Connect4WidgetState extends State<Connect4Widget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Flexible(
+              Container(
+                decoration: BoxDecoration(
+                  color: const Color(0xFF0B0909),
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(0.0),
+                    bottomRight: Radius.circular(0.0),
+                    topLeft: Radius.circular(0.0),
+                    topRight: Radius.circular(0.0),
+                  ),
+                  border: Border.all(
+                    color: FlutterFlowTheme.of(context).alternate,
+                  ),
+                ),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
                   child: Builder(
                     builder: (context) {
                       final grid = _model.currentGrid.toList();
@@ -298,24 +311,13 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                 child: Align(
                   alignment: const AlignmentDirectional(-1.0, 1.0),
                   child: Text(
-                    'You are: ${FFAppState().userType}',
+                    'You are: ${_model.type}',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Readex Pro',
                           fontSize: 30.0,
                           letterSpacing: 0.0,
                         ),
                   ),
-                ),
-              ),
-              Align(
-                alignment: const AlignmentDirectional(-1.0, -1.0),
-                child: Text(
-                  'isTurn: ${_model.isTurn.toString()}',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Readex Pro',
-                        fontSize: 20.0,
-                        letterSpacing: 0.0,
-                      ),
                 ),
               ),
             ],
