@@ -19,6 +19,8 @@ class ChooseGameModel extends FlutterFlowModel<ChooseGameWidget> {
   ApiCallResponse? dontUse;
   // Stores action output result for [Backend Call - API (postTicTacToe)] action in ChooseGame widget.
   ApiCallResponse? postTicTacToeResp;
+  // Stores action output result for [Backend Call - API (postMath)] action in ChooseGame widget.
+  ApiCallResponse? postMathResp;
   // Stores action output result for [Backend Call - API (postConnectF)] action in ChooseGame widget.
   ApiCallResponse? postConnectFResp;
   // State field(s) for TabBar widget.
@@ -34,6 +36,8 @@ class ChooseGameModel extends FlutterFlowModel<ChooseGameWidget> {
   ApiCallResponse? postTicTacToeRespLeader;
   // Stores action output result for [Backend Call - API (postConnectF)] action in Container widget.
   ApiCallResponse? postConnect4LeaderResp;
+  // Stores action output result for [Backend Call - API (postMath)] action in Container widget.
+  ApiCallResponse? postMathLeaderResp;
   // Stores action output result for [Backend Call - API (getUsers)] action in IconButton widget.
   ApiCallResponse? getUsersResp;
   // Stores action output result for [Backend Call - API (InviteUser)] action in Button widget.

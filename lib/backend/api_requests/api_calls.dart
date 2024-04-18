@@ -596,6 +596,39 @@ class GetMathTestCall {
   }
 }
 
+class PostMathCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    String? username = '',
+    String? leader = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "username": "$username",
+  "leader": "$leader"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'postMath',
+      apiUrl: 'http://$serverIP:5000/mathTest',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
