@@ -73,3 +73,32 @@ bool isTurn(
     return false;
   }
 }
+
+bool isTurnConnect4(
+  List<String> currentBoard,
+  String userType,
+) {
+  int rCount = 0;
+  int bCount = 0;
+
+  // Count the occurrences of X and O in the board
+  for (String cell in currentBoard) {
+    if (cell == 'R') {
+      rCount++;
+    } else if (cell == 'B') {
+      bCount++;
+    }
+  }
+
+  // Determine whose turn it is based on the count of X and O
+  if (userType == 'R') {
+    // If userType is X, then it's O's turn if O has fewer occurrences
+    return bCount >= rCount;
+  } else if (userType == 'B') {
+    // If userType is O, then it's X's turn if X has fewer occurrences
+    return rCount > bCount;
+  } else {
+    // Invalid userType
+    return false;
+  }
+}

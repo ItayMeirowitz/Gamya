@@ -474,6 +474,101 @@ class GetTicTacToeBoardCall {
   }
 }
 
+class PostConnectFCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    String? username = '',
+    String? leader = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "leader": "$leader",
+  "username": "$username"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'postConnectF',
+      apiUrl: 'http://$serverIP:5000/connect4',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class PlaceConnectFCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    int? lobbyId,
+    String? index = '',
+    String? userType = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "lobby_id": $lobbyId,
+  "index": $index,
+  "user_type": "$userType"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'placeConnectF',
+      apiUrl: 'http://$serverIP:5000/',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetConnectFBoardCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    int? lobbyId,
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getConnectFBoard',
+      apiUrl: 'http://$serverIP:5000/connect4/board',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {
+        'lobby_id': lobbyId,
+      },
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

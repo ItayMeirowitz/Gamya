@@ -960,46 +960,113 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 8.0, 12.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.network(
-                                            'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/5de4d66e-c076-4bf7-80ca-a220e301cb3a/sportswear-club-fleece-joggers-KflRdQ.png',
-                                            width: 70.0,
-                                            height: 70.0,
-                                            fit: BoxFit.cover,
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    var shouldSetState = false;
+                                    _model.postConnect4LeaderResp =
+                                        await PostConnectFCall.call(
+                                      serverIP: FFAppState().serverIP,
+                                      tokenType: FFAppState().tokenType,
+                                      accessToken: FFAppState().accessToken,
+                                      username: FFAppState().username,
+                                      leader: FFAppState().leader,
+                                    );
+                                    shouldSetState = true;
+                                    if ((_model.postConnect4LeaderResp
+                                            ?.succeeded ??
+                                        true)) {
+                                      setState(() {
+                                        FFAppState().lobbyId = getJsonField(
+                                          (_model.postConnect4LeaderResp
+                                                  ?.jsonBody ??
+                                              ''),
+                                          r'''$.lobby_id''',
+                                        );
+                                        FFAppState().userType = getJsonField(
+                                          (_model.postConnect4LeaderResp
+                                                  ?.jsonBody ??
+                                              ''),
+                                          r'''$.user_type''',
+                                        ).toString();
+                                        FFAppState().hasStarted = true;
+                                      });
+                                    } else {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: const Text('error accoured'),
+                                            content: Text(getJsonField(
+                                              (_model.postConnect4LeaderResp
+                                                      ?.jsonBody ??
+                                                  ''),
+                                              r'''$.detail''',
+                                            ).toString()),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: const Text('Ok'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    }
+
+                                    context.pushNamed('Connect4');
+
+                                    if (shouldSetState) setState(() {});
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 8.0, 12.0, 8.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/Connect4.png',
+                                              width: 90.0,
+                                              height: 70.0,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 0.0, 0.0, 0.0),
-                                          child: Text(
-                                            'Pants',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  letterSpacing: 0.0,
-                                                ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Connect 4',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
