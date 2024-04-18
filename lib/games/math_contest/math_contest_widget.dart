@@ -174,7 +174,7 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                       setState(() {
                                         _model.eqToSolve = getJsonField(
                                           _model.mathList[_model.currentIndex!],
-                                          r'''$.equations''',
+                                          r'''$.equation''',
                                         ).toString();
                                         _model.op1 = getJsonField(
                                           _model.mathList[_model.currentIndex!],
@@ -290,7 +290,7 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                       setState(() {
                                         _model.eqToSolve = getJsonField(
                                           _model.mathList[_model.currentIndex!],
-                                          r'''$.equations''',
+                                          r'''$.equation''',
                                         ).toString();
                                         _model.op1 = getJsonField(
                                           _model.mathList[_model.currentIndex!],
@@ -416,7 +416,7 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                     setState(() {
                                       _model.eqToSolve = getJsonField(
                                         _model.mathList[_model.currentIndex!],
-                                        r'''$.equations''',
+                                        r'''$.equation''',
                                       ).toString();
                                       _model.op1 = getJsonField(
                                         _model.mathList[_model.currentIndex!],
@@ -532,7 +532,7 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                     setState(() {
                                       _model.eqToSolve = getJsonField(
                                         _model.mathList[_model.currentIndex!],
-                                        r'''$.equations''',
+                                        r'''$.equation''',
                                       ).toString();
                                       _model.op1 = getJsonField(
                                         _model.mathList[_model.currentIndex!],
