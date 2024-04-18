@@ -524,7 +524,7 @@ class PlaceConnectFCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'placeConnectF',
-      apiUrl: 'http://$serverIP:5000/',
+      apiUrl: 'http://$serverIP:5000/connect4/place',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
