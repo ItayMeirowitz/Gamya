@@ -41,12 +41,20 @@ class VocabModel extends FlutterFlowModel<VocabWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Backend Call - API (postVocabAnswer)] action in Button widget.
+  ApiCallResponse? postVocabAnswer1Resp;
   AudioPlayer? soundPlayer1;
   AudioPlayer? soundPlayer2;
+  // Stores action output result for [Backend Call - API (postVocabAnswer)] action in Button widget.
+  ApiCallResponse? postVocabAnswer2Resp;
   AudioPlayer? soundPlayer3;
   AudioPlayer? soundPlayer4;
+  // Stores action output result for [Backend Call - API (postVocabAnswer)] action in Button widget.
+  ApiCallResponse? postVocabAnswer3Resp;
   AudioPlayer? soundPlayer5;
   AudioPlayer? soundPlayer6;
+  // Stores action output result for [Backend Call - API (postVocabAnswer)] action in Button widget.
+  ApiCallResponse? postVocabAnswer4Resp;
   AudioPlayer? soundPlayer7;
   AudioPlayer? soundPlayer8;
   // Stores action output result for [Backend Call - API (getVocab)] action in Button widget.

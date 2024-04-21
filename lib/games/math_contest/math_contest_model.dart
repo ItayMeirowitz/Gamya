@@ -41,12 +41,20 @@ class MathContestModel extends FlutterFlowModel<MathContestWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // Stores action output result for [Backend Call - API (postMathAnswer)] action in Button widget.
+  ApiCallResponse? postMathAnswer1Resp;
   AudioPlayer? soundPlayer1;
   AudioPlayer? soundPlayer2;
+  // Stores action output result for [Backend Call - API (postMathAnswer)] action in Button widget.
+  ApiCallResponse? postMathAnswer2Resp;
   AudioPlayer? soundPlayer3;
   AudioPlayer? soundPlayer4;
+  // Stores action output result for [Backend Call - API (postMathAnswer)] action in Button widget.
+  ApiCallResponse? postMathAnswer3Resp;
   AudioPlayer? soundPlayer5;
   AudioPlayer? soundPlayer6;
+  // Stores action output result for [Backend Call - API (postMathAnswer)] action in Button widget.
+  ApiCallResponse? postMathAnswer4Resp;
   AudioPlayer? soundPlayer7;
   AudioPlayer? soundPlayer8;
   // Stores action output result for [Backend Call - API (getMathTest)] action in Button widget.

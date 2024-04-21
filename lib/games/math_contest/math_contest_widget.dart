@@ -114,91 +114,123 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                 alignment: const AlignmentDirectional(0.0, -1.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    if (_model.op1 == _model.correct) {
-                                      _model.soundPlayer1 ??= AudioPlayer();
-                                      if (_model.soundPlayer1!.playing) {
-                                        await _model.soundPlayer1!.stop();
+                                    var shouldSetState = false;
+                                    _model.postMathAnswer1Resp =
+                                        await PostMathAnswerCall.call(
+                                      serverIP: FFAppState().serverIP,
+                                      tokenType: FFAppState().tokenType,
+                                      accessToken: FFAppState().accessToken,
+                                      lobbyId: FFAppState().lobbyId,
+                                      index: _model.currentIndex,
+                                      answer: _model.op1,
+                                    );
+                                    shouldSetState = true;
+                                    if ((_model
+                                            .postMathAnswer1Resp?.succeeded ??
+                                        true)) {
+                                      if (getJsonField(
+                                        (_model.postMathAnswer1Resp?.jsonBody ??
+                                            ''),
+                                        r'''$.correct''',
+                                      )) {
+                                        _model.soundPlayer1 ??= AudioPlayer();
+                                        if (_model.soundPlayer1!.playing) {
+                                          await _model.soundPlayer1!.stop();
+                                        }
+                                        _model.soundPlayer1!.setVolume(1.0);
+                                        _model.soundPlayer1!
+                                            .setAsset(
+                                                'assets/audios/cute-level-up-3-189853.mp3')
+                                            .then((_) =>
+                                                _model.soundPlayer1!.play());
+
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 50;
+                                        });
+                                      } else {
+                                        _model.soundPlayer2 ??= AudioPlayer();
+                                        if (_model.soundPlayer2!.playing) {
+                                          await _model.soundPlayer2!.stop();
+                                        }
+                                        _model.soundPlayer2!.setVolume(1.0);
+                                        _model.soundPlayer2!
+                                            .setAsset(
+                                                'assets/audios/buzzer-or-wrong-answer-20582.mp3')
+                                            .then((_) =>
+                                                _model.soundPlayer2!.play());
                                       }
-                                      _model.soundPlayer1!.setVolume(1.0);
-                                      _model.soundPlayer1!
-                                          .setAsset(
-                                              'assets/audios/cute-level-up-3-189853.mp3')
-                                          .then((_) =>
-                                              _model.soundPlayer1!.play());
 
                                       setState(() {
-                                        _model.clientScore =
-                                            _model.clientScore! + 50;
+                                        _model.currentIndex =
+                                            _model.currentIndex! + 1;
                                       });
-                                    } else {
-                                      _model.soundPlayer2 ??= AudioPlayer();
-                                      if (_model.soundPlayer2!.playing) {
-                                        await _model.soundPlayer2!.stop();
+                                      if (_model.currentIndex! >=
+                                          _model.quizLength) {
+                                        context.pushNamed(
+                                          'GameFinished',
+                                          queryParameters: {
+                                            'score': serializeParam(
+                                              _model.clientScore?.toDouble(),
+                                              ParamType.double,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: const TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.scale,
+                                              alignment: Alignment.bottomCenter,
+                                              duration:
+                                                  Duration(milliseconds: 2000),
+                                            ),
+                                          },
+                                        );
+
+                                        if (shouldSetState) setState(() {});
+                                        return;
+                                      } else {
+                                        setState(() {
+                                          _model.eqToSolve = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.equation''',
+                                          ).toString();
+                                          _model.op1 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op1''',
+                                          ).toString();
+                                          _model.op2 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op2''',
+                                          ).toString();
+                                          _model.op3 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op3''',
+                                          ).toString();
+                                          _model.op4 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op4''',
+                                          ).toString();
+                                          _model.correct = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.correct''',
+                                          ).toString();
+                                        });
+                                        if (shouldSetState) setState(() {});
+                                        return;
                                       }
-                                      _model.soundPlayer2!.setVolume(1.0);
-                                      _model.soundPlayer2!
-                                          .setAsset(
-                                              'assets/audios/buzzer-or-wrong-answer-20582.mp3')
-                                          .then((_) =>
-                                              _model.soundPlayer2!.play());
-                                    }
-
-                                    setState(() {
-                                      _model.currentIndex =
-                                          _model.currentIndex! + 1;
-                                    });
-                                    if (_model.currentIndex! >=
-                                        _model.quizLength) {
-                                      context.pushNamed(
-                                        'GameFinished',
-                                        queryParameters: {
-                                          'score': serializeParam(
-                                            _model.clientScore?.toDouble(),
-                                            ParamType.double,
-                                          ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: const TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.scale,
-                                            alignment: Alignment.bottomCenter,
-                                            duration:
-                                                Duration(milliseconds: 2000),
-                                          ),
-                                        },
-                                      );
-
-                                      return;
                                     } else {
-                                      setState(() {
-                                        _model.eqToSolve = getJsonField(
-                                          _model.mathList[_model.currentIndex!],
-                                          r'''$.equation''',
-                                        ).toString();
-                                        _model.op1 = getJsonField(
-                                          _model.mathList[_model.currentIndex!],
-                                          r'''$.op1''',
-                                        ).toString();
-                                        _model.op2 = getJsonField(
-                                          _model.mathList[_model.currentIndex!],
-                                          r'''$.op2''',
-                                        ).toString();
-                                        _model.op3 = getJsonField(
-                                          _model.mathList[_model.currentIndex!],
-                                          r'''$.op3''',
-                                        ).toString();
-                                        _model.op4 = getJsonField(
-                                          _model.mathList[_model.currentIndex!],
-                                          r'''$.op4''',
-                                        ).toString();
-                                        _model.correct = getJsonField(
-                                          _model.mathList[_model.currentIndex!],
-                                          r'''$.correct''',
-                                        ).toString();
-                                      });
+                                      if (shouldSetState) setState(() {});
                                       return;
                                     }
+
+                                    if (shouldSetState) setState(() {});
                                   },
                                   text: _model.op1!,
                                   options: FFButtonOptions(
@@ -230,91 +262,123 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                 alignment: const AlignmentDirectional(0.0, -1.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    if (_model.op2 == _model.correct) {
-                                      _model.soundPlayer3 ??= AudioPlayer();
-                                      if (_model.soundPlayer3!.playing) {
-                                        await _model.soundPlayer3!.stop();
+                                    var shouldSetState = false;
+                                    _model.postMathAnswer2Resp =
+                                        await PostMathAnswerCall.call(
+                                      serverIP: FFAppState().serverIP,
+                                      tokenType: FFAppState().tokenType,
+                                      accessToken: FFAppState().accessToken,
+                                      lobbyId: FFAppState().lobbyId,
+                                      index: _model.currentIndex,
+                                      answer: _model.op2,
+                                    );
+                                    shouldSetState = true;
+                                    if ((_model
+                                            .postMathAnswer2Resp?.succeeded ??
+                                        true)) {
+                                      if (getJsonField(
+                                        (_model.postMathAnswer2Resp?.jsonBody ??
+                                            ''),
+                                        r'''$.correct''',
+                                      )) {
+                                        _model.soundPlayer3 ??= AudioPlayer();
+                                        if (_model.soundPlayer3!.playing) {
+                                          await _model.soundPlayer3!.stop();
+                                        }
+                                        _model.soundPlayer3!.setVolume(1.0);
+                                        _model.soundPlayer3!
+                                            .setAsset(
+                                                'assets/audios/cute-level-up-3-189853.mp3')
+                                            .then((_) =>
+                                                _model.soundPlayer3!.play());
+
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 50;
+                                        });
+                                      } else {
+                                        _model.soundPlayer4 ??= AudioPlayer();
+                                        if (_model.soundPlayer4!.playing) {
+                                          await _model.soundPlayer4!.stop();
+                                        }
+                                        _model.soundPlayer4!.setVolume(1.0);
+                                        _model.soundPlayer4!
+                                            .setAsset(
+                                                'assets/audios/buzzer-or-wrong-answer-20582.mp3')
+                                            .then((_) =>
+                                                _model.soundPlayer4!.play());
                                       }
-                                      _model.soundPlayer3!.setVolume(1.0);
-                                      _model.soundPlayer3!
-                                          .setAsset(
-                                              'assets/audios/cute-level-up-3-189853.mp3')
-                                          .then((_) =>
-                                              _model.soundPlayer3!.play());
 
                                       setState(() {
-                                        _model.clientScore =
-                                            _model.clientScore! + 50;
+                                        _model.currentIndex =
+                                            _model.currentIndex! + 1;
                                       });
-                                    } else {
-                                      _model.soundPlayer4 ??= AudioPlayer();
-                                      if (_model.soundPlayer4!.playing) {
-                                        await _model.soundPlayer4!.stop();
+                                      if (_model.currentIndex! >=
+                                          _model.quizLength) {
+                                        context.pushNamed(
+                                          'GameFinished',
+                                          queryParameters: {
+                                            'score': serializeParam(
+                                              _model.clientScore?.toDouble(),
+                                              ParamType.double,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: const TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.scale,
+                                              alignment: Alignment.bottomCenter,
+                                              duration:
+                                                  Duration(milliseconds: 2000),
+                                            ),
+                                          },
+                                        );
+
+                                        if (shouldSetState) setState(() {});
+                                        return;
+                                      } else {
+                                        setState(() {
+                                          _model.eqToSolve = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.equation''',
+                                          ).toString();
+                                          _model.op1 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op1''',
+                                          ).toString();
+                                          _model.op2 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op2''',
+                                          ).toString();
+                                          _model.op3 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op3''',
+                                          ).toString();
+                                          _model.op4 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op4''',
+                                          ).toString();
+                                          _model.correct = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.correct''',
+                                          ).toString();
+                                        });
+                                        if (shouldSetState) setState(() {});
+                                        return;
                                       }
-                                      _model.soundPlayer4!.setVolume(1.0);
-                                      _model.soundPlayer4!
-                                          .setAsset(
-                                              'assets/audios/buzzer-or-wrong-answer-20582.mp3')
-                                          .then((_) =>
-                                              _model.soundPlayer4!.play());
-                                    }
-
-                                    setState(() {
-                                      _model.currentIndex =
-                                          _model.currentIndex! + 1;
-                                    });
-                                    if (_model.currentIndex! >=
-                                        _model.quizLength) {
-                                      context.pushNamed(
-                                        'GameFinished',
-                                        queryParameters: {
-                                          'score': serializeParam(
-                                            _model.clientScore?.toDouble(),
-                                            ParamType.double,
-                                          ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: const TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.scale,
-                                            alignment: Alignment.bottomCenter,
-                                            duration:
-                                                Duration(milliseconds: 2000),
-                                          ),
-                                        },
-                                      );
-
-                                      return;
                                     } else {
-                                      setState(() {
-                                        _model.eqToSolve = getJsonField(
-                                          _model.mathList[_model.currentIndex!],
-                                          r'''$.equation''',
-                                        ).toString();
-                                        _model.op1 = getJsonField(
-                                          _model.mathList[_model.currentIndex!],
-                                          r'''$.op1''',
-                                        ).toString();
-                                        _model.op2 = getJsonField(
-                                          _model.mathList[_model.currentIndex!],
-                                          r'''$.op2''',
-                                        ).toString();
-                                        _model.op3 = getJsonField(
-                                          _model.mathList[_model.currentIndex!],
-                                          r'''$.op3''',
-                                        ).toString();
-                                        _model.op4 = getJsonField(
-                                          _model.mathList[_model.currentIndex!],
-                                          r'''$.op4''',
-                                        ).toString();
-                                        _model.correct = getJsonField(
-                                          _model.mathList[_model.currentIndex!],
-                                          r'''$.correct''',
-                                        ).toString();
-                                      });
+                                      if (shouldSetState) setState(() {});
                                       return;
                                     }
+
+                                    if (shouldSetState) setState(() {});
                                   },
                                   text: _model.op2!,
                                   options: FFButtonOptions(
@@ -356,91 +420,116 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                               alignment: const AlignmentDirectional(0.0, -1.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  if (_model.op3 == _model.correct) {
-                                    _model.soundPlayer5 ??= AudioPlayer();
-                                    if (_model.soundPlayer5!.playing) {
-                                      await _model.soundPlayer5!.stop();
+                                  var shouldSetState = false;
+                                  _model.postMathAnswer3Resp =
+                                      await PostMathAnswerCall.call(
+                                    serverIP: FFAppState().serverIP,
+                                    tokenType: FFAppState().tokenType,
+                                    accessToken: FFAppState().accessToken,
+                                    lobbyId: FFAppState().lobbyId,
+                                    index: _model.currentIndex,
+                                    answer: _model.op3,
+                                  );
+                                  shouldSetState = true;
+                                  if ((_model.postMathAnswer3Resp?.succeeded ??
+                                      true)) {
+                                    if (getJsonField(
+                                      (_model.postMathAnswer3Resp?.jsonBody ??
+                                          ''),
+                                      r'''$.correct''',
+                                    )) {
+                                      _model.soundPlayer5 ??= AudioPlayer();
+                                      if (_model.soundPlayer5!.playing) {
+                                        await _model.soundPlayer5!.stop();
+                                      }
+                                      _model.soundPlayer5!.setVolume(1.0);
+                                      _model.soundPlayer5!
+                                          .setAsset(
+                                              'assets/audios/cute-level-up-3-189853.mp3')
+                                          .then((_) =>
+                                              _model.soundPlayer5!.play());
+
+                                      setState(() {
+                                        _model.clientScore =
+                                            _model.clientScore! + 50;
+                                      });
+                                    } else {
+                                      _model.soundPlayer6 ??= AudioPlayer();
+                                      if (_model.soundPlayer6!.playing) {
+                                        await _model.soundPlayer6!.stop();
+                                      }
+                                      _model.soundPlayer6!.setVolume(1.0);
+                                      _model.soundPlayer6!
+                                          .setAsset(
+                                              'assets/audios/buzzer-or-wrong-answer-20582.mp3')
+                                          .then((_) =>
+                                              _model.soundPlayer6!.play());
                                     }
-                                    _model.soundPlayer5!.setVolume(1.0);
-                                    _model.soundPlayer5!
-                                        .setAsset(
-                                            'assets/audios/cute-level-up-3-189853.mp3')
-                                        .then(
-                                            (_) => _model.soundPlayer5!.play());
 
                                     setState(() {
-                                      _model.clientScore =
-                                          _model.clientScore! + 50;
+                                      _model.currentIndex =
+                                          _model.currentIndex! + 1;
                                     });
-                                  } else {
-                                    _model.soundPlayer6 ??= AudioPlayer();
-                                    if (_model.soundPlayer6!.playing) {
-                                      await _model.soundPlayer6!.stop();
+                                    if (_model.currentIndex! >=
+                                        _model.quizLength) {
+                                      context.pushNamed(
+                                        'GameFinished',
+                                        queryParameters: {
+                                          'score': serializeParam(
+                                            _model.clientScore?.toDouble(),
+                                            ParamType.double,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: const TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.scale,
+                                            alignment: Alignment.bottomCenter,
+                                            duration:
+                                                Duration(milliseconds: 2000),
+                                          ),
+                                        },
+                                      );
+
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    } else {
+                                      setState(() {
+                                        _model.eqToSolve = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.equation''',
+                                        ).toString();
+                                        _model.op1 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op1''',
+                                        ).toString();
+                                        _model.op2 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op2''',
+                                        ).toString();
+                                        _model.op3 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op3''',
+                                        ).toString();
+                                        _model.op4 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op4''',
+                                        ).toString();
+                                        _model.correct = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.correct''',
+                                        ).toString();
+                                      });
+                                      if (shouldSetState) setState(() {});
+                                      return;
                                     }
-                                    _model.soundPlayer6!.setVolume(1.0);
-                                    _model.soundPlayer6!
-                                        .setAsset(
-                                            'assets/audios/buzzer-or-wrong-answer-20582.mp3')
-                                        .then(
-                                            (_) => _model.soundPlayer6!.play());
-                                  }
-
-                                  setState(() {
-                                    _model.currentIndex =
-                                        _model.currentIndex! + 1;
-                                  });
-                                  if (_model.currentIndex! >=
-                                      _model.quizLength) {
-                                    context.pushNamed(
-                                      'GameFinished',
-                                      queryParameters: {
-                                        'score': serializeParam(
-                                          _model.clientScore?.toDouble(),
-                                          ParamType.double,
-                                        ),
-                                      }.withoutNulls,
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: const TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.scale,
-                                          alignment: Alignment.bottomCenter,
-                                          duration:
-                                              Duration(milliseconds: 2000),
-                                        ),
-                                      },
-                                    );
-
-                                    return;
                                   } else {
-                                    setState(() {
-                                      _model.eqToSolve = getJsonField(
-                                        _model.mathList[_model.currentIndex!],
-                                        r'''$.equation''',
-                                      ).toString();
-                                      _model.op1 = getJsonField(
-                                        _model.mathList[_model.currentIndex!],
-                                        r'''$.op1''',
-                                      ).toString();
-                                      _model.op2 = getJsonField(
-                                        _model.mathList[_model.currentIndex!],
-                                        r'''$.op2''',
-                                      ).toString();
-                                      _model.op3 = getJsonField(
-                                        _model.mathList[_model.currentIndex!],
-                                        r'''$.op3''',
-                                      ).toString();
-                                      _model.op4 = getJsonField(
-                                        _model.mathList[_model.currentIndex!],
-                                        r'''$.op4''',
-                                      ).toString();
-                                      _model.correct = getJsonField(
-                                        _model.mathList[_model.currentIndex!],
-                                        r'''$.correct''',
-                                      ).toString();
-                                    });
+                                    if (shouldSetState) setState(() {});
                                     return;
                                   }
+
+                                  if (shouldSetState) setState(() {});
                                 },
                                 text: _model.op3!,
                                 options: FFButtonOptions(
@@ -472,91 +561,116 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                               alignment: const AlignmentDirectional(0.0, -1.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  if (_model.op4 == _model.correct) {
-                                    _model.soundPlayer7 ??= AudioPlayer();
-                                    if (_model.soundPlayer7!.playing) {
-                                      await _model.soundPlayer7!.stop();
+                                  var shouldSetState = false;
+                                  _model.postMathAnswer4Resp =
+                                      await PostMathAnswerCall.call(
+                                    serverIP: FFAppState().serverIP,
+                                    tokenType: FFAppState().tokenType,
+                                    accessToken: FFAppState().accessToken,
+                                    lobbyId: FFAppState().lobbyId,
+                                    index: _model.currentIndex,
+                                    answer: _model.op4,
+                                  );
+                                  shouldSetState = true;
+                                  if ((_model.postMathAnswer4Resp?.succeeded ??
+                                      true)) {
+                                    if (getJsonField(
+                                      (_model.postMathAnswer4Resp?.jsonBody ??
+                                          ''),
+                                      r'''$.correct''',
+                                    )) {
+                                      _model.soundPlayer7 ??= AudioPlayer();
+                                      if (_model.soundPlayer7!.playing) {
+                                        await _model.soundPlayer7!.stop();
+                                      }
+                                      _model.soundPlayer7!.setVolume(1.0);
+                                      _model.soundPlayer7!
+                                          .setAsset(
+                                              'assets/audios/cute-level-up-3-189853.mp3')
+                                          .then((_) =>
+                                              _model.soundPlayer7!.play());
+
+                                      setState(() {
+                                        _model.clientScore =
+                                            _model.clientScore! + 50;
+                                      });
+                                    } else {
+                                      _model.soundPlayer8 ??= AudioPlayer();
+                                      if (_model.soundPlayer8!.playing) {
+                                        await _model.soundPlayer8!.stop();
+                                      }
+                                      _model.soundPlayer8!.setVolume(1.0);
+                                      _model.soundPlayer8!
+                                          .setAsset(
+                                              'assets/audios/buzzer-or-wrong-answer-20582.mp3')
+                                          .then((_) =>
+                                              _model.soundPlayer8!.play());
                                     }
-                                    _model.soundPlayer7!.setVolume(1.0);
-                                    _model.soundPlayer7!
-                                        .setAsset(
-                                            'assets/audios/cute-level-up-3-189853.mp3')
-                                        .then(
-                                            (_) => _model.soundPlayer7!.play());
 
                                     setState(() {
-                                      _model.clientScore =
-                                          _model.clientScore! + 50;
+                                      _model.currentIndex =
+                                          _model.currentIndex! + 1;
                                     });
-                                  } else {
-                                    _model.soundPlayer8 ??= AudioPlayer();
-                                    if (_model.soundPlayer8!.playing) {
-                                      await _model.soundPlayer8!.stop();
+                                    if (_model.currentIndex! >=
+                                        _model.quizLength) {
+                                      context.pushNamed(
+                                        'GameFinished',
+                                        queryParameters: {
+                                          'score': serializeParam(
+                                            _model.clientScore?.toDouble(),
+                                            ParamType.double,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: const TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.scale,
+                                            alignment: Alignment.bottomCenter,
+                                            duration:
+                                                Duration(milliseconds: 2000),
+                                          ),
+                                        },
+                                      );
+
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    } else {
+                                      setState(() {
+                                        _model.eqToSolve = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.equation''',
+                                        ).toString();
+                                        _model.op1 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op1''',
+                                        ).toString();
+                                        _model.op2 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op2''',
+                                        ).toString();
+                                        _model.op3 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op3''',
+                                        ).toString();
+                                        _model.op4 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op4''',
+                                        ).toString();
+                                        _model.correct = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.correct''',
+                                        ).toString();
+                                      });
+                                      if (shouldSetState) setState(() {});
+                                      return;
                                     }
-                                    _model.soundPlayer8!.setVolume(1.0);
-                                    _model.soundPlayer8!
-                                        .setAsset(
-                                            'assets/audios/buzzer-or-wrong-answer-20582.mp3')
-                                        .then(
-                                            (_) => _model.soundPlayer8!.play());
-                                  }
-
-                                  setState(() {
-                                    _model.currentIndex =
-                                        _model.currentIndex! + 1;
-                                  });
-                                  if (_model.currentIndex! >=
-                                      _model.quizLength) {
-                                    context.pushNamed(
-                                      'GameFinished',
-                                      queryParameters: {
-                                        'score': serializeParam(
-                                          _model.clientScore?.toDouble(),
-                                          ParamType.double,
-                                        ),
-                                      }.withoutNulls,
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: const TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.scale,
-                                          alignment: Alignment.bottomCenter,
-                                          duration:
-                                              Duration(milliseconds: 2000),
-                                        ),
-                                      },
-                                    );
-
-                                    return;
                                   } else {
-                                    setState(() {
-                                      _model.eqToSolve = getJsonField(
-                                        _model.mathList[_model.currentIndex!],
-                                        r'''$.equation''',
-                                      ).toString();
-                                      _model.op1 = getJsonField(
-                                        _model.mathList[_model.currentIndex!],
-                                        r'''$.op1''',
-                                      ).toString();
-                                      _model.op2 = getJsonField(
-                                        _model.mathList[_model.currentIndex!],
-                                        r'''$.op2''',
-                                      ).toString();
-                                      _model.op3 = getJsonField(
-                                        _model.mathList[_model.currentIndex!],
-                                        r'''$.op3''',
-                                      ).toString();
-                                      _model.op4 = getJsonField(
-                                        _model.mathList[_model.currentIndex!],
-                                        r'''$.op4''',
-                                      ).toString();
-                                      _model.correct = getJsonField(
-                                        _model.mathList[_model.currentIndex!],
-                                        r'''$.correct''',
-                                      ).toString();
-                                    });
+                                    if (shouldSetState) setState(() {});
                                     return;
                                   }
+
+                                  if (shouldSetState) setState(() {});
                                 },
                                 text: _model.op4!,
                                 options: FFButtonOptions(

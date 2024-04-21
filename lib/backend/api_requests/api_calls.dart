@@ -56,7 +56,7 @@ class GetVocabCall {
     String? accessToken = '',
     String? tokenType = '',
     String? serverIP = '',
-    String? diff = 'easy',
+    String? diff = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getVocab',
@@ -612,6 +612,76 @@ class PostMathCall {
     return ApiManager.instance.makeApiCall(
       callName: 'postMath',
       apiUrl: 'http://$serverIP:5000/mathTest',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class PostVocabAnswerCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    String? diff = '',
+    int? index,
+    String? answer = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "diff": "$diff",
+  "index": $index,
+  "answer": "$answer"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'postVocabAnswer',
+      apiUrl: 'http://$serverIP:5000/vocab/answer',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'applicarion/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class PostMathAnswerCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    int? lobbyId,
+    int? index,
+    String? answer = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "lobby_id": $lobbyId,
+  "index": $index,
+  "answer": "$answer"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'postMathAnswer',
+      apiUrl: 'http://$serverIP:5000/math/answer',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',

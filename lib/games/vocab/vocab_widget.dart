@@ -114,109 +114,136 @@ class _VocabWidgetState extends State<VocabWidget> {
                                 alignment: const AlignmentDirectional(0.0, -1.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    if (_model.op1 == _model.correct) {
-                                      _model.soundPlayer1 ??= AudioPlayer();
-                                      if (_model.soundPlayer1!.playing) {
-                                        await _model.soundPlayer1!.stop();
-                                      }
-                                      _model.soundPlayer1!.setVolume(1.0);
-                                      _model.soundPlayer1!
-                                          .setAsset(
-                                              'assets/audios/cute-level-up-3-189853.mp3')
-                                          .then((_) =>
-                                              _model.soundPlayer1!.play());
+                                    var shouldSetState = false;
+                                    _model.postVocabAnswer1Resp =
+                                        await PostVocabAnswerCall.call(
+                                      serverIP: FFAppState().serverIP,
+                                      tokenType: FFAppState().tokenType,
+                                      accessToken: FFAppState().accessToken,
+                                      index: _model.currentIndex,
+                                      answer: _model.op1,
+                                      diff: _model.diff,
+                                    );
+                                    shouldSetState = true;
+                                    if ((_model
+                                            .postVocabAnswer1Resp?.succeeded ??
+                                        true)) {
+                                      if (getJsonField(
+                                        (_model.postVocabAnswer1Resp
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.correct''',
+                                      )) {
+                                        _model.soundPlayer1 ??= AudioPlayer();
+                                        if (_model.soundPlayer1!.playing) {
+                                          await _model.soundPlayer1!.stop();
+                                        }
+                                        _model.soundPlayer1!.setVolume(1.0);
+                                        _model.soundPlayer1!
+                                            .setAsset(
+                                                'assets/audios/cute-level-up-3-189853.mp3')
+                                            .then((_) =>
+                                                _model.soundPlayer1!.play());
 
-                                      if (_model.diff == 'easy') {
-                                        setState(() {
-                                          _model.clientScore =
-                                              _model.clientScore! + 20;
-                                        });
-                                      } else if (_model.diff == 'medium') {
-                                        setState(() {
-                                          _model.clientScore =
-                                              _model.clientScore! + 40;
-                                        });
-                                      } else if (_model.diff == 'hard') {
-                                        setState(() {
-                                          _model.clientScore =
-                                              _model.clientScore! + 100;
-                                        });
+                                        if (_model.diff == 'easy') {
+                                          setState(() {
+                                            _model.clientScore =
+                                                _model.clientScore! + 20;
+                                          });
+                                        } else if (_model.diff == 'medium') {
+                                          setState(() {
+                                            _model.clientScore =
+                                                _model.clientScore! + 40;
+                                          });
+                                        } else if (_model.diff == 'hard') {
+                                          setState(() {
+                                            _model.clientScore =
+                                                _model.clientScore! + 100;
+                                          });
+                                        }
+                                      } else {
+                                        _model.soundPlayer2 ??= AudioPlayer();
+                                        if (_model.soundPlayer2!.playing) {
+                                          await _model.soundPlayer2!.stop();
+                                        }
+                                        _model.soundPlayer2!.setVolume(1.0);
+                                        _model.soundPlayer2!
+                                            .setAsset(
+                                                'assets/audios/buzzer-or-wrong-answer-20582.mp3')
+                                            .then((_) =>
+                                                _model.soundPlayer2!.play());
                                       }
-                                    } else {
-                                      _model.soundPlayer2 ??= AudioPlayer();
-                                      if (_model.soundPlayer2!.playing) {
-                                        await _model.soundPlayer2!.stop();
-                                      }
-                                      _model.soundPlayer2!.setVolume(1.0);
-                                      _model.soundPlayer2!
-                                          .setAsset(
-                                              'assets/audios/buzzer-or-wrong-answer-20582.mp3')
-                                          .then((_) =>
-                                              _model.soundPlayer2!.play());
-                                    }
 
-                                    setState(() {
-                                      _model.currentIndex =
-                                          _model.currentIndex! + 1;
-                                    });
-                                    if (_model.currentIndex! >=
-                                        _model.quizLength) {
-                                      context.pushNamed(
-                                        'GameFinished',
-                                        queryParameters: {
-                                          'score': serializeParam(
-                                            _model.clientScore?.toDouble(),
-                                            ParamType.double,
-                                          ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: const TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.scale,
-                                            alignment: Alignment.bottomCenter,
-                                            duration:
-                                                Duration(milliseconds: 2000),
-                                          ),
-                                        },
-                                      );
-
-                                      return;
-                                    } else {
                                       setState(() {
-                                        _model.wordToGuess = getJsonField(
-                                          _model
-                                              .vocabList[_model.currentIndex!],
-                                          r'''$.word''',
-                                        ).toString();
-                                        _model.op1 = getJsonField(
-                                          _model
-                                              .vocabList[_model.currentIndex!],
-                                          r'''$.op1''',
-                                        ).toString();
-                                        _model.op2 = getJsonField(
-                                          _model
-                                              .vocabList[_model.currentIndex!],
-                                          r'''$.op2''',
-                                        ).toString();
-                                        _model.op3 = getJsonField(
-                                          _model
-                                              .vocabList[_model.currentIndex!],
-                                          r'''$.op3''',
-                                        ).toString();
-                                        _model.op4 = getJsonField(
-                                          _model
-                                              .vocabList[_model.currentIndex!],
-                                          r'''$.op4''',
-                                        ).toString();
-                                        _model.correct = getJsonField(
-                                          _model
-                                              .vocabList[_model.currentIndex!],
-                                          r'''$.correct''',
-                                        ).toString();
+                                        _model.currentIndex =
+                                            _model.currentIndex! + 1;
                                       });
+                                      if (_model.currentIndex! >=
+                                          _model.quizLength) {
+                                        context.pushNamed(
+                                          'GameFinished',
+                                          queryParameters: {
+                                            'score': serializeParam(
+                                              _model.clientScore?.toDouble(),
+                                              ParamType.double,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: const TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.scale,
+                                              alignment: Alignment.bottomCenter,
+                                              duration:
+                                                  Duration(milliseconds: 2000),
+                                            ),
+                                          },
+                                        );
+
+                                        if (shouldSetState) setState(() {});
+                                        return;
+                                      } else {
+                                        setState(() {
+                                          _model.wordToGuess = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.word''',
+                                          ).toString();
+                                          _model.op1 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op1''',
+                                          ).toString();
+                                          _model.op2 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op2''',
+                                          ).toString();
+                                          _model.op3 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op3''',
+                                          ).toString();
+                                          _model.op4 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op4''',
+                                          ).toString();
+                                          _model.correct = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.correct''',
+                                          ).toString();
+                                        });
+                                        if (shouldSetState) setState(() {});
+                                        return;
+                                      }
+                                    } else {
+                                      if (shouldSetState) setState(() {});
                                       return;
                                     }
+
+                                    if (shouldSetState) setState(() {});
                                   },
                                   text: _model.op1!,
                                   options: FFButtonOptions(
@@ -248,109 +275,136 @@ class _VocabWidgetState extends State<VocabWidget> {
                                 alignment: const AlignmentDirectional(0.0, -1.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    if (_model.op2 == _model.correct) {
-                                      _model.soundPlayer3 ??= AudioPlayer();
-                                      if (_model.soundPlayer3!.playing) {
-                                        await _model.soundPlayer3!.stop();
-                                      }
-                                      _model.soundPlayer3!.setVolume(1.0);
-                                      _model.soundPlayer3!
-                                          .setAsset(
-                                              'assets/audios/cute-level-up-3-189853.mp3')
-                                          .then((_) =>
-                                              _model.soundPlayer3!.play());
+                                    var shouldSetState = false;
+                                    _model.postVocabAnswer2Resp =
+                                        await PostVocabAnswerCall.call(
+                                      serverIP: FFAppState().serverIP,
+                                      tokenType: FFAppState().tokenType,
+                                      accessToken: FFAppState().accessToken,
+                                      diff: _model.diff,
+                                      index: _model.currentIndex,
+                                      answer: _model.op2,
+                                    );
+                                    shouldSetState = true;
+                                    if ((_model
+                                            .postVocabAnswer2Resp?.succeeded ??
+                                        true)) {
+                                      if (getJsonField(
+                                        (_model.postVocabAnswer2Resp
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.correct''',
+                                      )) {
+                                        _model.soundPlayer3 ??= AudioPlayer();
+                                        if (_model.soundPlayer3!.playing) {
+                                          await _model.soundPlayer3!.stop();
+                                        }
+                                        _model.soundPlayer3!.setVolume(1.0);
+                                        _model.soundPlayer3!
+                                            .setAsset(
+                                                'assets/audios/cute-level-up-3-189853.mp3')
+                                            .then((_) =>
+                                                _model.soundPlayer3!.play());
 
-                                      if (_model.diff == 'easy') {
-                                        setState(() {
-                                          _model.clientScore =
-                                              _model.clientScore! + 20;
-                                        });
-                                      } else if (_model.diff == 'medium') {
-                                        setState(() {
-                                          _model.clientScore =
-                                              _model.clientScore! + 40;
-                                        });
-                                      } else if (_model.diff == 'hard') {
-                                        setState(() {
-                                          _model.clientScore =
-                                              _model.clientScore! + 100;
-                                        });
+                                        if (_model.diff == 'easy') {
+                                          setState(() {
+                                            _model.clientScore =
+                                                _model.clientScore! + 20;
+                                          });
+                                        } else if (_model.diff == 'medium') {
+                                          setState(() {
+                                            _model.clientScore =
+                                                _model.clientScore! + 40;
+                                          });
+                                        } else if (_model.diff == 'hard') {
+                                          setState(() {
+                                            _model.clientScore =
+                                                _model.clientScore! + 100;
+                                          });
+                                        }
+                                      } else {
+                                        _model.soundPlayer4 ??= AudioPlayer();
+                                        if (_model.soundPlayer4!.playing) {
+                                          await _model.soundPlayer4!.stop();
+                                        }
+                                        _model.soundPlayer4!.setVolume(1.0);
+                                        _model.soundPlayer4!
+                                            .setAsset(
+                                                'assets/audios/buzzer-or-wrong-answer-20582.mp3')
+                                            .then((_) =>
+                                                _model.soundPlayer4!.play());
                                       }
-                                    } else {
-                                      _model.soundPlayer4 ??= AudioPlayer();
-                                      if (_model.soundPlayer4!.playing) {
-                                        await _model.soundPlayer4!.stop();
-                                      }
-                                      _model.soundPlayer4!.setVolume(1.0);
-                                      _model.soundPlayer4!
-                                          .setAsset(
-                                              'assets/audios/buzzer-or-wrong-answer-20582.mp3')
-                                          .then((_) =>
-                                              _model.soundPlayer4!.play());
-                                    }
 
-                                    setState(() {
-                                      _model.currentIndex =
-                                          _model.currentIndex! + 1;
-                                    });
-                                    if (_model.currentIndex! >=
-                                        _model.quizLength) {
-                                      context.pushNamed(
-                                        'GameFinished',
-                                        queryParameters: {
-                                          'score': serializeParam(
-                                            _model.clientScore?.toDouble(),
-                                            ParamType.double,
-                                          ),
-                                        }.withoutNulls,
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: const TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.scale,
-                                            alignment: Alignment.bottomCenter,
-                                            duration:
-                                                Duration(milliseconds: 2000),
-                                          ),
-                                        },
-                                      );
-
-                                      return;
-                                    } else {
                                       setState(() {
-                                        _model.wordToGuess = getJsonField(
-                                          _model
-                                              .vocabList[_model.currentIndex!],
-                                          r'''$.word''',
-                                        ).toString();
-                                        _model.op1 = getJsonField(
-                                          _model
-                                              .vocabList[_model.currentIndex!],
-                                          r'''$.op1''',
-                                        ).toString();
-                                        _model.op2 = getJsonField(
-                                          _model
-                                              .vocabList[_model.currentIndex!],
-                                          r'''$.op2''',
-                                        ).toString();
-                                        _model.op3 = getJsonField(
-                                          _model
-                                              .vocabList[_model.currentIndex!],
-                                          r'''$.op3''',
-                                        ).toString();
-                                        _model.op4 = getJsonField(
-                                          _model
-                                              .vocabList[_model.currentIndex!],
-                                          r'''$.op4''',
-                                        ).toString();
-                                        _model.correct = getJsonField(
-                                          _model
-                                              .vocabList[_model.currentIndex!],
-                                          r'''$.correct''',
-                                        ).toString();
+                                        _model.currentIndex =
+                                            _model.currentIndex! + 1;
                                       });
+                                      if (_model.currentIndex! >=
+                                          _model.quizLength) {
+                                        context.pushNamed(
+                                          'GameFinished',
+                                          queryParameters: {
+                                            'score': serializeParam(
+                                              _model.clientScore?.toDouble(),
+                                              ParamType.double,
+                                            ),
+                                          }.withoutNulls,
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: const TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType:
+                                                  PageTransitionType.scale,
+                                              alignment: Alignment.bottomCenter,
+                                              duration:
+                                                  Duration(milliseconds: 2000),
+                                            ),
+                                          },
+                                        );
+
+                                        if (shouldSetState) setState(() {});
+                                        return;
+                                      } else {
+                                        setState(() {
+                                          _model.wordToGuess = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.word''',
+                                          ).toString();
+                                          _model.op1 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op1''',
+                                          ).toString();
+                                          _model.op2 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op2''',
+                                          ).toString();
+                                          _model.op3 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op3''',
+                                          ).toString();
+                                          _model.op4 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op4''',
+                                          ).toString();
+                                          _model.correct = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.correct''',
+                                          ).toString();
+                                        });
+                                        if (shouldSetState) setState(() {});
+                                        return;
+                                      }
+                                    } else {
+                                      if (shouldSetState) setState(() {});
                                       return;
                                     }
+
+                                    if (shouldSetState) setState(() {});
                                   },
                                   text: _model.op2!,
                                   options: FFButtonOptions(
@@ -392,103 +446,134 @@ class _VocabWidgetState extends State<VocabWidget> {
                               alignment: const AlignmentDirectional(0.0, -1.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  if (_model.op3 == _model.correct) {
-                                    _model.soundPlayer5 ??= AudioPlayer();
-                                    if (_model.soundPlayer5!.playing) {
-                                      await _model.soundPlayer5!.stop();
-                                    }
-                                    _model.soundPlayer5!.setVolume(1.0);
-                                    _model.soundPlayer5!
-                                        .setAsset(
-                                            'assets/audios/cute-level-up-3-189853.mp3')
-                                        .then(
-                                            (_) => _model.soundPlayer5!.play());
+                                  var shouldSetState = false;
+                                  _model.postVocabAnswer3Resp =
+                                      await PostVocabAnswerCall.call(
+                                    serverIP: FFAppState().serverIP,
+                                    tokenType: FFAppState().tokenType,
+                                    accessToken: FFAppState().accessToken,
+                                    diff: _model.diff,
+                                    index: _model.currentIndex,
+                                    answer: _model.op3,
+                                  );
+                                  shouldSetState = true;
+                                  if ((_model.postVocabAnswer3Resp?.succeeded ??
+                                      true)) {
+                                    if (getJsonField(
+                                      (_model.postVocabAnswer3Resp?.jsonBody ??
+                                          ''),
+                                      r'''$.correct''',
+                                    )) {
+                                      _model.soundPlayer5 ??= AudioPlayer();
+                                      if (_model.soundPlayer5!.playing) {
+                                        await _model.soundPlayer5!.stop();
+                                      }
+                                      _model.soundPlayer5!.setVolume(1.0);
+                                      _model.soundPlayer5!
+                                          .setAsset(
+                                              'assets/audios/cute-level-up-3-189853.mp3')
+                                          .then((_) =>
+                                              _model.soundPlayer5!.play());
 
-                                    if (_model.diff == 'easy') {
-                                      setState(() {
-                                        _model.clientScore =
-                                            _model.clientScore! + 20;
-                                      });
-                                    } else if (_model.diff == 'medium') {
-                                      setState(() {
-                                        _model.clientScore =
-                                            _model.clientScore! + 40;
-                                      });
-                                    } else if (_model.diff == 'hard') {
-                                      setState(() {
-                                        _model.clientScore =
-                                            _model.clientScore! + 100;
-                                      });
+                                      if (_model.diff == 'easy') {
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 20;
+                                        });
+                                      } else if (_model.diff == 'medium') {
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 40;
+                                        });
+                                      } else if (_model.diff == 'hard') {
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 100;
+                                        });
+                                      }
+                                    } else {
+                                      _model.soundPlayer6 ??= AudioPlayer();
+                                      if (_model.soundPlayer6!.playing) {
+                                        await _model.soundPlayer6!.stop();
+                                      }
+                                      _model.soundPlayer6!.setVolume(1.0);
+                                      _model.soundPlayer6!
+                                          .setAsset(
+                                              'assets/audios/buzzer-or-wrong-answer-20582.mp3')
+                                          .then((_) =>
+                                              _model.soundPlayer6!.play());
                                     }
-                                  } else {
-                                    _model.soundPlayer6 ??= AudioPlayer();
-                                    if (_model.soundPlayer6!.playing) {
-                                      await _model.soundPlayer6!.stop();
-                                    }
-                                    _model.soundPlayer6!.setVolume(1.0);
-                                    _model.soundPlayer6!
-                                        .setAsset(
-                                            'assets/audios/buzzer-or-wrong-answer-20582.mp3')
-                                        .then(
-                                            (_) => _model.soundPlayer6!.play());
-                                  }
 
-                                  setState(() {
-                                    _model.currentIndex =
-                                        _model.currentIndex! + 1;
-                                  });
-                                  if (_model.currentIndex! >=
-                                      _model.quizLength) {
-                                    context.pushNamed(
-                                      'GameFinished',
-                                      queryParameters: {
-                                        'score': serializeParam(
-                                          _model.clientScore?.toDouble(),
-                                          ParamType.double,
-                                        ),
-                                      }.withoutNulls,
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: const TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.scale,
-                                          alignment: Alignment.bottomCenter,
-                                          duration:
-                                              Duration(milliseconds: 2000),
-                                        ),
-                                      },
-                                    );
-
-                                    return;
-                                  } else {
                                     setState(() {
-                                      _model.wordToGuess = getJsonField(
-                                        _model.vocabList[_model.currentIndex!],
-                                        r'''$.word''',
-                                      ).toString();
-                                      _model.op1 = getJsonField(
-                                        _model.vocabList[_model.currentIndex!],
-                                        r'''$.op1''',
-                                      ).toString();
-                                      _model.op2 = getJsonField(
-                                        _model.vocabList[_model.currentIndex!],
-                                        r'''$.op2''',
-                                      ).toString();
-                                      _model.op3 = getJsonField(
-                                        _model.vocabList[_model.currentIndex!],
-                                        r'''$.op3''',
-                                      ).toString();
-                                      _model.op4 = getJsonField(
-                                        _model.vocabList[_model.currentIndex!],
-                                        r'''$.op4''',
-                                      ).toString();
-                                      _model.correct = getJsonField(
-                                        _model.vocabList[_model.currentIndex!],
-                                        r'''$.correct''',
-                                      ).toString();
+                                      _model.currentIndex =
+                                          _model.currentIndex! + 1;
                                     });
+                                    if (_model.currentIndex! >=
+                                        _model.quizLength) {
+                                      context.pushNamed(
+                                        'GameFinished',
+                                        queryParameters: {
+                                          'score': serializeParam(
+                                            _model.clientScore?.toDouble(),
+                                            ParamType.double,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: const TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.scale,
+                                            alignment: Alignment.bottomCenter,
+                                            duration:
+                                                Duration(milliseconds: 2000),
+                                          ),
+                                        },
+                                      );
+
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    } else {
+                                      setState(() {
+                                        _model.wordToGuess = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.word''',
+                                        ).toString();
+                                        _model.op1 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op1''',
+                                        ).toString();
+                                        _model.op2 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op2''',
+                                        ).toString();
+                                        _model.op3 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op3''',
+                                        ).toString();
+                                        _model.op4 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op4''',
+                                        ).toString();
+                                        _model.correct = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.correct''',
+                                        ).toString();
+                                      });
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    }
+                                  } else {
+                                    if (shouldSetState) setState(() {});
                                     return;
                                   }
+
+                                  if (shouldSetState) setState(() {});
                                 },
                                 text: _model.op3!,
                                 options: FFButtonOptions(
@@ -520,103 +605,134 @@ class _VocabWidgetState extends State<VocabWidget> {
                               alignment: const AlignmentDirectional(0.0, -1.0),
                               child: FFButtonWidget(
                                 onPressed: () async {
-                                  if (_model.op4 == _model.correct) {
-                                    _model.soundPlayer7 ??= AudioPlayer();
-                                    if (_model.soundPlayer7!.playing) {
-                                      await _model.soundPlayer7!.stop();
-                                    }
-                                    _model.soundPlayer7!.setVolume(1.0);
-                                    _model.soundPlayer7!
-                                        .setAsset(
-                                            'assets/audios/cute-level-up-3-189853.mp3')
-                                        .then(
-                                            (_) => _model.soundPlayer7!.play());
+                                  var shouldSetState = false;
+                                  _model.postVocabAnswer4Resp =
+                                      await PostVocabAnswerCall.call(
+                                    serverIP: FFAppState().serverIP,
+                                    tokenType: FFAppState().tokenType,
+                                    accessToken: FFAppState().accessToken,
+                                    diff: _model.diff,
+                                    index: _model.currentIndex,
+                                    answer: _model.op4,
+                                  );
+                                  shouldSetState = true;
+                                  if ((_model.postVocabAnswer4Resp?.succeeded ??
+                                      true)) {
+                                    if (getJsonField(
+                                      (_model.postVocabAnswer4Resp?.jsonBody ??
+                                          ''),
+                                      r'''$.correct''',
+                                    )) {
+                                      _model.soundPlayer7 ??= AudioPlayer();
+                                      if (_model.soundPlayer7!.playing) {
+                                        await _model.soundPlayer7!.stop();
+                                      }
+                                      _model.soundPlayer7!.setVolume(1.0);
+                                      _model.soundPlayer7!
+                                          .setAsset(
+                                              'assets/audios/cute-level-up-3-189853.mp3')
+                                          .then((_) =>
+                                              _model.soundPlayer7!.play());
 
-                                    if (_model.diff == 'easy') {
-                                      setState(() {
-                                        _model.clientScore =
-                                            _model.clientScore! + 20;
-                                      });
-                                    } else if (_model.diff == 'medium') {
-                                      setState(() {
-                                        _model.clientScore =
-                                            _model.clientScore! + 40;
-                                      });
-                                    } else if (_model.diff == 'hard') {
-                                      setState(() {
-                                        _model.clientScore =
-                                            _model.clientScore! + 100;
-                                      });
+                                      if (_model.diff == 'easy') {
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 20;
+                                        });
+                                      } else if (_model.diff == 'medium') {
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 40;
+                                        });
+                                      } else if (_model.diff == 'hard') {
+                                        setState(() {
+                                          _model.clientScore =
+                                              _model.clientScore! + 100;
+                                        });
+                                      }
+                                    } else {
+                                      _model.soundPlayer8 ??= AudioPlayer();
+                                      if (_model.soundPlayer8!.playing) {
+                                        await _model.soundPlayer8!.stop();
+                                      }
+                                      _model.soundPlayer8!.setVolume(1.0);
+                                      _model.soundPlayer8!
+                                          .setAsset(
+                                              'assets/audios/buzzer-or-wrong-answer-20582.mp3')
+                                          .then((_) =>
+                                              _model.soundPlayer8!.play());
                                     }
-                                  } else {
-                                    _model.soundPlayer8 ??= AudioPlayer();
-                                    if (_model.soundPlayer8!.playing) {
-                                      await _model.soundPlayer8!.stop();
-                                    }
-                                    _model.soundPlayer8!.setVolume(1.0);
-                                    _model.soundPlayer8!
-                                        .setAsset(
-                                            'assets/audios/buzzer-or-wrong-answer-20582.mp3')
-                                        .then(
-                                            (_) => _model.soundPlayer8!.play());
-                                  }
 
-                                  setState(() {
-                                    _model.currentIndex =
-                                        _model.currentIndex! + 1;
-                                  });
-                                  if (_model.currentIndex! >=
-                                      _model.quizLength) {
-                                    context.pushNamed(
-                                      'GameFinished',
-                                      queryParameters: {
-                                        'score': serializeParam(
-                                          _model.clientScore?.toDouble(),
-                                          ParamType.double,
-                                        ),
-                                      }.withoutNulls,
-                                      extra: <String, dynamic>{
-                                        kTransitionInfoKey: const TransitionInfo(
-                                          hasTransition: true,
-                                          transitionType:
-                                              PageTransitionType.scale,
-                                          alignment: Alignment.bottomCenter,
-                                          duration:
-                                              Duration(milliseconds: 2000),
-                                        ),
-                                      },
-                                    );
-
-                                    return;
-                                  } else {
                                     setState(() {
-                                      _model.wordToGuess = getJsonField(
-                                        _model.vocabList[_model.currentIndex!],
-                                        r'''$.word''',
-                                      ).toString();
-                                      _model.op1 = getJsonField(
-                                        _model.vocabList[_model.currentIndex!],
-                                        r'''$.op1''',
-                                      ).toString();
-                                      _model.op2 = getJsonField(
-                                        _model.vocabList[_model.currentIndex!],
-                                        r'''$.op2''',
-                                      ).toString();
-                                      _model.op3 = getJsonField(
-                                        _model.vocabList[_model.currentIndex!],
-                                        r'''$.op3''',
-                                      ).toString();
-                                      _model.op4 = getJsonField(
-                                        _model.vocabList[_model.currentIndex!],
-                                        r'''$.op4''',
-                                      ).toString();
-                                      _model.correct = getJsonField(
-                                        _model.vocabList[_model.currentIndex!],
-                                        r'''$.correct''',
-                                      ).toString();
+                                      _model.currentIndex =
+                                          _model.currentIndex! + 1;
                                     });
+                                    if (_model.currentIndex! >=
+                                        _model.quizLength) {
+                                      context.pushNamed(
+                                        'GameFinished',
+                                        queryParameters: {
+                                          'score': serializeParam(
+                                            _model.clientScore?.toDouble(),
+                                            ParamType.double,
+                                          ),
+                                        }.withoutNulls,
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: const TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.scale,
+                                            alignment: Alignment.bottomCenter,
+                                            duration:
+                                                Duration(milliseconds: 2000),
+                                          ),
+                                        },
+                                      );
+
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    } else {
+                                      setState(() {
+                                        _model.wordToGuess = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.word''',
+                                        ).toString();
+                                        _model.op1 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op1''',
+                                        ).toString();
+                                        _model.op2 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op2''',
+                                        ).toString();
+                                        _model.op3 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op3''',
+                                        ).toString();
+                                        _model.op4 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op4''',
+                                        ).toString();
+                                        _model.correct = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.correct''',
+                                        ).toString();
+                                      });
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    }
+                                  } else {
+                                    if (shouldSetState) setState(() {});
                                     return;
                                   }
+
+                                  if (shouldSetState) setState(() {});
                                 },
                                 text: _model.op4!,
                                 options: FFButtonOptions(
