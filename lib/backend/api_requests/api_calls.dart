@@ -649,7 +649,7 @@ class PostVocabAnswerCall {
       apiUrl: 'http://$serverIP:5000/vocab/answer',
       callType: ApiCallType.POST,
       headers: {
-        'Content-Type': 'applicarion/json',
+        'Content-Type': 'application/json',
         'Authorization': '$tokenType $accessToken',
       },
       params: {},
