@@ -22,9 +22,9 @@ class GuessWrongModel extends FlutterFlowModel<GuessWrongWidget> {
   // Stores action output result for [Custom Action - fetchData] action in GuessWrong widget.
   dynamic currentReceived;
   // Stores action output result for [Custom Action - fetchData] action in GuessWrong widget.
-  dynamic dataReceived;
-  // Stores action output result for [Custom Action - fetchData] action in GuessWrong widget.
   dynamic dataReceivedTurn;
+  // Stores action output result for [Custom Action - fetchData] action in GuessWrong widget.
+  dynamic dataReceived;
   // State field(s) for category widget.
   FocusNode? categoryFocusNode;
   TextEditingController? categoryTextController;

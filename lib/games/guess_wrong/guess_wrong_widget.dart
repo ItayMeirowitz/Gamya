@@ -48,7 +48,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
         });
       } else {
         setState(() {
-          _model.isTurn = true;
+          _model.isTurn = false;
         });
         await showDialog(
           context: context,
@@ -68,100 +68,103 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
       }
 
       while (FFAppState().hasStarted) {
-        while (!_model.isTurn) {
-          _model.dataReceived = await actions.fetchData(
-            'http://${FFAppState().serverIP}:5000/guessWrong/${FFAppState().username}',
-            FFAppState().tokenType,
-            FFAppState().accessToken,
-            FFAppState().username,
-          );
-          if (getJsonField(
-                _model.dataReceived,
-                r'''$.category''',
-              ) !=
-              null) {
-            setState(() {
-              _model.guessCategory = getJsonField(
-                _model.dataReceived,
-                r'''$.category''',
-              ).toString().toString();
-            });
-          } else if (getJsonField(
-                _model.dataReceived,
-                r'''$.getScore''',
-              ) !=
-              null) {
-            var confirmDialogResponse = await showDialog<bool>(
-                  context: context,
-                  builder: (alertDialogContext) {
-                    return AlertDialog(
-                      title: const Text('got scores?'),
-                      content: const Text(',l;l;l'),
-                      actions: [
-                        TextButton(
-                          onPressed: () =>
-                              Navigator.pop(alertDialogContext, false),
-                          child: const Text('Cancel'),
-                        ),
-                        TextButton(
-                          onPressed: () =>
-                              Navigator.pop(alertDialogContext, true),
-                          child: const Text('Confirm'),
-                        ),
-                      ],
-                    );
-                  },
-                ) ??
-                false;
-          } else if (getJsonField(
-                _model.dataReceived,
-                r'''$.current''',
-              ) !=
-              null) {
-            setState(() {
-              _model.isTurn = true;
-              _model.guessCategory = null;
-            });
-          } else {
-            await showDialog(
-              context: context,
-              builder: (alertDialogContext) {
-                return AlertDialog(
-                  title: const Text('SUS'),
-                  content: const Text('couldnt get state'),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(alertDialogContext),
-                      child: const Text('Ok'),
-                    ),
-                  ],
-                );
-              },
+        if (_model.isTurn) {
+          while (_model.isTurn &&
+              (_model.category != null && _model.category != '')) {
+            _model.dataReceivedTurn = await actions.fetchData(
+              'http://${FFAppState().serverIP}:5000/guessWrong/${FFAppState().username}',
+              FFAppState().tokenType,
+              FFAppState().accessToken,
+              FFAppState().username,
             );
-            break;
+            if (getJsonField(
+                  _model.dataReceivedTurn,
+                  r'''$.current''',
+                ) !=
+                null) {
+              setState(() {
+                _model.isTurn = false;
+              });
+              setState(() {
+                _model.category = null;
+                _model.secretWord = null;
+                _model.waitingGuess = false;
+              });
+            }
           }
-        }
-        while (_model.isTurn &&
-            (_model.category != null && _model.category != '')) {
-          _model.dataReceivedTurn = await actions.fetchData(
-            'http://${FFAppState().serverIP}:5000/guessWrong/${FFAppState().username}',
-            FFAppState().tokenType,
-            FFAppState().accessToken,
-            FFAppState().username,
-          );
-          if (getJsonField(
-                _model.dataReceivedTurn,
-                r'''$.current''',
-              ) !=
-              null) {
-            setState(() {
-              _model.isTurn = false;
-            });
-            setState(() {
-              _model.category = null;
-              _model.secretWord = null;
-              _model.waitingGuess = false;
-            });
+        } else {
+          while (!_model.isTurn) {
+            _model.dataReceived = await actions.fetchData(
+              'http://${FFAppState().serverIP}:5000/guessWrong/${FFAppState().username}',
+              FFAppState().tokenType,
+              FFAppState().accessToken,
+              FFAppState().username,
+            );
+            if (getJsonField(
+                  _model.dataReceived,
+                  r'''$.category''',
+                ) !=
+                null) {
+              setState(() {
+                _model.guessCategory = getJsonField(
+                  _model.dataReceived,
+                  r'''$.category''',
+                ).toString().toString();
+              });
+            } else if (getJsonField(
+                  _model.dataReceived,
+                  r'''$.getScore''',
+                ) !=
+                null) {
+              var confirmDialogResponse = await showDialog<bool>(
+                    context: context,
+                    builder: (alertDialogContext) {
+                      return AlertDialog(
+                        title: const Text('got scores?'),
+                        content: const Text(',l;l;l'),
+                        actions: [
+                          TextButton(
+                            onPressed: () =>
+                                Navigator.pop(alertDialogContext, false),
+                            child: const Text('Cancel'),
+                          ),
+                          TextButton(
+                            onPressed: () =>
+                                Navigator.pop(alertDialogContext, true),
+                            child: const Text('Confirm'),
+                          ),
+                        ],
+                      );
+                    },
+                  ) ??
+                  false;
+            } else if (getJsonField(
+                  _model.dataReceived,
+                  r'''$.current''',
+                ) !=
+                null) {
+              setState(() {
+                _model.isTurn = true;
+                _model.guessCategory = null;
+              });
+            } else {
+              await showDialog(
+                context: context,
+                builder: (alertDialogContext) {
+                  return AlertDialog(
+                    title: const Text('SUS'),
+                    content: const Text('couldnt get state'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(alertDialogContext),
+                        child: const Text('Ok'),
+                      ),
+                    ],
+                  );
+                },
+              );
+              break;
+            }
           }
         }
       }
