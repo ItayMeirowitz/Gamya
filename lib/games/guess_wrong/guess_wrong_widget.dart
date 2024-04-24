@@ -48,8 +48,23 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
         });
       } else {
         setState(() {
-          _model.isTurn = false;
+          _model.isTurn = true;
         });
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: const Text('ffffffffff'),
+              content: Text(_model.currentReceived!.toString()),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: const Text('AAAAAAA'),
+                ),
+              ],
+            );
+          },
+        );
       }
 
       while (FFAppState().hasStarted) {
