@@ -172,6 +172,23 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
             } else {
               return;
             }
+          } else if ('Guess Wrong' ==
+              getJsonField(
+                _model.dataReceived,
+                r'''$.game''',
+              )) {
+            _model.postCheckWrongResp = await PostCheckWrongCall.call(
+              serverIP: FFAppState().serverIP,
+              tokenType: FFAppState().tokenType,
+              accessToken: FFAppState().accessToken,
+              username: FFAppState().username,
+              leader: FFAppState().leader,
+            );
+            if ((_model.postCheckWrongResp?.succeeded ?? true)) {
+              context.pushNamed('GuessWrong');
+            } else {
+              return;
+            }
           } else {
             _model.postConnectFResp = await PostConnectFCall.call(
               serverIP: FFAppState().serverIP,
@@ -1199,46 +1216,88 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                               Padding(
                                 padding: const EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: FlutterFlowTheme.of(context)
-                                        .primaryBackground,
-                                    borderRadius: BorderRadius.circular(12.0),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
-                                        8.0, 8.0, 12.0, 8.0),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(8.0),
-                                          child: Image.network(
-                                            'https://static.nike.com/a/images/c_limit,w_592,f_auto/t_product_v1/64797ee7-26d7-4bd7-97c8-84d4edd8a48f/sportswear-mens-fleece-shorts-GPCN4W.png',
-                                            width: 70.0,
-                                            height: 70.0,
-                                            fit: BoxFit.cover,
+                                child: InkWell(
+                                  splashColor: Colors.transparent,
+                                  focusColor: Colors.transparent,
+                                  hoverColor: Colors.transparent,
+                                  highlightColor: Colors.transparent,
+                                  onTap: () async {
+                                    var shouldSetState = false;
+
+                                    context.pushNamed('GuessWrong');
+
+                                    _model.postGuessWrongLeaderResp =
+                                        await PostCheckWrongCall.call(
+                                      serverIP: FFAppState().serverIP,
+                                      tokenType: FFAppState().tokenType,
+                                      accessToken: FFAppState().accessToken,
+                                      username: FFAppState().username,
+                                      leader: FFAppState().leader,
+                                    );
+                                    shouldSetState = true;
+                                    if ((_model.postGuessWrongLeaderResp
+                                            ?.succeeded ??
+                                        true)) {
+                                      setState(() {
+                                        FFAppState().lobbyId = getJsonField(
+                                          (_model.postGuessWrongLeaderResp
+                                                  ?.jsonBody ??
+                                              ''),
+                                          r'''$.lobby_id''',
+                                        );
+                                      });
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    } else {
+                                      if (shouldSetState) setState(() {});
+                                      return;
+                                    }
+
+                                    if (shouldSetState) setState(() {});
+                                  },
+                                  child: Container(
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      color: FlutterFlowTheme.of(context)
+                                          .primaryBackground,
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          8.0, 8.0, 12.0, 8.0),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(8.0),
+                                            child: Image.asset(
+                                              'assets/images/GuessWrong.png',
+                                              width: 90.0,
+                                              height: 70.0,
+                                              fit: BoxFit.cover,
+                                            ),
                                           ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  16.0, 0.0, 0.0, 0.0),
-                                          child: Text(
-                                            'Shorts Casual',
-                                            style: FlutterFlowTheme.of(context)
-                                                .bodyLarge
-                                                .override(
-                                                  fontFamily: 'Readex Pro',
-                                                  letterSpacing: 0.0,
-                                                ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    16.0, 0.0, 0.0, 0.0),
+                                            child: Text(
+                                              'Guess Wrong',
+                                              style:
+                                                  FlutterFlowTheme.of(context)
+                                                      .bodyLarge
+                                                      .override(
+                                                        fontFamily:
+                                                            'Readex Pro',
+                                                        letterSpacing: 0.0,
+                                                      ),
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),

@@ -699,6 +699,138 @@ class PostMathAnswerCall {
   }
 }
 
+class PostGuessWCategoryCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    int? lobbyId,
+    String? username = '',
+    String? category = '',
+    String? secretWord = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "lobby_id": $lobbyId,
+  "username": "$username",
+  "category": "$category",
+  "secret_word": "$secretWord"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'postGuessWCategory',
+      apiUrl: 'http://$serverIP:5000/guessWrong/category',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetGuessWrongStateCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    String? username = '',
+    String? get = '',
+    String? change = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'getGuessWrongState',
+      apiUrl: 'http://$serverIP:5000/guessWrong/get',
+      callType: ApiCallType.GET,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class PostCheckGuessWCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    String? lobbyId = '',
+    String? username = '',
+    String? guess = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "lobby_id": "$lobbyId",
+  "username": "$username",
+  "guess": "$guess"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'postCheckGuessW',
+      apiUrl: 'http://$serverIP:5000/guessWrong/guess',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class PostCheckWrongCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? tokenType = '',
+    String? accessToken = '',
+    String? username = '',
+    String? leader = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "username": "$username",
+  "leader": "$leader"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'postCheckWrong',
+      apiUrl: 'http://$serverIP:5000/guessWrong',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

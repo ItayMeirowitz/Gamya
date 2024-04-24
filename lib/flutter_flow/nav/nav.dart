@@ -97,6 +97,11 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'MathContest',
           path: '/mathContest',
           builder: (context, params) => const MathContestWidget(),
+        ),
+        FFRoute(
+          name: 'GuessWrong',
+          path: '/guessWrong',
+          builder: (context, params) => const GuessWrongWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

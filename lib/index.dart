@@ -11,3 +11,4 @@ export '/games/get2_zero/get2_zero_widget.dart' show Get2ZeroWidget;
 export '/games/tic_tac_toe/tic_tac_toe_widget.dart' show TicTacToeWidget;
 export '/games/connect4/connect4_widget.dart' show Connect4Widget;
 export '/games/math_contest/math_contest_widget.dart' show MathContestWidget;
+export '/games/guess_wrong/guess_wrong_widget.dart' show GuessWrongWidget;
