@@ -38,12 +38,20 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
         FFAppState().accessToken,
         FFAppState().username,
       );
-      setState(() {
-        _model.isTurn = getJsonField(
-          _model.currentReceived,
-          r'''$.current''',
-        );
-      });
+      if ('1' ==
+          getJsonField(
+            _model.currentReceived,
+            r'''$.current''',
+          )) {
+        setState(() {
+          _model.isTurn = true;
+        });
+      } else {
+        setState(() {
+          _model.isTurn = false;
+        });
+      }
+
       while (FFAppState().hasStarted) {
         while (!_model.isTurn) {
           _model.dataReceived = await actions.fetchData(
