@@ -69,8 +69,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
 
       while (FFAppState().hasStarted) {
         if (_model.isTurn) {
-          while (_model.isTurn &&
-              (_model.category != null && _model.category != '')) {
+          while (_model.isTurn) {
             _model.dataReceivedTurn = await actions.fetchData(
               'http://${FFAppState().serverIP}:5000/guessWrong/${FFAppState().username}',
               FFAppState().tokenType,
