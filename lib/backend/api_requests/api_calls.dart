@@ -736,33 +736,6 @@ class PostGuessWCategoryCall {
   }
 }
 
-class GetGuessWrongStateCall {
-  static Future<ApiCallResponse> call({
-    String? serverIP = '',
-    String? tokenType = '',
-    String? accessToken = '',
-    String? username = '',
-    String? get = '',
-    String? change = '',
-  }) async {
-    return ApiManager.instance.makeApiCall(
-      callName: 'getGuessWrongState',
-      apiUrl: 'http://$serverIP:5000/guessWrong/get',
-      callType: ApiCallType.GET,
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
-      },
-      params: {},
-      returnBody: true,
-      encodeBodyUtf8: false,
-      decodeUtf8: false,
-      cache: false,
-      alwaysAllowBody: false,
-    );
-  }
-}
-
 class PostCheckGuessWCall {
   static Future<ApiCallResponse> call({
     String? serverIP = '',
@@ -798,7 +771,7 @@ class PostCheckGuessWCall {
   }
 }
 
-class PostCheckWrongCall {
+class PostGuessWrongCall {
   static Future<ApiCallResponse> call({
     String? serverIP = '',
     String? tokenType = '',
@@ -812,7 +785,7 @@ class PostCheckWrongCall {
   "leader": "$leader"
 }''';
     return ApiManager.instance.makeApiCall(
-      callName: 'postCheckWrong',
+      callName: 'postGuessWrong',
       apiUrl: 'http://$serverIP:5000/guessWrong',
       callType: ApiCallType.POST,
       headers: {

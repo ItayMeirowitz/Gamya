@@ -177,7 +177,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                 _model.dataReceived,
                 r'''$.game''',
               )) {
-            _model.postCheckWrongResp = await PostCheckWrongCall.call(
+            _model.postCheckWrongResp = await PostGuessWrongCall.call(
               serverIP: FFAppState().serverIP,
               tokenType: FFAppState().tokenType,
               accessToken: FFAppState().accessToken,
@@ -1223,11 +1223,8 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     var shouldSetState = false;
-
-                                    context.pushNamed('GuessWrong');
-
                                     _model.postGuessWrongLeaderResp =
-                                        await PostCheckWrongCall.call(
+                                        await PostGuessWrongCall.call(
                                       serverIP: FFAppState().serverIP,
                                       tokenType: FFAppState().tokenType,
                                       accessToken: FFAppState().accessToken,
@@ -1246,6 +1243,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                           r'''$.lobby_id''',
                                         );
                                       });
+
+                                      context.pushNamed('GuessWrong');
+
                                       if (shouldSetState) setState(() {});
                                       return;
                                     } else {

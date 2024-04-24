@@ -21,7 +21,7 @@ class ChooseGameModel extends FlutterFlowModel<ChooseGameWidget> {
   ApiCallResponse? postTicTacToeResp;
   // Stores action output result for [Backend Call - API (postMath)] action in ChooseGame widget.
   ApiCallResponse? postMathResp;
-  // Stores action output result for [Backend Call - API (postCheckWrong)] action in ChooseGame widget.
+  // Stores action output result for [Backend Call - API (postGuessWrong)] action in ChooseGame widget.
   ApiCallResponse? postCheckWrongResp;
   // Stores action output result for [Backend Call - API (postConnectF)] action in ChooseGame widget.
   ApiCallResponse? postConnectFResp;
@@ -40,7 +40,7 @@ class ChooseGameModel extends FlutterFlowModel<ChooseGameWidget> {
   ApiCallResponse? postConnect4LeaderResp;
   // Stores action output result for [Backend Call - API (postMath)] action in Container widget.
   ApiCallResponse? postMathLeaderResp;
-  // Stores action output result for [Backend Call - API (postCheckWrong)] action in Container widget.
+  // Stores action output result for [Backend Call - API (postGuessWrong)] action in Container widget.
   ApiCallResponse? postGuessWrongLeaderResp;
   // Stores action output result for [Backend Call - API (getUsers)] action in IconButton widget.
   ApiCallResponse? getUsersResp;
