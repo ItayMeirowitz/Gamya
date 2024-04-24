@@ -29,7 +29,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
+      FFAppState().update(() {
         FFAppState().hasStarted = true;
       });
       _model.currentReceived = await actions.fetchData(
@@ -50,21 +50,6 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
         setState(() {
           _model.isTurn = false;
         });
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: const Text('ffffffffff'),
-              content: Text(_model.currentReceived!.toString()),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: const Text('AAAAAAA'),
-                ),
-              ],
-            );
-          },
-        );
       }
 
       while (FFAppState().hasStarted) {
@@ -115,28 +100,6 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                   r'''$.getScore''',
                 ) !=
                 null) {
-              var confirmDialogResponse = await showDialog<bool>(
-                    context: context,
-                    builder: (alertDialogContext) {
-                      return AlertDialog(
-                        title: const Text('got scores?'),
-                        content: const Text(',l;l;l'),
-                        actions: [
-                          TextButton(
-                            onPressed: () =>
-                                Navigator.pop(alertDialogContext, false),
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () =>
-                                Navigator.pop(alertDialogContext, true),
-                            child: const Text('Confirm'),
-                          ),
-                        ],
-                      );
-                    },
-                  ) ??
-                  false;
             } else if (getJsonField(
                   _model.dataReceived,
                   r'''$.current''',
@@ -166,6 +129,22 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
             }
           }
         }
+
+        await showDialog(
+          context: context,
+          builder: (alertDialogContext) {
+            return AlertDialog(
+              title: const Text('exited from loop'),
+              content: const Text('ll'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pop(alertDialogContext),
+                  child: const Text('Ok'),
+                ),
+              ],
+            );
+          },
+        );
       }
     });
 
