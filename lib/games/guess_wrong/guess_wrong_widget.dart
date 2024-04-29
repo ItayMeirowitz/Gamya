@@ -76,6 +76,22 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                 _model.secretWord = null;
                 _model.waitingGuess = false;
               });
+            } else if (getJsonField(
+                  _model.dataReceivedTurn,
+                  r'''$.gameOver''',
+                ) !=
+                null) {
+              context.pushNamed(
+                'GameFinished',
+                queryParameters: {
+                  'score': serializeParam(
+                    0.0,
+                    ParamType.double,
+                  ),
+                }.withoutNulls,
+              );
+
+              return;
             }
           }
         } else {
@@ -124,6 +140,22 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                 _model.isTurn = true;
                 _model.guessCategory = null;
               });
+            } else if (getJsonField(
+                  _model.dataReceived,
+                  r'''$.gameOver''',
+                ) !=
+                null) {
+              context.pushNamed(
+                'GameFinished',
+                queryParameters: {
+                  'score': serializeParam(
+                    0.0,
+                    ParamType.double,
+                  ),
+                }.withoutNulls,
+              );
+
+              return;
             } else {
               await showDialog(
                 context: context,
