@@ -46,10 +46,12 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
         setState(() {
           _model.isTurn = true;
         });
+        await Future.delayed(const Duration(milliseconds: 500));
       } else {
         setState(() {
           _model.isTurn = false;
         });
+        await Future.delayed(const Duration(milliseconds: 500));
       }
 
       while (FFAppState().hasStarted) {
@@ -148,7 +150,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
           builder: (alertDialogContext) {
             return AlertDialog(
               title: const Text('exited from loop'),
-              content: const Text('ll'),
+              content: Text(_model.isTurn.toString()),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(alertDialogContext),
