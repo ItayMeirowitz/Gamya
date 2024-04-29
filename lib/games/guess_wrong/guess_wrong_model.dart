@@ -16,6 +16,15 @@ class GuessWrongModel extends FlutterFlowModel<GuessWrongWidget> {
 
   bool waitingGuess = false;
 
+  List<dynamic> scores = [];
+  void addToScores(dynamic item) => scores.add(item);
+  void removeFromScores(dynamic item) => scores.remove(item);
+  void removeAtIndexFromScores(int index) => scores.removeAt(index);
+  void insertAtIndexInScores(int index, dynamic item) =>
+      scores.insert(index, item);
+  void updateScoresAtIndex(int index, Function(dynamic) updateFn) =>
+      scores[index] = updateFn(scores[index]);
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -25,6 +34,8 @@ class GuessWrongModel extends FlutterFlowModel<GuessWrongWidget> {
   dynamic dataReceivedTurn;
   // Stores action output result for [Custom Action - fetchData] action in GuessWrong widget.
   dynamic dataReceived;
+  // Stores action output result for [Backend Call - API (getScore)] action in GuessWrong widget.
+  ApiCallResponse? getScoreResp;
   // State field(s) for category widget.
   FocusNode? categoryFocusNode;
   TextEditingController? categoryTextController;

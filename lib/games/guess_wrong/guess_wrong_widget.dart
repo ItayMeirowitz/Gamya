@@ -100,6 +100,19 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                   r'''$.getScore''',
                 ) !=
                 null) {
+              _model.getScoreResp = await GetScoreCall.call(
+                serverIP: FFAppState().serverIP,
+                tokenType: FFAppState().tokenType,
+                accessToken: FFAppState().accessToken,
+                lobbyId: FFAppState().lobbyId,
+              );
+              if ((_model.getScoreResp?.succeeded ?? true)) {
+                setState(() {
+                  _model.scores = (_model.getScoreResp?.jsonBody ?? '')
+                      .toList()
+                      .cast<dynamic>();
+                });
+              }
             } else if (getJsonField(
                   _model.dataReceived,
                   r'''$.current''',
@@ -790,6 +803,58 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                       ],
                     ),
                 ],
+              ),
+              Flexible(
+                child: Align(
+                  alignment: const AlignmentDirectional(0.0, 1.0),
+                  child: Builder(
+                    builder: (context) {
+                      final scoresList = _model.scores.toList();
+                      return ListView.builder(
+                        padding: EdgeInsets.zero,
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: scoresList.length,
+                        itemBuilder: (context, scoresListIndex) {
+                          final scoresListItem = scoresList[scoresListIndex];
+                          return Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                10.0, 0.0, 10.0, 0.0),
+                            child: Card(
+                              clipBehavior: Clip.antiAliasWithSaveLayer,
+                              color: FlutterFlowTheme.of(context)
+                                  .secondaryBackground,
+                              elevation: 4.0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                  '${getJsonField(
+                                    scoresListItem,
+                                    r'''$.username''',
+                                  ).toString()}: ${getJsonField(
+                                    scoresListItem,
+                                    r'''$.score''',
+                                  ).toString()}',
+                                  textAlign: TextAlign.center,
+                                  style: FlutterFlowTheme.of(context)
+                                      .bodyMedium
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        fontSize: 20.0,
+                                        letterSpacing: 0.0,
+                                      ),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ),
               ),
             ],
           ),
