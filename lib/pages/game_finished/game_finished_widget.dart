@@ -33,31 +33,52 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       while (widget.score != null) {
-        _model.postScoreResp = await PostScoreCall.call(
-          serverIP: FFAppState().serverIP,
-          tokenType: FFAppState().tokenType,
-          accessToken: FFAppState().accessToken,
-          username: FFAppState().username,
-          score: widget.score,
-          lobbyId: FFAppState().lobbyId,
-        );
-        if ((_model.postScoreResp?.succeeded ?? true)) {
-          _model.getScoreResp = await GetScoreCall.call(
+        if (widget.score! > 0.0) {
+          _model.postScoreResp = await PostScoreCall.call(
             serverIP: FFAppState().serverIP,
             tokenType: FFAppState().tokenType,
             accessToken: FFAppState().accessToken,
+            username: FFAppState().username,
+            score: widget.score,
             lobbyId: FFAppState().lobbyId,
           );
-          if ((_model.getScoreResp?.succeeded ?? true)) {
-            setState(() {
-              _model.scores = (_model.getScoreResp?.jsonBody ?? '')
-                  .toList()
-                  .cast<dynamic>();
-            });
-            return;
-          } else {
-            return;
-          }
+          var confirmDialogResponse = await showDialog<bool>(
+                context: context,
+                builder: (alertDialogContext) {
+                  return AlertDialog(
+                    title: const Text('why'),
+                    content: const Text('just why'),
+                    actions: [
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pop(alertDialogContext, false),
+                        child: const Text('Cancel'),
+                      ),
+                      TextButton(
+                        onPressed: () =>
+                            Navigator.pop(alertDialogContext, true),
+                        child: const Text('Confirm'),
+                      ),
+                    ],
+                  );
+                },
+              ) ??
+              false;
+        }
+        _model.getScoreResp = await GetScoreCall.call(
+          serverIP: FFAppState().serverIP,
+          tokenType: FFAppState().tokenType,
+          accessToken: FFAppState().accessToken,
+          lobbyId: FFAppState().lobbyId,
+        );
+        if ((_model.getScoreResp?.succeeded ?? true)) {
+          setState(() {
+            _model.scores =
+                (_model.getScoreResp?.jsonBody ?? '').toList().cast<dynamic>();
+          });
+          return;
+        } else {
+          return;
         }
       }
     });

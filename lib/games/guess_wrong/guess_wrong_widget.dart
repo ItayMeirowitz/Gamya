@@ -85,7 +85,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                 'GameFinished',
                 queryParameters: {
                   'score': serializeParam(
-                    0.0,
+                    -1.0,
                     ParamType.double,
                   ),
                 }.withoutNulls,
@@ -149,7 +149,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                 'GameFinished',
                 queryParameters: {
                   'score': serializeParam(
-                    0.0,
+                    -1.0,
                     ParamType.double,
                   ),
                 }.withoutNulls,
@@ -176,22 +176,6 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
             }
           }
         }
-
-        await showDialog(
-          context: context,
-          builder: (alertDialogContext) {
-            return AlertDialog(
-              title: const Text('exited from loop'),
-              content: Text(_model.isTurn.toString()),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(alertDialogContext),
-                  child: const Text('Ok'),
-                ),
-              ],
-            );
-          },
-        );
       }
     });
 
