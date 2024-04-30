@@ -231,10 +231,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
           leading: Text(
-            valueOrDefault<String>(
-              _model.category,
-              '-0',
-            ),
+            _model.scores.first.toString(),
             style: FlutterFlowTheme.of(context).bodyMedium.override(
                   fontFamily: 'Readex Pro',
                   letterSpacing: 0.0,
