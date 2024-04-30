@@ -92,6 +92,24 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
               );
 
               return;
+            } else if (getJsonField(
+                  _model.dataReceivedTurn,
+                  r'''$.getScore''',
+                ) !=
+                null) {
+              _model.getScoreTurnResp = await GetScoreCall.call(
+                serverIP: FFAppState().serverIP,
+                tokenType: FFAppState().tokenType,
+                accessToken: FFAppState().accessToken,
+                lobbyId: FFAppState().lobbyId,
+              );
+              if ((_model.getScoreResp?.succeeded ?? true)) {
+                setState(() {
+                  _model.scores = (_model.getScoreResp?.jsonBody ?? '')
+                      .toList()
+                      .cast<dynamic>();
+                });
+              }
             }
           }
         } else {
@@ -221,7 +239,18 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                   letterSpacing: 0.0,
                 ),
           ),
-          actions: const [],
+          actions: [
+            Align(
+              alignment: const AlignmentDirectional(0.0, 0.0),
+              child: Text(
+                'Logged as: ${FFAppState().username}',
+                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                      fontFamily: 'Readex Pro',
+                      letterSpacing: 0.0,
+                    ),
+              ),
+            ),
+          ],
           centerTitle: false,
           elevation: 2.0,
         ),

@@ -32,6 +32,8 @@ class GuessWrongModel extends FlutterFlowModel<GuessWrongWidget> {
   dynamic currentReceived;
   // Stores action output result for [Custom Action - fetchData] action in GuessWrong widget.
   dynamic dataReceivedTurn;
+  // Stores action output result for [Backend Call - API (getScore)] action in GuessWrong widget.
+  ApiCallResponse? getScoreTurnResp;
   // Stores action output result for [Custom Action - fetchData] action in GuessWrong widget.
   dynamic dataReceived;
   // Stores action output result for [Backend Call - API (getScore)] action in GuessWrong widget.
