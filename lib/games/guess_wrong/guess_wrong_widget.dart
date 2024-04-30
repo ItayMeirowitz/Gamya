@@ -148,6 +148,21 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                       .toList()
                       .cast<dynamic>();
                 });
+                await showDialog(
+                  context: context,
+                  builder: (alertDialogContext) {
+                    return AlertDialog(
+                      title: const Text('uyittggfghfghfjhg'),
+                      content: const Text('fjhffghjfjhg'),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(alertDialogContext),
+                          child: const Text('Ok'),
+                        ),
+                      ],
+                    );
+                  },
+                );
               }
             } else if (getJsonField(
                   _model.dataReceived,
@@ -230,16 +245,6 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
-          leading: Text(
-            valueOrDefault<String>(
-              _model.scores.first.toString(),
-              'none yet',
-            ),
-            style: FlutterFlowTheme.of(context).bodyMedium.override(
-                  fontFamily: 'Readex Pro',
-                  letterSpacing: 0.0,
-                ),
-          ),
           title: Text(
             'Guess Wrong!',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -252,12 +257,15 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
           actions: [
             Align(
               alignment: const AlignmentDirectional(0.0, 0.0),
-              child: Text(
-                'Logged as: ${FFAppState().username}',
-                style: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Readex Pro',
-                      letterSpacing: 0.0,
-                    ),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                child: Text(
+                  'Logged as: ${FFAppState().username}',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
+                ),
               ),
             ),
           ],
