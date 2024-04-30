@@ -230,6 +230,16 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
+          leading: Text(
+            valueOrDefault<String>(
+              _model.category,
+              '-0',
+            ),
+            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                  fontFamily: 'Readex Pro',
+                  letterSpacing: 0.0,
+                ),
+          ),
           title: Text(
             'Guess Wrong!',
             style: FlutterFlowTheme.of(context).headlineMedium.override(
