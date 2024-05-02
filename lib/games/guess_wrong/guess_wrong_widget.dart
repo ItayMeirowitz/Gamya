@@ -161,7 +161,9 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                   )) {
                 setState(() {
                   _model.isTurn = true;
+                  _model.guessCategory = null;
                 });
+                break;
               }
               setState(() {
                 _model.guessCategory = null;
