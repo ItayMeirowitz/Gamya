@@ -154,9 +154,9 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                   r'''$.current''',
                 ) !=
                 null) {
-              if ('1' ==
+              if ('true' ==
                   getJsonField(
-                    _model.currentReceived,
+                    _model.dataReceived,
                     r'''$.current''',
                   )) {
                 setState(() {
