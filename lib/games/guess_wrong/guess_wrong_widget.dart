@@ -38,7 +38,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
         FFAppState().accessToken,
         FFAppState().username,
       );
-      if ('1' ==
+      if ('true' ==
           getJsonField(
             _model.currentReceived,
             r'''$.current''',
