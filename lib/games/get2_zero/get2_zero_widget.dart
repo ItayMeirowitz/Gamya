@@ -71,7 +71,21 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                   ),
             ),
           ),
-          actions: const [],
+          actions: [
+            Align(
+              alignment: const AlignmentDirectional(0.0, 0.0),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                child: Text(
+                  'Logged as: ${FFAppState().username}',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
+                ),
+              ),
+            ),
+          ],
           centerTitle: false,
           elevation: 2.0,
         ),

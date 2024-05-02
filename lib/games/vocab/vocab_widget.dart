@@ -55,12 +55,26 @@ class _VocabWidgetState extends State<VocabWidget> {
         appBar: AppBar(
           backgroundColor: FlutterFlowTheme.of(context).primary,
           automaticallyImplyLeading: false,
-          actions: const [],
+          actions: [
+            Align(
+              alignment: const AlignmentDirectional(0.0, 0.0),
+              child: Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                child: Text(
+                  'Logged as: ${FFAppState().username}',
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Readex Pro',
+                        letterSpacing: 0.0,
+                      ),
+                ),
+              ),
+            ),
+          ],
           flexibleSpace: FlexibleSpaceBar(
             title: Align(
-              alignment: const AlignmentDirectional(0.0, 1.0),
+              alignment: const AlignmentDirectional(-1.0, 1.0),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
                 child: Text(
                   'Vocabulary Contest!',
                   style: FlutterFlowTheme.of(context).headlineMedium.override(
