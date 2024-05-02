@@ -76,6 +76,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                 _model.secretWord = null;
                 _model.waitingGuess = false;
               });
+              break;
             } else if (getJsonField(
                   _model.dataReceivedTurn,
                   r'''$.gameOver''',
@@ -103,9 +104,9 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                 accessToken: FFAppState().accessToken,
                 lobbyId: FFAppState().lobbyId,
               );
-              if ((_model.getScoreResp?.succeeded ?? true)) {
+              if ((_model.getScoreTurnResp?.succeeded ?? true)) {
                 setState(() {
-                  _model.scores = (_model.getScoreResp?.jsonBody ?? '')
+                  _model.scores = (_model.getScoreTurnResp?.jsonBody ?? '')
                       .toList()
                       .cast<dynamic>();
                 });
