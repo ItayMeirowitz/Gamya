@@ -110,6 +110,22 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                       .cast<dynamic>();
                 });
               }
+            } else {
+              await showDialog(
+                context: context,
+                builder: (alertDialogContext) {
+                  return AlertDialog(
+                    title: const Text('yhgokn '),
+                    content: const Text('ghytvnu'),
+                    actions: [
+                      TextButton(
+                        onPressed: () => Navigator.pop(alertDialogContext),
+                        child: const Text('Ok'),
+                      ),
+                    ],
+                  );
+                },
+              );
             }
           }
         } else {
