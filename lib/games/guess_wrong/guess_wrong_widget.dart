@@ -148,21 +148,6 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                       .toList()
                       .cast<dynamic>();
                 });
-                await showDialog(
-                  context: context,
-                  builder: (alertDialogContext) {
-                    return AlertDialog(
-                      title: const Text('uyittggfghfghfjhg'),
-                      content: const Text('fjhffghjfjhg'),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(alertDialogContext),
-                          child: const Text('Ok'),
-                        ),
-                      ],
-                    );
-                  },
-                );
               }
             } else if (getJsonField(
                   _model.dataReceived,
