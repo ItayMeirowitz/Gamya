@@ -164,7 +164,27 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                   _model.guessCategory = null;
                 });
                 break;
+              } else {
+                await showDialog(
+                  context: context,
+                  builder: (alertDialogContext) {
+                    return AlertDialog(
+                      title: const Text('not my turn'),
+                      content: Text(getJsonField(
+                        _model.dataReceived,
+                        r'''$.current''',
+                      ).toString().toString()),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(alertDialogContext),
+                          child: const Text('Ok'),
+                        ),
+                      ],
+                    );
+                  },
+                );
               }
+
               setState(() {
                 _model.guessCategory = null;
               });
