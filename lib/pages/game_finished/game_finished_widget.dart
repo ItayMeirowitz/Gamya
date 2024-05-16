@@ -33,7 +33,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       while (widget.score != null) {
-        if (widget.score! > 0.0) {
+        if (widget.score != -1.0) {
           _model.postScoreResp = await PostScoreCall.call(
             serverIP: FFAppState().serverIP,
             tokenType: FFAppState().tokenType,
@@ -42,28 +42,6 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
             score: widget.score,
             lobbyId: FFAppState().lobbyId,
           );
-          var confirmDialogResponse = await showDialog<bool>(
-                context: context,
-                builder: (alertDialogContext) {
-                  return AlertDialog(
-                    title: const Text('why'),
-                    content: const Text('just why'),
-                    actions: [
-                      TextButton(
-                        onPressed: () =>
-                            Navigator.pop(alertDialogContext, false),
-                        child: const Text('Cancel'),
-                      ),
-                      TextButton(
-                        onPressed: () =>
-                            Navigator.pop(alertDialogContext, true),
-                        child: const Text('Confirm'),
-                      ),
-                    ],
-                  );
-                },
-              ) ??
-              false;
         }
         _model.getScoreResp = await GetScoreCall.call(
           serverIP: FFAppState().serverIP,
