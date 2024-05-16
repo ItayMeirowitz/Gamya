@@ -31,12 +31,32 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => const IPregisterationWidget(),
+      errorBuilder: (context, state) => appStateNotifier.showSplashImage
+          ? Builder(
+              builder: (context) => Container(
+                color: Colors.transparent,
+                child: Image.asset(
+                  'assets/images/videoonline-video-cutter.com-ezgif.com-crop.gif',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            )
+          : const IPregisterationWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const IPregisterationWidget(),
+          builder: (context, _) => appStateNotifier.showSplashImage
+              ? Builder(
+                  builder: (context) => Container(
+                    color: Colors.transparent,
+                    child: Image.asset(
+                      'assets/images/videoonline-video-cutter.com-ezgif.com-crop.gif',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
+              : const IPregisterationWidget(),
         ),
         FFRoute(
           name: 'GameFinished',

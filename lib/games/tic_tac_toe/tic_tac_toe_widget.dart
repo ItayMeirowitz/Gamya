@@ -94,7 +94,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
             context: context,
             builder: (alertDialogContext) {
               return AlertDialog(
-                title: const Text('aaaaaaaaaaaaaaaaaaaaaaaaa'),
+                title: const Text('Disconnected'),
                 content: const Text('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),
                 actions: [
                   TextButton(

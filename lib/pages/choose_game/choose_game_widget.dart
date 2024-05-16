@@ -844,6 +844,23 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       if (shouldSetState) setState(() {});
                                       return;
                                     } else {
+                                      await showDialog(
+                                        context: context,
+                                        builder: (alertDialogContext) {
+                                          return AlertDialog(
+                                            title: const Text('Cannot enter game'),
+                                            content: const Text(
+                                                'This game is for a single player'),
+                                            actions: [
+                                              TextButton(
+                                                onPressed: () => Navigator.pop(
+                                                    alertDialogContext),
+                                                child: const Text('Got it!'),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      );
                                       if (shouldSetState) setState(() {});
                                       return;
                                     }
