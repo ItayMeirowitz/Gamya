@@ -822,9 +822,6 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
                                     var shouldSetState = false;
-
-                                    context.pushNamed('Get2Zero');
-
                                     _model.postZeroResp =
                                         await PostGetTZeroCall.call(
                                       serverIP: FFAppState().serverIP,
@@ -841,6 +838,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                           r'''$.lobby_id''',
                                         );
                                       });
+
+                                      context.pushNamed('Get2Zero');
+
                                       if (shouldSetState) setState(() {});
                                       return;
                                     } else {
