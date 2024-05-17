@@ -1713,16 +1713,16 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                           _model.signUpError,
                                                           'Couldn\'t connect to server',
                                                         ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Readex Pro',
+                                                              fontSize: 14.0,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                            ),
                                                       ),
                                                     ),
                                                   if (_model.signUpErrorCode !=
@@ -1735,6 +1735,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                           .override(
                                                             fontFamily:
                                                                 'Readex Pro',
+                                                            fontSize: 14.0,
                                                             letterSpacing: 0.0,
                                                           ),
                                                     ),
@@ -1752,6 +1753,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                           .override(
                                                             fontFamily:
                                                                 'Readex Pro',
+                                                            fontSize: 14.0,
                                                             letterSpacing: 0.0,
                                                           ),
                                                     ),

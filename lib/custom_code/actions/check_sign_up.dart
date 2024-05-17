@@ -13,25 +13,25 @@ String? checkSignUp(
   // Check username
   RegExp usernameRegex = RegExp(r'^[a-zA-Z0-9 ]+$');
   if (!usernameRegex.hasMatch(username)) {
-    return "Username must contain only English letters, numbers, and spaces.";
+    return "Username must contain only English letters,\nnumbers, and spaces.";
   }
 
   // Check email
   RegExp emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
   if (!emailRegex.hasMatch(email)) {
-    return "Invalid email format.";
+    return "Invalid email format.\nPlease enter a valid email address.";
   }
 
   // Check password
   RegExp passwordRegex = RegExp(
       r'^(?=.*?[A-Z])(?=.*?[0-9])(?=.*?[!@#$%^&*(),.?":{}|<>])[A-Za-z0-9!@#$%^&*(),.?":{}|<>]{8,}$');
   if (!passwordRegex.hasMatch(password)) {
-    return "Password must be at least 8 characters long and contain at least one uppercase letter, one digit, and one special character.";
+    return "Password must be at least 8 characters long\nand contain at least one uppercase letter,\none digit, and one special character.";
   }
 
   // Check confirmPassword
   if (password != confirmPassword) {
-    return "Passwords do not match.";
+    return "Passwords do not match.\nPlease make sure the passwords match.";
   }
 
   return null;
