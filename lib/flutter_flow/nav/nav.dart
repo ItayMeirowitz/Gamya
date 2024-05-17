@@ -36,7 +36,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context) => Container(
                 color: Colors.transparent,
                 child: Image.asset(
-                  'assets/images/NewProject-ezgif.com-video-to-gif-converter_(1).gif',
+                  'assets/images/NewProject1-ezgif.com-video-to-gif-converter_(1).gif',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -51,7 +51,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                   builder: (context) => Container(
                     color: Colors.transparent,
                     child: Image.asset(
-                      'assets/images/NewProject-ezgif.com-video-to-gif-converter_(1).gif',
+                      'assets/images/NewProject1-ezgif.com-video-to-gif-converter_(1).gif',
                       fit: BoxFit.cover,
                     ),
                   ),

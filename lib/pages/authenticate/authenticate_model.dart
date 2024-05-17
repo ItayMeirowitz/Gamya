@@ -72,6 +72,8 @@ class AuthenticateModel extends FlutterFlowModel<AuthenticateWidget> {
   late bool passwordConfirmVisibility;
   String? Function(BuildContext, String?)?
       passwordConfirmTextControllerValidator;
+  // Stores action output result for [Custom Action - checkSignUp] action in Button widget.
+  String? isValidSignUp;
   // Stores action output result for [Backend Call - API (ConnectUser)] action in Button widget.
   ApiCallResponse? signUpResp;
 

@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -816,10 +817,9 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                         ),
                                                                   ),
                                                                 ),
-                                                              if (_model.signInError !=
-                                                                      null &&
-                                                                  _model.signInError !=
-                                                                      '')
+                                                              if (_model
+                                                                      .signInErrorCode !=
+                                                                  null)
                                                                 Text(
                                                                   ': status: ',
                                                                   style: FlutterFlowTheme.of(
@@ -832,10 +832,9 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                             0.0,
                                                                       ),
                                                                 ),
-                                                              if (_model.signInError !=
-                                                                      null &&
-                                                                  _model.signInError !=
-                                                                      '')
+                                                              if (_model
+                                                                      .signInErrorCode !=
+                                                                  null)
                                                                 Text(
                                                                   valueOrDefault<
                                                                       String>(
@@ -1523,21 +1522,20 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                 _model
                                                                     .datePicked);
                                                       });
-                                                      if ((_model.passwordCreate ==
-                                                              _model
-                                                                  .passwordConfirm) &&
-                                                          (_model.usernameCreate !=
-                                                                  null &&
-                                                              _model.usernameCreate !=
-                                                                  '') &&
-                                                          (_model.emailAdressCreate !=
-                                                                  null &&
-                                                              _model.emailAdressCreate !=
-                                                                  '') &&
-                                                          (_model.birthday !=
-                                                                  null &&
-                                                              _model.birthday !=
-                                                                  '')) {
+                                                      _model.isValidSignUp =
+                                                          actions
+                                                              .checkSignUp(
+                                                        _model.usernameCreate!,
+                                                        _model
+                                                            .emailAdressCreate!,
+                                                        _model.passwordCreate!,
+                                                        _model.passwordConfirm!,
+                                                      );
+                                                      shouldSetState = true;
+                                                      if (_model.isValidSignUp ==
+                                                              null ||
+                                                          _model.isValidSignUp ==
+                                                              '') {
                                                         _model.signUpResp =
                                                             await ConnectUserCall
                                                                 .call(
@@ -1602,8 +1600,8 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                             return;
                                                           } else {
                                                             setState(() {
-                                                              _model.username =
-                                                                  'already taken';
+                                                              _model.signUpError =
+                                                                  'Username already taken!';
                                                             });
                                                             if (shouldSetState) {
                                                               setState(() {});
@@ -1636,9 +1634,8 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                       } else {
                                                         setState(() {
                                                           _model.signUpError =
-                                                              'Invalid input';
-                                                          _model.signUpErrorCode =
-                                                              100;
+                                                              _model
+                                                                  .isValidSignUp;
                                                         });
                                                         if (shouldSetState) {
                                                           setState(() {});
@@ -1728,9 +1725,8 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                 ),
                                                       ),
                                                     ),
-                                                  if (_model.signUpError !=
-                                                          null &&
-                                                      _model.signUpError != '')
+                                                  if (_model.signUpErrorCode !=
+                                                      null)
                                                     Text(
                                                       ': status: ',
                                                       style: FlutterFlowTheme
@@ -1742,9 +1738,8 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                             letterSpacing: 0.0,
                                                           ),
                                                     ),
-                                                  if (_model.signUpError !=
-                                                          null &&
-                                                      _model.signUpError != '')
+                                                  if (_model.signUpErrorCode !=
+                                                      null)
                                                     Text(
                                                       valueOrDefault<String>(
                                                         _model.signUpErrorCode
