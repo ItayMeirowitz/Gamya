@@ -6,7 +6,6 @@ export '/games/vocab/vocab_widget.dart' show VocabWidget;
 export '/pages/i_pregisteration/i_pregisteration_widget.dart'
     show IPregisterationWidget;
 export '/pages/choose_game/choose_game_widget.dart' show ChooseGameWidget;
-export '/test/test_widget.dart' show TestWidget;
 export '/games/get2_zero/get2_zero_widget.dart' show Get2ZeroWidget;
 export '/games/tic_tac_toe/tic_tac_toe_widget.dart' show TicTacToeWidget;
 export '/games/connect4/connect4_widget.dart' show Connect4Widget;

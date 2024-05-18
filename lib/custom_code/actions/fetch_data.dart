@@ -16,8 +16,6 @@ import 'package:http/http.dart';
 
 import 'package:http/http.dart' as http;
 
-import 'package:gamya/custom_code/actions/post_to_userpage.dart';
-
 dynamic fetchData(String apiUrl, String tokenType, String accessToken,
     String username) async {
   while (true) {

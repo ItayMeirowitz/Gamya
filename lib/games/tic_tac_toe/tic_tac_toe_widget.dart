@@ -77,7 +77,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
               });
             }
 
-            context.pushNamed(
+            context.goNamed(
               'GameFinished',
               queryParameters: {
                 'score': serializeParam(
@@ -85,6 +85,13 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                   ParamType.double,
                 ),
               }.withoutNulls,
+              extra: <String, dynamic>{
+                kTransitionInfoKey: const TransitionInfo(
+                  hasTransition: true,
+                  transitionType: PageTransitionType.fade,
+                  duration: Duration(milliseconds: 1000),
+                ),
+              },
             );
 
             return;
@@ -126,216 +133,226 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
       onTap: () => _model.unfocusNode.canRequestFocus
           ? FocusScope.of(context).requestFocus(_model.unfocusNode)
           : FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        key: scaffoldKey,
-        backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primary,
-          automaticallyImplyLeading: false,
-          title: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Text(
-                'Tic Tac Toe',
-                style: FlutterFlowTheme.of(context).headlineMedium.override(
-                      fontFamily: 'Outfit',
-                      color: Colors.white,
-                      fontSize: 22.0,
-                      letterSpacing: 0.0,
-                    ),
-              ),
-            ],
-          ),
-          actions: [
-            Align(
-              alignment: const AlignmentDirectional(0.0, 0.0),
-              child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-                child: Text(
-                  'Logged as: ${FFAppState().username}',
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Readex Pro',
+      child: WillPopScope(
+        onWillPop: () async => false,
+        child: Scaffold(
+          key: scaffoldKey,
+          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+          appBar: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primary,
+            automaticallyImplyLeading: false,
+            title: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Text(
+                  'Tic Tac Toe',
+                  style: FlutterFlowTheme.of(context).headlineMedium.override(
+                        fontFamily: 'Outfit',
+                        color: Colors.white,
+                        fontSize: 22.0,
                         letterSpacing: 0.0,
                       ),
                 ),
-              ),
+              ],
             ),
-          ],
-          centerTitle: false,
-          elevation: 2.0,
-        ),
-        body: SafeArea(
-          top: true,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              if (_model.started)
-                Builder(
-                  builder: (context) {
-                    final grid = _model.currentGrid.toList();
-                    return GridView.builder(
-                      padding: EdgeInsets.zero,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 10.0,
-                        mainAxisSpacing: 10.0,
-                        childAspectRatio: 1.0,
-                      ),
-                      shrinkWrap: true,
-                      scrollDirection: Axis.vertical,
-                      itemCount: grid.length,
-                      itemBuilder: (context, gridIndex) {
-                        final gridItem = grid[gridIndex];
-                        return Card(
-                          clipBehavior: Clip.antiAliasWithSaveLayer,
-                          color:
-                              FlutterFlowTheme.of(context).secondaryBackground,
-                          elevation: 4.0,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Stack(
-                            children: [
-                              if (gridItem == '')
-                                InkWell(
-                                  splashColor: Colors.transparent,
-                                  focusColor: Colors.transparent,
-                                  hoverColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  onTap: () async {
-                                    var shouldSetState = false;
-                                    if (_model.isTurn) {
-                                      _model.placeTicTacToeResp =
-                                          await PlaceTicTacToeCall.call(
-                                        serverIP: FFAppState().serverIP,
-                                        tokenType: FFAppState().tokenType,
-                                        accessToken: FFAppState().accessToken,
-                                        lobbyId: FFAppState().lobbyId,
-                                        index: gridIndex,
-                                        userType: FFAppState().userType,
-                                      );
-                                      shouldSetState = true;
-                                      if ((_model
-                                              .placeTicTacToeResp?.succeeded ??
-                                          true)) {
-                                        _model.getTicTacToeResp =
-                                            await GetTicTacToeBoardCall.call(
+            actions: [
+              Align(
+                alignment: const AlignmentDirectional(0.0, 0.0),
+                child: Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                  child: Text(
+                    'Logged as: ${FFAppState().username}',
+                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                          fontFamily: 'Readex Pro',
+                          letterSpacing: 0.0,
+                        ),
+                  ),
+                ),
+              ),
+            ],
+            centerTitle: false,
+            elevation: 2.0,
+          ),
+          body: SafeArea(
+            top: true,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                if (_model.started)
+                  Builder(
+                    builder: (context) {
+                      final grid = _model.currentGrid.toList();
+                      return GridView.builder(
+                        padding: EdgeInsets.zero,
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: 10.0,
+                          mainAxisSpacing: 10.0,
+                          childAspectRatio: 1.0,
+                        ),
+                        shrinkWrap: true,
+                        scrollDirection: Axis.vertical,
+                        itemCount: grid.length,
+                        itemBuilder: (context, gridIndex) {
+                          final gridItem = grid[gridIndex];
+                          return Card(
+                            clipBehavior: Clip.antiAliasWithSaveLayer,
+                            color: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
+                            elevation: 4.0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8.0),
+                            ),
+                            child: Stack(
+                              children: [
+                                if (gridItem == '')
+                                  InkWell(
+                                    splashColor: Colors.transparent,
+                                    focusColor: Colors.transparent,
+                                    hoverColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    onTap: () async {
+                                      var shouldSetState = false;
+                                      if (_model.isTurn) {
+                                        _model.placeTicTacToeResp =
+                                            await PlaceTicTacToeCall.call(
                                           serverIP: FFAppState().serverIP,
                                           tokenType: FFAppState().tokenType,
                                           accessToken: FFAppState().accessToken,
                                           lobbyId: FFAppState().lobbyId,
+                                          index: gridIndex,
+                                          userType: FFAppState().userType,
                                         );
                                         shouldSetState = true;
-                                        if ((_model
-                                                .getTicTacToeResp?.succeeded ??
+                                        if ((_model.placeTicTacToeResp
+                                                ?.succeeded ??
                                             true)) {
-                                          setState(() {
-                                            _model.currentGrid = (getJsonField(
-                                              (_model.getTicTacToeResp
-                                                      ?.jsonBody ??
-                                                  ''),
-                                              r'''$.board''',
-                                              true,
-                                            ) as List)
-                                                .map<String>(
-                                                    (s) => s.toString())
-                                                .toList()
-                                                .toList()
-                                                .cast<String>();
-                                          });
-                                          if (shouldSetState) setState(() {});
-                                          return;
+                                          _model.getTicTacToeResp =
+                                              await GetTicTacToeBoardCall.call(
+                                            serverIP: FFAppState().serverIP,
+                                            tokenType: FFAppState().tokenType,
+                                            accessToken:
+                                                FFAppState().accessToken,
+                                            lobbyId: FFAppState().lobbyId,
+                                          );
+                                          shouldSetState = true;
+                                          if ((_model.getTicTacToeResp
+                                                  ?.succeeded ??
+                                              true)) {
+                                            setState(() {
+                                              _model.currentGrid =
+                                                  (getJsonField(
+                                                (_model.getTicTacToeResp
+                                                        ?.jsonBody ??
+                                                    ''),
+                                                r'''$.board''',
+                                                true,
+                                              ) as List)
+                                                      .map<String>(
+                                                          (s) => s.toString())
+                                                      .toList()
+                                                      .toList()
+                                                      .cast<String>();
+                                            });
+                                            if (shouldSetState) {
+                                              setState(() {});
+                                            }
+                                            return;
+                                          } else {
+                                            if (shouldSetState) {
+                                              setState(() {});
+                                            }
+                                            return;
+                                          }
                                         } else {
                                           if (shouldSetState) setState(() {});
                                           return;
                                         }
                                       } else {
+                                        await showDialog(
+                                          context: context,
+                                          builder: (alertDialogContext) {
+                                            return AlertDialog(
+                                              title: const Text('YOU SUCK'),
+                                              content:
+                                                  const Text('It is not your turn!'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () =>
+                                                      Navigator.pop(
+                                                          alertDialogContext),
+                                                  child: const Text(
+                                                      'OK I AM VERY SORRY'),
+                                                ),
+                                              ],
+                                            );
+                                          },
+                                        );
                                         if (shouldSetState) setState(() {});
                                         return;
                                       }
-                                    } else {
-                                      await showDialog(
-                                        context: context,
-                                        builder: (alertDialogContext) {
-                                          return AlertDialog(
-                                            title: const Text('YOU SUCK'),
-                                            content:
-                                                const Text('It is not your turn!'),
-                                            actions: [
-                                              TextButton(
-                                                onPressed: () => Navigator.pop(
-                                                    alertDialogContext),
-                                                child:
-                                                    const Text('OK I AM VERY SORRY'),
-                                              ),
-                                            ],
-                                          );
-                                        },
-                                      );
-                                      if (shouldSetState) setState(() {});
-                                      return;
-                                    }
 
-                                    if (shouldSetState) setState(() {});
-                                  },
-                                  child: ClipRRect(
+                                      if (shouldSetState) setState(() {});
+                                    },
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.asset(
+                                        'assets/images/Empty.png',
+                                        width: 300.0,
+                                        height: 200.0,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                if ('O' == gridItem)
+                                  ClipRRect(
                                     borderRadius: BorderRadius.circular(8.0),
                                     child: Image.asset(
-                                      'assets/images/Empty.png',
+                                      'assets/images/O_pic.png',
                                       width: 300.0,
                                       height: 200.0,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
-                                ),
-                              if ('O' == gridItem)
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(8.0),
-                                  child: Image.asset(
-                                    'assets/images/O_pic.png',
-                                    width: 300.0,
-                                    height: 200.0,
-                                    fit: BoxFit.cover,
-                                  ),
-                                ),
-                              if ('X' == gridItem)
-                                Align(
-                                  alignment: const AlignmentDirectional(0.0, 0.0),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    child: Image.asset(
-                                      'assets/images/X_pic.png',
-                                      width: 300.0,
-                                      height: 200.0,
-                                      fit: BoxFit.cover,
+                                if ('X' == gridItem)
+                                  Align(
+                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8.0),
+                                      child: Image.asset(
+                                        'assets/images/X_pic.png',
+                                        width: 300.0,
+                                        height: 200.0,
+                                        fit: BoxFit.cover,
+                                      ),
                                     ),
                                   ),
-                                ),
-                            ],
-                          ),
-                        );
-                      },
-                    );
-                  },
-                ),
-              Flexible(
-                child: Align(
-                  alignment: const AlignmentDirectional(-1.0, 1.0),
-                  child: Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 100.0),
-                    child: Text(
-                      'You are: ${FFAppState().userType}',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            fontSize: 30.0,
-                            letterSpacing: 0.0,
-                          ),
+                              ],
+                            ),
+                          );
+                        },
+                      );
+                    },
+                  ),
+                Flexible(
+                  child: Align(
+                    alignment: const AlignmentDirectional(-1.0, 1.0),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 100.0),
+                      child: Text(
+                        'You are: ${FFAppState().userType}',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              fontSize: 30.0,
+                              letterSpacing: 0.0,
+                            ),
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
