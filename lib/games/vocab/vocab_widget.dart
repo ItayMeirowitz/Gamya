@@ -4,7 +4,6 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:provider/provider.dart';
 import 'vocab_model.dart';
@@ -60,9 +59,9 @@ class _VocabWidgetState extends State<VocabWidget> {
             automaticallyImplyLeading: false,
             actions: [
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                   child: Text(
                     'Logged as: ${FFAppState().username}',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -75,10 +74,10 @@ class _VocabWidgetState extends State<VocabWidget> {
             ],
             flexibleSpace: FlexibleSpaceBar(
               title: Align(
-                alignment: AlignmentDirectional(-1.0, 1.0),
+                alignment: const AlignmentDirectional(-1.0, 1.0),
                 child: Padding(
                   padding:
-                      EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
+                      const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 0.0, 10.0),
                   child: Text(
                     'Vocabulary Contest!',
                     style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -104,9 +103,9 @@ class _VocabWidgetState extends State<VocabWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 50.0, 0.0, 0.0),
                           child: Text(
                             _model.wordToGuess!,
@@ -121,19 +120,19 @@ class _VocabWidgetState extends State<VocabWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 150.0, 0.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Flexible(
                                 child: Align(
-                                  alignment: AlignmentDirectional(0.0, -1.0),
+                                  alignment: const AlignmentDirectional(0.0, -1.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      var _shouldSetState = false;
+                                      var shouldSetState = false;
                                       _model.postVocabAnswer1Resp =
                                           await PostVocabAnswerCall.call(
                                         serverIP: FFAppState().serverIP,
@@ -143,7 +142,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                         answer: _model.op1,
                                         diff: _model.diff,
                                       );
-                                      _shouldSetState = true;
+                                      shouldSetState = true;
                                       if ((_model.postVocabAnswer1Resp
                                               ?.succeeded ??
                                           true)) {
@@ -209,7 +208,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             }.withoutNulls,
                                             extra: <String, dynamic>{
                                               kTransitionInfoKey:
-                                                  TransitionInfo(
+                                                  const TransitionInfo(
                                                 hasTransition: true,
                                                 transitionType:
                                                     PageTransitionType.scale,
@@ -221,7 +220,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             },
                                           );
 
-                                          if (_shouldSetState) setState(() {});
+                                          if (shouldSetState) setState(() {});
                                           return;
                                         } else {
                                           setState(() {
@@ -256,23 +255,23 @@ class _VocabWidgetState extends State<VocabWidget> {
                                               r'''$.correct''',
                                             ).toString();
                                           });
-                                          if (_shouldSetState) setState(() {});
+                                          if (shouldSetState) setState(() {});
                                           return;
                                         }
                                       } else {
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       }
 
-                                      if (_shouldSetState) setState(() {});
+                                      if (shouldSetState) setState(() {});
                                     },
                                     text: _model.op1!,
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
@@ -284,7 +283,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -295,10 +294,10 @@ class _VocabWidgetState extends State<VocabWidget> {
                               ),
                               Flexible(
                                 child: Align(
-                                  alignment: AlignmentDirectional(0.0, -1.0),
+                                  alignment: const AlignmentDirectional(0.0, -1.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      var _shouldSetState = false;
+                                      var shouldSetState = false;
                                       _model.postVocabAnswer2Resp =
                                           await PostVocabAnswerCall.call(
                                         serverIP: FFAppState().serverIP,
@@ -308,7 +307,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                         index: _model.currentIndex,
                                         answer: _model.op2,
                                       );
-                                      _shouldSetState = true;
+                                      shouldSetState = true;
                                       if ((_model.postVocabAnswer2Resp
                                               ?.succeeded ??
                                           true)) {
@@ -374,7 +373,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             }.withoutNulls,
                                             extra: <String, dynamic>{
                                               kTransitionInfoKey:
-                                                  TransitionInfo(
+                                                  const TransitionInfo(
                                                 hasTransition: true,
                                                 transitionType:
                                                     PageTransitionType.scale,
@@ -386,7 +385,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             },
                                           );
 
-                                          if (_shouldSetState) setState(() {});
+                                          if (shouldSetState) setState(() {});
                                           return;
                                         } else {
                                           setState(() {
@@ -421,23 +420,23 @@ class _VocabWidgetState extends State<VocabWidget> {
                                               r'''$.correct''',
                                             ).toString();
                                           });
-                                          if (_shouldSetState) setState(() {});
+                                          if (shouldSetState) setState(() {});
                                           return;
                                         }
                                       } else {
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       }
 
-                                      if (_shouldSetState) setState(() {});
+                                      if (shouldSetState) setState(() {});
                                     },
                                     text: _model.op2!,
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
@@ -449,7 +448,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -463,17 +462,17 @@ class _VocabWidgetState extends State<VocabWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 100.0, 0.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Flexible(
                               child: Align(
-                                alignment: AlignmentDirectional(0.0, -1.0),
+                                alignment: const AlignmentDirectional(0.0, -1.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    var _shouldSetState = false;
+                                    var shouldSetState = false;
                                     _model.postVocabAnswer3Resp =
                                         await PostVocabAnswerCall.call(
                                       serverIP: FFAppState().serverIP,
@@ -483,7 +482,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       index: _model.currentIndex,
                                       answer: _model.op3,
                                     );
-                                    _shouldSetState = true;
+                                    shouldSetState = true;
                                     if ((_model
                                             .postVocabAnswer3Resp?.succeeded ??
                                         true)) {
@@ -548,7 +547,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             ),
                                           }.withoutNulls,
                                           extra: <String, dynamic>{
-                                            kTransitionInfoKey: TransitionInfo(
+                                            kTransitionInfoKey: const TransitionInfo(
                                               hasTransition: true,
                                               transitionType:
                                                   PageTransitionType.scale,
@@ -559,7 +558,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                           },
                                         );
 
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       } else {
                                         setState(() {
@@ -594,22 +593,22 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             r'''$.correct''',
                                           ).toString();
                                         });
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       }
                                     } else {
-                                      if (_shouldSetState) setState(() {});
+                                      if (shouldSetState) setState(() {});
                                       return;
                                     }
 
-                                    if (_shouldSetState) setState(() {});
+                                    if (shouldSetState) setState(() {});
                                   },
                                   text: _model.op3!,
                                   options: FFButtonOptions(
                                     height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -620,7 +619,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                           letterSpacing: 0.0,
                                         ),
                                     elevation: 3.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),
@@ -631,10 +630,10 @@ class _VocabWidgetState extends State<VocabWidget> {
                             ),
                             Flexible(
                               child: Align(
-                                alignment: AlignmentDirectional(0.0, -1.0),
+                                alignment: const AlignmentDirectional(0.0, -1.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
-                                    var _shouldSetState = false;
+                                    var shouldSetState = false;
                                     _model.postVocabAnswer4Resp =
                                         await PostVocabAnswerCall.call(
                                       serverIP: FFAppState().serverIP,
@@ -644,7 +643,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       index: _model.currentIndex,
                                       answer: _model.op4,
                                     );
-                                    _shouldSetState = true;
+                                    shouldSetState = true;
                                     if ((_model
                                             .postVocabAnswer4Resp?.succeeded ??
                                         true)) {
@@ -709,7 +708,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             ),
                                           }.withoutNulls,
                                           extra: <String, dynamic>{
-                                            kTransitionInfoKey: TransitionInfo(
+                                            kTransitionInfoKey: const TransitionInfo(
                                               hasTransition: true,
                                               transitionType:
                                                   PageTransitionType.scale,
@@ -720,7 +719,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                           },
                                         );
 
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       } else {
                                         setState(() {
@@ -755,22 +754,22 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             r'''$.correct''',
                                           ).toString();
                                         });
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       }
                                     } else {
-                                      if (_shouldSetState) setState(() {});
+                                      if (shouldSetState) setState(() {});
                                       return;
                                     }
 
-                                    if (_shouldSetState) setState(() {});
+                                    if (shouldSetState) setState(() {});
                                   },
                                   text: _model.op4!,
                                   options: FFButtonOptions(
                                     height: 40.0,
-                                    padding: EdgeInsetsDirectional.fromSTEB(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: FlutterFlowTheme.of(context).primary,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -781,7 +780,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                           letterSpacing: 0.0,
                                         ),
                                     elevation: 3.0,
-                                    borderSide: BorderSide(
+                                    borderSide: const BorderSide(
                                       color: Colors.transparent,
                                       width: 1.0,
                                     ),
@@ -794,13 +793,13 @@ class _VocabWidgetState extends State<VocabWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 100.0, 0.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
                             Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   25.0, 0.0, 0.0, 0.0),
                               child: Text(
                                 'Your score: ',
@@ -820,7 +819,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                         mainAxisSize: MainAxisSize.max,
                         children: [
                           Padding(
-                            padding: EdgeInsetsDirectional.fromSTEB(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
                                 40.0, 0.0, 0.0, 0.0),
                             child: Text(
                               valueOrDefault<String>(
@@ -841,21 +840,21 @@ class _VocabWidgetState extends State<VocabWidget> {
                   ),
                 if (!_model.hasStarted!)
                   Align(
-                    alignment: AlignmentDirectional(0.0, 0.0),
+                    alignment: const AlignmentDirectional(0.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 20.0, 0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(0.0, -1.0),
+                                alignment: const AlignmentDirectional(0.0, -1.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 30.0, 0.0, 0.0),
                                   child: Text(
                                     'Choose Difficulty:',
@@ -870,9 +869,9 @@ class _VocabWidgetState extends State<VocabWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 20.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -880,7 +879,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       Flexible(
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             'x1 score',
                                             style: FlutterFlowTheme.of(context)
@@ -895,7 +894,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       Flexible(
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             'x2 score',
                                             style: FlutterFlowTheme.of(context)
@@ -910,7 +909,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       Flexible(
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: Text(
                                             'x5 score',
                                             style: FlutterFlowTheme.of(context)
@@ -927,9 +926,9 @@ class _VocabWidgetState extends State<VocabWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       0.0, 5.0, 0.0, 0.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -937,7 +936,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       Flexible(
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
                                               setState(() {
@@ -947,10 +946,10 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             text: 'Easy',
                                             options: FFButtonOptions(
                                               height: 40.0,
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       24.0, 0.0, 24.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
+                                              iconPadding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -965,7 +964,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                               elevation: 3.0,
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),
@@ -978,7 +977,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       Flexible(
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
                                               setState(() {
@@ -988,10 +987,10 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             text: 'Medium',
                                             options: FFButtonOptions(
                                               height: 40.0,
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       24.0, 0.0, 24.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
+                                              iconPadding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -1006,7 +1005,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                               elevation: 3.0,
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),
@@ -1019,7 +1018,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       Flexible(
                                         child: Align(
                                           alignment:
-                                              AlignmentDirectional(0.0, 0.0),
+                                              const AlignmentDirectional(0.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
                                               setState(() {
@@ -1029,10 +1028,10 @@ class _VocabWidgetState extends State<VocabWidget> {
                                             text: 'Hard',
                                             options: FFButtonOptions(
                                               height: 40.0,
-                                              padding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       24.0, 0.0, 24.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
+                                              iconPadding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -1047,7 +1046,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                               elevation: 3.0,
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),
@@ -1065,14 +1064,14 @@ class _VocabWidgetState extends State<VocabWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 20.0, 0.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Text(
                                   'Difficulty selected: ',
                                   style: FlutterFlowTheme.of(context)
@@ -1084,7 +1083,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(0.0, 0.0),
+                                alignment: const AlignmentDirectional(0.0, 0.0),
                                 child: Text(
                                   _model.diff,
                                   style: FlutterFlowTheme.of(context)
@@ -1099,18 +1098,18 @@ class _VocabWidgetState extends State<VocabWidget> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               70.0, 80.0, 70.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              var _shouldSetState = false;
+                              var shouldSetState = false;
                               _model.vocabJSON = await GetVocabCall.call(
                                 accessToken: FFAppState().accessToken,
                                 tokenType: FFAppState().tokenType,
                                 serverIP: FFAppState().serverIP,
                                 diff: _model.diff,
                               );
-                              _shouldSetState = true;
+                              shouldSetState = true;
                               if ((_model.vocabJSON?.succeeded ?? true)) {
                                 setState(() {
                                   _model.vocabList = getJsonField(
@@ -1126,7 +1125,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                   );
                                 });
                               } else {
-                                if (_shouldSetState) setState(() {});
+                                if (shouldSetState) setState(() {});
                                 return;
                               }
 
@@ -1157,14 +1156,14 @@ class _VocabWidgetState extends State<VocabWidget> {
                                 ).toString();
                                 _model.hasStarted = true;
                               });
-                              if (_shouldSetState) setState(() {});
+                              if (shouldSetState) setState(() {});
                             },
                             text: 'Press to START!',
                             options: FFButtonOptions(
                               height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 0.0, 24.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context).primary,
                               textStyle: FlutterFlowTheme.of(context)
@@ -1175,7 +1174,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                     letterSpacing: 0.0,
                                   ),
                               elevation: 3.0,
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1.0,
                               ),

@@ -1,19 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 import '/backend/schema/structs/index.dart';
 
 import '/index.dart';
-import '/main.dart';
-import '/flutter_flow/flutter_flow_theme.dart';
-import '/flutter_flow/lat_lng.dart';
-import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -48,7 +41,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                 ),
               ),
             )
-          : IPregisterationWidget(),
+          : const IPregisterationWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
@@ -63,7 +56,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
                     ),
                   ),
                 )
-              : IPregisterationWidget(),
+              : const IPregisterationWidget(),
         ),
         FFRoute(
           name: 'GameFinished',
@@ -78,52 +71,52 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'authenticate',
           path: '/authenticate',
-          builder: (context, params) => AuthenticateWidget(),
+          builder: (context, params) => const AuthenticateWidget(),
         ),
         FFRoute(
           name: 'errorPage',
           path: '/errorPage',
-          builder: (context, params) => ErrorPageWidget(),
+          builder: (context, params) => const ErrorPageWidget(),
         ),
         FFRoute(
           name: 'Vocab',
           path: '/vocab',
-          builder: (context, params) => VocabWidget(),
+          builder: (context, params) => const VocabWidget(),
         ),
         FFRoute(
           name: 'IPregisteration',
           path: '/iPregisteration',
-          builder: (context, params) => IPregisterationWidget(),
+          builder: (context, params) => const IPregisterationWidget(),
         ),
         FFRoute(
           name: 'ChooseGame',
           path: '/chooseGame',
-          builder: (context, params) => ChooseGameWidget(),
+          builder: (context, params) => const ChooseGameWidget(),
         ),
         FFRoute(
           name: 'Get2Zero',
           path: '/get2Zero',
-          builder: (context, params) => Get2ZeroWidget(),
+          builder: (context, params) => const Get2ZeroWidget(),
         ),
         FFRoute(
           name: 'TicTacToe',
           path: '/ticTacToe',
-          builder: (context, params) => TicTacToeWidget(),
+          builder: (context, params) => const TicTacToeWidget(),
         ),
         FFRoute(
           name: 'Connect4',
           path: '/connect4',
-          builder: (context, params) => Connect4Widget(),
+          builder: (context, params) => const Connect4Widget(),
         ),
         FFRoute(
           name: 'MathContest',
           path: '/mathContest',
-          builder: (context, params) => MathContestWidget(),
+          builder: (context, params) => const MathContestWidget(),
         ),
         FFRoute(
           name: 'GuessWrong',
           path: '/guessWrong',
-          builder: (context, params) => GuessWrongWidget(),
+          builder: (context, params) => const GuessWrongWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -289,7 +282,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

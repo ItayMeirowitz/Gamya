@@ -7,7 +7,6 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'get2_zero_model.dart';
 export 'get2_zero_model.dart';
@@ -60,10 +59,10 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
           key: scaffoldKey,
           backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
           appBar: AppBar(
-            backgroundColor: Color(0xFF5E57B9),
+            backgroundColor: const Color(0xFF5E57B9),
             automaticallyImplyLeading: false,
             title: Align(
-              alignment: AlignmentDirectional(-1.0, 0.0),
+              alignment: const AlignmentDirectional(-1.0, 0.0),
               child: Text(
                 'Get 2 Zero!',
                 style: FlutterFlowTheme.of(context).headlineMedium.override(
@@ -76,9 +75,9 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
             ),
             actions: [
               Align(
-                alignment: AlignmentDirectional(0.0, 0.0),
+                alignment: const AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                   child: Text(
                     'Logged as: ${FFAppState().username}',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -101,9 +100,9 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 80.0, 0.0, 0.0),
                           child: Text(
                             'Optimal clicks: ${_model.initialOptimal}',
@@ -118,9 +117,9 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.0, 0.0),
+                        alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 5.0, 0.0, 0.0),
                           child: Text(
                             'Current optimal clicks: ${_model.currentOptimal}',
@@ -136,7 +135,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                         child: Text(
                           'Clicks: ${_model.clicks.toString()}',
                           style:
@@ -149,7 +148,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                         child: Text(
                           'Current dec: ${_model.currentDecrementer.toString()}',
                           style:
@@ -161,7 +160,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             0.0, 100.0, 0.0, 0.0),
                         child: Text(
                           'Push this number all the way to ZERO!',
@@ -183,20 +182,20 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                       ),
                       Flexible(
                         child: Align(
-                          alignment: AlignmentDirectional(0.0, 1.0),
+                          alignment: const AlignmentDirectional(0.0, 1.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Align(
-                                alignment: AlignmentDirectional(0.0, 1.0),
+                                alignment: const AlignmentDirectional(0.0, 1.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       5.0, 0.0, 0.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      var _shouldSetState = false;
+                                      var shouldSetState = false;
                                       setState(() {
                                         _model.clicks = _model.clicks + 1;
                                         _model.currentDecrementer =
@@ -212,7 +211,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                           percent: _model.percentage,
                                           dec: _model.currentDecrementer,
                                         );
-                                        _shouldSetState = true;
+                                        shouldSetState = true;
                                         if ((_model
                                                 .getOptimalIncResp?.succeeded ??
                                             true)) {
@@ -225,28 +224,28 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                               r'''$.optimal''',
                                             ).toString();
                                           });
-                                          if (_shouldSetState) setState(() {});
+                                          if (shouldSetState) setState(() {});
                                           return;
                                         } else {
-                                          if (_shouldSetState) setState(() {});
+                                          if (shouldSetState) setState(() {});
                                           return;
                                         }
                                       } else {
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       }
 
-                                      if (_shouldSetState) setState(() {});
+                                      if (shouldSetState) setState(() {});
                                     },
                                     text: 'Dec+=1',
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           20.0, 0.0, 20.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
-                                      color: Color(0xFF5E57B9),
+                                      color: const Color(0xFF5E57B9),
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
@@ -255,7 +254,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -266,10 +265,10 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                               ),
                               Flexible(
                                 child: Align(
-                                  alignment: AlignmentDirectional(1.0, 1.0),
+                                  alignment: const AlignmentDirectional(1.0, 1.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      var _shouldSetState = false;
+                                      var shouldSetState = false;
                                       setState(() {
                                         _model.clicks = _model.clicks + 1;
                                         _model.currentNumber =
@@ -287,7 +286,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                           percent: _model.percentage,
                                           dec: _model.currentDecrementer,
                                         );
-                                        _shouldSetState = true;
+                                        shouldSetState = true;
                                         if ((_model
                                                 .getOptimalPerResp?.succeeded ??
                                             true)) {
@@ -300,28 +299,28 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                               r'''$.optimal''',
                                             ).toString();
                                           });
-                                          if (_shouldSetState) setState(() {});
+                                          if (shouldSetState) setState(() {});
                                           return;
                                         } else {
-                                          if (_shouldSetState) setState(() {});
+                                          if (shouldSetState) setState(() {});
                                           return;
                                         }
                                       } else {
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       }
 
-                                      if (_shouldSetState) setState(() {});
+                                      if (shouldSetState) setState(() {});
                                     },
                                     text: '-${_model.percentage.toString()}%',
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 5.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
-                                      color: Color(0xFF5E57B9),
+                                      color: const Color(0xFF5E57B9),
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
@@ -330,7 +329,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -340,13 +339,13 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(1.0, 1.0),
+                                alignment: const AlignmentDirectional(1.0, 1.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       5.0, 0.0, 0.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      var _shouldSetState = false;
+                                      var shouldSetState = false;
                                       setState(() {
                                         _model.clicks = _model.clicks + 1;
                                         _model.currentNumber =
@@ -364,7 +363,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                             ),
                                           }.withoutNulls,
                                           extra: <String, dynamic>{
-                                            kTransitionInfoKey: TransitionInfo(
+                                            kTransitionInfoKey: const TransitionInfo(
                                               hasTransition: true,
                                               transitionType:
                                                   PageTransitionType.fade,
@@ -374,7 +373,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                           },
                                         );
 
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       }
                                       if (_model.reveal) {
@@ -387,7 +386,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                           percent: _model.percentage,
                                           dec: _model.currentDecrementer,
                                         );
-                                        _shouldSetState = true;
+                                        shouldSetState = true;
                                         if ((_model
                                                 .getOptimalDecResp?.succeeded ??
                                             true)) {
@@ -400,28 +399,28 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                               r'''$.optimal''',
                                             ).toString();
                                           });
-                                          if (_shouldSetState) setState(() {});
+                                          if (shouldSetState) setState(() {});
                                           return;
                                         } else {
-                                          if (_shouldSetState) setState(() {});
+                                          if (shouldSetState) setState(() {});
                                           return;
                                         }
                                       } else {
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       }
 
-                                      if (_shouldSetState) setState(() {});
+                                      if (shouldSetState) setState(() {});
                                     },
                                     text: '-Dec',
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           5.0, 0.0, 5.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
-                                      color: Color(0xFF5E57B9),
+                                      color: const Color(0xFF5E57B9),
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
@@ -430,7 +429,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -440,13 +439,13 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                 ),
                               ),
                               Align(
-                                alignment: AlignmentDirectional(1.0, 1.0),
+                                alignment: const AlignmentDirectional(1.0, 1.0),
                                 child: Padding(
-                                  padding: EdgeInsetsDirectional.fromSTEB(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
                                       5.0, 0.0, 5.0, 0.0),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      var _shouldSetState = false;
+                                      var shouldSetState = false;
                                       setState(() {
                                         _model.reveal = true;
                                       });
@@ -459,7 +458,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                         percent: _model.percentage,
                                         dec: _model.initialDecrementer,
                                       );
-                                      _shouldSetState = true;
+                                      shouldSetState = true;
                                       if ((_model.getOptimalResp?.succeeded ??
                                           true)) {
                                         setState(() {
@@ -469,28 +468,28 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                             r'''$.optimal''',
                                           ).toString();
                                         });
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       } else {
                                         setState(() {
                                           _model.initialOptimal =
                                               'there was an error lol';
                                         });
-                                        if (_shouldSetState) setState(() {});
+                                        if (shouldSetState) setState(() {});
                                         return;
                                       }
 
-                                      if (_shouldSetState) setState(() {});
+                                      if (shouldSetState) setState(() {});
                                     },
                                     text: 'Reveal',
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: EdgeInsetsDirectional.fromSTEB(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
                                           16.0, 0.0, 16.0, 0.0),
                                       iconPadding:
-                                          EdgeInsetsDirectional.fromSTEB(
+                                          const EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
-                                      color: Color(0xFF5E57B9),
+                                      color: const Color(0xFF5E57B9),
                                       textStyle: FlutterFlowTheme.of(context)
                                           .titleSmall
                                           .override(
@@ -499,7 +498,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: BorderSide(
+                                      borderSide: const BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -522,7 +521,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                     children: [
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: Text(
                           'Choose the reduction percentage:',
                           style:
@@ -533,10 +532,10 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsetsDirectional.fromSTEB(
+                        padding: const EdgeInsetsDirectional.fromSTEB(
                             20.0, 0.0, 20.0, 0.0),
                         child: SliderTheme(
-                          data: SliderThemeData(
+                          data: const SliderThemeData(
                             showValueIndicator: ShowValueIndicator.always,
                           ),
                           child: Slider(
@@ -567,7 +566,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                         child: Text(
                           'Choose the starting reduction:',
                           style:
@@ -579,7 +578,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                       ),
                       Padding(
                         padding:
-                            EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                            const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                         child: Container(
                           width: 160.0,
                           height: 50.0,
@@ -627,9 +626,9 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                         ),
                       ),
                       Align(
-                        alignment: AlignmentDirectional(0.0, -1.0),
+                        alignment: const AlignmentDirectional(0.0, -1.0),
                         child: Padding(
-                          padding: EdgeInsetsDirectional.fromSTEB(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 100.0, 0.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
@@ -650,9 +649,9 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                             text: 'Start!',
                             options: FFButtonOptions(
                               height: 40.0,
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   24.0, 0.0, 24.0, 0.0),
-                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context).primary,
                               textStyle: FlutterFlowTheme.of(context)
@@ -663,7 +662,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                     letterSpacing: 0.0,
                                   ),
                               elevation: 3.0,
-                              borderSide: BorderSide(
+                              borderSide: const BorderSide(
                                 color: Colors.transparent,
                                 width: 1.0,
                               ),
