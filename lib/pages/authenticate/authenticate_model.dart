@@ -30,6 +30,8 @@ class AuthenticateModel extends FlutterFlowModel<AuthenticateWidget> {
 
   String? birthday;
 
+  bool forgotPasswordSetUp = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

@@ -693,63 +693,66 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   ),
                                                 ),
                                               ),
-                                              Align(
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 16.0),
-                                                  child: FFButtonWidget(
-                                                    onPressed: () {
-                                                      print(
-                                                          'Button pressed ...');
-                                                    },
-                                                    text: 'Forgot Password',
-                                                    options: FFButtonOptions(
-                                                      width: 230.0,
-                                                      height: 44.0,
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      iconPadding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
-                                                                letterSpacing:
+                                              if (_model.forgotPasswordSetUp)
+                                                Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 16.0),
+                                                    child: FFButtonWidget(
+                                                      onPressed: () {
+                                                        print(
+                                                            'Button pressed ...');
+                                                      },
+                                                      text: 'Forgot Password',
+                                                      options: FFButtonOptions(
+                                                        width: 230.0,
+                                                        height: 44.0,
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
                                                                     0.0,
-                                                              ),
-                                                      elevation: 0.0,
-                                                      borderSide: BorderSide(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
                                                         color: FlutterFlowTheme
                                                                 .of(context)
                                                             .secondaryBackground,
-                                                        width: 2.0,
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                        elevation: 0.0,
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12.0),
                                                       ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
                                               Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
