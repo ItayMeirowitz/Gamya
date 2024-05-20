@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '/backend/schema/structs/index.dart';
+
 import '/index.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 
@@ -29,20 +31,40 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => const IPregisterationWidget(),
+      errorBuilder: (context, state) => appStateNotifier.showSplashImage
+          ? Builder(
+              builder: (context) => Container(
+                color: Colors.transparent,
+                child: Image.asset(
+                  'assets/images/NewProject1-ezgif.com-video-to-gif-converter_(1).gif',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            )
+          : const IPregisterationWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const IPregisterationWidget(),
+          builder: (context, _) => appStateNotifier.showSplashImage
+              ? Builder(
+                  builder: (context) => Container(
+                    color: Colors.transparent,
+                    child: Image.asset(
+                      'assets/images/NewProject1-ezgif.com-video-to-gif-converter_(1).gif',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
+              : const IPregisterationWidget(),
         ),
         FFRoute(
-          name: 'HomePage',
-          path: '/homePage',
-          builder: (context, params) => HomePageWidget(
-            vocabScore: params.getParam(
-              'vocabScore',
-              ParamType.int,
+          name: 'GameFinished',
+          path: '/gameFinished',
+          builder: (context, params) => GameFinishedWidget(
+            score: params.getParam(
+              'score',
+              ParamType.double,
             ),
           ),
         ),
@@ -70,6 +92,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'ChooseGame',
           path: '/chooseGame',
           builder: (context, params) => const ChooseGameWidget(),
+        ),
+        FFRoute(
+          name: 'Get2Zero',
+          path: '/get2Zero',
+          builder: (context, params) => const Get2ZeroWidget(),
+        ),
+        FFRoute(
+          name: 'TicTacToe',
+          path: '/ticTacToe',
+          builder: (context, params) => const TicTacToeWidget(),
+        ),
+        FFRoute(
+          name: 'Connect4',
+          path: '/connect4',
+          builder: (context, params) => const Connect4Widget(),
+        ),
+        FFRoute(
+          name: 'MathContest',
+          path: '/mathContest',
+          builder: (context, params) => const MathContestWidget(),
+        ),
+        FFRoute(
+          name: 'GuessWrong',
+          path: '/guessWrong',
+          builder: (context, params) => const GuessWrongWidget(),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
@@ -99,7 +146,7 @@ extension _GoRouterStateExtensions on GoRouterState {
       extra != null ? extra as Map<String, dynamic> : {};
   Map<String, dynamic> get allParams => <String, dynamic>{}
     ..addAll(pathParameters)
-    ..addAll(queryParameters)
+    ..addAll(uri.queryParameters)
     ..addAll(extraMap);
   TransitionInfo get transitionInfo => extraMap.containsKey(kTransitionInfoKey)
       ? extraMap[kTransitionInfoKey] as TransitionInfo
@@ -118,7 +165,7 @@ class FFParameters {
   // present is the special extra parameter reserved for the transition info.
   bool get isEmpty =>
       state.allParams.isEmpty ||
-      (state.extraMap.length == 1 &&
+      (state.allParams.length == 1 &&
           state.extraMap.containsKey(kTransitionInfoKey));
   bool isAsyncParam(MapEntry<String, dynamic> param) =>
       asyncParams.containsKey(param.key) && param.value is String;
@@ -139,9 +186,10 @@ class FFParameters {
 
   dynamic getParam<T>(
     String paramName,
-    ParamType type, [
+    ParamType type, {
     bool isList = false,
-  ]) {
+    StructBuilder<T>? structBuilder,
+  }) {
     if (futureParamValues.containsKey(paramName)) {
       return futureParamValues[paramName];
     }
@@ -158,6 +206,7 @@ class FFParameters {
       param,
       type,
       isList,
+      structBuilder: structBuilder,
     );
   }
 }
@@ -244,7 +293,7 @@ class RootPageContext {
   static bool isInactiveRootPage(BuildContext context) {
     final rootPageContext = context.read<RootPageContext?>();
     final isRootPage = rootPageContext?.isRootPage ?? false;
-    final location = GoRouter.of(context).location;
+    final location = GoRouterState.of(context).uri.toString();
     return isRootPage &&
         location != '/' &&
         location != rootPageContext?.errorRoute;
@@ -254,4 +303,14 @@ class RootPageContext {
         value: RootPageContext(true, errorRoute),
         child: child,
       );
+}
+
+extension GoRouterLocationExtension on GoRouter {
+  String getCurrentLocation() {
+    final RouteMatch lastMatch = routerDelegate.currentConfiguration.last;
+    final RouteMatchList matchList = lastMatch is ImperativeRouteMatch
+        ? lastMatch.matches
+        : routerDelegate.currentConfiguration;
+    return matchList.uri.toString();
+  }
 }

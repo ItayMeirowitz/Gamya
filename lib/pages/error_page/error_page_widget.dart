@@ -68,7 +68,7 @@ class _ErrorPageWidgetState extends State<ErrorPageWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  context.pushNamed('authenticate');
+                  context.safePop();
                 },
                 text: 'Go Back',
                 options: FFButtonOptions(
@@ -89,7 +89,7 @@ class _ErrorPageWidgetState extends State<ErrorPageWidget> {
               ),
               FFButtonWidget(
                 onPressed: () async {
-                  context.pushNamed('HomePage');
+                  context.pushNamed('ChooseGame');
                 },
                 text: 'Home Page',
                 options: FFButtonOptions(

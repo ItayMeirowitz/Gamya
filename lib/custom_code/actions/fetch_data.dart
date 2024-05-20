@@ -1,10 +1,14 @@
 // Automatic FlutterFlow imports
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom actions
+import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
+
+import 'dart:io';
 
 import 'dart:async';
 
@@ -30,6 +34,8 @@ dynamic fetchData(String apiUrl, String tokenType, String accessToken,
     http.Response response =
         await http.get(Uri.parse(urlWithParams), headers: headers);
 
+    sleep(Duration(milliseconds: 50));
+
     if (response.statusCode == 200) {
       Map<String, dynamic> data = jsonDecode(response.body);
 
@@ -38,16 +44,13 @@ dynamic fetchData(String apiUrl, String tokenType, String accessToken,
           'get': 'false',
           'change': jsonEncode({'isUpdate': 'false'})
         };
-        String urlWithParams =
-            apiUrl + '?' + Uri(queryParameters: updateQueryParams).query;
 
-        http.Response response =
-            await http.get(Uri.parse(urlWithParams), headers: headers);
+        postToUserpage(apiUrl, updateQueryParams, headers);
 
-        return data;
+        return data['data'];
       }
     } else {
-      return "failed to load data: ${response.statusCode}";
+      return {"msg": "failed to load data: ${response.statusCode}"};
     }
   }
 }

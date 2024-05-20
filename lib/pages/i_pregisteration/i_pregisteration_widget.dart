@@ -118,7 +118,6 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                               fontFamily: 'Readex Pro',
                               letterSpacing: 0.0,
                             ),
-                        minLines: null,
                         validator:
                             _model.textControllerValidator.asValidator(context),
                       ),

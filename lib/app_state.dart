@@ -99,6 +99,59 @@ class FFAppState extends ChangeNotifier {
   set hasStarted(bool value) {
     _hasStarted = value;
   }
+
+  int _notificationCounter = 0;
+  int get notificationCounter => _notificationCounter;
+  set notificationCounter(int value) {
+    _notificationCounter = value;
+  }
+
+  List<dynamic> _requests = [];
+  List<dynamic> get requests => _requests;
+  set requests(List<dynamic> value) {
+    _requests = value;
+  }
+
+  void addToRequests(dynamic value) {
+    _requests.add(value);
+  }
+
+  void removeFromRequests(dynamic value) {
+    _requests.remove(value);
+  }
+
+  void removeAtIndexFromRequests(int index) {
+    _requests.removeAt(index);
+  }
+
+  void updateRequestsAtIndex(
+    int index,
+    dynamic Function(dynamic) updateFn,
+  ) {
+    _requests[index] = updateFn(_requests[index]);
+  }
+
+  void insertAtIndexInRequests(int index, dynamic value) {
+    _requests.insert(index, value);
+  }
+
+  String _leader = 'singlePlayer';
+  String get leader => _leader;
+  set leader(String value) {
+    _leader = value;
+  }
+
+  int _lobbyId = 0;
+  int get lobbyId => _lobbyId;
+  set lobbyId(int value) {
+    _lobbyId = value;
+  }
+
+  String _userType = '';
+  String get userType => _userType;
+  set userType(String value) {
+    _userType = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

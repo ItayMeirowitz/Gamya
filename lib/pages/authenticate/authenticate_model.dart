@@ -30,6 +30,8 @@ class AuthenticateModel extends FlutterFlowModel<AuthenticateWidget> {
 
   String? birthday;
 
+  bool forgotPasswordSetUp = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
@@ -40,35 +42,40 @@ class AuthenticateModel extends FlutterFlowModel<AuthenticateWidget> {
 
   // State field(s) for username widget.
   FocusNode? usernameFocusNode;
-  TextEditingController? usernameController;
-  String? Function(BuildContext, String?)? usernameControllerValidator;
+  TextEditingController? usernameTextController;
+  String? Function(BuildContext, String?)? usernameTextControllerValidator;
   // State field(s) for password widget.
   FocusNode? passwordFocusNode;
-  TextEditingController? passwordController;
+  TextEditingController? passwordTextController;
   late bool passwordVisibility;
-  String? Function(BuildContext, String?)? passwordControllerValidator;
+  String? Function(BuildContext, String?)? passwordTextControllerValidator;
   // Stores action output result for [Backend Call - API (ConnectUser)] action in Button widget.
   ApiCallResponse? signInResp;
   // State field(s) for username_Create widget.
   FocusNode? usernameCreateFocusNode;
-  TextEditingController? usernameCreateController;
-  String? Function(BuildContext, String?)? usernameCreateControllerValidator;
+  TextEditingController? usernameCreateTextController;
+  String? Function(BuildContext, String?)?
+      usernameCreateTextControllerValidator;
   // State field(s) for emailAddress_Create widget.
   FocusNode? emailAddressCreateFocusNode;
-  TextEditingController? emailAddressCreateController;
+  TextEditingController? emailAddressCreateTextController;
   String? Function(BuildContext, String?)?
-      emailAddressCreateControllerValidator;
+      emailAddressCreateTextControllerValidator;
   DateTime? datePicked;
   // State field(s) for password_Create widget.
   FocusNode? passwordCreateFocusNode;
-  TextEditingController? passwordCreateController;
+  TextEditingController? passwordCreateTextController;
   late bool passwordCreateVisibility;
-  String? Function(BuildContext, String?)? passwordCreateControllerValidator;
+  String? Function(BuildContext, String?)?
+      passwordCreateTextControllerValidator;
   // State field(s) for passwordConfirm widget.
   FocusNode? passwordConfirmFocusNode;
-  TextEditingController? passwordConfirmController;
+  TextEditingController? passwordConfirmTextController;
   late bool passwordConfirmVisibility;
-  String? Function(BuildContext, String?)? passwordConfirmControllerValidator;
+  String? Function(BuildContext, String?)?
+      passwordConfirmTextControllerValidator;
+  // Stores action output result for [Custom Action - checkSignUp] action in Button widget.
+  String? isValidSignUp;
   // Stores action output result for [Backend Call - API (ConnectUser)] action in Button widget.
   ApiCallResponse? signUpResp;
 
@@ -84,21 +91,21 @@ class AuthenticateModel extends FlutterFlowModel<AuthenticateWidget> {
     unfocusNode.dispose();
     tabBarController?.dispose();
     usernameFocusNode?.dispose();
-    usernameController?.dispose();
+    usernameTextController?.dispose();
 
     passwordFocusNode?.dispose();
-    passwordController?.dispose();
+    passwordTextController?.dispose();
 
     usernameCreateFocusNode?.dispose();
-    usernameCreateController?.dispose();
+    usernameCreateTextController?.dispose();
 
     emailAddressCreateFocusNode?.dispose();
-    emailAddressCreateController?.dispose();
+    emailAddressCreateTextController?.dispose();
 
     passwordCreateFocusNode?.dispose();
-    passwordCreateController?.dispose();
+    passwordCreateTextController?.dispose();
 
     passwordConfirmFocusNode?.dispose();
-    passwordConfirmController?.dispose();
+    passwordConfirmTextController?.dispose();
   }
 }

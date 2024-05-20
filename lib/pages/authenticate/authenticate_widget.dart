@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -23,60 +24,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  final animationsMap = {
-    'columnOnPageLoadAnimation1': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(0.0, 60.0),
-          end: const Offset(0.0, 0.0),
-        ),
-        TiltEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(-0.349, 0),
-          end: const Offset(0, 0),
-        ),
-      ],
-    ),
-    'columnOnPageLoadAnimation2': AnimationInfo(
-      trigger: AnimationTrigger.onPageLoad,
-      effects: [
-        FadeEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: 0.0,
-          end: 1.0,
-        ),
-        MoveEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(0.0, 60.0),
-          end: const Offset(0.0, 0.0),
-        ),
-        TiltEffect(
-          curve: Curves.easeInOut,
-          delay: 0.ms,
-          duration: 300.ms,
-          begin: const Offset(-0.349, 0),
-          end: const Offset(0, 0),
-        ),
-      ],
-    ),
-  };
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
@@ -88,23 +36,78 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
       length: 2,
       initialIndex: 0,
     )..addListener(() => setState(() {}));
-    _model.usernameController ??= TextEditingController();
+    _model.usernameTextController ??= TextEditingController();
     _model.usernameFocusNode ??= FocusNode();
 
-    _model.passwordController ??= TextEditingController();
+    _model.passwordTextController ??= TextEditingController();
     _model.passwordFocusNode ??= FocusNode();
 
-    _model.usernameCreateController ??= TextEditingController();
+    _model.usernameCreateTextController ??= TextEditingController();
     _model.usernameCreateFocusNode ??= FocusNode();
 
-    _model.emailAddressCreateController ??= TextEditingController();
+    _model.emailAddressCreateTextController ??= TextEditingController();
     _model.emailAddressCreateFocusNode ??= FocusNode();
 
-    _model.passwordCreateController ??= TextEditingController();
+    _model.passwordCreateTextController ??= TextEditingController();
     _model.passwordCreateFocusNode ??= FocusNode();
 
-    _model.passwordConfirmController ??= TextEditingController();
+    _model.passwordConfirmTextController ??= TextEditingController();
     _model.passwordConfirmFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'columnOnPageLoadAnimation1': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          TiltEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(-0.349, 0),
+            end: const Offset(0, 0),
+          ),
+        ],
+      ),
+      'columnOnPageLoadAnimation2': AnimationInfo(
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          FadeEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: 0.0,
+            end: 1.0,
+          ),
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(0.0, 60.0),
+            end: const Offset(0.0, 0.0),
+          ),
+          TiltEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 300.0.ms,
+            begin: const Offset(-0.349, 0),
+            end: const Offset(0, 0),
+          ),
+        ],
+      ),
+    });
   }
 
   @override
@@ -288,7 +291,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .usernameController,
+                                                        .usernameTextController,
                                                     focusNode: _model
                                                         .usernameFocusNode,
                                                     autofocus: true,
@@ -371,13 +374,12 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    minLines: null,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .usernameControllerValidator
+                                                        .usernameTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -390,7 +392,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .passwordController,
+                                                        .passwordTextController,
                                                     focusNode: _model
                                                         .passwordFocusNode,
                                                     autofocus: false,
@@ -496,13 +498,12 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    minLines: null,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .passwordControllerValidator
+                                                        .passwordTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -520,10 +521,10 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                           false;
                                                       setState(() {
                                                         _model.username = _model
-                                                            .usernameController
+                                                            .usernameTextController
                                                             .text;
                                                         _model.password = _model
-                                                            .passwordController
+                                                            .passwordTextController
                                                             .text;
                                                       });
                                                       if (!((_model.username !=
@@ -692,63 +693,66 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   ),
                                                 ),
                                               ),
-                                              Align(
-                                                alignment: const AlignmentDirectional(
-                                                    0.0, 0.0),
-                                                child: Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          0.0, 0.0, 0.0, 16.0),
-                                                  child: FFButtonWidget(
-                                                    onPressed: () {
-                                                      print(
-                                                          'Button pressed ...');
-                                                    },
-                                                    text: 'Forgot Password',
-                                                    options: FFButtonOptions(
-                                                      width: 230.0,
-                                                      height: 44.0,
-                                                      padding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      iconPadding:
-                                                          const EdgeInsetsDirectional
-                                                              .fromSTEB(
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0,
-                                                                  0.0),
-                                                      color: FlutterFlowTheme
-                                                              .of(context)
-                                                          .secondaryBackground,
-                                                      textStyle:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .bodyMedium
-                                                              .override(
-                                                                fontFamily:
-                                                                    'Readex Pro',
-                                                                letterSpacing:
+                                              if (_model.forgotPasswordSetUp)
+                                                Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(0.0, 0.0,
+                                                                0.0, 16.0),
+                                                    child: FFButtonWidget(
+                                                      onPressed: () {
+                                                        print(
+                                                            'Button pressed ...');
+                                                      },
+                                                      text: 'Forgot Password',
+                                                      options: FFButtonOptions(
+                                                        width: 230.0,
+                                                        height: 44.0,
+                                                        padding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
                                                                     0.0,
-                                                              ),
-                                                      elevation: 0.0,
-                                                      borderSide: BorderSide(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
+                                                        iconPadding:
+                                                            const EdgeInsetsDirectional
+                                                                .fromSTEB(
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0,
+                                                                    0.0),
                                                         color: FlutterFlowTheme
                                                                 .of(context)
                                                             .secondaryBackground,
-                                                        width: 2.0,
+                                                        textStyle:
+                                                            FlutterFlowTheme.of(
+                                                                    context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Readex Pro',
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                ),
+                                                        elevation: 0.0,
+                                                        borderSide: BorderSide(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          width: 2.0,
+                                                        ),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(12.0),
                                                       ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
                                                     ),
                                                   ),
                                                 ),
-                                              ),
                                               Column(
                                                 mainAxisSize: MainAxisSize.max,
                                                 children: [
@@ -816,10 +820,9 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                         ),
                                                                   ),
                                                                 ),
-                                                              if (_model.signInError !=
-                                                                      null &&
-                                                                  _model.signInError !=
-                                                                      '')
+                                                              if (_model
+                                                                      .signInErrorCode !=
+                                                                  null)
                                                                 Text(
                                                                   ': status: ',
                                                                   style: FlutterFlowTheme.of(
@@ -832,10 +835,9 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                             0.0,
                                                                       ),
                                                                 ),
-                                                              if (_model.signInError !=
-                                                                      null &&
-                                                                  _model.signInError !=
-                                                                      '')
+                                                              if (_model
+                                                                      .signInErrorCode !=
+                                                                  null)
                                                                 Text(
                                                                   valueOrDefault<
                                                                       String>(
@@ -903,7 +905,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .usernameCreateController,
+                                                        .usernameCreateTextController,
                                                     focusNode: _model
                                                         .usernameCreateFocusNode,
                                                     autofocus: true,
@@ -986,7 +988,6 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    minLines: null,
                                                     keyboardType: TextInputType
                                                         .emailAddress,
                                                     cursorColor:
@@ -994,7 +995,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .usernameCreateControllerValidator
+                                                        .usernameCreateTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -1007,7 +1008,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .emailAddressCreateController,
+                                                        .emailAddressCreateTextController,
                                                     focusNode: _model
                                                         .emailAddressCreateFocusNode,
                                                     autofocus: true,
@@ -1090,7 +1091,6 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    minLines: null,
                                                     keyboardType: TextInputType
                                                         .emailAddress,
                                                     cursorColor:
@@ -1098,7 +1098,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .emailAddressCreateControllerValidator
+                                                        .emailAddressCreateTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -1249,7 +1249,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .passwordCreateController,
+                                                        .passwordCreateTextController,
                                                     focusNode: _model
                                                         .passwordCreateFocusNode,
                                                     autofocus: false,
@@ -1355,13 +1355,12 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
-                                                    minLines: null,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .passwordCreateControllerValidator
+                                                        .passwordCreateTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -1374,7 +1373,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                   width: double.infinity,
                                                   child: TextFormField(
                                                     controller: _model
-                                                        .passwordConfirmController,
+                                                        .passwordConfirmTextController,
                                                     focusNode: _model
                                                         .passwordConfirmFocusNode,
                                                     autofocus: false,
@@ -1481,12 +1480,13 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               'Readex Pro',
                                                           letterSpacing: 0.0,
                                                         ),
+                                                    minLines: 1,
                                                     cursorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
                                                             .primary,
                                                     validator: _model
-                                                        .passwordConfirmControllerValidator
+                                                        .passwordConfirmTextControllerValidator
                                                         .asValidator(context),
                                                   ),
                                                 ),
@@ -1505,19 +1505,19 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                       setState(() {
                                                         _model.usernameCreate =
                                                             _model
-                                                                .usernameCreateController
+                                                                .usernameCreateTextController
                                                                 .text;
                                                         _model.emailAdressCreate =
                                                             _model
-                                                                .emailAddressCreateController
+                                                                .emailAddressCreateTextController
                                                                 .text;
                                                         _model.passwordCreate =
                                                             _model
-                                                                .passwordCreateController
+                                                                .passwordCreateTextController
                                                                 .text;
                                                         _model.passwordConfirm =
                                                             _model
-                                                                .passwordConfirmController
+                                                                .passwordConfirmTextController
                                                                 .text;
                                                         _model.birthday =
                                                             dateTimeFormat(
@@ -1525,21 +1525,20 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                 _model
                                                                     .datePicked);
                                                       });
-                                                      if ((_model.passwordCreate ==
-                                                              _model
-                                                                  .passwordConfirm) &&
-                                                          (_model.usernameCreate !=
-                                                                  null &&
-                                                              _model.usernameCreate !=
-                                                                  '') &&
-                                                          (_model.emailAdressCreate !=
-                                                                  null &&
-                                                              _model.emailAdressCreate !=
-                                                                  '') &&
-                                                          (_model.birthday !=
-                                                                  null &&
-                                                              _model.birthday !=
-                                                                  '')) {
+                                                      _model.isValidSignUp =
+                                                          actions
+                                                              .checkSignUp(
+                                                        _model.usernameCreate!,
+                                                        _model
+                                                            .emailAdressCreate!,
+                                                        _model.passwordCreate!,
+                                                        _model.passwordConfirm!,
+                                                      );
+                                                      shouldSetState = true;
+                                                      if (_model.isValidSignUp ==
+                                                              null ||
+                                                          _model.isValidSignUp ==
+                                                              '') {
                                                         _model.signUpResp =
                                                             await ConnectUserCall
                                                                 .call(
@@ -1604,8 +1603,8 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                             return;
                                                           } else {
                                                             setState(() {
-                                                              _model.username =
-                                                                  'already taken';
+                                                              _model.signUpError =
+                                                                  'Username already taken!';
                                                             });
                                                             if (shouldSetState) {
                                                               setState(() {});
@@ -1638,9 +1637,8 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                       } else {
                                                         setState(() {
                                                           _model.signUpError =
-                                                              'Invalid input';
-                                                          _model.signUpErrorCode =
-                                                              100;
+                                                              _model
+                                                                  .isValidSignUp;
                                                         });
                                                         if (shouldSetState) {
                                                           setState(() {});
@@ -1718,21 +1716,20 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                           _model.signUpError,
                                                           'Couldn\'t connect to server',
                                                         ),
-                                                        style:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .bodyMedium
-                                                                .override(
-                                                                  fontFamily:
-                                                                      'Readex Pro',
-                                                                  letterSpacing:
-                                                                      0.0,
-                                                                ),
+                                                        style: FlutterFlowTheme
+                                                                .of(context)
+                                                            .bodyMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Readex Pro',
+                                                              fontSize: 14.0,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                            ),
                                                       ),
                                                     ),
-                                                  if (_model.signUpError !=
-                                                          null &&
-                                                      _model.signUpError != '')
+                                                  if (_model.signUpErrorCode !=
+                                                      null)
                                                     Text(
                                                       ': status: ',
                                                       style: FlutterFlowTheme
@@ -1741,12 +1738,12 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                           .override(
                                                             fontFamily:
                                                                 'Readex Pro',
+                                                            fontSize: 14.0,
                                                             letterSpacing: 0.0,
                                                           ),
                                                     ),
-                                                  if (_model.signUpError !=
-                                                          null &&
-                                                      _model.signUpError != '')
+                                                  if (_model.signUpErrorCode !=
+                                                      null)
                                                     Text(
                                                       valueOrDefault<String>(
                                                         _model.signUpErrorCode
@@ -1759,6 +1756,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                           .override(
                                                             fontFamily:
                                                                 'Readex Pro',
+                                                            fontSize: 14.0,
                                                             letterSpacing: 0.0,
                                                           ),
                                                     ),
