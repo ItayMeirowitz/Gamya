@@ -6,6 +6,7 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'guess_wrong_model.dart';
 export 'guess_wrong_model.dart';
@@ -91,7 +92,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                   ),
                 }.withoutNulls,
                 extra: <String, dynamic>{
-                  kTransitionInfoKey: const TransitionInfo(
+                  kTransitionInfoKey: TransitionInfo(
                     hasTransition: true,
                     transitionType: PageTransitionType.fade,
                     duration: Duration(milliseconds: 1000),
@@ -123,12 +124,12 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                 context: context,
                 builder: (alertDialogContext) {
                   return AlertDialog(
-                    title: const Text('yhgokn '),
-                    content: const Text('ghytvnu'),
+                    title: Text('yhgokn '),
+                    content: Text('ghytvnu'),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(alertDialogContext),
-                        child: const Text('Ok'),
+                        child: Text('Ok'),
                       ),
                     ],
                   );
@@ -206,7 +207,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                   ),
                 }.withoutNulls,
                 extra: <String, dynamic>{
-                  kTransitionInfoKey: const TransitionInfo(
+                  kTransitionInfoKey: TransitionInfo(
                     hasTransition: true,
                     transitionType: PageTransitionType.fade,
                     duration: Duration(milliseconds: 1000),
@@ -220,12 +221,12 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                 context: context,
                 builder: (alertDialogContext) {
                   return AlertDialog(
-                    title: const Text('SUS'),
-                    content: const Text('couldnt get state'),
+                    title: Text('SUS'),
+                    content: Text('couldnt get state'),
                     actions: [
                       TextButton(
                         onPressed: () => Navigator.pop(alertDialogContext),
-                        child: const Text('Ok'),
+                        child: Text('Ok'),
                       ),
                     ],
                   );
@@ -284,9 +285,9 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
             ),
             actions: [
               Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                   child: Text(
                     'Logged as: ${FFAppState().username}',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -312,12 +313,12 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                         children: [
                           if (!_model.waitingGuess)
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 10.0, 0.0, 0.0),
                                     child: Text(
                                       'Choose a category:',
@@ -331,16 +332,16 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         24.0, 20.0, 24.0, 16.0),
-                                    child: SizedBox(
+                                    child: Container(
                                       width: double.infinity,
                                       child: TextFormField(
                                         controller:
                                             _model.categoryTextController,
                                         focusNode: _model.categoryFocusNode,
                                         autofocus: true,
-                                        autofillHints: const [AutofillHints.username],
+                                        autofillHints: [AutofillHints.username],
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Enter catergory here',
@@ -396,7 +397,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                           fillColor:
                                               FlutterFlowTheme.of(context)
                                                   .secondaryBackground,
-                                          contentPadding: const EdgeInsets.all(24.0),
+                                          contentPadding: EdgeInsets.all(24.0),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
@@ -414,7 +415,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 5.0, 0.0, 0.0),
                                     child: Text(
                                       'Enter the word you think they would guess:',
@@ -427,16 +428,16 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         24.0, 20.0, 24.0, 16.0),
-                                    child: SizedBox(
+                                    child: Container(
                                       width: double.infinity,
                                       child: TextFormField(
                                         controller:
                                             _model.secretWordTextController,
                                         focusNode: _model.secretWordFocusNode,
                                         autofocus: true,
-                                        autofillHints: const [AutofillHints.username],
+                                        autofillHints: [AutofillHints.username],
                                         obscureText: false,
                                         decoration: InputDecoration(
                                           labelText: 'Secret word here',
@@ -492,7 +493,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                           fillColor:
                                               FlutterFlowTheme.of(context)
                                                   .secondaryBackground,
-                                          contentPadding: const EdgeInsets.all(24.0),
+                                          contentPadding: EdgeInsets.all(24.0),
                                         ),
                                         style: FlutterFlowTheme.of(context)
                                             .bodyMedium
@@ -511,7 +512,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                   ),
                                   FFButtonWidget(
                                     onPressed: () async {
-                                      var shouldSetState = false;
+                                      var _shouldSetState = false;
                                       setState(() {
                                         _model.category =
                                             _model.categoryTextController.text;
@@ -532,7 +533,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                           category: _model.category,
                                           secretWord: _model.secretWord,
                                         );
-                                        shouldSetState = true;
+                                        _shouldSetState = true;
                                         if ((_model
                                                 .postCategoryResp?.succeeded ??
                                             true)) {
@@ -544,7 +545,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                             context: context,
                                             builder: (alertDialogContext) {
                                               return AlertDialog(
-                                                title: const Text('API error'),
+                                                title: Text('API error'),
                                                 content: Text((_model
                                                             .postCategoryResp
                                                             ?.jsonBody ??
@@ -555,13 +556,13 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                                     onPressed: () =>
                                                         Navigator.pop(
                                                             alertDialogContext),
-                                                    child: const Text('Ok'),
+                                                    child: Text('Ok'),
                                                   ),
                                                 ],
                                               );
                                             },
                                           );
-                                          if (shouldSetState) setState(() {});
+                                          if (_shouldSetState) setState(() {});
                                           return;
                                         }
                                       } else {
@@ -569,33 +570,33 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                           context: context,
                                           builder: (alertDialogContext) {
                                             return AlertDialog(
-                                              title: const Text('Invalid Input'),
-                                              content: const Text(
+                                              title: Text('Invalid Input'),
+                                              content: Text(
                                                   'Both fields need to be filled'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext),
-                                                  child: const Text('Ok, mb'),
+                                                  child: Text('Ok, mb'),
                                                 ),
                                               ],
                                             );
                                           },
                                         );
-                                        if (shouldSetState) setState(() {});
+                                        if (_shouldSetState) setState(() {});
                                         return;
                                       }
 
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                     },
                                     text: 'Submit',
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       iconPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
@@ -607,7 +608,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: const BorderSide(
+                                      borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -623,9 +624,9 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                               crossAxisAlignment: CrossAxisAlignment.stretch,
                               children: [
                                 Align(
-                                  alignment: const AlignmentDirectional(0.0, -1.0),
+                                  alignment: AlignmentDirectional(0.0, -1.0),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         10.0, 20.0, 10.0, 0.0),
                                     child: Text(
                                       'Waiting for users to guess the word',
@@ -642,9 +643,9 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                   ),
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(0.0, 1.0),
+                                  alignment: AlignmentDirectional(0.0, 1.0),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 80.0, 0.0, 0.0),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8.0),
@@ -678,9 +679,9 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                   children: [
                                     Align(
                                       alignment:
-                                          const AlignmentDirectional(0.0, -1.0),
+                                          AlignmentDirectional(0.0, -1.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             10.0, 20.0, 10.0, 0.0),
                                         child: Text(
                                           'Waiting for others',
@@ -697,9 +698,9 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                       ),
                                     ),
                                     Align(
-                                      alignment: const AlignmentDirectional(0.0, 1.0),
+                                      alignment: AlignmentDirectional(0.0, 1.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 80.0, 0.0, 0.0),
                                         child: ClipRRect(
                                           borderRadius:
@@ -723,9 +724,9 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                   children: [
                                     Align(
                                       alignment:
-                                          const AlignmentDirectional(0.0, -1.0),
+                                          AlignmentDirectional(0.0, -1.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 20.0, 0.0, 0.0),
                                         child: AutoSizeText(
                                           'Category: ${_model.guessCategory}',
@@ -742,9 +743,9 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                     ),
                                     Align(
                                       alignment:
-                                          const AlignmentDirectional(0.0, -1.0),
+                                          AlignmentDirectional(0.0, -1.0),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 10.0, 0.0, 0.0),
                                         child: Text(
                                           'Guess the unanticipated',
@@ -758,16 +759,16 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 20.0, 24.0, 16.0),
-                                      child: SizedBox(
+                                      child: Container(
                                         width: double.infinity,
                                         child: TextFormField(
                                           controller:
                                               _model.guessTextController,
                                           focusNode: _model.guessFocusNode,
                                           autofocus: true,
-                                          autofillHints: const [
+                                          autofillHints: [
                                             AutofillHints.username
                                           ],
                                           obscureText: false,
@@ -826,7 +827,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                                 FlutterFlowTheme.of(context)
                                                     .secondaryBackground,
                                             contentPadding:
-                                                const EdgeInsets.all(24.0),
+                                                EdgeInsets.all(24.0),
                                           ),
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
@@ -844,11 +845,11 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 20.0, 0.0, 0.0),
                                       child: FFButtonWidget(
                                         onPressed: () async {
-                                          var shouldSetState = false;
+                                          var _shouldSetState = false;
                                           _model.postCheckGuessResp =
                                               await PostCheckGuessWCall.call(
                                             serverIP: FFAppState().serverIP,
@@ -861,51 +862,49 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                             guess:
                                                 _model.guessTextController.text,
                                           );
-                                          shouldSetState = true;
+                                          _shouldSetState = true;
                                           if ((_model.postCheckGuessResp
                                                   ?.succeeded ??
                                               true)) {
                                             setState(() {
                                               _model.guessCategory = null;
                                             });
-                                            if (shouldSetState) {
+                                            if (_shouldSetState)
                                               setState(() {});
-                                            }
                                             return;
                                           } else {
                                             await showDialog(
                                               context: context,
                                               builder: (alertDialogContext) {
                                                 return AlertDialog(
-                                                  title: const Text('aaaa'),
-                                                  content: const Text('checkguesded'),
+                                                  title: Text('aaaa'),
+                                                  content: Text('checkguesded'),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () =>
                                                           Navigator.pop(
                                                               alertDialogContext),
-                                                      child: const Text('Ok'),
+                                                      child: Text('Ok'),
                                                     ),
                                                   ],
                                                 );
                                               },
                                             );
-                                            if (shouldSetState) {
+                                            if (_shouldSetState)
                                               setState(() {});
-                                            }
                                             return;
                                           }
 
-                                          if (shouldSetState) setState(() {});
+                                          if (_shouldSetState) setState(() {});
                                         },
                                         text: 'Send it!',
                                         options: FFButtonOptions(
                                           height: 40.0,
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   24.0, 0.0, 24.0, 0.0),
                                           iconPadding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 0.0, 0.0),
                                           color: FlutterFlowTheme.of(context)
                                               .primary,
@@ -918,7 +917,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                                     letterSpacing: 0.0,
                                                   ),
                                           elevation: 3.0,
-                                          borderSide: const BorderSide(
+                                          borderSide: BorderSide(
                                             color: Colors.transparent,
                                             width: 1.0,
                                           ),
@@ -937,7 +936,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                 ),
                 Flexible(
                   child: Align(
-                    alignment: const AlignmentDirectional(0.0, 1.0),
+                    alignment: AlignmentDirectional(0.0, 1.0),
                     child: Builder(
                       builder: (context) {
                         final scoresList = _model.scores.toList();
@@ -949,7 +948,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                           itemBuilder: (context, scoresListIndex) {
                             final scoresListItem = scoresList[scoresListIndex];
                             return Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   10.0, 0.0, 10.0, 0.0),
                               child: Card(
                                 clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -960,7 +959,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(12.0),
+                                  padding: EdgeInsets.all(12.0),
                                   child: Text(
                                     '${getJsonField(
                                       scoresListItem,

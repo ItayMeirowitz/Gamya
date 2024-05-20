@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:typed_data';
+import '../schema/structs/index.dart';
 
 import 'package:flutter/foundation.dart';
 
@@ -19,15 +21,15 @@ class ConnectUserCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "username": "$username",
-  "email": "$email",
-  "birthday": "$birthday",
-  "password": "$password",
+  "username": "${username}",
+  "email": "${email}",
+  "birthday": "${birthday}",
+  "password": "${password}",
   "online": 1
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ConnectUser',
-      apiUrl: 'http://$serverIP:5000/user',
+      apiUrl: 'http://${serverIP}:5000/user',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -62,11 +64,11 @@ class GetVocabCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getVocab',
-      apiUrl: 'http://$serverIP:5000/getVocab',
+      apiUrl: 'http://${serverIP}:5000/getVocab',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {
         'diff': diff,
@@ -102,11 +104,11 @@ class GetUsersCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getUsers',
-      apiUrl: 'http://$serverIP:5000/users',
+      apiUrl: 'http://${serverIP}:5000/users',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {
         'username': username,
@@ -134,11 +136,11 @@ class GetScoreCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getScore',
-      apiUrl: 'http://$serverIP:5000/getScore',
+      apiUrl: 'http://${serverIP}:5000/getScore',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {
         'lobby_id': lobbyId,
@@ -162,16 +164,16 @@ class InviteUserCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "sender_username": "$thisUser",
-  "receiver_username": "$otherUser"
+  "sender_username": "${thisUser}",
+  "receiver_username": "${otherUser}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'InviteUser',
-      apiUrl: 'http://$serverIP:5000/inviteUser',
+      apiUrl: 'http://${serverIP}:5000/inviteUser',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -195,16 +197,16 @@ class DeclineInviteCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "sender_username": "$senderUsername",
-  "receiver_username": "$receiverUsername"
+  "sender_username": "${senderUsername}",
+  "receiver_username": "${receiverUsername}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'declineInvite',
-      apiUrl: 'http://$serverIP:5000/declineInvite',
+      apiUrl: 'http://${serverIP}:5000/declineInvite',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -228,16 +230,16 @@ class AcceptInviteCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "sender_username": "$senderUsername",
-  "receiver_username": "$receiverUsername"
+  "sender_username": "${senderUsername}",
+  "receiver_username": "${receiverUsername}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'acceptInvite',
-      apiUrl: 'http://$serverIP:5000/acceptInvite',
+      apiUrl: 'http://${serverIP}:5000/acceptInvite',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -262,17 +264,17 @@ class PostScoreCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "username": "$username",
-  "score": $score,
-  "lobby_id": $lobbyId
+  "username": "${username}",
+  "score": ${score},
+  "lobby_id": ${lobbyId}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postScore',
-      apiUrl: 'http://$serverIP:5000/postScore',
+      apiUrl: 'http://${serverIP}:5000/postScore',
       callType: ApiCallType.POST,
       headers: {
         'Content-type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -297,11 +299,11 @@ class GetOptimalCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getOptimal',
-      apiUrl: 'http://$serverIP:5000/zero/optimal',
+      apiUrl: 'http://${serverIP}:5000/zero/optimal',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {
         'number': number,
@@ -326,15 +328,15 @@ class PostGetTZeroCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "username": "$username"
+  "username": "${username}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postGetTZero',
-      apiUrl: 'http://$serverIP:5000/zero',
+      apiUrl: 'http://${serverIP}:5000/zero',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -358,16 +360,16 @@ class PostVocabCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "leader": "$leader",
-  "username": "$username"
+  "leader": "${leader}",
+  "username": "${username}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postVocab',
-      apiUrl: 'http://$serverIP:5000/vocab',
+      apiUrl: 'http://${serverIP}:5000/vocab',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -391,16 +393,16 @@ class PostTicTacToeCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "username": "$username",
-  "leader": "$leader"
+  "username": "${username}",
+  "leader": "${leader}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postTicTacToe',
-      apiUrl: 'http://$serverIP:5000/tictactoe',
+      apiUrl: 'http://${serverIP}:5000/tictactoe',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -425,17 +427,17 @@ class PlaceTicTacToeCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "lobby_id": $lobbyId,
-  "index": $index,
-  "user_type": "$userType"
+  "lobby_id": ${lobbyId},
+  "index": ${index},
+  "user_type": "${userType}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'placeTicTacToe',
-      apiUrl: 'http://$serverIP:5000/tictactoe/place',
+      apiUrl: 'http://${serverIP}:5000/tictactoe/place',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -458,11 +460,11 @@ class GetTicTacToeBoardCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getTicTacToeBoard',
-      apiUrl: 'http://$serverIP:5000/tictactoe/board',
+      apiUrl: 'http://${serverIP}:5000/tictactoe/board',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {
         'lobby_id': lobbyId,
@@ -486,16 +488,16 @@ class PostConnectFCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "leader": "$leader",
-  "username": "$username"
+  "leader": "${leader}",
+  "username": "${username}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postConnectF',
-      apiUrl: 'http://$serverIP:5000/connect4',
+      apiUrl: 'http://${serverIP}:5000/connect4',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -520,17 +522,17 @@ class PlaceConnectFCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "lobby_id": $lobbyId,
-  "index": $index,
-  "user_type": "$userType"
+  "lobby_id": ${lobbyId},
+  "index": ${index},
+  "user_type": "${userType}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'placeConnectF',
-      apiUrl: 'http://$serverIP:5000/connect4/place',
+      apiUrl: 'http://${serverIP}:5000/connect4/place',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -553,11 +555,11 @@ class GetConnectFBoardCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getConnectFBoard',
-      apiUrl: 'http://$serverIP:5000/connect4/board',
+      apiUrl: 'http://${serverIP}:5000/connect4/board',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {
         'lobby_id': lobbyId,
@@ -580,11 +582,11 @@ class GetMathTestCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getMathTest',
-      apiUrl: 'http://$serverIP:5000/getMath',
+      apiUrl: 'http://${serverIP}:5000/getMath',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {
         'lobby_id': lobbyId,
@@ -608,16 +610,16 @@ class PostMathCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "username": "$username",
-  "leader": "$leader"
+  "username": "${username}",
+  "leader": "${leader}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postMath',
-      apiUrl: 'http://$serverIP:5000/mathTest',
+      apiUrl: 'http://${serverIP}:5000/mathTest',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -642,17 +644,17 @@ class PostVocabAnswerCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "diff": "$diff",
-  "index": $index,
-  "answer": "$answer"
+  "diff": "${diff}",
+  "index": ${index},
+  "answer": "${answer}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postVocabAnswer',
-      apiUrl: 'http://$serverIP:5000/vocab/answer',
+      apiUrl: 'http://${serverIP}:5000/vocab/answer',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -677,17 +679,17 @@ class PostMathAnswerCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "lobby_id": $lobbyId,
-  "index": $index,
-  "answer": "$answer"
+  "lobby_id": ${lobbyId},
+  "index": ${index},
+  "answer": "${answer}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postMathAnswer',
-      apiUrl: 'http://$serverIP:5000/math/answer',
+      apiUrl: 'http://${serverIP}:5000/math/answer',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -713,18 +715,18 @@ class PostGuessWCategoryCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "lobby_id": $lobbyId,
-  "username": "$username",
-  "category": "$category",
-  "secret_word": "$secretWord"
+  "lobby_id": ${lobbyId},
+  "username": "${username}",
+  "category": "${category}",
+  "secret_word": "${secretWord}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postGuessWCategory',
-      apiUrl: 'http://$serverIP:5000/guessWrong/category',
+      apiUrl: 'http://${serverIP}:5000/guessWrong/category',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -749,17 +751,17 @@ class PostCheckGuessWCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "lobby_id": "$lobbyId",
-  "username": "$username",
-  "guess": "$guess"
+  "lobby_id": "${lobbyId}",
+  "username": "${username}",
+  "guess": "${guess}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postCheckGuessW',
-      apiUrl: 'http://$serverIP:5000/guessWrong/guess',
+      apiUrl: 'http://${serverIP}:5000/guessWrong/guess',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,
@@ -783,16 +785,16 @@ class PostGuessWrongCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "username": "$username",
-  "leader": "$leader"
+  "username": "${username}",
+  "leader": "${leader}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postGuessWrong',
-      apiUrl: 'http://$serverIP:5000/guessWrong',
+      apiUrl: 'http://${serverIP}:5000/guessWrong',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': '$tokenType $accessToken',
+        'Authorization': '${tokenType} ${accessToken}',
       },
       params: {},
       body: ffApiRequestBody,

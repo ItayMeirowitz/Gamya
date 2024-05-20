@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'game_finished_model.dart';
 export 'game_finished_model.dart';
@@ -92,7 +93,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                     letterSpacing: 0.0,
                   ),
             ),
-            actions: const [],
+            actions: [],
             centerTitle: false,
             elevation: 2.0,
           ),
@@ -102,13 +103,13 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 Align(
-                  alignment: const AlignmentDirectional(0.0, -1.0),
+                  alignment: AlignmentDirectional(0.0, -1.0),
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 60.0, 0.0, 0.0),
                         child: Text(
                           'Game Concluded',
                           style:
@@ -121,13 +122,13 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                         ),
                       ),
                       Align(
-                        alignment: const AlignmentDirectional(0.0, 0.0),
+                        alignment: AlignmentDirectional(0.0, 0.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 10.0, 0.0, 20.0),
                               child: Text(
                                 'Scores from the match:',
@@ -155,7 +156,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                               final scoresListItem =
                                   scoresList[scoresListIndex];
                               return Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     10.0, 0.0, 10.0, 0.0),
                                 child: Card(
                                   clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -166,7 +167,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(12.0),
+                                    padding: EdgeInsets.all(12.0),
                                     child: Text(
                                       '${getJsonField(
                                         scoresListItem,
@@ -195,20 +196,20 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                   ),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(5.0, 15.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(5.0, 15.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        var shouldSetState = false;
+                        var _shouldSetState = false;
                         _model.getScoreResponse = await GetScoreCall.call(
                           serverIP: FFAppState().serverIP,
                           tokenType: FFAppState().tokenType,
                           accessToken: FFAppState().accessToken,
                           lobbyId: FFAppState().lobbyId,
                         );
-                        shouldSetState = true;
+                        _shouldSetState = true;
                         if ((_model.getScoreResponse?.succeeded ?? true)) {
                           setState(() {
                             _model.scores =
@@ -216,22 +217,22 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                                     .toList()
                                     .cast<dynamic>();
                           });
-                          if (shouldSetState) setState(() {});
+                          if (_shouldSetState) setState(() {});
                           return;
                         } else {
-                          if (shouldSetState) setState(() {});
+                          if (_shouldSetState) setState(() {});
                           return;
                         }
 
-                        if (shouldSetState) setState(() {});
+                        if (_shouldSetState) setState(() {});
                       },
                       text: 'Refresh results',
                       options: FFButtonOptions(
                         height: 40.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
@@ -240,7 +241,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                                   letterSpacing: 0.0,
                                 ),
                         elevation: 3.0,
-                        borderSide: const BorderSide(
+                        borderSide: BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),

@@ -1,9 +1,11 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'connect4_model.dart';
 export 'connect4_model.dart';
@@ -49,7 +51,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
               true,
             ) as List)
                 .map<String>((s) => s.toString())
-                .toList()
+                .toList()!
                 .toList()
                 .cast<String>();
           });
@@ -87,7 +89,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                 ),
               }.withoutNulls,
               extra: <String, dynamic>{
-                kTransitionInfoKey: const TransitionInfo(
+                kTransitionInfoKey: TransitionInfo(
                   hasTransition: true,
                   transitionType: PageTransitionType.fade,
                   duration: Duration(milliseconds: 1000),
@@ -102,12 +104,12 @@ class _Connect4WidgetState extends State<Connect4Widget> {
             context: context,
             builder: (alertDialogContext) {
               return AlertDialog(
-                title: const Text('aaaaaaaaaaaaaaaaaaaaaaaaa'),
-                content: const Text('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),
+                title: Text('aaaaaaaaaaaaaaaaaaaaaaaaa'),
+                content: Text('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
-                    child: const Text('Oaaaaaak'),
+                    child: Text('Oaaaaaak'),
                   ),
                 ],
               );
@@ -153,9 +155,9 @@ class _Connect4WidgetState extends State<Connect4Widget> {
             ),
             actions: [
               Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                   child: Text(
                     'Logged as: ${FFAppState().username}',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -176,8 +178,8 @@ class _Connect4WidgetState extends State<Connect4Widget> {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: const Color(0xFF0B0909),
-                    borderRadius: const BorderRadius.only(
+                    color: Color(0xFF0B0909),
+                    borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(0.0),
                       bottomRight: Radius.circular(0.0),
                       topLeft: Radius.circular(0.0),
@@ -188,14 +190,14 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
                     child: Builder(
                       builder: (context) {
                         final grid = _model.currentGrid.toList();
                         return GridView.builder(
                           padding: EdgeInsets.zero,
                           gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
+                              SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 7,
                             crossAxisSpacing: 10.0,
                             mainAxisSpacing: 10.0,
@@ -208,14 +210,14 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                             final gridItem = grid[gridIndex];
                             return Stack(
                               children: [
-                                if (gridItem == '')
+                                if (gridItem == null || gridItem == '')
                                   InkWell(
                                     splashColor: Colors.transparent,
                                     focusColor: Colors.transparent,
                                     hoverColor: Colors.transparent,
                                     highlightColor: Colors.transparent,
                                     onTap: () async {
-                                      var shouldSetState = false;
+                                      var _shouldSetState = false;
                                       if (_model.isTurn) {
                                         _model.placeConnect4Resp =
                                             await PlaceConnectFCall.call(
@@ -226,7 +228,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                                           index: gridIndex.toString(),
                                           userType: FFAppState().userType,
                                         );
-                                        shouldSetState = true;
+                                        _shouldSetState = true;
                                         if ((_model
                                                 .placeConnect4Resp?.succeeded ??
                                             true)) {
@@ -238,7 +240,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                                                 FFAppState().accessToken,
                                             lobbyId: FFAppState().lobbyId,
                                           );
-                                          shouldSetState = true;
+                                          _shouldSetState = true;
                                           if ((_model
                                                   .getConnect4Resp?.succeeded ??
                                               true)) {
@@ -253,22 +255,20 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                                               ) as List)
                                                       .map<String>(
                                                           (s) => s.toString())
-                                                      .toList()
+                                                      .toList()!
                                                       .toList()
                                                       .cast<String>();
                                             });
-                                            if (shouldSetState) {
+                                            if (_shouldSetState)
                                               setState(() {});
-                                            }
                                             return;
                                           } else {
-                                            if (shouldSetState) {
+                                            if (_shouldSetState)
                                               setState(() {});
-                                            }
                                             return;
                                           }
                                         } else {
-                                          if (shouldSetState) setState(() {});
+                                          if (_shouldSetState) setState(() {});
                                           return;
                                         }
                                       } else {
@@ -276,26 +276,26 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                                           context: context,
                                           builder: (alertDialogContext) {
                                             return AlertDialog(
-                                              title: const Text('YOU SUCK'),
+                                              title: Text('YOU SUCK'),
                                               content:
-                                                  const Text('It is not your turn!'),
+                                                  Text('It is not your turn!'),
                                               actions: [
                                                 TextButton(
                                                   onPressed: () =>
                                                       Navigator.pop(
                                                           alertDialogContext),
-                                                  child: const Text(
+                                                  child: Text(
                                                       'OK I AM VERY SORRY'),
                                                 ),
                                               ],
                                             );
                                           },
                                         );
-                                        if (shouldSetState) setState(() {});
+                                        if (_shouldSetState) setState(() {});
                                         return;
                                       }
 
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                     },
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8.0),
@@ -319,7 +319,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                                   ),
                                 if ('B' == gridItem)
                                   Align(
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8.0),
                                       child: Image.asset(
@@ -340,7 +340,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                 ),
                 Flexible(
                   child: Align(
-                    alignment: const AlignmentDirectional(-1.0, 1.0),
+                    alignment: AlignmentDirectional(-1.0, 1.0),
                     child: Text(
                       'You are: ${_model.type}',
                       style: FlutterFlowTheme.of(context).bodyMedium.override(

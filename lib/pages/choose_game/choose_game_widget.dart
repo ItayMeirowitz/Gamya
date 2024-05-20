@@ -10,6 +10,7 @@ import 'package:badges/badges.dart' as badges;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'choose_game_model.dart';
 export 'choose_game_model.dart';
@@ -70,7 +71,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
             context: context,
             builder: (alertDialogContext) {
               return AlertDialog(
-                title: const Text('Invite Accepted!'),
+                title: Text('Invite Accepted!'),
                 content: Text(getJsonField(
                   _model.dataReceived,
                   r'''$.msg''',
@@ -78,7 +79,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
-                    child: const Text('Party up!'),
+                    child: Text('Party up!'),
                   ),
                 ],
               );
@@ -97,7 +98,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
             context: context,
             builder: (alertDialogContext) {
               return AlertDialog(
-                title: const Text('Host started game'),
+                title: Text('Host started game'),
                 content: Text(getJsonField(
                   _model.dataReceived,
                   r'''$.msg''',
@@ -105,7 +106,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(alertDialogContext),
-                    child: const Text('Join In!'),
+                    child: Text('Join In!'),
                   ),
                 ],
               );
@@ -249,10 +250,10 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                 children: [
                   Flexible(
                     child: Align(
-                      alignment: const AlignmentDirectional(0.0, -1.0),
+                      alignment: AlignmentDirectional(0.0, -1.0),
                       child: Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 40.0, 0.0, 0.0),
                         child: Text(
                           'Select someone to team up with!',
                           style: FlutterFlowTheme.of(context)
@@ -281,9 +282,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                       ),
                 ),
               Align(
-                alignment: const AlignmentDirectional(-1.0, 0.0),
+                alignment: AlignmentDirectional(-1.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(5.0, 40.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 40.0, 0.0, 0.0),
                   child: Text(
                     'Active users:',
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -301,7 +302,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                     final onlineUsers = FFAppState().usersOnline.toList();
                     return GridView.builder(
                       padding: EdgeInsets.zero,
-                      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
                         crossAxisSpacing: 2.0,
                         mainAxisSpacing: 10.0,
@@ -350,10 +351,10 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       .secondaryBackground,
                                 ),
                                 child: Align(
-                                  alignment: const AlignmentDirectional(0.0, -0.3),
+                                  alignment: AlignmentDirectional(0.0, -0.3),
                                   child: FFButtonWidget(
                                     onPressed: () async {
-                                      var shouldSetState = false;
+                                      var _shouldSetState = false;
                                       _model.inviteUserResp =
                                           await InviteUserCall.call(
                                         serverIP: FFAppState().serverIP,
@@ -362,11 +363,11 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         otherUser: onlineUsersItem,
                                         thisUser: FFAppState().username,
                                       );
-                                      shouldSetState = true;
+                                      _shouldSetState = true;
                                       if ((_model.inviteUserResp?.succeeded ??
                                           true)) {
                                         Navigator.pop(context);
-                                        if (shouldSetState) setState(() {});
+                                        if (_shouldSetState) setState(() {});
                                         return;
                                       } else {
                                         setState(() {
@@ -376,19 +377,19 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                             r'''$.detail''',
                                           ).toString();
                                         });
-                                        if (shouldSetState) setState(() {});
+                                        if (_shouldSetState) setState(() {});
                                         return;
                                       }
 
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                     },
                                     text: 'Invite!',
                                     options: FFButtonOptions(
                                       height: 40.0,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           24.0, 0.0, 24.0, 0.0),
                                       iconPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               0.0, 0.0, 0.0, 0.0),
                                       color:
                                           FlutterFlowTheme.of(context).primary,
@@ -400,7 +401,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                             letterSpacing: 0.0,
                                           ),
                                       elevation: 3.0,
-                                      borderSide: const BorderSide(
+                                      borderSide: BorderSide(
                                         color: Colors.transparent,
                                         width: 1.0,
                                       ),
@@ -460,15 +461,15 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                   ),
                   Flexible(
                     child: Align(
-                      alignment: const AlignmentDirectional(1.0, 0.0),
+                      alignment: AlignmentDirectional(1.0, 0.0),
                       child: Container(
-                        decoration: const BoxDecoration(),
+                        decoration: BoxDecoration(),
                         child: Stack(
                           children: [
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     15.0, 0.0, 0.0, 0.0),
                                 child: FlutterFlowIconButton(
                                   borderColor:
@@ -516,9 +517,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                             ),
                             if (FFAppState().notificationCounter > 0)
                               Align(
-                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       36.0, 6.0, 0.0, 0.0),
                                   child: InkWell(
                                     splashColor: Colors.transparent,
@@ -572,9 +573,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       ),
                                       showBadge: true,
                                       shape: badges.BadgeShape.circle,
-                                      badgeColor: const Color(0xFFFF0004),
+                                      badgeColor: Color(0xFFFF0004),
                                       elevation: 4.0,
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           4.0, 4.0, 4.0, 4.0),
                                       position: badges.BadgePosition.topStart(),
                                       animationType:
@@ -603,9 +604,9 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
           ),
           actions: [
             Align(
-              alignment: const AlignmentDirectional(0.0, 0.0),
+              alignment: AlignmentDirectional(0.0, 0.0),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                 child: FlutterFlowIconButton(
                   borderColor: FlutterFlowTheme.of(context).primary,
                   borderRadius: 25.0,
@@ -618,7 +619,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                     size: 24.0,
                   ),
                   onPressed: () async {
-                    var shouldSetState = false;
+                    var _shouldSetState = false;
                     scaffoldKey.currentState!.openEndDrawer();
                     _model.getUsersResp = await GetUsersCall.call(
                       serverIP: FFAppState().serverIP,
@@ -626,7 +627,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                       accessToken: FFAppState().accessToken,
                       username: FFAppState().username,
                     );
-                    shouldSetState = true;
+                    _shouldSetState = true;
                     if ((_model.getUsersResp?.succeeded ?? true)) {
                       setState(() {
                         FFAppState().usersOnline = (getJsonField(
@@ -635,18 +636,18 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                           true,
                         ) as List)
                             .map<String>((s) => s.toString())
-                            .toList()
+                            .toList()!
                             .toList()
                             .cast<String>();
                       });
-                      if (shouldSetState) setState(() {});
+                      if (_shouldSetState) setState(() {});
                       return;
                     } else {
-                      if (shouldSetState) setState(() {});
+                      if (_shouldSetState) setState(() {});
                       return;
                     }
 
-                    if (shouldSetState) setState(() {});
+                    if (_shouldSetState) setState(() {});
                   },
                 ),
               ),
@@ -662,7 +663,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               child: Column(
                 children: [
                   Align(
-                    alignment: const Alignment(-1.0, 0),
+                    alignment: Alignment(-1.0, 0),
                     child: FlutterFlowButtonTabBar(
                       useToggleButtonStyle: false,
                       isScrollable: true,
@@ -671,7 +672,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 fontFamily: 'Readex Pro',
                                 letterSpacing: 0.0,
                               ),
-                      unselectedLabelStyle: const TextStyle(),
+                      unselectedLabelStyle: TextStyle(),
                       labelColor: FlutterFlowTheme.of(context).primary,
                       unselectedLabelColor:
                           FlutterFlowTheme.of(context).secondaryText,
@@ -681,12 +682,12 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                       borderRadius: 12.0,
                       elevation: 0.0,
                       labelPadding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                       buttonMargin:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 16.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 16.0, 0.0),
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                      tabs: const [
+                          EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                      tabs: [
                         Tab(
                           text: 'All',
                         ),
@@ -707,7 +708,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 16.0, 0.0, 0.0),
                                 child: Text(
                                   'Games',
@@ -720,7 +721,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -728,7 +729,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    var shouldSetState = false;
+                                    var _shouldSetState = false;
                                     _model.postVocabResp =
                                         await PostVocabCall.call(
                                       serverIP: FFAppState().serverIP,
@@ -737,7 +738,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       leader: FFAppState().leader,
                                       username: FFAppState().username,
                                     );
-                                    shouldSetState = true;
+                                    _shouldSetState = true;
                                     if ((_model.postVocabResp?.succeeded ??
                                         true)) {
                                       setState(() {
@@ -750,14 +751,14 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
 
                                       context.goNamed('Vocab');
 
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     } else {
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     }
 
-                                    if (shouldSetState) setState(() {});
+                                    if (_shouldSetState) setState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -767,7 +768,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 8.0, 12.0, 8.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -786,7 +787,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               'Vocabulary Test',
@@ -807,7 +808,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 12.0, 16.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -815,7 +816,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    var shouldSetState = false;
+                                    var _shouldSetState = false;
                                     _model.postTicTacToeRespLeader =
                                         await PostTicTacToeCall.call(
                                       serverIP: FFAppState().serverIP,
@@ -824,7 +825,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       username: FFAppState().username,
                                       leader: FFAppState().leader,
                                     );
-                                    shouldSetState = true;
+                                    _shouldSetState = true;
                                     if ((_model.postTicTacToeRespLeader
                                             ?.succeeded ??
                                         true)) {
@@ -846,14 +847,14 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
 
                                       context.goNamed('TicTacToe');
 
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     } else {
                                       await showDialog(
                                         context: context,
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
-                                            title: const Text('error accoured'),
+                                            title: Text('error accoured'),
                                             content: Text(getJsonField(
                                               (_model.postTicTacToeRespLeader
                                                       ?.jsonBody ??
@@ -864,17 +865,17 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext),
-                                                child: const Text('Ok'),
+                                                child: Text('Ok'),
                                               ),
                                             ],
                                           );
                                         },
                                       );
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     }
 
-                                    if (shouldSetState) setState(() {});
+                                    if (_shouldSetState) setState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -884,7 +885,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 8.0, 12.0, 8.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -903,7 +904,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               'TicTacToe',
@@ -924,7 +925,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -932,7 +933,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    var shouldSetState = false;
+                                    var _shouldSetState = false;
                                     _model.postConnect4LeaderResp =
                                         await PostConnectFCall.call(
                                       serverIP: FFAppState().serverIP,
@@ -941,7 +942,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       username: FFAppState().username,
                                       leader: FFAppState().leader,
                                     );
-                                    shouldSetState = true;
+                                    _shouldSetState = true;
                                     if ((_model.postConnect4LeaderResp
                                             ?.succeeded ??
                                         true)) {
@@ -963,14 +964,14 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
 
                                       context.goNamed('Connect4');
 
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     } else {
                                       await showDialog(
                                         context: context,
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
-                                            title: const Text('error accoured'),
+                                            title: Text('error accoured'),
                                             content: Text(getJsonField(
                                               (_model.postConnect4LeaderResp
                                                       ?.jsonBody ??
@@ -981,17 +982,17 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext),
-                                                child: const Text('Ok'),
+                                                child: Text('Ok'),
                                               ),
                                             ],
                                           );
                                         },
                                       );
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     }
 
-                                    if (shouldSetState) setState(() {});
+                                    if (_shouldSetState) setState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -1001,7 +1002,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 8.0, 12.0, 8.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -1020,7 +1021,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               'Connect 4',
@@ -1041,7 +1042,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -1049,7 +1050,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    var shouldSetState = false;
+                                    var _shouldSetState = false;
                                     _model.postMathLeaderResp =
                                         await PostMathCall.call(
                                       serverIP: FFAppState().serverIP,
@@ -1058,7 +1059,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       username: FFAppState().username,
                                       leader: FFAppState().leader,
                                     );
-                                    shouldSetState = true;
+                                    _shouldSetState = true;
                                     if ((_model.postMathLeaderResp?.succeeded ??
                                         true)) {
                                       setState(() {
@@ -1072,14 +1073,14 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
 
                                       context.goNamed('MathContest');
 
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     } else {
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     }
 
-                                    if (shouldSetState) setState(() {});
+                                    if (_shouldSetState) setState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -1089,7 +1090,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 8.0, 12.0, 8.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -1108,7 +1109,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               'Math Test',
@@ -1129,7 +1130,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -1137,7 +1138,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    var shouldSetState = false;
+                                    var _shouldSetState = false;
                                     _model.postGuessWrongLeaderResp =
                                         await PostGuessWrongCall.call(
                                       serverIP: FFAppState().serverIP,
@@ -1146,7 +1147,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       username: FFAppState().username,
                                       leader: FFAppState().leader,
                                     );
-                                    shouldSetState = true;
+                                    _shouldSetState = true;
                                     if ((_model.postGuessWrongLeaderResp
                                             ?.succeeded ??
                                         true)) {
@@ -1161,14 +1162,14 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
 
                                       context.goNamed('GuessWrong');
 
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     } else {
                                       await showDialog(
                                         context: context,
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
-                                            title: const Text('error accoured'),
+                                            title: Text('error accoured'),
                                             content: Text(getJsonField(
                                               (_model.postTicTacToeRespLeader
                                                       ?.jsonBody ??
@@ -1179,17 +1180,17 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext),
-                                                child: const Text('Ok'),
+                                                child: Text('Ok'),
                                               ),
                                             ],
                                           );
                                         },
                                       );
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     }
 
-                                    if (shouldSetState) setState(() {});
+                                    if (_shouldSetState) setState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -1199,7 +1200,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 8.0, 12.0, 8.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -1218,7 +1219,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               'Guess Wrong',
@@ -1239,7 +1240,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     16.0, 8.0, 16.0, 0.0),
                                 child: InkWell(
                                   splashColor: Colors.transparent,
@@ -1247,7 +1248,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                   hoverColor: Colors.transparent,
                                   highlightColor: Colors.transparent,
                                   onTap: () async {
-                                    var shouldSetState = false;
+                                    var _shouldSetState = false;
                                     _model.postZeroResp =
                                         await PostGetTZeroCall.call(
                                       serverIP: FFAppState().serverIP,
@@ -1255,7 +1256,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       accessToken: FFAppState().accessToken,
                                       username: FFAppState().username,
                                     );
-                                    shouldSetState = true;
+                                    _shouldSetState = true;
                                     if ((_model.postZeroResp?.succeeded ??
                                         true)) {
                                       setState(() {
@@ -1267,31 +1268,31 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
 
                                       context.goNamed('Get2Zero');
 
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     } else {
                                       await showDialog(
                                         context: context,
                                         builder: (alertDialogContext) {
                                           return AlertDialog(
-                                            title: const Text('Cannot enter game'),
-                                            content: const Text(
+                                            title: Text('Cannot enter game'),
+                                            content: Text(
                                                 'This game is for a single player'),
                                             actions: [
                                               TextButton(
                                                 onPressed: () => Navigator.pop(
                                                     alertDialogContext),
-                                                child: const Text('Got it!'),
+                                                child: Text('Got it!'),
                                               ),
                                             ],
                                           );
                                         },
                                       );
-                                      if (shouldSetState) setState(() {});
+                                      if (_shouldSetState) setState(() {});
                                       return;
                                     }
 
-                                    if (shouldSetState) setState(() {});
+                                    if (_shouldSetState) setState(() {});
                                   },
                                   child: Container(
                                     width: double.infinity,
@@ -1301,7 +1302,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                       borderRadius: BorderRadius.circular(10.0),
                                     ),
                                     child: Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           8.0, 8.0, 12.0, 8.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -1320,7 +1321,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               'Get 2 Zero!',

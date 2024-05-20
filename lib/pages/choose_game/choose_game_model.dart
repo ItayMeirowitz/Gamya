@@ -1,7 +1,18 @@
 import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_button_tabbar.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/flutter_flow_widgets.dart';
+import '/pages/notifications/notifications_widget.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'choose_game_widget.dart' show ChooseGameWidget;
+import 'package:badges/badges.dart' as badges;
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ChooseGameModel extends FlutterFlowModel<ChooseGameWidget> {
   ///  Local state fields for this page.
@@ -14,7 +25,7 @@ class ChooseGameModel extends FlutterFlowModel<ChooseGameWidget> {
 
   final unfocusNode = FocusNode();
   // Stores action output result for [Custom Action - fetchData] action in ChooseGame widget.
-  dynamic dataReceived;
+  dynamic? dataReceived;
   // Stores action output result for [Backend Call - API (postVocab)] action in ChooseGame widget.
   ApiCallResponse? dontUse;
   // Stores action output result for [Backend Call - API (postTicTacToe)] action in ChooseGame widget.
