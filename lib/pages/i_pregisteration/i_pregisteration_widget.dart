@@ -43,7 +43,7 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
           birthday: '-1/-1/-1',
         );
         if ((_model.persistentSignInResp?.succeeded ?? true)) {
-          if (getJsonField(
+          if (!getJsonField(
             (_model.persistentSignInResp?.jsonBody ?? ''),
             r'''$.isNew''',
           )) {
