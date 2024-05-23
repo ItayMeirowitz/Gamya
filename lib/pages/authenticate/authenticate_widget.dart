@@ -1694,8 +1694,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                 FFAppState()
                                                                         .persistentPassword =
                                                                     _model
-                                                                        .passwordCreateTextController
-                                                                        .text;
+                                                                        .passwordCreate!;
                                                               });
                                                             }
 
