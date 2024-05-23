@@ -62,6 +62,7 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                 r'''$.token_type''',
               ).toString().toString();
             });
+            await Future.delayed(const Duration(milliseconds: 1000));
 
             context.pushNamed('ChooseGame');
 
@@ -117,10 +118,7 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                         Align(
                           alignment: const AlignmentDirectional(0.0, -1.0),
                           child: Text(
-                            ((FFAppState().persistentUsername !=
-                                            '') &&
-                                    (FFAppState().persistentPassword != ''))
-                                .toString(),
+                            'Enter the server\'s IPv4 Address',
                             style: FlutterFlowTheme.of(context)
                                 .headlineMedium
                                 .override(
