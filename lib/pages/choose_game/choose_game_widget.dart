@@ -253,7 +253,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                       children: [
                         Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 30.0, 0.0, 0.0),
+                              0.0, 50.0, 0.0, 0.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
                             children: [
@@ -302,8 +302,29 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 child: Align(
                                   alignment: const AlignmentDirectional(0.0, 0.0),
                                   child: FFButtonWidget(
-                                    onPressed: () {
-                                      print('Button pressed ...');
+                                    onPressed: () async {
+                                      _model.logOutResp = await LogOutCall.call(
+                                        serverIP: FFAppState().serverIP,
+                                        accessToken: FFAppState().accessToken,
+                                        tokenType: FFAppState().tokenType,
+                                        username: FFAppState().username,
+                                      );
+                                      setState(() {
+                                        FFAppState().username = '';
+                                        FFAppState().accessToken = '';
+                                        FFAppState().tokenType = '';
+                                        FFAppState().userId = 0;
+                                        FFAppState().hasStarted = false;
+                                        FFAppState().notificationCounter = 0;
+                                        FFAppState().requests = [];
+                                        FFAppState().leader = 'singlePlayer';
+                                        FFAppState().persistentUsername = '';
+                                        FFAppState().persistentPassword = '';
+                                      });
+
+                                      context.pushNamed('authenticate');
+
+                                      setState(() {});
                                     },
                                     text: 'Log out',
                                     options: FFButtonOptions(

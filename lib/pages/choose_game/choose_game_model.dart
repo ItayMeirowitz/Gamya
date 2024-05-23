@@ -44,6 +44,8 @@ class ChooseGameModel extends FlutterFlowModel<ChooseGameWidget> {
   ApiCallResponse? postZeroResp;
   // Stores action output result for [Backend Call - API (getUsers)] action in IconButton widget.
   ApiCallResponse? getUsersResp;
+  // Stores action output result for [Backend Call - API (logOut)] action in Button widget.
+  ApiCallResponse? logOutResp;
   // Stores action output result for [Backend Call - API (InviteUser)] action in Button widget.
   ApiCallResponse? inviteUserResp;
 
