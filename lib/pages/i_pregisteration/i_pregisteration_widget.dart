@@ -103,8 +103,8 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
           top: true,
           child: Stack(
             children: [
-              if (!((FFAppState().persistentUsername != '') &&
-                  (FFAppState().persistentPassword != '')))
+              if ((FFAppState().persistentUsername == '') ||
+                  (FFAppState().persistentPassword == ''))
                 Align(
                   alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Padding(
@@ -117,7 +117,10 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                         Align(
                           alignment: const AlignmentDirectional(0.0, -1.0),
                           child: Text(
-                            'Enter the server\'s IPv4 Address',
+                            ((FFAppState().persistentUsername !=
+                                            '') &&
+                                    (FFAppState().persistentPassword != ''))
+                                .toString(),
                             style: FlutterFlowTheme.of(context)
                                 .headlineMedium
                                 .override(
@@ -455,8 +458,8 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                     ),
                   ),
                 ),
-              if ((FFAppState().persistentUsername == '') ||
-                  (FFAppState().persistentPassword == ''))
+              if ((FFAppState().persistentUsername != '') &&
+                  (FFAppState().persistentPassword != ''))
                 Padding(
                   padding:
                       const EdgeInsetsDirectional.fromSTEB(50.0, 50.0, 50.0, 0.0),
