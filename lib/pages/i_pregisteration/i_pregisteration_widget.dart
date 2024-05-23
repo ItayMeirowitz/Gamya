@@ -103,8 +103,8 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
           top: true,
           child: Stack(
             children: [
-              if ((FFAppState().persistentUsername != '') &&
-                  (FFAppState().persistentPassword != ''))
+              if (!((FFAppState().persistentUsername != '') &&
+                  (FFAppState().persistentPassword != '')))
                 Align(
                   alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Padding(
