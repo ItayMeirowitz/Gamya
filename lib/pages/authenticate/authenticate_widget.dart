@@ -1689,12 +1689,12 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               setState(() {
                                                                 FFAppState()
                                                                         .persistentUsername =
-                                                                    FFAppState()
-                                                                        .username;
+                                                                    _model
+                                                                        .usernameCreate!;
                                                                 FFAppState()
                                                                         .persistentPassword =
                                                                     _model
-                                                                        .passwordTextController
+                                                                        .passwordCreateTextController
                                                                         .text;
                                                               });
                                                             }
