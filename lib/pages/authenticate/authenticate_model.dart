@@ -51,6 +51,8 @@ class AuthenticateModel extends FlutterFlowModel<AuthenticateWidget> {
   String? Function(BuildContext, String?)? passwordTextControllerValidator;
   // Stores action output result for [Backend Call - API (ConnectUser)] action in Button widget.
   ApiCallResponse? signInResp;
+  // State field(s) for CheckRememberLog widget.
+  bool? checkRememberLogValue;
   // State field(s) for username_Create widget.
   FocusNode? usernameCreateFocusNode;
   TextEditingController? usernameCreateTextController;
@@ -78,6 +80,8 @@ class AuthenticateModel extends FlutterFlowModel<AuthenticateWidget> {
   String? isValidSignUp;
   // Stores action output result for [Backend Call - API (ConnectUser)] action in Button widget.
   ApiCallResponse? signUpResp;
+  // State field(s) for CheckRememberCreate widget.
+  bool? checkRememberCreateValue;
 
   @override
   void initState(BuildContext context) {

@@ -86,7 +86,12 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         FFRoute(
           name: 'IPregisteration',
           path: '/iPregisteration',
-          builder: (context, params) => const IPregisterationWidget(),
+          builder: (context, params) => IPregisterationWidget(
+            isLoggedIn: params.getParam(
+              'isLoggedIn',
+              ParamType.bool,
+            ),
+          ),
         ),
         FFRoute(
           name: 'ChooseGame',

@@ -1,13 +1,20 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import 'i_pregisteration_model.dart';
 export 'i_pregisteration_model.dart';
 
 class IPregisterationWidget extends StatefulWidget {
-  const IPregisterationWidget({super.key});
+  const IPregisterationWidget({
+    super.key,
+    bool? isLoggedIn,
+  }) : isLoggedIn = isLoggedIn ?? false;
+
+  final bool isLoggedIn;
 
   @override
   State<IPregisterationWidget> createState() => _IPregisterationWidgetState();
@@ -22,6 +29,53 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
   void initState() {
     super.initState();
     _model = createModel(context, () => IPregisterationModel());
+
+    // On page load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      if ((FFAppState().persistentUsername != '') &&
+          (FFAppState().persistentPassword != '') &&
+          !widget.isLoggedIn) {
+        _model.persistentSignInResp = await ConnectUserCall.call(
+          username: FFAppState().persistentUsername,
+          email: 'signInEmail@gmail.com',
+          password: FFAppState().persistentPassword,
+          serverIP: FFAppState().serverIP,
+          birthday: '-1/-1/-1',
+        );
+        if ((_model.persistentSignInResp?.succeeded ?? true)) {
+          if (getJsonField(
+            (_model.persistentSignInResp?.jsonBody ?? ''),
+            r'''$.isNew''',
+          )) {
+            setState(() {
+              FFAppState().userId = getJsonField(
+                (_model.persistentSignInResp?.jsonBody ?? ''),
+                r'''$.id''',
+              );
+              FFAppState().username = FFAppState().persistentUsername;
+              FFAppState().accessToken = getJsonField(
+                (_model.persistentSignInResp?.jsonBody ?? ''),
+                r'''$.access_token''',
+              ).toString().toString();
+              FFAppState().tokenType = getJsonField(
+                (_model.persistentSignInResp?.jsonBody ?? ''),
+                r'''$.token_type''',
+              ).toString().toString();
+            });
+
+            context.pushNamed('ChooseGame');
+
+            return;
+          } else {
+            return;
+          }
+        } else {
+          return;
+        }
+      } else {
+        return;
+      }
+    });
 
     _model.textController ??= TextEditingController();
     _model.textFieldFocusNode ??= FocusNode();
@@ -135,10 +189,15 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                               FFAppState().serverIP =
                                   _model.textController.text;
                             });
+                            if (widget.isLoggedIn) {
+                              context.pushNamed('ChooseGame');
 
-                            context.pushNamed('authenticate');
+                              return;
+                            } else {
+                              context.pushNamed('authenticate');
 
-                            return;
+                              return;
+                            }
                           } else {
                             return;
                           }
@@ -208,8 +267,15 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                                       setState(() {
                                         FFAppState().serverIP = '192.168.1.181';
                                       });
+                                      if (widget.isLoggedIn) {
+                                        context.pushNamed('ChooseGame');
 
-                                      context.pushNamed('authenticate');
+                                        return;
+                                      } else {
+                                        context.pushNamed('authenticate');
+
+                                        return;
+                                      }
                                     },
                                     text: '192.168.1.181',
                                     options: FFButtonOptions(
@@ -249,8 +315,15 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                                         FFAppState().serverIP =
                                             '192.168.188.140';
                                       });
+                                      if (widget.isLoggedIn) {
+                                        context.pushNamed('ChooseGame');
 
-                                      context.pushNamed('authenticate');
+                                        return;
+                                      } else {
+                                        context.pushNamed('authenticate');
+
+                                        return;
+                                      }
                                     },
                                     text: '192.168.188.140',
                                     options: FFButtonOptions(
@@ -313,9 +386,15 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                           child: FFButtonWidget(
                             onPressed: () async {
                               if (FFAppState().serverIP != '') {
-                                context.pushNamed('authenticate');
+                                if (widget.isLoggedIn) {
+                                  context.pushNamed('ChooseGame');
 
-                                return;
+                                  return;
+                                } else {
+                                  context.pushNamed('authenticate');
+
+                                  return;
+                                }
                               } else {
                                 return;
                               }

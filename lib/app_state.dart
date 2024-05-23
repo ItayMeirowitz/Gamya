@@ -19,6 +19,14 @@ class FFAppState extends ChangeNotifier {
     _safeInit(() {
       _serverIP = prefs.getString('ff_serverIP') ?? _serverIP;
     });
+    _safeInit(() {
+      _persistentUsername =
+          prefs.getString('ff_persistentUsername') ?? _persistentUsername;
+    });
+    _safeInit(() {
+      _persistentPassword =
+          prefs.getString('ff_persistentPassword') ?? _persistentPassword;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -151,6 +159,20 @@ class FFAppState extends ChangeNotifier {
   String get userType => _userType;
   set userType(String value) {
     _userType = value;
+  }
+
+  String _persistentUsername = '';
+  String get persistentUsername => _persistentUsername;
+  set persistentUsername(String value) {
+    _persistentUsername = value;
+    prefs.setString('ff_persistentUsername', value);
+  }
+
+  String _persistentPassword = '';
+  String get persistentPassword => _persistentPassword;
+  set persistentPassword(String value) {
+    _persistentPassword = value;
+    prefs.setString('ff_persistentPassword', value);
   }
 }
 
