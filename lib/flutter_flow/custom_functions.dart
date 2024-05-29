@@ -109,5 +109,5 @@ String getName(String userType) {
   } else if (userType == 'B') {
     return "Blue";
   }
-  return "SUS";
+  return "Unknown type";
 }

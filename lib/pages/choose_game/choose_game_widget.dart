@@ -210,6 +210,14 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
 
             context.goNamed('Connect4');
           }
+        } else if ('party disbanded' ==
+            getJsonField(
+              _model.dataReceived,
+              r'''$.type''',
+            )) {
+          setState(() {
+            FFAppState().leader = 'singlePlayer';
+          });
         }
       }
     });
@@ -355,11 +363,77 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                             ],
                           ),
                         ),
+                        Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 10.0, 0.0, 0.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              var shouldSetState = false;
+                              _model.leavePartyResp = await LeavePartyCall.call(
+                                serverIP: FFAppState().serverIP,
+                                accessToken: FFAppState().accessToken,
+                                tokenType: FFAppState().tokenType,
+                              );
+                              shouldSetState = true;
+                              if ((_model.leavePartyResp?.succeeded ?? true)) {
+                                setState(() {
+                                  FFAppState().leader = 'singlePlayer';
+                                });
+                              } else {
+                                await showDialog(
+                                  context: context,
+                                  builder: (alertDialogContext) {
+                                    return AlertDialog(
+                                      title: const Text('Failed to leave party'),
+                                      content: Text(getJsonField(
+                                        (_model.leavePartyResp?.jsonBody ?? ''),
+                                        r'''$.detail''',
+                                      ).toString()),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.pop(alertDialogContext),
+                                          child: const Text('Ok'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                                if (shouldSetState) setState(() {});
+                                return;
+                              }
+
+                              if (shouldSetState) setState(() {});
+                            },
+                            text: 'Leave party',
+                            options: FFButtonOptions(
+                              height: 40.0,
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: const Color(0xFFFD1926),
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                  ),
+                              elevation: 3.0,
+                              borderSide: const BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(12.0),
+                            ),
+                          ),
+                        ),
                         Align(
                           alignment: const AlignmentDirectional(0.0, -1.0),
                           child: Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 20.0, 0.0, 0.0),
+                                0.0, 10.0, 0.0, 0.0),
                             child: Text(
                               'Select someone to team up with!',
                               style: FlutterFlowTheme.of(context)

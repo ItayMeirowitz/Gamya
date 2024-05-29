@@ -837,6 +837,32 @@ class LogOutCall {
   }
 }
 
+class LeavePartyCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? port = '5000',
+    String? accessToken = '',
+    String? tokenType = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'leaveParty',
+      apiUrl: 'http://$serverIP:$port/leaveParty',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
