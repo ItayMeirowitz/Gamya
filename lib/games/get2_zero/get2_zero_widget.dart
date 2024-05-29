@@ -385,6 +385,7 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                           number: _model.currentNumber,
                                           percent: _model.percentage,
                                           dec: _model.currentDecrementer,
+                                          port: FFAppState().port,
                                         );
                                         shouldSetState = true;
                                         if ((_model

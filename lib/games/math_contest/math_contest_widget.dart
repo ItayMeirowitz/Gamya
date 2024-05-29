@@ -141,6 +141,7 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                         lobbyId: FFAppState().lobbyId,
                                         index: _model.currentIndex,
                                         answer: _model.op1,
+                                        port: FFAppState().port,
                                       );
                                       shouldSetState = true;
                                       if ((_model
@@ -294,6 +295,7 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                         lobbyId: FFAppState().lobbyId,
                                         index: _model.currentIndex,
                                         answer: _model.op2,
+                                        port: FFAppState().port,
                                       );
                                       shouldSetState = true;
                                       if ((_model
@@ -457,6 +459,7 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                       lobbyId: FFAppState().lobbyId,
                                       index: _model.currentIndex,
                                       answer: _model.op3,
+                                      port: FFAppState().port,
                                     );
                                     shouldSetState = true;
                                     if ((_model
@@ -605,6 +608,7 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                       lobbyId: FFAppState().lobbyId,
                                       index: _model.currentIndex,
                                       answer: _model.op4,
+                                      port: FFAppState().port,
                                     );
                                     shouldSetState = true;
                                     if ((_model

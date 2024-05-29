@@ -39,6 +39,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
           tokenType: FFAppState().tokenType,
           accessToken: FFAppState().accessToken,
           lobbyId: FFAppState().lobbyId,
+          port: FFAppState().port,
         );
         if ((_model.getInitialTicTacToeResp?.succeeded ?? true)) {
           setState(() {
@@ -222,6 +223,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                                           lobbyId: FFAppState().lobbyId,
                                           index: gridIndex,
                                           userType: FFAppState().userType,
+                                          port: FFAppState().port,
                                         );
                                         shouldSetState = true;
                                         if ((_model.placeTicTacToeResp
@@ -234,6 +236,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                                             accessToken:
                                                 FFAppState().accessToken,
                                             lobbyId: FFAppState().lobbyId,
+                                            port: FFAppState().port,
                                           );
                                           shouldSetState = true;
                                           if ((_model.getTicTacToeResp

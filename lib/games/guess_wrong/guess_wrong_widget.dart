@@ -33,7 +33,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
         FFAppState().hasStarted = true;
       });
       _model.currentReceived = await actions.fetchData(
-        'http://${FFAppState().serverIP}:5000/guessWrong/${FFAppState().username}',
+        'http://${FFAppState().serverIP}:${FFAppState().port}/guessWrong/${FFAppState().username}',
         FFAppState().tokenType,
         FFAppState().accessToken,
         FFAppState().username,
@@ -58,7 +58,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
         if (_model.isTurn) {
           while (_model.isTurn) {
             _model.dataReceivedTurn = await actions.fetchData(
-              'http://${FFAppState().serverIP}:5000/guessWrong/${FFAppState().username}',
+              'http://${FFAppState().serverIP}:${FFAppState().port}/guessWrong/${FFAppState().username}',
               FFAppState().tokenType,
               FFAppState().accessToken,
               FFAppState().username,
@@ -110,6 +110,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                 tokenType: FFAppState().tokenType,
                 accessToken: FFAppState().accessToken,
                 lobbyId: FFAppState().lobbyId,
+                port: FFAppState().port,
               );
               if ((_model.getScoreTurnResp?.succeeded ?? true)) {
                 setState(() {
@@ -139,7 +140,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
         } else {
           while (!_model.isTurn) {
             _model.dataReceived = await actions.fetchData(
-              'http://${FFAppState().serverIP}:5000/guessWrong/${FFAppState().username}',
+              'http://${FFAppState().serverIP}:${FFAppState().port}/guessWrong/${FFAppState().username}',
               FFAppState().tokenType,
               FFAppState().accessToken,
               FFAppState().username,
@@ -165,6 +166,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                 tokenType: FFAppState().tokenType,
                 accessToken: FFAppState().accessToken,
                 lobbyId: FFAppState().lobbyId,
+                port: FFAppState().port,
               );
               if ((_model.getScoreResp?.succeeded ?? true)) {
                 setState(() {
@@ -531,6 +533,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                           username: FFAppState().username,
                                           category: _model.category,
                                           secretWord: _model.secretWord,
+                                          port: FFAppState().port,
                                         );
                                         shouldSetState = true;
                                         if ((_model
@@ -860,6 +863,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                             username: FFAppState().username,
                                             guess:
                                                 _model.guessTextController.text,
+                                            port: FFAppState().port,
                                           );
                                           shouldSetState = true;
                                           if ((_model.postCheckGuessResp

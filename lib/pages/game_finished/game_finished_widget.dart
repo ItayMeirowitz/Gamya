@@ -41,6 +41,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
             username: FFAppState().username,
             score: widget.score,
             lobbyId: FFAppState().lobbyId,
+            port: FFAppState().port,
           );
         }
         _model.getScoreResp = await GetScoreCall.call(
@@ -48,6 +49,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
           tokenType: FFAppState().tokenType,
           accessToken: FFAppState().accessToken,
           lobbyId: FFAppState().lobbyId,
+          port: FFAppState().port,
         );
         if ((_model.getScoreResp?.succeeded ?? true)) {
           setState(() {
@@ -207,6 +209,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                           tokenType: FFAppState().tokenType,
                           accessToken: FFAppState().accessToken,
                           lobbyId: FFAppState().lobbyId,
+                          port: FFAppState().port,
                         );
                         shouldSetState = true;
                         if ((_model.getScoreResponse?.succeeded ?? true)) {

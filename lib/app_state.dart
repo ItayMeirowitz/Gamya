@@ -27,6 +27,9 @@ class FFAppState extends ChangeNotifier {
       _persistentPassword =
           prefs.getString('ff_persistentPassword') ?? _persistentPassword;
     });
+    _safeInit(() {
+      _port = prefs.getString('ff_port') ?? _port;
+    });
   }
 
   void update(VoidCallback callback) {
@@ -173,6 +176,13 @@ class FFAppState extends ChangeNotifier {
   set persistentPassword(String value) {
     _persistentPassword = value;
     prefs.setString('ff_persistentPassword', value);
+  }
+
+  String _port = '5000';
+  String get port => _port;
+  set port(String value) {
+    _port = value;
+    prefs.setString('ff_port', value);
   }
 }
 

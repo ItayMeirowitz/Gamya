@@ -40,6 +40,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
           tokenType: FFAppState().tokenType,
           accessToken: FFAppState().accessToken,
           lobbyId: FFAppState().lobbyId,
+          port: FFAppState().port,
         );
         if ((_model.getInitialConnectResp?.succeeded ?? true)) {
           setState(() {
@@ -225,6 +226,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                                           lobbyId: FFAppState().lobbyId,
                                           index: gridIndex.toString(),
                                           userType: FFAppState().userType,
+                                          port: FFAppState().port,
                                         );
                                         shouldSetState = true;
                                         if ((_model
@@ -237,6 +239,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                                             accessToken:
                                                 FFAppState().accessToken,
                                             lobbyId: FFAppState().lobbyId,
+                                            port: FFAppState().port,
                                           );
                                           shouldSetState = true;
                                           if ((_model

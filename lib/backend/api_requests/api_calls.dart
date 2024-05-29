@@ -16,6 +16,7 @@ class ConnectUserCall {
     String? password = '',
     String? serverIP = '',
     String? birthday = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -27,7 +28,7 @@ class ConnectUserCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'ConnectUser',
-      apiUrl: 'http://$serverIP:5000/user',
+      apiUrl: 'http://$serverIP:$port/user',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -59,10 +60,11 @@ class GetVocabCall {
     String? tokenType = '',
     String? serverIP = '',
     String? diff = '',
+    String? port = '5000',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getVocab',
-      apiUrl: 'http://$serverIP:5000/getVocab',
+      apiUrl: 'http://$serverIP:$port/getVocab',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -99,10 +101,11 @@ class GetUsersCall {
     String? tokenType = '',
     String? accessToken = '',
     String? username = '',
+    String? port = '5000',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getUsers',
-      apiUrl: 'http://$serverIP:5000/users',
+      apiUrl: 'http://$serverIP:$port/users',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -131,10 +134,11 @@ class GetScoreCall {
     String? tokenType = '',
     String? accessToken = '',
     int? lobbyId,
+    String? port = '5000',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getScore',
-      apiUrl: 'http://$serverIP:5000/getScore',
+      apiUrl: 'http://$serverIP:$port/getScore',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -159,6 +163,7 @@ class InviteUserCall {
     String? accessToken = '',
     String? otherUser = '',
     String? thisUser = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -167,7 +172,7 @@ class InviteUserCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'InviteUser',
-      apiUrl: 'http://$serverIP:5000/inviteUser',
+      apiUrl: 'http://$serverIP:$port/inviteUser',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -192,6 +197,7 @@ class DeclineInviteCall {
     String? accessToken = '',
     String? senderUsername = '',
     String? receiverUsername = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -200,7 +206,7 @@ class DeclineInviteCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'declineInvite',
-      apiUrl: 'http://$serverIP:5000/declineInvite',
+      apiUrl: 'http://$serverIP:$port/declineInvite',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -225,6 +231,7 @@ class AcceptInviteCall {
     String? accessToken = '',
     String? senderUsername = '',
     String? receiverUsername = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -233,7 +240,7 @@ class AcceptInviteCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'acceptInvite',
-      apiUrl: 'http://$serverIP:5000/acceptInvite',
+      apiUrl: 'http://$serverIP:$port/acceptInvite',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -259,6 +266,7 @@ class PostScoreCall {
     String? username = '',
     double? score,
     int? lobbyId,
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -268,7 +276,7 @@ class PostScoreCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postScore',
-      apiUrl: 'http://$serverIP:5000/postScore',
+      apiUrl: 'http://$serverIP:$port/postScore',
       callType: ApiCallType.POST,
       headers: {
         'Content-type': 'application/json',
@@ -294,10 +302,11 @@ class GetOptimalCall {
     double? number,
     double? percent,
     int? dec,
+    String? port = '5000',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getOptimal',
-      apiUrl: 'http://$serverIP:5000/zero/optimal',
+      apiUrl: 'http://$serverIP:$port/zero/optimal',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -323,6 +332,7 @@ class PostGetTZeroCall {
     String? tokenType = '',
     String? accessToken = '',
     String? username = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -330,7 +340,7 @@ class PostGetTZeroCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postGetTZero',
-      apiUrl: 'http://$serverIP:5000/zero',
+      apiUrl: 'http://$serverIP:$port/zero',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -355,6 +365,7 @@ class PostVocabCall {
     String? accessToken = '',
     String? leader = '',
     String? username = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -363,7 +374,7 @@ class PostVocabCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postVocab',
-      apiUrl: 'http://$serverIP:5000/vocab',
+      apiUrl: 'http://$serverIP:$port/vocab',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -388,6 +399,7 @@ class PostTicTacToeCall {
     String? accessToken = '',
     String? username = '',
     String? leader = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -396,7 +408,7 @@ class PostTicTacToeCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postTicTacToe',
-      apiUrl: 'http://$serverIP:5000/tictactoe',
+      apiUrl: 'http://$serverIP:$port/tictactoe',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -422,6 +434,7 @@ class PlaceTicTacToeCall {
     int? lobbyId,
     int? index,
     String? userType = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -431,7 +444,7 @@ class PlaceTicTacToeCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'placeTicTacToe',
-      apiUrl: 'http://$serverIP:5000/tictactoe/place',
+      apiUrl: 'http://$serverIP:$port/tictactoe/place',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -455,10 +468,11 @@ class GetTicTacToeBoardCall {
     String? tokenType = '',
     String? accessToken = '',
     int? lobbyId,
+    String? port = '5000',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getTicTacToeBoard',
-      apiUrl: 'http://$serverIP:5000/tictactoe/board',
+      apiUrl: 'http://$serverIP:$port/tictactoe/board',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -483,6 +497,7 @@ class PostConnectFCall {
     String? accessToken = '',
     String? username = '',
     String? leader = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -491,7 +506,7 @@ class PostConnectFCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postConnectF',
-      apiUrl: 'http://$serverIP:5000/connect4',
+      apiUrl: 'http://$serverIP:$port/connect4',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -517,6 +532,7 @@ class PlaceConnectFCall {
     int? lobbyId,
     String? index = '',
     String? userType = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -526,7 +542,7 @@ class PlaceConnectFCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'placeConnectF',
-      apiUrl: 'http://$serverIP:5000/connect4/place',
+      apiUrl: 'http://$serverIP:$port/connect4/place',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -550,10 +566,11 @@ class GetConnectFBoardCall {
     String? tokenType = '',
     String? accessToken = '',
     int? lobbyId,
+    String? port = '5000',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getConnectFBoard',
-      apiUrl: 'http://$serverIP:5000/connect4/board',
+      apiUrl: 'http://$serverIP:$port/connect4/board',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -577,10 +594,11 @@ class GetMathTestCall {
     String? tokenType = '',
     String? accessToken = '',
     int? lobbyId,
+    String? port = '5000',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'getMathTest',
-      apiUrl: 'http://$serverIP:5000/getMath',
+      apiUrl: 'http://$serverIP:$port/getMath',
       callType: ApiCallType.GET,
       headers: {
         'Content-Type': 'application/json',
@@ -605,6 +623,7 @@ class PostMathCall {
     String? accessToken = '',
     String? username = '',
     String? leader = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -613,7 +632,7 @@ class PostMathCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postMath',
-      apiUrl: 'http://$serverIP:5000/mathTest',
+      apiUrl: 'http://$serverIP:$port/mathTest',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -639,6 +658,7 @@ class PostVocabAnswerCall {
     String? diff = '',
     int? index,
     String? answer = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -648,7 +668,7 @@ class PostVocabAnswerCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postVocabAnswer',
-      apiUrl: 'http://$serverIP:5000/vocab/answer',
+      apiUrl: 'http://$serverIP:$port/vocab/answer',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -674,6 +694,7 @@ class PostMathAnswerCall {
     int? lobbyId,
     int? index,
     String? answer = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -683,7 +704,7 @@ class PostMathAnswerCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postMathAnswer',
-      apiUrl: 'http://$serverIP:5000/math/answer',
+      apiUrl: 'http://$serverIP:$port/math/answer',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -710,6 +731,7 @@ class PostGuessWCategoryCall {
     String? username = '',
     String? category = '',
     String? secretWord = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -720,7 +742,7 @@ class PostGuessWCategoryCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postGuessWCategory',
-      apiUrl: 'http://$serverIP:5000/guessWrong/category',
+      apiUrl: 'http://$serverIP:$port/guessWrong/category',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -746,6 +768,7 @@ class PostCheckGuessWCall {
     String? lobbyId = '',
     String? username = '',
     String? guess = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -755,7 +778,7 @@ class PostCheckGuessWCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postCheckGuessW',
-      apiUrl: 'http://$serverIP:5000/guessWrong/guess',
+      apiUrl: 'http://$serverIP:$port/guessWrong/guess',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -780,6 +803,7 @@ class PostGuessWrongCall {
     String? accessToken = '',
     String? username = '',
     String? leader = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -788,7 +812,7 @@ class PostGuessWrongCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postGuessWrong',
-      apiUrl: 'http://$serverIP:5000/guessWrong',
+      apiUrl: 'http://$serverIP:$port/guessWrong',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',
@@ -812,6 +836,7 @@ class LogOutCall {
     String? accessToken = '',
     String? tokenType = '',
     String? username = '',
+    String? port = '5000',
   }) async {
     final ffApiRequestBody = '''
 {
@@ -819,7 +844,7 @@ class LogOutCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'logOut',
-      apiUrl: 'http://$serverIP:5000/LogOut',
+      apiUrl: 'http://$serverIP:$port/LogOut',
       callType: ApiCallType.POST,
       headers: {
         'Content-Type': 'application/json',

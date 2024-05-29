@@ -141,6 +141,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                         index: _model.currentIndex,
                                         answer: _model.op1,
                                         diff: _model.diff,
+                                        port: FFAppState().port,
                                       );
                                       shouldSetState = true;
                                       if ((_model.postVocabAnswer1Resp
@@ -306,6 +307,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                         diff: _model.diff,
                                         index: _model.currentIndex,
                                         answer: _model.op2,
+                                        port: FFAppState().port,
                                       );
                                       shouldSetState = true;
                                       if ((_model.postVocabAnswer2Resp
@@ -481,6 +483,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       diff: _model.diff,
                                       index: _model.currentIndex,
                                       answer: _model.op3,
+                                      port: FFAppState().port,
                                     );
                                     shouldSetState = true;
                                     if ((_model
@@ -642,6 +645,7 @@ class _VocabWidgetState extends State<VocabWidget> {
                                       diff: _model.diff,
                                       index: _model.currentIndex,
                                       answer: _model.op4,
+                                      port: FFAppState().port,
                                     );
                                     shouldSetState = true;
                                     if ((_model

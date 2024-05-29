@@ -36,7 +36,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       while (!FFAppState().hasStarted) {
         _model.dataReceived = await actions.fetchData(
-          'http://${FFAppState().serverIP}:5000/user/${FFAppState().username}',
+          'http://${FFAppState().serverIP}:${FFAppState().port}/user/${FFAppState().username}',
           FFAppState().tokenType,
           FFAppState().accessToken,
           FFAppState().username,
@@ -128,6 +128,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               accessToken: FFAppState().accessToken,
               leader: FFAppState().leader,
               username: FFAppState().username,
+              port: FFAppState().port,
             );
 
             context.goNamed('Vocab');
@@ -142,6 +143,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               accessToken: FFAppState().accessToken,
               username: FFAppState().username,
               leader: FFAppState().leader,
+              port: FFAppState().port,
             );
             if ((_model.postTicTacToeResp?.succeeded ?? true)) {
               setState(() {
@@ -166,6 +168,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               accessToken: FFAppState().accessToken,
               username: FFAppState().username,
               leader: FFAppState().leader,
+              port: FFAppState().port,
             );
             if ((_model.postMathResp?.succeeded ?? true)) {
               context.goNamed('MathContest');
@@ -183,6 +186,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               accessToken: FFAppState().accessToken,
               username: FFAppState().username,
               leader: FFAppState().leader,
+              port: FFAppState().port,
             );
             if ((_model.postCheckWrongResp?.succeeded ?? true)) {
               context.goNamed('GuessWrong');
@@ -196,6 +200,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               accessToken: FFAppState().accessToken,
               username: FFAppState().username,
               leader: FFAppState().leader,
+              port: FFAppState().port,
             );
             if ((_model.postConnectFResp?.succeeded ?? true)) {
               setState(() {

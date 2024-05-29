@@ -41,6 +41,7 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
           password: FFAppState().persistentPassword,
           serverIP: FFAppState().serverIP,
           birthday: '-1/-1/-1',
+          port: FFAppState().port,
         );
         if ((_model.persistentSignInResp?.succeeded ?? true)) {
           if (!getJsonField(
@@ -78,8 +79,11 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
       }
     });
 
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
+    _model.textController1 ??= TextEditingController();
+    _model.textFieldFocusNode1 ??= FocusNode();
+
+    _model.textController2 ??= TextEditingController();
+    _model.textFieldFocusNode2 ??= FocusNode();
   }
 
   @override
@@ -104,8 +108,9 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
           top: true,
           child: Stack(
             children: [
-              if ((FFAppState().persistentUsername == '') ||
-                  (FFAppState().persistentPassword == ''))
+              if (((FFAppState().persistentUsername == '') ||
+                      (FFAppState().persistentPassword == '')) ||
+                  widget.isLoggedIn)
                 Align(
                   alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Padding(
@@ -135,8 +140,8 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 16.0, 10.0, 16.0, 0.0),
                             child: TextFormField(
-                              controller: _model.textController,
-                              focusNode: _model.textFieldFocusNode,
+                              controller: _model.textController1,
+                              focusNode: _model.textFieldFocusNode1,
                               autofocus: false,
                               obscureText: false,
                               decoration: InputDecoration(
@@ -183,7 +188,67 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                                     fontFamily: 'Readex Pro',
                                     letterSpacing: 0.0,
                                   ),
-                              validator: _model.textControllerValidator
+                              validator: _model.textController1Validator
+                                  .asValidator(context),
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: const AlignmentDirectional(0.0, -1.0),
+                          child: Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                20.0, 10.0, 20.0, 0.0),
+                            child: TextFormField(
+                              controller: _model.textController2,
+                              focusNode: _model.textFieldFocusNode2,
+                              autofocus: false,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Port number',
+                                hintText:
+                                    'Enter Port (currently: ${FFAppState().port})',
+                                hintStyle: FlutterFlowTheme.of(context)
+                                    .bodyLarge
+                                    .override(
+                                      fontFamily: 'Readex Pro',
+                                      letterSpacing: 0.0,
+                                    ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                errorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                                focusedErrorBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.0),
+                                ),
+                              ),
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyMedium
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    letterSpacing: 0.0,
+                                  ),
+                              validator: _model.textController2Validator
                                   .asValidator(context),
                             ),
                           ),
@@ -195,10 +260,14 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                                 0.0, 20.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                if (_model.textController.text != '') {
+                                setState(() {
+                                  FFAppState().port =
+                                      _model.textController2.text;
+                                });
+                                if (_model.textController1.text != '') {
                                   setState(() {
                                     FFAppState().serverIP =
-                                        _model.textController.text;
+                                        _model.textController1.text;
                                   });
                                   if (widget.isLoggedIn) {
                                     context.pushNamed('ChooseGame');
@@ -457,7 +526,8 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                   ),
                 ),
               if ((FFAppState().persistentUsername != '') &&
-                  (FFAppState().persistentPassword != ''))
+                  (FFAppState().persistentPassword != '') &&
+                  !widget.isLoggedIn)
                 Padding(
                   padding:
                       const EdgeInsetsDirectional.fromSTEB(50.0, 50.0, 50.0, 0.0),

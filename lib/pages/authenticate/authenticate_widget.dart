@@ -552,6 +552,7 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                         serverIP: FFAppState()
                                                             .serverIP,
                                                         birthday: '-1/-1/-1',
+                                                        port: FFAppState().port,
                                                       );
                                                       shouldSetState = true;
                                                       if ((_model.signInResp
@@ -1643,6 +1644,8 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               .serverIP,
                                                           birthday:
                                                               _model.birthday,
+                                                          port:
+                                                              FFAppState().port,
                                                         );
                                                         shouldSetState = true;
                                                         if ((_model.signUpResp
