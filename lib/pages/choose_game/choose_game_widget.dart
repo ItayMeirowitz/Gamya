@@ -372,6 +372,7 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                 serverIP: FFAppState().serverIP,
                                 accessToken: FFAppState().accessToken,
                                 tokenType: FFAppState().tokenType,
+                                username: FFAppState().username,
                               );
                               shouldSetState = true;
                               if ((_model.leavePartyResp?.succeeded ?? true)) {

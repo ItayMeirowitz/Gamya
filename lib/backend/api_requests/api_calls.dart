@@ -868,7 +868,12 @@ class LeavePartyCall {
     String? port = '5000',
     String? accessToken = '',
     String? tokenType = '',
+    String? username = '',
   }) async {
+    final ffApiRequestBody = '''
+{
+  "username": "$username"
+}''';
     return ApiManager.instance.makeApiCall(
       callName: 'leaveParty',
       apiUrl: 'http://$serverIP:$port/leaveParty',
@@ -878,6 +883,7 @@ class LeavePartyCall {
         'Authorization': '$tokenType $accessToken',
       },
       params: {},
+      body: ffApiRequestBody,
       bodyType: BodyType.JSON,
       returnBody: true,
       encodeBodyUtf8: false,
