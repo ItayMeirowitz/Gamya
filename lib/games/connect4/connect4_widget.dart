@@ -251,6 +251,10 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                                                 .toList()
                                                 .toList()
                                                 .cast<String>();
+                                            _model.isTurn =
+                                                functions.isTurnConnect4(
+                                                    _model.currentGrid.toList(),
+                                                    FFAppState().userType);
                                             setState(() {});
                                             if (shouldSetState) {
                                               setState(() {});
