@@ -47,14 +47,13 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               r'''$.type''',
             )) {
           // New invite
-          setState(() {
-            FFAppState().addToRequests(getJsonField(
-              _model.dataReceived,
-              r'''$.info''',
-            ));
-            FFAppState().notificationCounter =
-                FFAppState().notificationCounter + 1;
-          });
+          FFAppState().addToRequests(getJsonField(
+            _model.dataReceived,
+            r'''$.info''',
+          ));
+          FFAppState().notificationCounter =
+              FFAppState().notificationCounter + 1;
+          setState(() {});
         } else if ('decline' ==
             getJsonField(
               _model.dataReceived,
@@ -84,9 +83,8 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               );
             },
           );
-          setState(() {
-            FFAppState().leader = FFAppState().username;
-          });
+          FFAppState().leader = FFAppState().username;
+          setState(() {});
         } else if ('enter_game' ==
             getJsonField(
               _model.dataReceived,
@@ -111,12 +109,11 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               );
             },
           );
-          setState(() {
-            FFAppState().lobbyId = getJsonField(
-              _model.dataReceived,
-              r'''$.lobby_id''',
-            );
-          });
+          FFAppState().lobbyId = getJsonField(
+            _model.dataReceived,
+            r'''$.lobby_id''',
+          );
+          setState(() {});
           if ('Vocab' ==
               getJsonField(
                 _model.dataReceived,
@@ -146,12 +143,11 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               port: FFAppState().port,
             );
             if ((_model.postTicTacToeResp?.succeeded ?? true)) {
-              setState(() {
-                FFAppState().userType = getJsonField(
-                  (_model.postTicTacToeResp?.jsonBody ?? ''),
-                  r'''$.user_type''',
-                ).toString().toString();
-              });
+              FFAppState().userType = getJsonField(
+                (_model.postTicTacToeResp?.jsonBody ?? ''),
+                r'''$.user_type''',
+              ).toString().toString();
+              setState(() {});
             } else {
               return;
             }
@@ -203,12 +199,11 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               port: FFAppState().port,
             );
             if ((_model.postConnectFResp?.succeeded ?? true)) {
-              setState(() {
-                FFAppState().userType = getJsonField(
-                  (_model.postConnectFResp?.jsonBody ?? ''),
-                  r'''$.user_type''',
-                ).toString().toString();
-              });
+              FFAppState().userType = getJsonField(
+                (_model.postConnectFResp?.jsonBody ?? ''),
+                r'''$.user_type''',
+              ).toString().toString();
+              setState(() {});
             } else {
               return;
             }
@@ -220,9 +215,8 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               _model.dataReceived,
               r'''$.type''',
             )) {
-          setState(() {
-            FFAppState().leader = 'singlePlayer';
-          });
+          FFAppState().leader = 'singlePlayer';
+          setState(() {});
         }
       }
     });
@@ -322,18 +316,18 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         tokenType: FFAppState().tokenType,
                                         username: FFAppState().username,
                                       );
-                                      setState(() {
-                                        FFAppState().username = '';
-                                        FFAppState().accessToken = '';
-                                        FFAppState().tokenType = '';
-                                        FFAppState().userId = 0;
-                                        FFAppState().hasStarted = false;
-                                        FFAppState().notificationCounter = 0;
-                                        FFAppState().requests = [];
-                                        FFAppState().leader = 'singlePlayer';
-                                        FFAppState().persistentUsername = '';
-                                        FFAppState().persistentPassword = '';
-                                      });
+                                      FFAppState().username = '';
+                                      FFAppState().accessToken = '';
+                                      FFAppState().tokenType = '';
+                                      FFAppState().userId = 0;
+                                      FFAppState().hasStarted = false;
+                                      FFAppState().notificationCounter = 0;
+                                      FFAppState().requests = [];
+                                      FFAppState().leader = 'singlePlayer';
+                                      FFAppState().persistentUsername = '';
+                                      FFAppState().persistentPassword = '';
+                                      FFAppState().port = '5000';
+                                      setState(() {});
 
                                       context.pushNamed('authenticate');
 
@@ -381,9 +375,8 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                               );
                               shouldSetState = true;
                               if ((_model.leavePartyResp?.succeeded ?? true)) {
-                                setState(() {
-                                  FFAppState().leader = 'singlePlayer';
-                                });
+                                FFAppState().leader = 'singlePlayer';
+                                setState(() {});
                               } else {
                                 await showDialog(
                                   context: context,
@@ -557,13 +550,12 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                         if (shouldSetState) setState(() {});
                                         return;
                                       } else {
-                                        setState(() {
-                                          _model.errorDetail = getJsonField(
-                                            (_model.inviteUserResp?.jsonBody ??
-                                                ''),
-                                            r'''$.detail''',
-                                          ).toString();
-                                        });
+                                        _model.errorDetail = getJsonField(
+                                          (_model.inviteUserResp?.jsonBody ??
+                                              ''),
+                                          r'''$.detail''',
+                                        ).toString();
+                                        setState(() {});
                                         if (shouldSetState) setState(() {});
                                         return;
                                       }
@@ -816,17 +808,16 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                     );
                     shouldSetState = true;
                     if ((_model.getUsersResp?.succeeded ?? true)) {
-                      setState(() {
-                        FFAppState().usersOnline = (getJsonField(
-                          (_model.getUsersResp?.jsonBody ?? ''),
-                          r'''$.users''',
-                          true,
-                        ) as List)
-                            .map<String>((s) => s.toString())
-                            .toList()
-                            .toList()
-                            .cast<String>();
-                      });
+                      FFAppState().usersOnline = (getJsonField(
+                        (_model.getUsersResp?.jsonBody ?? ''),
+                        r'''$.users''',
+                        true,
+                      ) as List)
+                          .map<String>((s) => s.toString())
+                          .toList()
+                          .toList()
+                          .cast<String>();
+                      setState(() {});
                       if (shouldSetState) setState(() {});
                       return;
                     } else {
@@ -928,13 +919,11 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     shouldSetState = true;
                                     if ((_model.postVocabResp?.succeeded ??
                                         true)) {
-                                      setState(() {
-                                        FFAppState().lobbyId = getJsonField(
-                                          (_model.postVocabResp?.jsonBody ??
-                                              ''),
-                                          r'''$.lobby_id''',
-                                        );
-                                      });
+                                      FFAppState().lobbyId = getJsonField(
+                                        (_model.postVocabResp?.jsonBody ?? ''),
+                                        r'''$.lobby_id''',
+                                      );
+                                      setState(() {});
 
                                       context.goNamed('Vocab');
 
@@ -1016,21 +1005,20 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     if ((_model.postTicTacToeRespLeader
                                             ?.succeeded ??
                                         true)) {
-                                      setState(() {
-                                        FFAppState().lobbyId = getJsonField(
-                                          (_model.postTicTacToeRespLeader
-                                                  ?.jsonBody ??
-                                              ''),
-                                          r'''$.lobby_id''',
-                                        );
-                                        FFAppState().userType = getJsonField(
-                                          (_model.postTicTacToeRespLeader
-                                                  ?.jsonBody ??
-                                              ''),
-                                          r'''$.user_type''',
-                                        ).toString();
-                                        FFAppState().hasStarted = true;
-                                      });
+                                      FFAppState().lobbyId = getJsonField(
+                                        (_model.postTicTacToeRespLeader
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.lobby_id''',
+                                      );
+                                      FFAppState().userType = getJsonField(
+                                        (_model.postTicTacToeRespLeader
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.user_type''',
+                                      ).toString();
+                                      FFAppState().hasStarted = true;
+                                      setState(() {});
 
                                       context.goNamed('TicTacToe');
 
@@ -1133,21 +1121,20 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     if ((_model.postConnect4LeaderResp
                                             ?.succeeded ??
                                         true)) {
-                                      setState(() {
-                                        FFAppState().lobbyId = getJsonField(
-                                          (_model.postConnect4LeaderResp
-                                                  ?.jsonBody ??
-                                              ''),
-                                          r'''$.lobby_id''',
-                                        );
-                                        FFAppState().userType = getJsonField(
-                                          (_model.postConnect4LeaderResp
-                                                  ?.jsonBody ??
-                                              ''),
-                                          r'''$.user_type''',
-                                        ).toString();
-                                        FFAppState().hasStarted = true;
-                                      });
+                                      FFAppState().lobbyId = getJsonField(
+                                        (_model.postConnect4LeaderResp
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.lobby_id''',
+                                      );
+                                      FFAppState().userType = getJsonField(
+                                        (_model.postConnect4LeaderResp
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.user_type''',
+                                      ).toString();
+                                      FFAppState().hasStarted = true;
+                                      setState(() {});
 
                                       context.goNamed('Connect4');
 
@@ -1249,14 +1236,12 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     shouldSetState = true;
                                     if ((_model.postMathLeaderResp?.succeeded ??
                                         true)) {
-                                      setState(() {
-                                        FFAppState().lobbyId = getJsonField(
-                                          (_model.postMathLeaderResp
-                                                  ?.jsonBody ??
-                                              ''),
-                                          r'''$.lobby_id''',
-                                        );
-                                      });
+                                      FFAppState().lobbyId = getJsonField(
+                                        (_model.postMathLeaderResp?.jsonBody ??
+                                            ''),
+                                        r'''$.lobby_id''',
+                                      );
+                                      setState(() {});
 
                                       context.goNamed('MathContest');
 
@@ -1338,14 +1323,13 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     if ((_model.postGuessWrongLeaderResp
                                             ?.succeeded ??
                                         true)) {
-                                      setState(() {
-                                        FFAppState().lobbyId = getJsonField(
-                                          (_model.postGuessWrongLeaderResp
-                                                  ?.jsonBody ??
-                                              ''),
-                                          r'''$.lobby_id''',
-                                        );
-                                      });
+                                      FFAppState().lobbyId = getJsonField(
+                                        (_model.postGuessWrongLeaderResp
+                                                ?.jsonBody ??
+                                            ''),
+                                        r'''$.lobby_id''',
+                                      );
+                                      setState(() {});
 
                                       context.goNamed('GuessWrong');
 
@@ -1446,12 +1430,11 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
                                     shouldSetState = true;
                                     if ((_model.postZeroResp?.succeeded ??
                                         true)) {
-                                      setState(() {
-                                        FFAppState().lobbyId = getJsonField(
-                                          (_model.postZeroResp?.jsonBody ?? ''),
-                                          r'''$.lobby_id''',
-                                        );
-                                      });
+                                      FFAppState().lobbyId = getJsonField(
+                                        (_model.postZeroResp?.jsonBody ?? ''),
+                                        r'''$.lobby_id''',
+                                      );
+                                      setState(() {});
 
                                       context.goNamed('Get2Zero');
 

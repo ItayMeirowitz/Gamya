@@ -519,14 +519,13 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                     onPressed: () async {
                                                       var shouldSetState =
                                                           false;
-                                                      setState(() {
-                                                        _model.username = _model
-                                                            .usernameTextController
-                                                            .text;
-                                                        _model.password = _model
-                                                            .passwordTextController
-                                                            .text;
-                                                      });
+                                                      _model.username = _model
+                                                          .usernameTextController
+                                                          .text;
+                                                      _model.password = _model
+                                                          .passwordTextController
+                                                          .text;
+                                                      setState(() {});
                                                       if (!((_model.username !=
                                                                   null &&
                                                               _model.username !=
@@ -564,49 +563,45 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                               ''),
                                                           r'''$.isNew''',
                                                         )) {
-                                                          setState(() {
-                                                            FFAppState()
-                                                                    .userId =
-                                                                getJsonField(
-                                                              (_model.signInResp
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                              r'''$.id''',
-                                                            );
-                                                            FFAppState()
-                                                                    .username =
-                                                                _model
-                                                                    .username!;
-                                                            FFAppState()
-                                                                    .accessToken =
-                                                                getJsonField(
-                                                              (_model.signInResp
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                              r'''$.access_token''',
-                                                            ).toString();
-                                                            FFAppState()
-                                                                    .tokenType =
-                                                                getJsonField(
-                                                              (_model.signInResp
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                              r'''$.token_type''',
-                                                            ).toString();
-                                                          });
+                                                          FFAppState().userId =
+                                                              getJsonField(
+                                                            (_model.signInResp
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                            r'''$.id''',
+                                                          );
+                                                          FFAppState()
+                                                                  .username =
+                                                              _model.username!;
+                                                          FFAppState()
+                                                                  .accessToken =
+                                                              getJsonField(
+                                                            (_model.signInResp
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                            r'''$.access_token''',
+                                                          ).toString();
+                                                          FFAppState()
+                                                                  .tokenType =
+                                                              getJsonField(
+                                                            (_model.signInResp
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                            r'''$.token_type''',
+                                                          ).toString();
+                                                          setState(() {});
                                                           if (_model
                                                               .checkRememberLogValue!) {
-                                                            setState(() {
-                                                              FFAppState()
-                                                                      .persistentUsername =
-                                                                  FFAppState()
-                                                                      .username;
-                                                              FFAppState()
-                                                                      .persistentPassword =
-                                                                  _model
-                                                                      .passwordTextController
-                                                                      .text;
-                                                            });
+                                                            FFAppState()
+                                                                    .persistentUsername =
+                                                                FFAppState()
+                                                                    .username;
+                                                            FFAppState()
+                                                                    .persistentPassword =
+                                                                _model
+                                                                    .passwordTextController
+                                                                    .text;
+                                                            setState(() {});
                                                           }
 
                                                           context.pushNamed(
@@ -617,40 +612,37 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                           }
                                                           return;
                                                         } else {
-                                                          setState(() {
-                                                            _model.username =
-                                                                'no such username';
-                                                          });
+                                                          _model.username =
+                                                              'no such username';
+                                                          setState(() {});
                                                           if (shouldSetState) {
                                                             setState(() {});
                                                           }
                                                           return;
                                                         }
                                                       } else {
-                                                        setState(() {
-                                                          _model.signInError =
-                                                              valueOrDefault<
-                                                                  String>(
-                                                            getJsonField(
-                                                              (_model.signInResp
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                              r'''$.detail''',
-                                                            )?.toString(),
-                                                            'couldn\'t connect to provided IP',
-                                                          );
-                                                          _model.signInErrorCode =
-                                                              valueOrDefault<
-                                                                  int>(
-                                                            getJsonField(
-                                                              (_model.signInResp
-                                                                      ?.jsonBody ??
-                                                                  ''),
-                                                              r'''$.status''',
-                                                            ),
-                                                            -1,
-                                                          );
-                                                        });
+                                                        _model.signInError =
+                                                            valueOrDefault<
+                                                                String>(
+                                                          getJsonField(
+                                                            (_model.signInResp
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                            r'''$.detail''',
+                                                          )?.toString(),
+                                                          'couldn\'t connect to provided IP',
+                                                        );
+                                                        _model.signInErrorCode =
+                                                            valueOrDefault<int>(
+                                                          getJsonField(
+                                                            (_model.signInResp
+                                                                    ?.jsonBody ??
+                                                                ''),
+                                                            r'''$.status''',
+                                                          ),
+                                                          -1,
+                                                        );
+                                                        setState(() {});
                                                         if (shouldSetState) {
                                                           setState(() {});
                                                         }
@@ -1594,29 +1586,26 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                     onPressed: () async {
                                                       var shouldSetState =
                                                           false;
-                                                      setState(() {
-                                                        _model.usernameCreate =
-                                                            _model
-                                                                .usernameCreateTextController
-                                                                .text;
-                                                        _model.emailAdressCreate =
-                                                            _model
-                                                                .emailAddressCreateTextController
-                                                                .text;
-                                                        _model.passwordCreate =
-                                                            _model
-                                                                .passwordCreateTextController
-                                                                .text;
-                                                        _model.passwordConfirm =
-                                                            _model
-                                                                .passwordConfirmTextController
-                                                                .text;
-                                                        _model.birthday =
-                                                            dateTimeFormat(
-                                                                'd/M/y',
-                                                                _model
-                                                                    .datePicked);
-                                                      });
+                                                      _model.usernameCreate = _model
+                                                          .usernameCreateTextController
+                                                          .text;
+                                                      _model.emailAdressCreate =
+                                                          _model
+                                                              .emailAddressCreateTextController
+                                                              .text;
+                                                      _model.passwordCreate = _model
+                                                          .passwordCreateTextController
+                                                          .text;
+                                                      _model.passwordConfirm =
+                                                          _model
+                                                              .passwordConfirmTextController
+                                                              .text;
+                                                      _model.birthday =
+                                                          dateTimeFormat(
+                                                              'd/M/y',
+                                                              _model
+                                                                  .datePicked);
+                                                      setState(() {});
                                                       _model.isValidSignUp =
                                                           actions
                                                               .checkSignUp(
@@ -1657,48 +1646,46 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                                 ''),
                                                             r'''$.isNew''',
                                                           )) {
-                                                            setState(() {
+                                                            FFAppState()
+                                                                    .userId =
+                                                                getJsonField(
+                                                              (_model.signUpResp
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.id''',
+                                                            );
+                                                            FFAppState()
+                                                                    .username =
+                                                                _model
+                                                                    .usernameCreate!;
+                                                            FFAppState()
+                                                                    .accessToken =
+                                                                getJsonField(
+                                                              (_model.signUpResp
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.access_token''',
+                                                            ).toString();
+                                                            FFAppState()
+                                                                    .tokenType =
+                                                                getJsonField(
+                                                              (_model.signUpResp
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.token_type''',
+                                                            ).toString();
+                                                            setState(() {});
+                                                            if (_model
+                                                                .checkRememberCreateValue!) {
                                                               FFAppState()
-                                                                      .userId =
-                                                                  getJsonField(
-                                                                (_model.signUpResp
-                                                                        ?.jsonBody ??
-                                                                    ''),
-                                                                r'''$.id''',
-                                                              );
-                                                              FFAppState()
-                                                                      .username =
+                                                                      .persistentUsername =
                                                                   _model
                                                                       .usernameCreate!;
                                                               FFAppState()
-                                                                      .accessToken =
-                                                                  getJsonField(
-                                                                (_model.signUpResp
-                                                                        ?.jsonBody ??
-                                                                    ''),
-                                                                r'''$.access_token''',
-                                                              ).toString();
-                                                              FFAppState()
-                                                                      .tokenType =
-                                                                  getJsonField(
-                                                                (_model.signUpResp
-                                                                        ?.jsonBody ??
-                                                                    ''),
-                                                                r'''$.token_type''',
-                                                              ).toString();
-                                                            });
-                                                            if (_model
-                                                                .checkRememberCreateValue!) {
-                                                              setState(() {
-                                                                FFAppState()
-                                                                        .persistentUsername =
-                                                                    _model
-                                                                        .usernameCreate!;
-                                                                FFAppState()
-                                                                        .persistentPassword =
-                                                                    _model
-                                                                        .passwordCreate!;
-                                                              });
+                                                                      .persistentPassword =
+                                                                  _model
+                                                                      .passwordCreate!;
+                                                              setState(() {});
                                                             }
 
                                                             context.pushNamed(
@@ -1709,44 +1696,41 @@ class _AuthenticateWidgetState extends State<AuthenticateWidget>
                                                             }
                                                             return;
                                                           } else {
-                                                            setState(() {
-                                                              _model.signUpError =
-                                                                  'Username already taken!';
-                                                            });
+                                                            _model.signUpError =
+                                                                'Username already taken!';
+                                                            setState(() {});
                                                             if (shouldSetState) {
                                                               setState(() {});
                                                             }
                                                             return;
                                                           }
                                                         } else {
-                                                          setState(() {
-                                                            _model.signUpError =
-                                                                valueOrDefault<
-                                                                    String>(
-                                                              getJsonField(
-                                                                (_model.signUpResp
-                                                                        ?.jsonBody ??
-                                                                    ''),
-                                                                r'''$.detail''',
-                                                              )?.toString(),
-                                                              'Couldn\'t connect to given IP',
-                                                            );
-                                                            _model.signUpErrorCode =
-                                                                (_model.signUpResp
-                                                                        ?.statusCode ??
-                                                                    200);
-                                                          });
+                                                          _model.signUpError =
+                                                              valueOrDefault<
+                                                                  String>(
+                                                            getJsonField(
+                                                              (_model.signUpResp
+                                                                      ?.jsonBody ??
+                                                                  ''),
+                                                              r'''$.detail''',
+                                                            )?.toString(),
+                                                            'Couldn\'t connect to given IP',
+                                                          );
+                                                          _model.signUpErrorCode =
+                                                              (_model.signUpResp
+                                                                      ?.statusCode ??
+                                                                  200);
+                                                          setState(() {});
                                                           if (shouldSetState) {
                                                             setState(() {});
                                                           }
                                                           return;
                                                         }
                                                       } else {
-                                                        setState(() {
-                                                          _model.signUpError =
-                                                              _model
-                                                                  .isValidSignUp;
-                                                        });
+                                                        _model.signUpError =
+                                                            _model
+                                                                .isValidSignUp;
+                                                        setState(() {});
                                                         if (shouldSetState) {
                                                           setState(() {});
                                                         }

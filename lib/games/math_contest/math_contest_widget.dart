@@ -28,9 +28,8 @@ class _MathContestWidgetState extends State<MathContestWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        FFAppState().hasStarted = true;
-      });
+      FFAppState().hasStarted = true;
+      setState(() {});
     });
   }
 
@@ -164,10 +163,9 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                               .then((_) =>
                                                   _model.soundPlayer1!.play());
 
-                                          setState(() {
-                                            _model.clientScore =
-                                                _model.clientScore! + 50;
-                                          });
+                                          _model.clientScore =
+                                              _model.clientScore! + 50;
+                                          setState(() {});
                                         } else {
                                           _model.soundPlayer2 ??= AudioPlayer();
                                           if (_model.soundPlayer2!.playing) {
@@ -181,10 +179,9 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                                   _model.soundPlayer2!.play());
                                         }
 
-                                        setState(() {
-                                          _model.currentIndex =
-                                              _model.currentIndex! + 1;
-                                        });
+                                        _model.currentIndex =
+                                            _model.currentIndex! + 1;
+                                        setState(() {});
                                         if (_model.currentIndex! >=
                                             _model.quizLength) {
                                           context.goNamed(
@@ -212,38 +209,37 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                           if (shouldSetState) setState(() {});
                                           return;
                                         } else {
-                                          setState(() {
-                                            _model.eqToSolve = getJsonField(
-                                              _model.mathList[
-                                                  _model.currentIndex!],
-                                              r'''$.equation''',
-                                            ).toString();
-                                            _model.op1 = getJsonField(
-                                              _model.mathList[
-                                                  _model.currentIndex!],
-                                              r'''$.op1''',
-                                            ).toString();
-                                            _model.op2 = getJsonField(
-                                              _model.mathList[
-                                                  _model.currentIndex!],
-                                              r'''$.op2''',
-                                            ).toString();
-                                            _model.op3 = getJsonField(
-                                              _model.mathList[
-                                                  _model.currentIndex!],
-                                              r'''$.op3''',
-                                            ).toString();
-                                            _model.op4 = getJsonField(
-                                              _model.mathList[
-                                                  _model.currentIndex!],
-                                              r'''$.op4''',
-                                            ).toString();
-                                            _model.correct = getJsonField(
-                                              _model.mathList[
-                                                  _model.currentIndex!],
-                                              r'''$.correct''',
-                                            ).toString();
-                                          });
+                                          _model.eqToSolve = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.equation''',
+                                          ).toString();
+                                          _model.op1 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op1''',
+                                          ).toString();
+                                          _model.op2 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op2''',
+                                          ).toString();
+                                          _model.op3 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op3''',
+                                          ).toString();
+                                          _model.op4 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op4''',
+                                          ).toString();
+                                          _model.correct = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.correct''',
+                                          ).toString();
+                                          setState(() {});
                                           if (shouldSetState) setState(() {});
                                           return;
                                         }
@@ -318,10 +314,9 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                               .then((_) =>
                                                   _model.soundPlayer3!.play());
 
-                                          setState(() {
-                                            _model.clientScore =
-                                                _model.clientScore! + 50;
-                                          });
+                                          _model.clientScore =
+                                              _model.clientScore! + 50;
+                                          setState(() {});
                                         } else {
                                           _model.soundPlayer4 ??= AudioPlayer();
                                           if (_model.soundPlayer4!.playing) {
@@ -335,10 +330,9 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                                   _model.soundPlayer4!.play());
                                         }
 
-                                        setState(() {
-                                          _model.currentIndex =
-                                              _model.currentIndex! + 1;
-                                        });
+                                        _model.currentIndex =
+                                            _model.currentIndex! + 1;
+                                        setState(() {});
                                         if (_model.currentIndex! >=
                                             _model.quizLength) {
                                           context.goNamed(
@@ -366,38 +360,37 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                           if (shouldSetState) setState(() {});
                                           return;
                                         } else {
-                                          setState(() {
-                                            _model.eqToSolve = getJsonField(
-                                              _model.mathList[
-                                                  _model.currentIndex!],
-                                              r'''$.equation''',
-                                            ).toString();
-                                            _model.op1 = getJsonField(
-                                              _model.mathList[
-                                                  _model.currentIndex!],
-                                              r'''$.op1''',
-                                            ).toString();
-                                            _model.op2 = getJsonField(
-                                              _model.mathList[
-                                                  _model.currentIndex!],
-                                              r'''$.op2''',
-                                            ).toString();
-                                            _model.op3 = getJsonField(
-                                              _model.mathList[
-                                                  _model.currentIndex!],
-                                              r'''$.op3''',
-                                            ).toString();
-                                            _model.op4 = getJsonField(
-                                              _model.mathList[
-                                                  _model.currentIndex!],
-                                              r'''$.op4''',
-                                            ).toString();
-                                            _model.correct = getJsonField(
-                                              _model.mathList[
-                                                  _model.currentIndex!],
-                                              r'''$.correct''',
-                                            ).toString();
-                                          });
+                                          _model.eqToSolve = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.equation''',
+                                          ).toString();
+                                          _model.op1 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op1''',
+                                          ).toString();
+                                          _model.op2 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op2''',
+                                          ).toString();
+                                          _model.op3 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op3''',
+                                          ).toString();
+                                          _model.op4 = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.op4''',
+                                          ).toString();
+                                          _model.correct = getJsonField(
+                                            _model
+                                                .mathList[_model.currentIndex!],
+                                            r'''$.correct''',
+                                          ).toString();
+                                          setState(() {});
                                           if (shouldSetState) setState(() {});
                                           return;
                                         }
@@ -481,10 +474,9 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                             .then((_) =>
                                                 _model.soundPlayer5!.play());
 
-                                        setState(() {
-                                          _model.clientScore =
-                                              _model.clientScore! + 50;
-                                        });
+                                        _model.clientScore =
+                                            _model.clientScore! + 50;
+                                        setState(() {});
                                       } else {
                                         _model.soundPlayer6 ??= AudioPlayer();
                                         if (_model.soundPlayer6!.playing) {
@@ -498,10 +490,9 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                                 _model.soundPlayer6!.play());
                                       }
 
-                                      setState(() {
-                                        _model.currentIndex =
-                                            _model.currentIndex! + 1;
-                                      });
+                                      _model.currentIndex =
+                                          _model.currentIndex! + 1;
+                                      setState(() {});
                                       if (_model.currentIndex! >=
                                           _model.quizLength) {
                                         context.goNamed(
@@ -527,38 +518,31 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                         if (shouldSetState) setState(() {});
                                         return;
                                       } else {
-                                        setState(() {
-                                          _model.eqToSolve = getJsonField(
-                                            _model
-                                                .mathList[_model.currentIndex!],
-                                            r'''$.equation''',
-                                          ).toString();
-                                          _model.op1 = getJsonField(
-                                            _model
-                                                .mathList[_model.currentIndex!],
-                                            r'''$.op1''',
-                                          ).toString();
-                                          _model.op2 = getJsonField(
-                                            _model
-                                                .mathList[_model.currentIndex!],
-                                            r'''$.op2''',
-                                          ).toString();
-                                          _model.op3 = getJsonField(
-                                            _model
-                                                .mathList[_model.currentIndex!],
-                                            r'''$.op3''',
-                                          ).toString();
-                                          _model.op4 = getJsonField(
-                                            _model
-                                                .mathList[_model.currentIndex!],
-                                            r'''$.op4''',
-                                          ).toString();
-                                          _model.correct = getJsonField(
-                                            _model
-                                                .mathList[_model.currentIndex!],
-                                            r'''$.correct''',
-                                          ).toString();
-                                        });
+                                        _model.eqToSolve = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.equation''',
+                                        ).toString();
+                                        _model.op1 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op1''',
+                                        ).toString();
+                                        _model.op2 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op2''',
+                                        ).toString();
+                                        _model.op3 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op3''',
+                                        ).toString();
+                                        _model.op4 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op4''',
+                                        ).toString();
+                                        _model.correct = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.correct''',
+                                        ).toString();
+                                        setState(() {});
                                         if (shouldSetState) setState(() {});
                                         return;
                                       }
@@ -630,10 +614,9 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                             .then((_) =>
                                                 _model.soundPlayer7!.play());
 
-                                        setState(() {
-                                          _model.clientScore =
-                                              _model.clientScore! + 50;
-                                        });
+                                        _model.clientScore =
+                                            _model.clientScore! + 50;
+                                        setState(() {});
                                       } else {
                                         _model.soundPlayer8 ??= AudioPlayer();
                                         if (_model.soundPlayer8!.playing) {
@@ -647,10 +630,9 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                                 _model.soundPlayer8!.play());
                                       }
 
-                                      setState(() {
-                                        _model.currentIndex =
-                                            _model.currentIndex! + 1;
-                                      });
+                                      _model.currentIndex =
+                                          _model.currentIndex! + 1;
+                                      setState(() {});
                                       if (_model.currentIndex! >=
                                           _model.quizLength) {
                                         context.goNamed(
@@ -676,38 +658,31 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                         if (shouldSetState) setState(() {});
                                         return;
                                       } else {
-                                        setState(() {
-                                          _model.eqToSolve = getJsonField(
-                                            _model
-                                                .mathList[_model.currentIndex!],
-                                            r'''$.equation''',
-                                          ).toString();
-                                          _model.op1 = getJsonField(
-                                            _model
-                                                .mathList[_model.currentIndex!],
-                                            r'''$.op1''',
-                                          ).toString();
-                                          _model.op2 = getJsonField(
-                                            _model
-                                                .mathList[_model.currentIndex!],
-                                            r'''$.op2''',
-                                          ).toString();
-                                          _model.op3 = getJsonField(
-                                            _model
-                                                .mathList[_model.currentIndex!],
-                                            r'''$.op3''',
-                                          ).toString();
-                                          _model.op4 = getJsonField(
-                                            _model
-                                                .mathList[_model.currentIndex!],
-                                            r'''$.op4''',
-                                          ).toString();
-                                          _model.correct = getJsonField(
-                                            _model
-                                                .mathList[_model.currentIndex!],
-                                            r'''$.correct''',
-                                          ).toString();
-                                        });
+                                        _model.eqToSolve = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.equation''',
+                                        ).toString();
+                                        _model.op1 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op1''',
+                                        ).toString();
+                                        _model.op2 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op2''',
+                                        ).toString();
+                                        _model.op3 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op3''',
+                                        ).toString();
+                                        _model.op4 = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.op4''',
+                                        ).toString();
+                                        _model.correct = getJsonField(
+                                          _model.mathList[_model.currentIndex!],
+                                          r'''$.correct''',
+                                        ).toString();
+                                        setState(() {});
                                         if (shouldSetState) setState(() {});
                                         return;
                                       }
@@ -830,51 +805,49 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                               );
                               shouldSetState = true;
                               if ((_model.mathJSON?.succeeded ?? true)) {
-                                setState(() {
-                                  _model.mathList = getJsonField(
-                                    (_model.mathJSON?.jsonBody ?? ''),
-                                    r'''$.equations''',
-                                    true,
-                                  )!
-                                      .toList()
-                                      .cast<dynamic>();
-                                  _model.quizLength = getJsonField(
-                                    (_model.mathJSON?.jsonBody ?? ''),
-                                    r'''$.length''',
-                                  );
-                                });
+                                _model.mathList = getJsonField(
+                                  (_model.mathJSON?.jsonBody ?? ''),
+                                  r'''$.equations''',
+                                  true,
+                                )!
+                                    .toList()
+                                    .cast<dynamic>();
+                                _model.quizLength = getJsonField(
+                                  (_model.mathJSON?.jsonBody ?? ''),
+                                  r'''$.length''',
+                                );
+                                setState(() {});
                               } else {
                                 if (shouldSetState) setState(() {});
                                 return;
                               }
 
-                              setState(() {
-                                _model.eqToSolve = getJsonField(
-                                  _model.mathList[_model.currentIndex!],
-                                  r'''$.equation''',
-                                ).toString();
-                                _model.op1 = getJsonField(
-                                  _model.mathList[_model.currentIndex!],
-                                  r'''$.op1''',
-                                ).toString();
-                                _model.op2 = getJsonField(
-                                  _model.mathList[_model.currentIndex!],
-                                  r'''$.op2''',
-                                ).toString();
-                                _model.op3 = getJsonField(
-                                  _model.mathList[_model.currentIndex!],
-                                  r'''$.op3''',
-                                ).toString();
-                                _model.op4 = getJsonField(
-                                  _model.mathList[_model.currentIndex!],
-                                  r'''$.op4''',
-                                ).toString();
-                                _model.correct = getJsonField(
-                                  _model.mathList[_model.currentIndex!],
-                                  r'''$.correct''',
-                                ).toString();
-                                _model.hasStarted = true;
-                              });
+                              _model.eqToSolve = getJsonField(
+                                _model.mathList[_model.currentIndex!],
+                                r'''$.equation''',
+                              ).toString();
+                              _model.op1 = getJsonField(
+                                _model.mathList[_model.currentIndex!],
+                                r'''$.op1''',
+                              ).toString();
+                              _model.op2 = getJsonField(
+                                _model.mathList[_model.currentIndex!],
+                                r'''$.op2''',
+                              ).toString();
+                              _model.op3 = getJsonField(
+                                _model.mathList[_model.currentIndex!],
+                                r'''$.op3''',
+                              ).toString();
+                              _model.op4 = getJsonField(
+                                _model.mathList[_model.currentIndex!],
+                                r'''$.op4''',
+                              ).toString();
+                              _model.correct = getJsonField(
+                                _model.mathList[_model.currentIndex!],
+                                r'''$.correct''',
+                              ).toString();
+                              _model.hasStarted = true;
+                              setState(() {});
                               if (shouldSetState) setState(() {});
                             },
                             text: 'Press to START!',

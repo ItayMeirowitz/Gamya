@@ -30,9 +30,8 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        FFAppState().hasStarted = true;
-      });
+      FFAppState().hasStarted = true;
+      setState(() {});
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
@@ -196,11 +195,10 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                   child: FFButtonWidget(
                                     onPressed: () async {
                                       var shouldSetState = false;
-                                      setState(() {
-                                        _model.clicks = _model.clicks + 1;
-                                        _model.currentDecrementer =
-                                            _model.currentDecrementer + 1;
-                                      });
+                                      _model.clicks = _model.clicks + 1;
+                                      _model.currentDecrementer =
+                                          _model.currentDecrementer + 1;
+                                      setState(() {});
                                       if (_model.reveal) {
                                         _model.getOptimalIncResp =
                                             await GetOptimalCall.call(
@@ -215,15 +213,13 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                         if ((_model
                                                 .getOptimalIncResp?.succeeded ??
                                             true)) {
-                                          setState(() {
-                                            _model.currentOptimal =
-                                                getJsonField(
-                                              (_model.getOptimalIncResp
-                                                      ?.jsonBody ??
-                                                  ''),
-                                              r'''$.optimal''',
-                                            ).toString();
-                                          });
+                                          _model.currentOptimal = getJsonField(
+                                            (_model.getOptimalIncResp
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$.optimal''',
+                                          ).toString();
+                                          setState(() {});
                                           if (shouldSetState) setState(() {});
                                           return;
                                         } else {
@@ -269,13 +265,12 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                   child: FFButtonWidget(
                                     onPressed: () async {
                                       var shouldSetState = false;
-                                      setState(() {
-                                        _model.clicks = _model.clicks + 1;
-                                        _model.currentNumber =
-                                            functions.minusPrecent(
-                                                _model.currentNumber!,
-                                                _model.percentage);
-                                      });
+                                      _model.clicks = _model.clicks + 1;
+                                      _model.currentNumber =
+                                          functions.minusPrecent(
+                                              _model.currentNumber!,
+                                              _model.percentage);
+                                      setState(() {});
                                       if (_model.reveal) {
                                         _model.getOptimalPerResp =
                                             await GetOptimalCall.call(
@@ -290,15 +285,13 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                         if ((_model
                                                 .getOptimalPerResp?.succeeded ??
                                             true)) {
-                                          setState(() {
-                                            _model.currentOptimal =
-                                                getJsonField(
-                                              (_model.getOptimalPerResp
-                                                      ?.jsonBody ??
-                                                  ''),
-                                              r'''$.optimal''',
-                                            ).toString();
-                                          });
+                                          _model.currentOptimal = getJsonField(
+                                            (_model.getOptimalPerResp
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$.optimal''',
+                                          ).toString();
+                                          setState(() {});
                                           if (shouldSetState) setState(() {});
                                           return;
                                         } else {
@@ -346,13 +339,12 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                   child: FFButtonWidget(
                                     onPressed: () async {
                                       var shouldSetState = false;
-                                      setState(() {
-                                        _model.clicks = _model.clicks + 1;
-                                        _model.currentNumber =
-                                            functions.decrementNumber(
-                                                _model.currentNumber!,
-                                                _model.currentDecrementer);
-                                      });
+                                      _model.clicks = _model.clicks + 1;
+                                      _model.currentNumber =
+                                          functions.decrementNumber(
+                                              _model.currentNumber!,
+                                              _model.currentDecrementer);
+                                      setState(() {});
                                       if (_model.currentNumber! <= 0.0) {
                                         context.goNamed(
                                           'GameFinished',
@@ -391,15 +383,13 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                         if ((_model
                                                 .getOptimalDecResp?.succeeded ??
                                             true)) {
-                                          setState(() {
-                                            _model.currentOptimal =
-                                                getJsonField(
-                                              (_model.getOptimalDecResp
-                                                      ?.jsonBody ??
-                                                  ''),
-                                              r'''$.optimal''',
-                                            ).toString();
-                                          });
+                                          _model.currentOptimal = getJsonField(
+                                            (_model.getOptimalDecResp
+                                                    ?.jsonBody ??
+                                                ''),
+                                            r'''$.optimal''',
+                                          ).toString();
+                                          setState(() {});
                                           if (shouldSetState) setState(() {});
                                           return;
                                         } else {
@@ -447,9 +437,8 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                   child: FFButtonWidget(
                                     onPressed: () async {
                                       var shouldSetState = false;
-                                      setState(() {
-                                        _model.reveal = true;
-                                      });
+                                      _model.reveal = true;
+                                      setState(() {});
                                       _model.getOptimalResp =
                                           await GetOptimalCall.call(
                                         serverIP: FFAppState().serverIP,
@@ -462,20 +451,18 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                                       shouldSetState = true;
                                       if ((_model.getOptimalResp?.succeeded ??
                                           true)) {
-                                        setState(() {
-                                          _model.initialOptimal = getJsonField(
-                                            (_model.getOptimalResp?.jsonBody ??
-                                                ''),
-                                            r'''$.optimal''',
-                                          ).toString();
-                                        });
+                                        _model.initialOptimal = getJsonField(
+                                          (_model.getOptimalResp?.jsonBody ??
+                                              ''),
+                                          r'''$.optimal''',
+                                        ).toString();
+                                        setState(() {});
                                         if (shouldSetState) setState(() {});
                                         return;
                                       } else {
-                                        setState(() {
-                                          _model.initialOptimal =
-                                              'there was an error lol';
-                                        });
+                                        _model.initialOptimal =
+                                            'there was an error lol';
+                                        setState(() {});
                                         if (shouldSetState) setState(() {});
                                         return;
                                       }
@@ -551,9 +538,8 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                               newValue =
                                   double.parse(newValue.toStringAsFixed(2));
                               setState(() => _model.sliderValue = newValue);
-                              setState(() {
-                                _model.percentage = _model.sliderValue!;
-                              });
+                              _model.percentage = _model.sliderValue!;
+                              setState(() {});
                             },
                           ),
                         ),
@@ -633,19 +619,17 @@ class _Get2ZeroWidgetState extends State<Get2ZeroWidget> {
                               0.0, 100.0, 0.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
-                              setState(() {
-                                _model.initialDecrementer =
-                                    _model.countControllerValue!;
-                                _model.percentage = _model.sliderValue!;
-                                _model.initialNumber =
-                                    functions.getRandomNumber();
-                                _model.currentDecrementer =
-                                    _model.countControllerValue!;
-                                _model.started = true;
-                              });
-                              setState(() {
-                                _model.currentNumber = _model.initialNumber;
-                              });
+                              _model.initialDecrementer =
+                                  _model.countControllerValue!;
+                              _model.percentage = _model.sliderValue!;
+                              _model.initialNumber =
+                                  functions.getRandomNumber();
+                              _model.currentDecrementer =
+                                  _model.countControllerValue!;
+                              _model.started = true;
+                              setState(() {});
+                              _model.currentNumber = _model.initialNumber;
+                              setState(() {});
                             },
                             text: 'Start!',
                             options: FFButtonOptions(

@@ -29,9 +29,8 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      FFAppState().update(() {
-        FFAppState().hasStarted = true;
-      });
+      FFAppState().hasStarted = true;
+      FFAppState().update(() {});
       _model.currentReceived = await actions.fetchData(
         'http://${FFAppState().serverIP}:${FFAppState().port}/guessWrong/${FFAppState().username}',
         FFAppState().tokenType,
@@ -43,14 +42,12 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
             _model.currentReceived,
             r'''$.current''',
           )) {
-        setState(() {
-          _model.isTurn = true;
-        });
+        _model.isTurn = true;
+        setState(() {});
         await Future.delayed(const Duration(milliseconds: 500));
       } else {
-        setState(() {
-          _model.isTurn = false;
-        });
+        _model.isTurn = false;
+        setState(() {});
         await Future.delayed(const Duration(milliseconds: 500));
       }
 
@@ -68,14 +65,12 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                   r'''$.current''',
                 ) !=
                 null) {
-              setState(() {
-                _model.isTurn = false;
-              });
-              setState(() {
-                _model.category = null;
-                _model.secretWord = null;
-                _model.waitingGuess = false;
-              });
+              _model.isTurn = false;
+              setState(() {});
+              _model.category = null;
+              _model.secretWord = null;
+              _model.waitingGuess = false;
+              setState(() {});
               break;
             } else if (getJsonField(
                   _model.dataReceivedTurn,
@@ -113,11 +108,10 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                 port: FFAppState().port,
               );
               if ((_model.getScoreTurnResp?.succeeded ?? true)) {
-                setState(() {
-                  _model.scores = (_model.getScoreTurnResp?.jsonBody ?? '')
-                      .toList()
-                      .cast<dynamic>();
-                });
+                _model.scores = (_model.getScoreTurnResp?.jsonBody ?? '')
+                    .toList()
+                    .cast<dynamic>();
+                setState(() {});
               }
             } else {
               await showDialog(
@@ -150,12 +144,11 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                   r'''$.category''',
                 ) !=
                 null) {
-              setState(() {
-                _model.guessCategory = getJsonField(
-                  _model.dataReceived,
-                  r'''$.category''',
-                ).toString().toString();
-              });
+              _model.guessCategory = getJsonField(
+                _model.dataReceived,
+                r'''$.category''',
+              ).toString().toString();
+              setState(() {});
             } else if (getJsonField(
                   _model.dataReceived,
                   r'''$.getScore''',
@@ -169,11 +162,10 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                 port: FFAppState().port,
               );
               if ((_model.getScoreResp?.succeeded ?? true)) {
-                setState(() {
-                  _model.scores = (_model.getScoreResp?.jsonBody ?? '')
-                      .toList()
-                      .cast<dynamic>();
-                });
+                _model.scores = (_model.getScoreResp?.jsonBody ?? '')
+                    .toList()
+                    .cast<dynamic>();
+                setState(() {});
               }
             } else if (getJsonField(
                   _model.dataReceived,
@@ -185,15 +177,13 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                     _model.dataReceived,
                     r'''$.current''',
                   )) {
-                setState(() {
-                  _model.isTurn = true;
-                  _model.guessCategory = null;
-                });
+                _model.isTurn = true;
+                _model.guessCategory = null;
+                setState(() {});
                 break;
               }
-              setState(() {
-                _model.guessCategory = null;
-              });
+              _model.guessCategory = null;
+              setState(() {});
             } else if (getJsonField(
                   _model.dataReceived,
                   r'''$.gameOver''',
@@ -514,12 +504,11 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                   FFButtonWidget(
                                     onPressed: () async {
                                       var shouldSetState = false;
-                                      setState(() {
-                                        _model.category =
-                                            _model.categoryTextController.text;
-                                        _model.secretWord = _model
-                                            .secretWordTextController.text;
-                                      });
+                                      _model.category =
+                                          _model.categoryTextController.text;
+                                      _model.secretWord =
+                                          _model.secretWordTextController.text;
+                                      setState(() {});
                                       if ((_model.category != null &&
                                               _model.category != '') &&
                                           (_model.secretWord != null &&
@@ -539,9 +528,8 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                         if ((_model
                                                 .postCategoryResp?.succeeded ??
                                             true)) {
-                                          setState(() {
-                                            _model.waitingGuess = true;
-                                          });
+                                          _model.waitingGuess = true;
+                                          setState(() {});
                                         } else {
                                           await showDialog(
                                             context: context,
@@ -869,9 +857,8 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
                                           if ((_model.postCheckGuessResp
                                                   ?.succeeded ??
                                               true)) {
-                                            setState(() {
-                                              _model.guessCategory = null;
-                                            });
+                                            _model.guessCategory = null;
+                                            setState(() {});
                                             if (shouldSetState) {
                                               setState(() {});
                                             }

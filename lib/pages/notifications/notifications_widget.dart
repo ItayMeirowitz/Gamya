@@ -39,9 +39,8 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
 
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        _model.requestList = widget.requests!.toList().cast<dynamic>();
-      });
+      _model.requestList = widget.requests!.toList().cast<dynamic>();
+      setState(() {});
     });
 
     _model.tabBarController = TabController(
@@ -382,21 +381,19 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                             );
                                                           },
                                                         );
-                                                        setState(() {
-                                                          FFAppState()
-                                                              .removeFromRequests(
-                                                                  invitesItem);
-                                                          FFAppState()
-                                                                  .notificationCounter =
-                                                              FFAppState()
-                                                                      .notificationCounter +
-                                                                  -1;
-                                                        });
-                                                        setState(() {
-                                                          _model
-                                                              .removeFromRequestList(
-                                                                  invitesItem);
-                                                        });
+                                                        FFAppState()
+                                                            .removeFromRequests(
+                                                                invitesItem);
+                                                        FFAppState()
+                                                                .notificationCounter =
+                                                            FFAppState()
+                                                                    .notificationCounter +
+                                                                -1;
+                                                        setState(() {});
+                                                        _model
+                                                            .removeFromRequestList(
+                                                                invitesItem);
+                                                        setState(() {});
                                                         if (shouldSetState) {
                                                           setState(() {});
                                                         }
@@ -494,27 +491,24 @@ class _NotificationsWidgetState extends State<NotificationsWidget>
                                                               );
                                                             },
                                                           );
-                                                          setState(() {
-                                                            FFAppState()
-                                                                    .notificationCounter =
-                                                                FFAppState()
-                                                                        .notificationCounter +
-                                                                    -1;
-                                                            FFAppState()
-                                                                    .leader =
-                                                                getJsonField(
-                                                              invitesItem,
-                                                              r'''$.name''',
-                                                            ).toString();
-                                                            FFAppState()
-                                                                .removeFromRequests(
-                                                                    invitesItem);
-                                                          });
-                                                          setState(() {
-                                                            _model
-                                                                .removeFromRequestList(
-                                                                    invitesItem);
-                                                          });
+                                                          FFAppState()
+                                                                  .notificationCounter =
+                                                              FFAppState()
+                                                                      .notificationCounter +
+                                                                  -1;
+                                                          FFAppState().leader =
+                                                              getJsonField(
+                                                            invitesItem,
+                                                            r'''$.name''',
+                                                          ).toString();
+                                                          FFAppState()
+                                                              .removeFromRequests(
+                                                                  invitesItem);
+                                                          setState(() {});
+                                                          _model
+                                                              .removeFromRequestList(
+                                                                  invitesItem);
+                                                          setState(() {});
                                                           if (shouldSetState) {
                                                             setState(() {});
                                                           }

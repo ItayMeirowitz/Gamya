@@ -27,12 +27,10 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        FFAppState().hasStarted = true;
-      });
-      setState(() {
-        _model.started = true;
-      });
+      FFAppState().hasStarted = true;
+      setState(() {});
+      _model.started = true;
+      setState(() {});
       while (_model.started) {
         _model.getInitialTicTacToeResp = await GetTicTacToeBoardCall.call(
           serverIP: FFAppState().serverIP,
@@ -42,40 +40,35 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
           port: FFAppState().port,
         );
         if ((_model.getInitialTicTacToeResp?.succeeded ?? true)) {
-          setState(() {
-            _model.currentGrid = (getJsonField(
-              (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
-              r'''$.board''',
-              true,
-            ) as List)
-                .map<String>((s) => s.toString())
-                .toList()
-                .toList()
-                .cast<String>();
-          });
-          setState(() {
-            _model.isTurn = functions.isTurn(
-                FFAppState().userType, _model.currentGrid.toList());
-          });
+          _model.currentGrid = (getJsonField(
+            (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
+            r'''$.board''',
+            true,
+          ) as List)
+              .map<String>((s) => s.toString())
+              .toList()
+              .toList()
+              .cast<String>();
+          setState(() {});
+          _model.isTurn = functions.isTurn(
+              FFAppState().userType, _model.currentGrid.toList());
+          setState(() {});
           if (getJsonField(
                 (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
                 r'''$.won''',
               ) !=
               null) {
-            setState(() {
-              _model.won = getJsonField(
-                (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
-                r'''$.won''',
-              ).toString().toString();
-            });
+            _model.won = getJsonField(
+              (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
+              r'''$.won''',
+            ).toString().toString();
+            setState(() {});
             if (_model.won == FFAppState().userType) {
-              setState(() {
-                _model.score = 100;
-              });
+              _model.score = 100;
+              setState(() {});
             } else {
-              setState(() {
-                _model.score = 0;
-              });
+              _model.score = 0;
+              setState(() {});
             }
 
             context.goNamed(
@@ -242,21 +235,19 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                                           if ((_model.getTicTacToeResp
                                                   ?.succeeded ??
                                               true)) {
-                                            setState(() {
-                                              _model.currentGrid =
-                                                  (getJsonField(
-                                                (_model.getTicTacToeResp
-                                                        ?.jsonBody ??
-                                                    ''),
-                                                r'''$.board''',
-                                                true,
-                                              ) as List)
-                                                      .map<String>(
-                                                          (s) => s.toString())
-                                                      .toList()
-                                                      .toList()
-                                                      .cast<String>();
-                                            });
+                                            _model.currentGrid = (getJsonField(
+                                              (_model.getTicTacToeResp
+                                                      ?.jsonBody ??
+                                                  ''),
+                                              r'''$.board''',
+                                              true,
+                                            ) as List)
+                                                .map<String>(
+                                                    (s) => s.toString())
+                                                .toList()
+                                                .toList()
+                                                .cast<String>();
+                                            setState(() {});
                                             if (shouldSetState) {
                                               setState(() {});
                                             }

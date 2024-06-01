@@ -48,21 +48,20 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
             (_model.persistentSignInResp?.jsonBody ?? ''),
             r'''$.isNew''',
           )) {
-            setState(() {
-              FFAppState().userId = getJsonField(
-                (_model.persistentSignInResp?.jsonBody ?? ''),
-                r'''$.id''',
-              );
-              FFAppState().username = FFAppState().persistentUsername;
-              FFAppState().accessToken = getJsonField(
-                (_model.persistentSignInResp?.jsonBody ?? ''),
-                r'''$.access_token''',
-              ).toString().toString();
-              FFAppState().tokenType = getJsonField(
-                (_model.persistentSignInResp?.jsonBody ?? ''),
-                r'''$.token_type''',
-              ).toString().toString();
-            });
+            FFAppState().userId = getJsonField(
+              (_model.persistentSignInResp?.jsonBody ?? ''),
+              r'''$.id''',
+            );
+            FFAppState().username = FFAppState().persistentUsername;
+            FFAppState().accessToken = getJsonField(
+              (_model.persistentSignInResp?.jsonBody ?? ''),
+              r'''$.access_token''',
+            ).toString().toString();
+            FFAppState().tokenType = getJsonField(
+              (_model.persistentSignInResp?.jsonBody ?? ''),
+              r'''$.token_type''',
+            ).toString().toString();
+            setState(() {});
             await Future.delayed(const Duration(milliseconds: 1000));
 
             context.pushNamed('ChooseGame');
@@ -260,15 +259,12 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                                 0.0, 20.0, 0.0, 0.0),
                             child: FFButtonWidget(
                               onPressed: () async {
-                                setState(() {
-                                  FFAppState().port =
-                                      _model.textController2.text;
-                                });
+                                FFAppState().port = _model.textController2.text;
+                                setState(() {});
                                 if (_model.textController1.text != '') {
-                                  setState(() {
-                                    FFAppState().serverIP =
-                                        _model.textController1.text;
-                                  });
+                                  FFAppState().serverIP =
+                                      _model.textController1.text;
+                                  setState(() {});
                                   if (widget.isLoggedIn) {
                                     context.pushNamed('ChooseGame');
 
@@ -347,10 +343,9 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                                             const AlignmentDirectional(0.0, -1.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            setState(() {
-                                              FFAppState().serverIP =
-                                                  '192.168.1.181';
-                                            });
+                                            FFAppState().serverIP =
+                                                '192.168.1.181';
+                                            setState(() {});
                                             if (widget.isLoggedIn) {
                                               context.pushNamed('ChooseGame');
 
@@ -399,10 +394,9 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                                             const AlignmentDirectional(0.0, -1.0),
                                         child: FFButtonWidget(
                                           onPressed: () async {
-                                            setState(() {
-                                              FFAppState().serverIP =
-                                                  '192.168.188.140';
-                                            });
+                                            FFAppState().serverIP =
+                                                '192.168.188.140';
+                                            setState(() {});
                                             if (widget.isLoggedIn) {
                                               context.pushNamed('ChooseGame');
 
@@ -560,6 +554,41 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                               width: 300.0,
                               height: 200.0,
                               fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        child: Align(
+                          alignment: const AlignmentDirectional(0.0, 1.0),
+                          child: FFButtonWidget(
+                            onPressed: () async {
+                              FFAppState().persistentUsername = '';
+                              FFAppState().persistentPassword = '';
+                              FFAppState().port = '5000';
+                              setState(() {});
+                            },
+                            text: 'Sign out. (give up)',
+                            options: FFButtonOptions(
+                              height: 40.0,
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  24.0, 0.0, 24.0, 0.0),
+                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: const Color(0xFFEC2B37),
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .titleSmall
+                                  .override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                  ),
+                              elevation: 3.0,
+                              borderSide: const BorderSide(
+                                color: Colors.transparent,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(8.0),
                             ),
                           ),
                         ),

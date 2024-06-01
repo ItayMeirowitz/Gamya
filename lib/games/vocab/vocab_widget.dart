@@ -28,9 +28,8 @@ class _VocabWidgetState extends State<VocabWidget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        FFAppState().hasStarted = true;
-      });
+      FFAppState().hasStarted = true;
+      setState(() {});
     });
   }
 
@@ -165,20 +164,17 @@ class _VocabWidgetState extends State<VocabWidget> {
                                                   _model.soundPlayer1!.play());
 
                                           if (_model.diff == 'easy') {
-                                            setState(() {
-                                              _model.clientScore =
-                                                  _model.clientScore! + 20;
-                                            });
+                                            _model.clientScore =
+                                                _model.clientScore! + 20;
+                                            setState(() {});
                                           } else if (_model.diff == 'medium') {
-                                            setState(() {
-                                              _model.clientScore =
-                                                  _model.clientScore! + 40;
-                                            });
+                                            _model.clientScore =
+                                                _model.clientScore! + 40;
+                                            setState(() {});
                                           } else if (_model.diff == 'hard') {
-                                            setState(() {
-                                              _model.clientScore =
-                                                  _model.clientScore! + 100;
-                                            });
+                                            _model.clientScore =
+                                                _model.clientScore! + 100;
+                                            setState(() {});
                                           }
                                         } else {
                                           _model.soundPlayer2 ??= AudioPlayer();
@@ -193,10 +189,9 @@ class _VocabWidgetState extends State<VocabWidget> {
                                                   _model.soundPlayer2!.play());
                                         }
 
-                                        setState(() {
-                                          _model.currentIndex =
-                                              _model.currentIndex! + 1;
-                                        });
+                                        _model.currentIndex =
+                                            _model.currentIndex! + 1;
+                                        setState(() {});
                                         if (_model.currentIndex! >=
                                             _model.quizLength) {
                                           context.goNamed(
@@ -224,38 +219,37 @@ class _VocabWidgetState extends State<VocabWidget> {
                                           if (shouldSetState) setState(() {});
                                           return;
                                         } else {
-                                          setState(() {
-                                            _model.wordToGuess = getJsonField(
-                                              _model.vocabList[
-                                                  _model.currentIndex!],
-                                              r'''$.word''',
-                                            ).toString();
-                                            _model.op1 = getJsonField(
-                                              _model.vocabList[
-                                                  _model.currentIndex!],
-                                              r'''$.op1''',
-                                            ).toString();
-                                            _model.op2 = getJsonField(
-                                              _model.vocabList[
-                                                  _model.currentIndex!],
-                                              r'''$.op2''',
-                                            ).toString();
-                                            _model.op3 = getJsonField(
-                                              _model.vocabList[
-                                                  _model.currentIndex!],
-                                              r'''$.op3''',
-                                            ).toString();
-                                            _model.op4 = getJsonField(
-                                              _model.vocabList[
-                                                  _model.currentIndex!],
-                                              r'''$.op4''',
-                                            ).toString();
-                                            _model.correct = getJsonField(
-                                              _model.vocabList[
-                                                  _model.currentIndex!],
-                                              r'''$.correct''',
-                                            ).toString();
-                                          });
+                                          _model.wordToGuess = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.word''',
+                                          ).toString();
+                                          _model.op1 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op1''',
+                                          ).toString();
+                                          _model.op2 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op2''',
+                                          ).toString();
+                                          _model.op3 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op3''',
+                                          ).toString();
+                                          _model.op4 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op4''',
+                                          ).toString();
+                                          _model.correct = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.correct''',
+                                          ).toString();
+                                          setState(() {});
                                           if (shouldSetState) setState(() {});
                                           return;
                                         }
@@ -331,20 +325,17 @@ class _VocabWidgetState extends State<VocabWidget> {
                                                   _model.soundPlayer3!.play());
 
                                           if (_model.diff == 'easy') {
-                                            setState(() {
-                                              _model.clientScore =
-                                                  _model.clientScore! + 20;
-                                            });
+                                            _model.clientScore =
+                                                _model.clientScore! + 20;
+                                            setState(() {});
                                           } else if (_model.diff == 'medium') {
-                                            setState(() {
-                                              _model.clientScore =
-                                                  _model.clientScore! + 40;
-                                            });
+                                            _model.clientScore =
+                                                _model.clientScore! + 40;
+                                            setState(() {});
                                           } else if (_model.diff == 'hard') {
-                                            setState(() {
-                                              _model.clientScore =
-                                                  _model.clientScore! + 100;
-                                            });
+                                            _model.clientScore =
+                                                _model.clientScore! + 100;
+                                            setState(() {});
                                           }
                                         } else {
                                           _model.soundPlayer4 ??= AudioPlayer();
@@ -359,10 +350,9 @@ class _VocabWidgetState extends State<VocabWidget> {
                                                   _model.soundPlayer4!.play());
                                         }
 
-                                        setState(() {
-                                          _model.currentIndex =
-                                              _model.currentIndex! + 1;
-                                        });
+                                        _model.currentIndex =
+                                            _model.currentIndex! + 1;
+                                        setState(() {});
                                         if (_model.currentIndex! >=
                                             _model.quizLength) {
                                           context.goNamed(
@@ -390,38 +380,37 @@ class _VocabWidgetState extends State<VocabWidget> {
                                           if (shouldSetState) setState(() {});
                                           return;
                                         } else {
-                                          setState(() {
-                                            _model.wordToGuess = getJsonField(
-                                              _model.vocabList[
-                                                  _model.currentIndex!],
-                                              r'''$.word''',
-                                            ).toString();
-                                            _model.op1 = getJsonField(
-                                              _model.vocabList[
-                                                  _model.currentIndex!],
-                                              r'''$.op1''',
-                                            ).toString();
-                                            _model.op2 = getJsonField(
-                                              _model.vocabList[
-                                                  _model.currentIndex!],
-                                              r'''$.op2''',
-                                            ).toString();
-                                            _model.op3 = getJsonField(
-                                              _model.vocabList[
-                                                  _model.currentIndex!],
-                                              r'''$.op3''',
-                                            ).toString();
-                                            _model.op4 = getJsonField(
-                                              _model.vocabList[
-                                                  _model.currentIndex!],
-                                              r'''$.op4''',
-                                            ).toString();
-                                            _model.correct = getJsonField(
-                                              _model.vocabList[
-                                                  _model.currentIndex!],
-                                              r'''$.correct''',
-                                            ).toString();
-                                          });
+                                          _model.wordToGuess = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.word''',
+                                          ).toString();
+                                          _model.op1 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op1''',
+                                          ).toString();
+                                          _model.op2 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op2''',
+                                          ).toString();
+                                          _model.op3 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op3''',
+                                          ).toString();
+                                          _model.op4 = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.op4''',
+                                          ).toString();
+                                          _model.correct = getJsonField(
+                                            _model.vocabList[
+                                                _model.currentIndex!],
+                                            r'''$.correct''',
+                                          ).toString();
+                                          setState(() {});
                                           if (shouldSetState) setState(() {});
                                           return;
                                         }
@@ -507,20 +496,17 @@ class _VocabWidgetState extends State<VocabWidget> {
                                                 _model.soundPlayer5!.play());
 
                                         if (_model.diff == 'easy') {
-                                          setState(() {
-                                            _model.clientScore =
-                                                _model.clientScore! + 20;
-                                          });
+                                          _model.clientScore =
+                                              _model.clientScore! + 20;
+                                          setState(() {});
                                         } else if (_model.diff == 'medium') {
-                                          setState(() {
-                                            _model.clientScore =
-                                                _model.clientScore! + 40;
-                                          });
+                                          _model.clientScore =
+                                              _model.clientScore! + 40;
+                                          setState(() {});
                                         } else if (_model.diff == 'hard') {
-                                          setState(() {
-                                            _model.clientScore =
-                                                _model.clientScore! + 100;
-                                          });
+                                          _model.clientScore =
+                                              _model.clientScore! + 100;
+                                          setState(() {});
                                         }
                                       } else {
                                         _model.soundPlayer6 ??= AudioPlayer();
@@ -535,10 +521,9 @@ class _VocabWidgetState extends State<VocabWidget> {
                                                 _model.soundPlayer6!.play());
                                       }
 
-                                      setState(() {
-                                        _model.currentIndex =
-                                            _model.currentIndex! + 1;
-                                      });
+                                      _model.currentIndex =
+                                          _model.currentIndex! + 1;
+                                      setState(() {});
                                       if (_model.currentIndex! >=
                                           _model.quizLength) {
                                         context.goNamed(
@@ -564,38 +549,37 @@ class _VocabWidgetState extends State<VocabWidget> {
                                         if (shouldSetState) setState(() {});
                                         return;
                                       } else {
-                                        setState(() {
-                                          _model.wordToGuess = getJsonField(
-                                            _model.vocabList[
-                                                _model.currentIndex!],
-                                            r'''$.word''',
-                                          ).toString();
-                                          _model.op1 = getJsonField(
-                                            _model.vocabList[
-                                                _model.currentIndex!],
-                                            r'''$.op1''',
-                                          ).toString();
-                                          _model.op2 = getJsonField(
-                                            _model.vocabList[
-                                                _model.currentIndex!],
-                                            r'''$.op2''',
-                                          ).toString();
-                                          _model.op3 = getJsonField(
-                                            _model.vocabList[
-                                                _model.currentIndex!],
-                                            r'''$.op3''',
-                                          ).toString();
-                                          _model.op4 = getJsonField(
-                                            _model.vocabList[
-                                                _model.currentIndex!],
-                                            r'''$.op4''',
-                                          ).toString();
-                                          _model.correct = getJsonField(
-                                            _model.vocabList[
-                                                _model.currentIndex!],
-                                            r'''$.correct''',
-                                          ).toString();
-                                        });
+                                        _model.wordToGuess = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.word''',
+                                        ).toString();
+                                        _model.op1 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op1''',
+                                        ).toString();
+                                        _model.op2 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op2''',
+                                        ).toString();
+                                        _model.op3 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op3''',
+                                        ).toString();
+                                        _model.op4 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op4''',
+                                        ).toString();
+                                        _model.correct = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.correct''',
+                                        ).toString();
+                                        setState(() {});
                                         if (shouldSetState) setState(() {});
                                         return;
                                       }
@@ -669,20 +653,17 @@ class _VocabWidgetState extends State<VocabWidget> {
                                                 _model.soundPlayer7!.play());
 
                                         if (_model.diff == 'easy') {
-                                          setState(() {
-                                            _model.clientScore =
-                                                _model.clientScore! + 20;
-                                          });
+                                          _model.clientScore =
+                                              _model.clientScore! + 20;
+                                          setState(() {});
                                         } else if (_model.diff == 'medium') {
-                                          setState(() {
-                                            _model.clientScore =
-                                                _model.clientScore! + 40;
-                                          });
+                                          _model.clientScore =
+                                              _model.clientScore! + 40;
+                                          setState(() {});
                                         } else if (_model.diff == 'hard') {
-                                          setState(() {
-                                            _model.clientScore =
-                                                _model.clientScore! + 100;
-                                          });
+                                          _model.clientScore =
+                                              _model.clientScore! + 100;
+                                          setState(() {});
                                         }
                                       } else {
                                         _model.soundPlayer8 ??= AudioPlayer();
@@ -697,10 +678,9 @@ class _VocabWidgetState extends State<VocabWidget> {
                                                 _model.soundPlayer8!.play());
                                       }
 
-                                      setState(() {
-                                        _model.currentIndex =
-                                            _model.currentIndex! + 1;
-                                      });
+                                      _model.currentIndex =
+                                          _model.currentIndex! + 1;
+                                      setState(() {});
                                       if (_model.currentIndex! >=
                                           _model.quizLength) {
                                         context.goNamed(
@@ -726,38 +706,37 @@ class _VocabWidgetState extends State<VocabWidget> {
                                         if (shouldSetState) setState(() {});
                                         return;
                                       } else {
-                                        setState(() {
-                                          _model.wordToGuess = getJsonField(
-                                            _model.vocabList[
-                                                _model.currentIndex!],
-                                            r'''$.word''',
-                                          ).toString();
-                                          _model.op1 = getJsonField(
-                                            _model.vocabList[
-                                                _model.currentIndex!],
-                                            r'''$.op1''',
-                                          ).toString();
-                                          _model.op2 = getJsonField(
-                                            _model.vocabList[
-                                                _model.currentIndex!],
-                                            r'''$.op2''',
-                                          ).toString();
-                                          _model.op3 = getJsonField(
-                                            _model.vocabList[
-                                                _model.currentIndex!],
-                                            r'''$.op3''',
-                                          ).toString();
-                                          _model.op4 = getJsonField(
-                                            _model.vocabList[
-                                                _model.currentIndex!],
-                                            r'''$.op4''',
-                                          ).toString();
-                                          _model.correct = getJsonField(
-                                            _model.vocabList[
-                                                _model.currentIndex!],
-                                            r'''$.correct''',
-                                          ).toString();
-                                        });
+                                        _model.wordToGuess = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.word''',
+                                        ).toString();
+                                        _model.op1 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op1''',
+                                        ).toString();
+                                        _model.op2 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op2''',
+                                        ).toString();
+                                        _model.op3 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op3''',
+                                        ).toString();
+                                        _model.op4 = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.op4''',
+                                        ).toString();
+                                        _model.correct = getJsonField(
+                                          _model
+                                              .vocabList[_model.currentIndex!],
+                                          r'''$.correct''',
+                                        ).toString();
+                                        setState(() {});
                                         if (shouldSetState) setState(() {});
                                         return;
                                       }
@@ -943,9 +922,8 @@ class _VocabWidgetState extends State<VocabWidget> {
                                               const AlignmentDirectional(0.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
-                                              setState(() {
-                                                _model.diff = 'easy';
-                                              });
+                                              _model.diff = 'easy';
+                                              setState(() {});
                                             },
                                             text: 'Easy',
                                             options: FFButtonOptions(
@@ -984,9 +962,8 @@ class _VocabWidgetState extends State<VocabWidget> {
                                               const AlignmentDirectional(0.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
-                                              setState(() {
-                                                _model.diff = 'medium';
-                                              });
+                                              _model.diff = 'medium';
+                                              setState(() {});
                                             },
                                             text: 'Medium',
                                             options: FFButtonOptions(
@@ -1025,9 +1002,8 @@ class _VocabWidgetState extends State<VocabWidget> {
                                               const AlignmentDirectional(0.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
-                                              setState(() {
-                                                _model.diff = 'hard';
-                                              });
+                                              _model.diff = 'hard';
+                                              setState(() {});
                                             },
                                             text: 'Hard',
                                             options: FFButtonOptions(
@@ -1115,51 +1091,49 @@ class _VocabWidgetState extends State<VocabWidget> {
                               );
                               shouldSetState = true;
                               if ((_model.vocabJSON?.succeeded ?? true)) {
-                                setState(() {
-                                  _model.vocabList = getJsonField(
-                                    (_model.vocabJSON?.jsonBody ?? ''),
-                                    r'''$.vocab''',
-                                    true,
-                                  )!
-                                      .toList()
-                                      .cast<dynamic>();
-                                  _model.quizLength = getJsonField(
-                                    (_model.vocabJSON?.jsonBody ?? ''),
-                                    r'''$.length''',
-                                  );
-                                });
+                                _model.vocabList = getJsonField(
+                                  (_model.vocabJSON?.jsonBody ?? ''),
+                                  r'''$.vocab''',
+                                  true,
+                                )!
+                                    .toList()
+                                    .cast<dynamic>();
+                                _model.quizLength = getJsonField(
+                                  (_model.vocabJSON?.jsonBody ?? ''),
+                                  r'''$.length''',
+                                );
+                                setState(() {});
                               } else {
                                 if (shouldSetState) setState(() {});
                                 return;
                               }
 
-                              setState(() {
-                                _model.wordToGuess = getJsonField(
-                                  _model.vocabList[_model.currentIndex!],
-                                  r'''$.word''',
-                                ).toString();
-                                _model.op1 = getJsonField(
-                                  _model.vocabList[_model.currentIndex!],
-                                  r'''$.op1''',
-                                ).toString();
-                                _model.op2 = getJsonField(
-                                  _model.vocabList[_model.currentIndex!],
-                                  r'''$.op2''',
-                                ).toString();
-                                _model.op3 = getJsonField(
-                                  _model.vocabList[_model.currentIndex!],
-                                  r'''$.op3''',
-                                ).toString();
-                                _model.op4 = getJsonField(
-                                  _model.vocabList[_model.currentIndex!],
-                                  r'''$.op4''',
-                                ).toString();
-                                _model.correct = getJsonField(
-                                  _model.vocabList[_model.currentIndex!],
-                                  r'''$.correct''',
-                                ).toString();
-                                _model.hasStarted = true;
-                              });
+                              _model.wordToGuess = getJsonField(
+                                _model.vocabList[_model.currentIndex!],
+                                r'''$.word''',
+                              ).toString();
+                              _model.op1 = getJsonField(
+                                _model.vocabList[_model.currentIndex!],
+                                r'''$.op1''',
+                              ).toString();
+                              _model.op2 = getJsonField(
+                                _model.vocabList[_model.currentIndex!],
+                                r'''$.op2''',
+                              ).toString();
+                              _model.op3 = getJsonField(
+                                _model.vocabList[_model.currentIndex!],
+                                r'''$.op3''',
+                              ).toString();
+                              _model.op4 = getJsonField(
+                                _model.vocabList[_model.currentIndex!],
+                                r'''$.op4''',
+                              ).toString();
+                              _model.correct = getJsonField(
+                                _model.vocabList[_model.currentIndex!],
+                                r'''$.correct''',
+                              ).toString();
+                              _model.hasStarted = true;
+                              setState(() {});
                               if (shouldSetState) setState(() {});
                             },
                             text: 'Press to START!',

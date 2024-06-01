@@ -52,10 +52,9 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
           port: FFAppState().port,
         );
         if ((_model.getScoreResp?.succeeded ?? true)) {
-          setState(() {
-            _model.scores =
-                (_model.getScoreResp?.jsonBody ?? '').toList().cast<dynamic>();
-          });
+          _model.scores =
+              (_model.getScoreResp?.jsonBody ?? '').toList().cast<dynamic>();
+          setState(() {});
           return;
         } else {
           return;
@@ -213,12 +212,11 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                         );
                         shouldSetState = true;
                         if ((_model.getScoreResponse?.succeeded ?? true)) {
-                          setState(() {
-                            _model.scores =
-                                (_model.getScoreResponse?.jsonBody ?? '')
-                                    .toList()
-                                    .cast<dynamic>();
-                          });
+                          _model.scores =
+                              (_model.getScoreResponse?.jsonBody ?? '')
+                                  .toList()
+                                  .cast<dynamic>();
+                          setState(() {});
                           if (shouldSetState) setState(() {});
                           return;
                         } else {

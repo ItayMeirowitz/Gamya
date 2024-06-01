@@ -27,13 +27,11 @@ class _Connect4WidgetState extends State<Connect4Widget> {
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      setState(() {
-        FFAppState().hasStarted = true;
-      });
-      setState(() {
-        _model.started = true;
-        _model.type = functions.getName(FFAppState().userType);
-      });
+      FFAppState().hasStarted = true;
+      setState(() {});
+      _model.started = true;
+      _model.type = functions.getName(FFAppState().userType);
+      setState(() {});
       while (_model.started) {
         _model.getInitialConnectResp = await GetConnectFBoardCall.call(
           serverIP: FFAppState().serverIP,
@@ -43,40 +41,35 @@ class _Connect4WidgetState extends State<Connect4Widget> {
           port: FFAppState().port,
         );
         if ((_model.getInitialConnectResp?.succeeded ?? true)) {
-          setState(() {
-            _model.currentGrid = (getJsonField(
-              (_model.getInitialConnectResp?.jsonBody ?? ''),
-              r'''$.board''',
-              true,
-            ) as List)
-                .map<String>((s) => s.toString())
-                .toList()
-                .toList()
-                .cast<String>();
-          });
-          setState(() {
-            _model.isTurn = functions.isTurnConnect4(
-                _model.currentGrid.toList(), FFAppState().userType);
-          });
+          _model.currentGrid = (getJsonField(
+            (_model.getInitialConnectResp?.jsonBody ?? ''),
+            r'''$.board''',
+            true,
+          ) as List)
+              .map<String>((s) => s.toString())
+              .toList()
+              .toList()
+              .cast<String>();
+          setState(() {});
+          _model.isTurn = functions.isTurnConnect4(
+              _model.currentGrid.toList(), FFAppState().userType);
+          setState(() {});
           if (getJsonField(
                 (_model.getInitialConnectResp?.jsonBody ?? ''),
                 r'''$.won''',
               ) !=
               null) {
-            setState(() {
-              _model.won = getJsonField(
-                (_model.getInitialConnectResp?.jsonBody ?? ''),
-                r'''$.won''',
-              ).toString().toString();
-            });
+            _model.won = getJsonField(
+              (_model.getInitialConnectResp?.jsonBody ?? ''),
+              r'''$.won''',
+            ).toString().toString();
+            setState(() {});
             if (_model.won == FFAppState().userType) {
-              setState(() {
-                _model.score = 100;
-              });
+              _model.score = 100;
+              setState(() {});
             } else {
-              setState(() {
-                _model.score = 0;
-              });
+              _model.score = 0;
+              setState(() {});
             }
 
             context.goNamed(
@@ -245,21 +238,19 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                                           if ((_model
                                                   .getConnect4Resp?.succeeded ??
                                               true)) {
-                                            setState(() {
-                                              _model.currentGrid =
-                                                  (getJsonField(
-                                                (_model.getConnect4Resp
-                                                        ?.jsonBody ??
-                                                    ''),
-                                                r'''$.board''',
-                                                true,
-                                              ) as List)
-                                                      .map<String>(
-                                                          (s) => s.toString())
-                                                      .toList()
-                                                      .toList()
-                                                      .cast<String>();
-                                            });
+                                            _model.currentGrid = (getJsonField(
+                                              (_model.getConnect4Resp
+                                                      ?.jsonBody ??
+                                                  ''),
+                                              r'''$.board''',
+                                              true,
+                                            ) as List)
+                                                .map<String>(
+                                                    (s) => s.toString())
+                                                .toList()
+                                                .toList()
+                                                .cast<String>();
+                                            setState(() {});
                                             if (shouldSetState) {
                                               setState(() {});
                                             }
