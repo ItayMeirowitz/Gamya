@@ -228,7 +228,7 @@ class _GuessWrongWidgetState extends State<GuessWrongWidget> {
           }
         }
 
-        await Future.delayed(const Duration(milliseconds: 250));
+        await Future.delayed(const Duration(milliseconds: 200));
       }
     });
 

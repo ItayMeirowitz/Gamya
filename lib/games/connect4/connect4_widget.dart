@@ -54,6 +54,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
           _model.isTurn = functions.isTurnConnect4(
               _model.currentGrid.toList(), FFAppState().userType);
           setState(() {});
+          await Future.delayed(const Duration(milliseconds: 50));
           if (getJsonField(
                 (_model.getInitialConnectResp?.jsonBody ?? ''),
                 r'''$.won''',
@@ -107,7 +108,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
               );
             },
           );
-          return;
+          await Future.delayed(const Duration(milliseconds: 50));
         }
       }
     });

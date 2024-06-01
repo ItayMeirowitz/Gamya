@@ -53,6 +53,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
           _model.isTurn = functions.isTurn(
               FFAppState().userType, _model.currentGrid.toList());
           setState(() {});
+          await Future.delayed(const Duration(milliseconds: 50));
           if (getJsonField(
                 (_model.getInitialTicTacToeResp?.jsonBody ?? ''),
                 r'''$.won''',
@@ -106,7 +107,7 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
               );
             },
           );
-          return;
+          await Future.delayed(const Duration(milliseconds: 50));
         }
       }
     });
