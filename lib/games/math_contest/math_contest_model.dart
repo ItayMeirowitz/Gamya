@@ -1,6 +1,8 @@
 import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'math_contest_widget.dart' show MathContestWidget;
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
 
@@ -41,6 +43,17 @@ class MathContestModel extends FlutterFlowModel<MathContestWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
+  // State field(s) for MathTestTimer widget.
+  final mathTestTimerInitialTimeMs = 0;
+  int mathTestTimerMilliseconds = 0;
+  String mathTestTimerValue = StopWatchTimer.getDisplayTime(
+    0,
+    hours: false,
+    milliSecond: false,
+  );
+  FlutterFlowTimerController mathTestTimerController =
+      FlutterFlowTimerController(StopWatchTimer(mode: StopWatchMode.countUp));
+
   // Stores action output result for [Backend Call - API (postMathAnswer)] action in Button widget.
   ApiCallResponse? postMathAnswer1Resp;
   AudioPlayer? soundPlayer1;
@@ -66,5 +79,6 @@ class MathContestModel extends FlutterFlowModel<MathContestWidget> {
   @override
   void dispose() {
     unfocusNode.dispose();
+    mathTestTimerController.dispose();
   }
 }

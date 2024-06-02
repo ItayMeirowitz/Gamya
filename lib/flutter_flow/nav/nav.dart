@@ -66,6 +66,10 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'score',
               ParamType.double,
             ),
+            mathTime: params.getParam(
+              'mathTime',
+              ParamType.String,
+            ),
           ),
         ),
         FFRoute(
@@ -122,6 +126,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           name: 'GuessWrong',
           path: '/guessWrong',
           builder: (context, params) => const GuessWrongWidget(),
+        ),
+        FFRoute(
+          name: 'GameFinishedCopy',
+          path: '/gameFinishedCopy',
+          builder: (context, params) => GameFinishedCopyWidget(
+            score: params.getParam(
+              'score',
+              ParamType.double,
+            ),
+          ),
         )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

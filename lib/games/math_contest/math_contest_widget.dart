@@ -1,7 +1,9 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/flutter_flow_timer.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:stop_watch_timer/stop_watch_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:just_audio/just_audio.dart';
@@ -31,6 +33,8 @@ class _MathContestWidgetState extends State<MathContestWidget> {
       FFAppState().hasStarted = true;
       setState(() {});
     });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
@@ -101,6 +105,36 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                   Column(
                     mainAxisSize: MainAxisSize.max,
                     children: [
+                      Align(
+                        alignment: const AlignmentDirectional(-1.0, -1.0),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              5.0, 5.0, 0.0, 0.0),
+                          child: FlutterFlowTimer(
+                            initialTime: _model.mathTestTimerInitialTimeMs,
+                            getDisplayTime: (value) =>
+                                StopWatchTimer.getDisplayTime(
+                              value,
+                              hours: false,
+                              milliSecond: false,
+                            ),
+                            controller: _model.mathTestTimerController,
+                            updateStateInterval: const Duration(milliseconds: 1000),
+                            onChanged: (value, displayTime, shouldUpdate) {
+                              _model.mathTestTimerMilliseconds = value;
+                              _model.mathTestTimerValue = displayTime;
+                              if (shouldUpdate) setState(() {});
+                            },
+                            textAlign: TextAlign.start,
+                            style: FlutterFlowTheme.of(context)
+                                .headlineSmall
+                                .override(
+                                  fontFamily: 'Outfit',
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                        ),
+                      ),
                       Align(
                         alignment: const AlignmentDirectional(0.0, 0.0),
                         child: Padding(
@@ -190,6 +224,10 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                               'score': serializeParam(
                                                 _model.clientScore?.toDouble(),
                                                 ParamType.double,
+                                              ),
+                                              'mathTime': serializeParam(
+                                                _model.mathTestTimerValue,
+                                                ParamType.String,
                                               ),
                                             }.withoutNulls,
                                             extra: <String, dynamic>{
@@ -341,6 +379,10 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                               'score': serializeParam(
                                                 _model.clientScore?.toDouble(),
                                                 ParamType.double,
+                                              ),
+                                              'mathTime': serializeParam(
+                                                _model.mathTestTimerValue,
+                                                ParamType.String,
                                               ),
                                             }.withoutNulls,
                                             extra: <String, dynamic>{
@@ -502,6 +544,10 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                               _model.clientScore?.toDouble(),
                                               ParamType.double,
                                             ),
+                                            'mathTime': serializeParam(
+                                              _model.mathTestTimerValue,
+                                              ParamType.String,
+                                            ),
                                           }.withoutNulls,
                                           extra: <String, dynamic>{
                                             kTransitionInfoKey: const TransitionInfo(
@@ -641,6 +687,10 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                             'score': serializeParam(
                                               _model.clientScore?.toDouble(),
                                               ParamType.double,
+                                            ),
+                                            'mathTime': serializeParam(
+                                              _model.mathTestTimerValue,
+                                              ParamType.String,
                                             ),
                                           }.withoutNulls,
                                           extra: <String, dynamic>{
@@ -848,6 +898,7 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                               ).toString();
                               _model.hasStarted = true;
                               setState(() {});
+                              _model.mathTestTimerController.onStartTimer();
                               if (shouldSetState) setState(() {});
                             },
                             text: 'Press to START!',

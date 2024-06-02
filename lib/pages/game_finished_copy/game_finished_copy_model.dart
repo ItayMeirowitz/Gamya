@@ -1,9 +1,9 @@
 import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import 'game_finished_widget.dart' show GameFinishedWidget;
+import 'game_finished_copy_widget.dart' show GameFinishedCopyWidget;
 import 'package:flutter/material.dart';
 
-class GameFinishedModel extends FlutterFlowModel<GameFinishedWidget> {
+class GameFinishedCopyModel extends FlutterFlowModel<GameFinishedCopyWidget> {
   ///  Local state fields for this page.
 
   List<dynamic> scores = [];
@@ -18,11 +18,9 @@ class GameFinishedModel extends FlutterFlowModel<GameFinishedWidget> {
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();
-  // Stores action output result for [Backend Call - API (postScore)] action in GameFinished widget.
-  ApiCallResponse? postScoreTimeResp;
-  // Stores action output result for [Backend Call - API (postScore)] action in GameFinished widget.
+  // Stores action output result for [Backend Call - API (postScore)] action in GameFinishedCopy widget.
   ApiCallResponse? postScoreResp;
-  // Stores action output result for [Backend Call - API (getScore)] action in GameFinished widget.
+  // Stores action output result for [Backend Call - API (getScore)] action in GameFinishedCopy widget.
   ApiCallResponse? getScoreResp;
   // Stores action output result for [Backend Call - API (getScore)] action in Button widget.
   ApiCallResponse? getScoreResponse;

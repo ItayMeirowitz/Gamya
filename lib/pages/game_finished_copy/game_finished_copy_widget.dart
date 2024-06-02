@@ -5,59 +5,44 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
-import 'game_finished_model.dart';
-export 'game_finished_model.dart';
+import 'game_finished_copy_model.dart';
+export 'game_finished_copy_model.dart';
 
-class GameFinishedWidget extends StatefulWidget {
-  const GameFinishedWidget({
+class GameFinishedCopyWidget extends StatefulWidget {
+  const GameFinishedCopyWidget({
     super.key,
     required this.score,
-    this.mathTime,
   });
 
   final double? score;
-  final String? mathTime;
 
   @override
-  State<GameFinishedWidget> createState() => _GameFinishedWidgetState();
+  State<GameFinishedCopyWidget> createState() => _GameFinishedCopyWidgetState();
 }
 
-class _GameFinishedWidgetState extends State<GameFinishedWidget> {
-  late GameFinishedModel _model;
+class _GameFinishedCopyWidgetState extends State<GameFinishedCopyWidget> {
+  late GameFinishedCopyModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => GameFinishedModel());
+    _model = createModel(context, () => GameFinishedCopyModel());
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       while (widget.score != null) {
         if (widget.score != -1.0) {
-          if (widget.mathTime != null && widget.mathTime != '') {
-            _model.postScoreTimeResp = await PostScoreCall.call(
-              serverIP: FFAppState().serverIP,
-              tokenType: FFAppState().tokenType,
-              accessToken: FFAppState().accessToken,
-              username: FFAppState().username,
-              score: widget.score,
-              lobbyId: FFAppState().lobbyId,
-              port: FFAppState().port,
-              time: widget.mathTime,
-            );
-          } else {
-            _model.postScoreResp = await PostScoreCall.call(
-              serverIP: FFAppState().serverIP,
-              tokenType: FFAppState().tokenType,
-              accessToken: FFAppState().accessToken,
-              username: FFAppState().username,
-              score: widget.score,
-              lobbyId: FFAppState().lobbyId,
-              port: FFAppState().port,
-            );
-          }
+          _model.postScoreResp = await PostScoreCall.call(
+            serverIP: FFAppState().serverIP,
+            tokenType: FFAppState().tokenType,
+            accessToken: FFAppState().accessToken,
+            username: FFAppState().username,
+            score: widget.score,
+            lobbyId: FFAppState().lobbyId,
+            port: FFAppState().port,
+          );
         }
         _model.getScoreResp = await GetScoreCall.call(
           serverIP: FFAppState().serverIP,
@@ -181,64 +166,25 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8.0),
                                   ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Flexible(
-                                        child: Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(12.0),
-                                            child: Text(
-                                              '${getJsonField(
-                                                scoresListItem,
-                                                r'''$.username''',
-                                              ).toString()}: ${getJsonField(
-                                                scoresListItem,
-                                                r'''$.score''',
-                                              ).toString()}',
-                                              textAlign: TextAlign.center,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        fontSize: 20.0,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Text(
+                                      '${getJsonField(
+                                        scoresListItem,
+                                        r'''$.username''',
+                                      ).toString()}: ${getJsonField(
+                                        scoresListItem,
+                                        r'''$.score''',
+                                      ).toString()}',
+                                      textAlign: TextAlign.center,
+                                      style: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .override(
+                                            fontFamily: 'Readex Pro',
+                                            fontSize: 20.0,
+                                            letterSpacing: 0.0,
                                           ),
-                                        ),
-                                      ),
-                                      if (getJsonField(
-                                            scoresListItem,
-                                            r'''$.time''',
-                                          ) !=
-                                          null)
-                                        Flexible(
-                                          child: Align(
-                                            alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
-                                            child: Text(
-                                              '(time: ${getJsonField(
-                                                scoresListItem,
-                                                r'''$.time''',
-                                              ).toString()} )',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        fontSize: 16.0,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ),
-                                        ),
-                                    ],
+                                    ),
                                   ),
                                 ),
                               );

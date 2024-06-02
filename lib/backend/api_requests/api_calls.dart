@@ -267,12 +267,14 @@ class PostScoreCall {
     double? score,
     int? lobbyId,
     String? port = '5000',
+    String? time = '\"\"',
   }) async {
     final ffApiRequestBody = '''
 {
   "username": "$username",
   "score": $score,
-  "lobby_id": $lobbyId
+  "lobby_id": $lobbyId,
+  "time": "$time"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'postScore',
