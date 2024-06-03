@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/pages/notifications/notifications_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:badges/badges.dart' as badges;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
@@ -46,14 +47,40 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
               _model.dataReceived,
               r'''$.type''',
             )) {
-          // New invite
-          FFAppState().addToRequests(getJsonField(
-            _model.dataReceived,
-            r'''$.info''',
-          ));
-          FFAppState().notificationCounter =
-              FFAppState().notificationCounter + 1;
-          setState(() {});
+          if (functions.isNewJson(
+              FFAppState().requests.toList(),
+              getJsonField(
+                _model.dataReceived,
+                r'''$.info''',
+              ))) {
+            // New invite
+            FFAppState().addToRequests(getJsonField(
+              _model.dataReceived,
+              r'''$.info''',
+            ));
+            FFAppState().notificationCounter =
+                FFAppState().notificationCounter + 1;
+            setState(() {});
+          } else {
+            await showDialog(
+              context: context,
+              builder: (alertDialogContext) {
+                return AlertDialog(
+                  title: const Text('Duplicate invite'),
+                  content: Text(getJsonField(
+                    _model.dataReceived,
+                    r'''$.info''',
+                  ).toString().toString()),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(alertDialogContext),
+                      child: const Text('Ok'),
+                    ),
+                  ],
+                );
+              },
+            );
+          }
         } else if ('decline' ==
             getJsonField(
               _model.dataReceived,

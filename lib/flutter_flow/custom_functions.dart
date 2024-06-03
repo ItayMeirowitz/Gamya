@@ -111,3 +111,56 @@ String getName(String userType) {
   }
   return "Unknown type";
 }
+
+bool isNewJson(
+  List<dynamic> jsonList,
+  dynamic newJson,
+) {
+  for (var json in jsonList) {
+    if (json is Map<String, dynamic> &&
+        newJson is Map<String, dynamic> &&
+        mapEquals(json, newJson)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool mapEquals(
+  dynamic json1,
+  dynamic json2,
+) {
+  if (json1.length != json2.length) return false;
+  for (var key in json1.keys) {
+    if (!json2.containsKey(key) || !valueEquals(json1[key], json2[key])) {
+      return false;
+    }
+  }
+  return true;
+}
+
+bool valueEquals(
+  dynamic value1,
+  dynamic value2,
+) {
+  if (value1 is Map<String, dynamic> && value2 is Map<String, dynamic>) {
+    return mapEquals(value1, value2);
+  } else if (value1 is List && value2 is List) {
+    return listEquals(value1, value2);
+  } else {
+    return value1 == value2;
+  }
+}
+
+bool listEquals(
+  List<dynamic> list1,
+  List<dynamic> list2,
+) {
+  if (list1.length != list2.length) return false;
+  for (int i = 0; i < list1.length; i++) {
+    if (!valueEquals(list1[i], list2[i])) {
+      return false;
+    }
+  }
+  return true;
+}
