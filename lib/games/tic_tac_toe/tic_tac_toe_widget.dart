@@ -330,20 +330,40 @@ class _TicTacToeWidgetState extends State<TicTacToeWidget> {
                     },
                   ),
                 Flexible(
-                  child: Align(
-                    alignment: const AlignmentDirectional(-1.0, 1.0),
-                    child: Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 100.0),
-                      child: Text(
-                        'You are: ${FFAppState().userType}',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Readex Pro',
-                              fontSize: 30.0,
-                              letterSpacing: 0.0,
-                            ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Align(
+                        alignment: const AlignmentDirectional(-1.0, 1.0),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 10.0),
+                          child: Text(
+                            'Is it your turn: ${functions.isTurn(FFAppState().userType, _model.currentGrid.toList()).toString()}',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.0,
+                                ),
+                          ),
+                        ),
                       ),
-                    ),
+                      Align(
+                        alignment: const AlignmentDirectional(-1.0, 1.0),
+                        child: Text(
+                          'You are: ${FFAppState().userType}',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    fontSize: 30.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

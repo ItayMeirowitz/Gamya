@@ -12,11 +12,11 @@ class GameFinishedWidget extends StatefulWidget {
   const GameFinishedWidget({
     super.key,
     required this.score,
-    this.mathTime,
+    this.time,
   });
 
   final double? score;
-  final String? mathTime;
+  final String? time;
 
   @override
   State<GameFinishedWidget> createState() => _GameFinishedWidgetState();
@@ -36,7 +36,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       while (widget.score != null) {
         if (widget.score != -1.0) {
-          if (widget.mathTime != null && widget.mathTime != '') {
+          if (widget.time != null && widget.time != '') {
             _model.postScoreTimeResp = await PostScoreCall.call(
               serverIP: FFAppState().serverIP,
               tokenType: FFAppState().tokenType,
@@ -45,7 +45,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
               score: widget.score,
               lobbyId: FFAppState().lobbyId,
               port: FFAppState().port,
-              time: widget.mathTime,
+              time: widget.time,
             );
           } else {
             _model.postScoreResp = await PostScoreCall.call(
@@ -56,6 +56,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
               score: widget.score,
               lobbyId: FFAppState().lobbyId,
               port: FFAppState().port,
+              time: 'no time',
             );
           }
         }
@@ -116,6 +117,7 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
             top: true,
             child: Column(
               mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Align(
                   alignment: const AlignmentDirectional(0.0, -1.0),
@@ -159,92 +161,103 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                           ],
                         ),
                       ),
-                      Builder(
-                        builder: (context) {
-                          final scoresList = _model.scores.toList();
-                          return ListView.builder(
-                            padding: EdgeInsets.zero,
-                            shrinkWrap: true,
-                            scrollDirection: Axis.vertical,
-                            itemCount: scoresList.length,
-                            itemBuilder: (context, scoresListIndex) {
-                              final scoresListItem =
-                                  scoresList[scoresListIndex];
-                              return Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    10.0, 0.0, 10.0, 0.0),
-                                child: Card(
-                                  clipBehavior: Clip.antiAliasWithSaveLayer,
-                                  color: FlutterFlowTheme.of(context)
-                                      .secondaryBackground,
-                                  elevation: 4.0,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                  ),
-                                  child: Row(
-                                    mainAxisSize: MainAxisSize.max,
-                                    children: [
-                                      Flexible(
-                                        child: Align(
-                                          alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(12.0),
-                                            child: Text(
-                                              '${getJsonField(
-                                                scoresListItem,
-                                                r'''$.username''',
-                                              ).toString()}: ${getJsonField(
-                                                scoresListItem,
-                                                r'''$.score''',
-                                              ).toString()}',
-                                              textAlign: TextAlign.center,
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        fontSize: 20.0,
-                                                        letterSpacing: 0.0,
-                                                      ),
+                      SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Builder(
+                              builder: (context) {
+                                final scoresList = _model.scores.toList();
+                                return ListView.builder(
+                                  padding: EdgeInsets.zero,
+                                  primary: false,
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: scoresList.length,
+                                  itemBuilder: (context, scoresListIndex) {
+                                    final scoresListItem =
+                                        scoresList[scoresListIndex];
+                                    return Padding(
+                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                          10.0, 0.0, 10.0, 0.0),
+                                      child: Card(
+                                        clipBehavior:
+                                            Clip.antiAliasWithSaveLayer,
+                                        color: FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                        elevation: 4.0,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8.0),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Flexible(
+                                              child: Align(
+                                                alignment: const AlignmentDirectional(
+                                                    0.0, 0.0),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(12.0),
+                                                  child: Text(
+                                                    '${getJsonField(
+                                                      scoresListItem,
+                                                      r'''$.username''',
+                                                    ).toString()}: ${getJsonField(
+                                                      scoresListItem,
+                                                      r'''$.score''',
+                                                    ).toString()}',
+                                                    textAlign: TextAlign.center,
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: 20.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                            if (getJsonField(
+                                                  scoresListItem,
+                                                  r'''$.time''',
+                                                ) !=
+                                                null)
+                                              Flexible(
+                                                child: Align(
+                                                  alignment:
+                                                      const AlignmentDirectional(
+                                                          0.0, 0.0),
+                                                  child: Text(
+                                                    '(time: ${getJsonField(
+                                                      scoresListItem,
+                                                      r'''$.time''',
+                                                    ).toString()} )',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: 16.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                ),
+                                              ),
+                                          ],
                                         ),
                                       ),
-                                      if (getJsonField(
-                                            scoresListItem,
-                                            r'''$.time''',
-                                          ) !=
-                                          null)
-                                        Flexible(
-                                          child: Align(
-                                            alignment:
-                                                const AlignmentDirectional(0.0, 0.0),
-                                            child: Text(
-                                              '(time: ${getJsonField(
-                                                scoresListItem,
-                                                r'''$.time''',
-                                              ).toString()} )',
-                                              style:
-                                                  FlutterFlowTheme.of(context)
-                                                      .bodyMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        fontSize: 16.0,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                            ),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        },
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -274,6 +287,25 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                           if (shouldSetState) setState(() {});
                           return;
                         } else {
+                          await showDialog(
+                            context: context,
+                            builder: (alertDialogContext) {
+                              return AlertDialog(
+                                title: const Text('Failed to refresh'),
+                                content: Text(getJsonField(
+                                  (_model.getScoreResponse?.jsonBody ?? ''),
+                                  r'''$.detail''',
+                                ).toString()),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () =>
+                                        Navigator.pop(alertDialogContext),
+                                    child: const Text('Ok'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                           if (shouldSetState) setState(() {});
                           return;
                         }
@@ -300,6 +332,55 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                           width: 1.0,
                         ),
                         borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
+                  ),
+                ),
+                Flexible(
+                  child: Align(
+                    alignment: const AlignmentDirectional(0.0, 1.0),
+                    child: Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 20.0),
+                      child: FFButtonWidget(
+                        onPressed: () async {
+                          FFAppState().hasStarted = false;
+                          FFAppState().leader = 'singlePlayer';
+                          FFAppState().lobbyId = 0;
+                          setState(() {});
+
+                          context.pushNamed(
+                            'ChooseGame',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: const TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.bottomToTop,
+                                duration: Duration(milliseconds: 500),
+                              ),
+                            },
+                          );
+                        },
+                        text: 'Play another game',
+                        options: FFButtonOptions(
+                          height: 40.0,
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              24.0, 0.0, 24.0, 0.0),
+                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 0.0),
+                          color: FlutterFlowTheme.of(context).primary,
+                          textStyle:
+                              FlutterFlowTheme.of(context).titleSmall.override(
+                                    fontFamily: 'Readex Pro',
+                                    color: Colors.white,
+                                    letterSpacing: 0.0,
+                                  ),
+                          elevation: 5.0,
+                          borderSide: const BorderSide(
+                            color: Colors.transparent,
+                            width: 1.0,
+                          ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
                       ),
                     ),
                   ),

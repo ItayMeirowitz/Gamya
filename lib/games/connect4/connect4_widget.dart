@@ -338,16 +338,40 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                   ),
                 ),
                 Flexible(
-                  child: Align(
-                    alignment: const AlignmentDirectional(-1.0, 1.0),
-                    child: Text(
-                      'You are: ${_model.type}',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            fontSize: 30.0,
-                            letterSpacing: 0.0,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Align(
+                        alignment: const AlignmentDirectional(-1.0, 1.0),
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 0.0, 0.0, 10.0),
+                          child: Text(
+                            'Is it your turn: ${functions.isTurnConnect4(_model.currentGrid.toList(), _model.type!).toString()}',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  fontSize: 20.0,
+                                  letterSpacing: 0.0,
+                                ),
                           ),
-                    ),
+                        ),
+                      ),
+                      Align(
+                        alignment: const AlignmentDirectional(-1.0, 1.0),
+                        child: Text(
+                          'You are: ${_model.type}',
+                          style:
+                              FlutterFlowTheme.of(context).bodyMedium.override(
+                                    fontFamily: 'Readex Pro',
+                                    fontSize: 30.0,
+                                    letterSpacing: 0.0,
+                                  ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

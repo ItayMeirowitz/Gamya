@@ -225,7 +225,7 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                                 _model.clientScore?.toDouble(),
                                                 ParamType.double,
                                               ),
-                                              'mathTime': serializeParam(
+                                              'time': serializeParam(
                                                 _model.mathTestTimerValue,
                                                 ParamType.String,
                                               ),
@@ -380,7 +380,7 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                                 _model.clientScore?.toDouble(),
                                                 ParamType.double,
                                               ),
-                                              'mathTime': serializeParam(
+                                              'time': serializeParam(
                                                 _model.mathTestTimerValue,
                                                 ParamType.String,
                                               ),
@@ -544,7 +544,7 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                               _model.clientScore?.toDouble(),
                                               ParamType.double,
                                             ),
-                                            'mathTime': serializeParam(
+                                            'time': serializeParam(
                                               _model.mathTestTimerValue,
                                               ParamType.String,
                                             ),
@@ -688,7 +688,7 @@ class _MathContestWidgetState extends State<MathContestWidget> {
                                               _model.clientScore?.toDouble(),
                                               ParamType.double,
                                             ),
-                                            'mathTime': serializeParam(
+                                            'time': serializeParam(
                                               _model.mathTestTimerValue,
                                               ParamType.String,
                                             ),

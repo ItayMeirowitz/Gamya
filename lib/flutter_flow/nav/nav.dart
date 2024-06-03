@@ -66,8 +66,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               'score',
               ParamType.double,
             ),
-            mathTime: params.getParam(
-              'mathTime',
+            time: params.getParam(
+              'time',
               ParamType.String,
             ),
           ),
