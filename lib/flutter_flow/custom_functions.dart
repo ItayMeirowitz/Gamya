@@ -120,10 +120,10 @@ bool isNewJson(
     if (json is Map<String, dynamic> &&
         newJson is Map<String, dynamic> &&
         mapEquals(json, newJson)) {
-      return true;
+      return false;
     }
   }
-  return false;
+  return true;
 }
 
 bool mapEquals(
