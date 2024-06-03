@@ -348,6 +348,13 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                           FFAppState().leader = 'singlePlayer';
                           FFAppState().lobbyId = 0;
                           setState(() {});
+                          _model.goBackResp = await GoBackCall.call(
+                            serverIP: FFAppState().serverIP,
+                            port: FFAppState().port,
+                            accessToken: FFAppState().accessToken,
+                            tokenType: FFAppState().tokenType,
+                            username: FFAppState().username,
+                          );
 
                           context.pushNamed(
                             'ChooseGame',
@@ -359,6 +366,8 @@ class _GameFinishedWidgetState extends State<GameFinishedWidget> {
                               ),
                             },
                           );
+
+                          setState(() {});
                         },
                         text: 'Play another game',
                         options: FFButtonOptions(

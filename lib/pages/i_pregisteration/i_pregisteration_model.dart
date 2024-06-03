@@ -4,6 +4,10 @@ import 'i_pregisteration_widget.dart' show IPregisterationWidget;
 import 'package:flutter/material.dart';
 
 class IPregisterationModel extends FlutterFlowModel<IPregisterationWidget> {
+  ///  Local state fields for this page.
+
+  bool loggedInSetUp = false;
+
   ///  State fields for stateful widgets in this page.
 
   final unfocusNode = FocusNode();

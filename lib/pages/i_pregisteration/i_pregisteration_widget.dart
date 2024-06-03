@@ -48,6 +48,8 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
             (_model.persistentSignInResp?.jsonBody ?? ''),
             r'''$.isNew''',
           )) {
+            _model.loggedInSetUp = true;
+            setState(() {});
             FFAppState().userId = getJsonField(
               (_model.persistentSignInResp?.jsonBody ?? ''),
               r'''$.id''',
@@ -576,45 +578,46 @@ class _IPregisterationWidgetState extends State<IPregisterationWidget> {
                           ),
                         ),
                       ),
-                      Flexible(
-                        child: Align(
-                          alignment: const AlignmentDirectional(0.0, 1.0),
-                          child: Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 20.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                FFAppState().persistentUsername = '';
-                                FFAppState().persistentPassword = '';
-                                FFAppState().port = '5000';
-                                setState(() {});
-                              },
-                              text: 'Sign out. (give up)',
-                              options: FFButtonOptions(
-                                height: 40.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    24.0, 0.0, 24.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: const Color(0xFFEC2B37),
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Readex Pro',
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                    ),
-                                elevation: 3.0,
-                                borderSide: const BorderSide(
-                                  color: Colors.transparent,
-                                  width: 1.0,
+                      if (!_model.loggedInSetUp)
+                        Flexible(
+                          child: Align(
+                            alignment: const AlignmentDirectional(0.0, 1.0),
+                            child: Padding(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 20.0),
+                              child: FFButtonWidget(
+                                onPressed: () async {
+                                  FFAppState().persistentUsername = '';
+                                  FFAppState().persistentPassword = '';
+                                  FFAppState().port = '5000';
+                                  setState(() {});
+                                },
+                                text: 'Sign out. (give up)',
+                                options: FFButtonOptions(
+                                  height: 40.0,
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      24.0, 0.0, 24.0, 0.0),
+                                  iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                      0.0, 0.0, 0.0, 0.0),
+                                  color: const Color(0xFFEC2B37),
+                                  textStyle: FlutterFlowTheme.of(context)
+                                      .titleSmall
+                                      .override(
+                                        fontFamily: 'Readex Pro',
+                                        color: Colors.white,
+                                        letterSpacing: 0.0,
+                                      ),
+                                  elevation: 3.0,
+                                  borderSide: const BorderSide(
+                                    color: Colors.transparent,
+                                    width: 1.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(8.0),
                                 ),
-                                borderRadius: BorderRadius.circular(8.0),
                               ),
                             ),
                           ),
                         ),
-                      ),
                     ],
                   ),
                 ),

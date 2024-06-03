@@ -896,6 +896,38 @@ class LeavePartyCall {
   }
 }
 
+class GoBackCall {
+  static Future<ApiCallResponse> call({
+    String? serverIP = '',
+    String? port = '',
+    String? accessToken = '',
+    String? tokenType = '',
+    String? username = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "username": "$username"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'goBack',
+      apiUrl: 'http://$serverIP:$port/goBack',
+      callType: ApiCallType.POST,
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': '$tokenType $accessToken',
+      },
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

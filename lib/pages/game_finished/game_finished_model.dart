@@ -26,6 +26,8 @@ class GameFinishedModel extends FlutterFlowModel<GameFinishedWidget> {
   ApiCallResponse? getScoreResp;
   // Stores action output result for [Backend Call - API (getScore)] action in Button widget.
   ApiCallResponse? getScoreResponse;
+  // Stores action output result for [Backend Call - API (goBack)] action in Button widget.
+  ApiCallResponse? goBackResp;
 
   @override
   void initState(BuildContext context) {}
