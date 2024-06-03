@@ -61,25 +61,6 @@ class _ChooseGameWidgetState extends State<ChooseGameWidget>
             FFAppState().notificationCounter =
                 FFAppState().notificationCounter + 1;
             setState(() {});
-          } else {
-            await showDialog(
-              context: context,
-              builder: (alertDialogContext) {
-                return AlertDialog(
-                  title: const Text('Duplicate invite'),
-                  content: Text(getJsonField(
-                    _model.dataReceived,
-                    r'''$.info''',
-                  ).toString().toString()),
-                  actions: [
-                    TextButton(
-                      onPressed: () => Navigator.pop(alertDialogContext),
-                      child: const Text('Ok'),
-                    ),
-                  ],
-                );
-              },
-            );
           }
         } else if ('decline' ==
             getJsonField(
