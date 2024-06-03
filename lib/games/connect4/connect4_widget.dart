@@ -348,7 +348,7 @@ class _Connect4WidgetState extends State<Connect4Widget> {
                           padding: const EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 10.0),
                           child: Text(
-                            'Is it your turn: ${functions.isTurnConnect4(_model.currentGrid.toList(), _model.type!).toString()}',
+                            'Is it your turn: ${functions.isTurnConnect4(_model.currentGrid.toList(), FFAppState().userType).toString()}',
                             style: FlutterFlowTheme.of(context)
                                 .bodyMedium
                                 .override(
